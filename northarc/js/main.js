@@ -569,9 +569,107 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, { passive: true });
 
-        scrollTopBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+    // ═══════════════════════════════════════════════════════════════════
+    // 16. HERO INTERACTIVE TERMINAL LOGIC
+    // ═══════════════════════════════════════════════════════════════════
+    const heroLogs = document.getElementById('hero-logs');
+    const heroInference = document.getElementById('hero-inference-rate');
+    const heroGraphPath = document.getElementById('hero-graph-path');
+    const btnRag = document.getElementById('hero-btn-rag');
+    const btnPredict = document.getElementById('hero-btn-predict');
+    const btnAgents = document.getElementById('hero-btn-agents');
+
+    if (heroLogs) {
+        let currentMode = 'rag';
+        let logIndex = 0;
+        let logsArray = [];
+
+        const logDatabase = {
+            rag: [
+                "&gt; Initializing semantic retrieval pipeline...",
+                "&gt; Parsing vector store indices (N=402,000)...",
+                "&gt; [SUCCESS] Database handshake established.",
+                "&gt; Match confidence score: 0.9631",
+                "&gt; Injecting retrieved metadata to context window...",
+                "&gt; Model reasoning: assembling cited response...",
+                "&gt; [OUTPUT] Answer generated natively in 184ms.",
+                "&gt; Syncing session state cache to Redis node..."
+            ],
+            predict: [
+                "&gt; Loading forecasting regression weights...",
+                "&gt; Syncing historical data streams...",
+                "&gt; [MODEL] Running Monte Carlo scenario (N=10,000)...",
+                "&gt; Accuracy variance validation check: 98.42%",
+                "&gt; [ALERT] Operational margin increase projected.",
+                "&gt; Storing predicted values to local cache...",
+                "&gt; [SYNC] Dashboard coordinates refreshed.",
+                "&gt; Model run success. Target validation passed."
+            ],
+            agents: [
+                "&gt; Instantiating stateful agent graph loop...",
+                "&gt; Node [1] Discover: Fetching customer CRM logs...",
+                "&gt; Node [2] Retrieve: Extracting PDF metadata...",
+                "&gt; Node [3] Reasoning: Planning action path...",
+                "&gt; Executing REST API writeback target...",
+                "&gt; [SUCCESS] Slack notification webhook fired.",
+                "&gt; [ALERT] Agent loop completed tasks cleanly.",
+                "&gt; Resetting graph state for next queue input..."
+            ]
+        };
+
+        function setMode(mode) {
+            currentMode = mode;
+            logIndex = 0;
+            logsArray = [];
+            heroLogs.innerHTML = '';
+            
+            // Toggle active buttons
+            [btnRag, btnPredict, btnAgents].forEach(btn => {
+                if (btn) btn.classList.remove('active');
+            });
+            if (mode === 'rag' && btnRag) btnRag.classList.add('active');
+            if (mode === 'predict' && btnPredict) btnPredict.classList.add('active');
+            if (mode === 'agents' && btnAgents) btnAgents.classList.add('active');
+
+            runLogger();
+        }
+
+        function runLogger() {
+            if (logsArray.length >= 8) {
+                logsArray.shift();
+            }
+            const logsSource = logDatabase[currentMode];
+            const line = logsSource[logIndex % logsSource.length];
+            logsArray.push(line);
+            
+            heroLogs.innerHTML = logsArray.map(l => `<div style="margin-bottom: 4px;">${l}</div>`).join('');
+            logIndex++;
+
+            // Update Inference indicator slightly
+            const baseRate = currentMode === 'rag' ? 96.3 : (currentMode === 'predict' ? 98.4 : 99.1);
+            const variation = (Math.random() * 0.4 - 0.2).toFixed(2);
+            if (heroInference) heroInference.textContent = `${(parseFloat(baseRate) + parseFloat(variation)).toFixed(1)}%`;
+        }
+
+        // Action listeners
+        if (btnRag) btnRag.addEventListener('click', () => setMode('rag'));
+        if (btnPredict) btnPredict.addEventListener('click', () => setMode('predict'));
+        if (btnAgents) btnAgents.addEventListener('click', () => setMode('agents'));
+
+        // Start interval loops
+        setInterval(runLogger, 1500);
+        setMode('rag'); // init
+
+        // Fluctuate SVG graph path dynamically
+        setInterval(() => {
+            if (!heroGraphPath) return;
+            const points = [];
+            for (let i = 0; i <= 300; i += 30) {
+                const y = Math.round(Math.random() * 40 + 20);
+                points.push(`${i},${y}`);
+            }
+            heroGraphPath.setAttribute('d', `M 0,40 Q ${points.join(' ')}`);
+        }, 800);
     }
 
 });

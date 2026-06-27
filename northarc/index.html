@@ -83,18 +83,35 @@
             </div>
         </div>
 
-        <div class="hero-visual">
-            <div class="hero-orb">
-                <div class="orb-core"></div>
-                <div class="orbit-node"></div>
-                <div class="orbit-node"></div>
-                <div class="orbit-node"></div>
-                <div class="orbit-node"></div>
+        <div class="hero-visual" style="align-items: stretch; justify-content: stretch; height: 100%;">
+            <div class="demo-window glass" style="width: 100%; height: 100%; display: flex; flex-direction: column; border-color: rgba(29, 117, 255, 0.25);">
+                <div class="demo-titlebar">
+                    <div class="demo-dots-row"><span></span><span></span><span></span></div>
+                    <span class="demo-titlebar-text">autonomous-agent@northarc: ~</span>
+                </div>
+                <div class="demo-content" style="flex-grow: 1; padding: 1.2rem; display: flex; flex-direction: column; justify-content: space-between; font-family: var(--font-display); min-height: 400px;">
+                    <!-- Terminal Console output -->
+                    <div class="terminal-logs" id="hero-logs" style="font-family: monospace; font-size: 0.8rem; color: var(--blue-300); line-height: 1.5; overflow-y: hidden; flex-grow: 1; margin-bottom: 1rem; text-align: left; height: 180px;">
+                        <!-- Logs dynamically inserted here -->
+                    </div>
+                    <!-- Live Analytics Graph -->
+                    <div class="terminal-graph" style="height: 100px; border-top: 1px solid var(--border-subtle); padding-top: 1rem; position: relative;">
+                        <svg id="hero-graph-svg" viewBox="0 0 300 80" style="width: 100%; height: 100%; stroke: var(--blue-400); fill: none; stroke-width: 2;">
+                            <path d="M 0,40 Q 30,20 60,50 T 120,30 T 180,60 T 240,20 T 300,40" id="hero-graph-path"/>
+                        </svg>
+                        <div style="position: absolute; top: 0.5rem; right: 0; font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase;">Inference Rate: <span id="hero-inference-rate" style="color: var(--blue-400); font-weight: bold;">98.4%</span></div>
+                    </div>
+                    <!-- Control buttons -->
+                    <div style="display: flex; gap: 0.5rem; border-top: 1px solid var(--border-subtle); padding-top: 1rem; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">Active Schema:</span>
+                        <div style="display: flex; gap: 0.4rem;">
+                            <button class="filter-btn active" id="hero-btn-rag" style="padding: 0.3rem 0.6rem; font-size: 0.65rem;">RAG Hub</button>
+                            <button class="filter-btn" id="hero-btn-predict" style="padding: 0.3rem 0.6rem; font-size: 0.65rem;">Forecast</button>
+                            <button class="filter-btn" id="hero-btn-agents" style="padding: 0.3rem 0.6rem; font-size: 0.65rem;">Agents</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="float-node"></div>
-            <div class="float-node"></div>
-            <div class="float-node"></div>
-            <div class="float-node"></div>
         </div>
     </div>
 </section>
