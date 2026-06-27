@@ -522,28 +522,52 @@ document.addEventListener('DOMContentLoaded', () => {
             formStatusMsg.textContent = 'Encrypting payload...';
 
             try {
-                const res = await fetch('/api/inquiry', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload),
-                });
+                const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 
-                const data = await res.json();
+                if (isLocal) {
+                    // Submit to local Python server
+                    const res = await fetch('/api/inquiry', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload),
+                    });
 
-                if (data.success) {
-                    formStatusMsg.style.color = '#28c840';
-                    formStatusMsg.textContent = `✓ Consultation request #${data.record_id} secured. We'll reach out within 24 hours.`;
-                    submitBtn.textContent = 'Request Submitted';
-                    contactForm.reset();
+                    const data = await res.json();
 
-                    setTimeout(() => {
-                        submitBtn.disabled = false;
-                        submitBtn.textContent = 'Book a Consultation';
-                        formStatusMsg.textContent = '';
-                    }, 5000);
+                    if (data.success) {
+                        formStatusMsg.style.color = '#28c840';
+                        formStatusMsg.textContent = `✓ Consultation request #${data.record_id} secured. We'll reach out within 24 hours.`;
+                        submitBtn.textContent = 'Request Submitted';
+                        contactForm.reset();
+                    } else {
+                        throw new Error(data.error || 'Submission failed.');
+                    }
                 } else {
-                    throw new Error(data.error || 'Submission failed.');
+                    // Submit to Netlify serverless forms in production
+                    const formData = new FormData(contactForm);
+                    formData.append('form-name', 'contact');
+
+                    const res = await fetch('/', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: new URLSearchParams(formData).toString(),
+                    });
+
+                    if (res.ok) {
+                        formStatusMsg.style.color = '#28c840';
+                        formStatusMsg.textContent = `✓ Consultation request secured. We'll reach out within 24 hours.`;
+                        submitBtn.textContent = 'Request Submitted';
+                        contactForm.reset();
+                    } else {
+                        throw new Error('Submission failed.');
+                    }
                 }
+
+                setTimeout(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Book a Consultation';
+                    formStatusMsg.textContent = '';
+                }, 5000);
             } catch (err) {
                 formStatusMsg.style.color = '#ff5f57';
                 formStatusMsg.textContent = `Error: ${err.message}`;
