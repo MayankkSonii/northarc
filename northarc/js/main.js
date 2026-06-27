@@ -504,7 +504,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 company: document.getElementById('f-company').value.trim(),
                 phone: document.getElementById('f-phone').value.trim(),
                 service: document.getElementById('f-service').value,
-                budget: document.getElementById('f-budget').value,
                 requirement: document.getElementById('f-requirement').value.trim(),
             };
 

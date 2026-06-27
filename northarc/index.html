@@ -12,17 +12,7 @@
 
 <!-- ═══ Loading Screen ═══ -->
 <div class="loading-screen">
-    <svg class="loader-logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="50" r="38" stroke="url(#lg1)" stroke-width="2.5" fill="none" stroke-dasharray="180 60"/>
-        <circle cx="78" cy="22" r="4" fill="#4DA6FF">
-            <animate attributeName="opacity" values="1;0.4;1" dur="2s" repeatCount="indefinite"/>
-        </circle>
-        <path d="M38 70V35L60 52.5L38 70Z" fill="url(#lg2)" opacity="0.9"/>
-        <defs>
-            <linearGradient id="lg1" x1="10" y1="10" x2="90" y2="90"><stop stop-color="#0A1628"/><stop offset="1" stop-color="#1D75FF"/></linearGradient>
-            <linearGradient id="lg2" x1="38" y1="35" x2="60" y2="70"><stop stop-color="#0E2040"/><stop offset="1" stop-color="#1D75FF"/></linearGradient>
-        </defs>
-    </svg>
+    <img src="assets/logo.jpg" alt="NorthArc Logo" class="loader-logo">
     <div class="loader-bar"><div class="loader-bar-fill"></div></div>
 </div>
 
@@ -189,6 +179,7 @@
     <div class="services-filter reveal">
         <button class="filter-btn active" data-filter="all">All Services</button>
         <button class="filter-btn" data-filter="core">Core AI</button>
+        <button class="filter-btn" data-filter="marketing">Marketing AI</button>
         <button class="filter-btn" data-filter="auto">Automation</button>
         <button class="filter-btn" data-filter="analytics">Analytics</button>
         <button class="filter-btn" data-filter="vision">Vision & Docs</button>
@@ -200,6 +191,12 @@
             <div class="service-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M6 12h12"/></svg></div>
             <h3>Artificial Intelligence Solutions</h3>
             <p>End-to-end design and deployment of deep learning models, classification engines, and algorithmic decision systems tailored to your domain-specific requirements.</p>
+        </div>
+
+        <div class="service-card glass" data-category="marketing">
+            <div class="service-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+            <h3>Marketing AI & Growth Systems</h3>
+            <p>Deploy custom predictive models for customer acquisition, dynamic attribution graphs, multi-variant generative copy suites, and intelligent personalization engines.</p>
         </div>
 
         <div class="service-card glass" data-category="core">
@@ -676,21 +673,21 @@
                     <div class="contact-card-icon">📍</div>
                     <div class="contact-card-text">
                         <h4>Headquarters</h4>
-                        <p>San Francisco, CA & London, UK</p>
+                        <p>Ahmedabad, Gujarat</p>
                     </div>
                 </div>
                 <div class="contact-card">
                     <div class="contact-card-icon">✉️</div>
                     <div class="contact-card-text">
                         <h4>Solutions Desk</h4>
-                        <p>solutions@northarc.ai</p>
+                        <p>northarc.support@gmail.com</p>
                     </div>
                 </div>
                 <div class="contact-card">
                     <div class="contact-card-icon">📞</div>
                     <div class="contact-card-text">
                         <h4>Direct Line</h4>
-                        <p>+1 (415) 800-NARC</p>
+                        <p>+91 88499 69336</p>
                     </div>
                 </div>
                 <div class="contact-card">
@@ -722,36 +719,24 @@
                     </div>
                     <div class="form-field">
                         <label for="f-phone">Phone Number</label>
-                        <input type="tel" id="f-phone" name="phone" placeholder="+1 (555) 000-0000">
+                        <input type="tel" id="f-phone" name="phone" value="+91 " placeholder="+91 88499 69336">
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-field">
-                        <label for="f-service">Service Interest</label>
-                        <select id="f-service" name="service">
-                            <option value="">Select a service area</option>
-                            <option value="ai-solutions">Artificial Intelligence Solutions</option>
-                            <option value="generative-ai">Generative AI Applications</option>
-                            <option value="ai-agents">AI Agents & Agentic Systems</option>
-                            <option value="automation">Intelligent Automation</option>
-                            <option value="data-science">Data Science & Analytics</option>
-                            <option value="predictive">Predictive Analytics</option>
-                            <option value="computer-vision">Computer Vision & OCR</option>
-                            <option value="cloud-ai">Cloud AI Solutions</option>
-                            <option value="custom">Custom AI Development</option>
-                        </select>
-                    </div>
-                    <div class="form-field">
-                        <label for="f-budget">Project Budget</label>
-                        <select id="f-budget" name="budget">
-                            <option value="">Select budget range</option>
-                            <option value="10k-25k">$10K – $25K</option>
-                            <option value="25k-50k">$25K – $50K</option>
-                            <option value="50k-100k">$50K – $100K</option>
-                            <option value="100k-250k">$100K – $250K</option>
-                            <option value="250k+">$250K+</option>
-                        </select>
-                    </div>
+                <div class="form-field full" style="margin-bottom: 1.2rem;">
+                    <label for="f-service">Service Interest</label>
+                    <select id="f-service" name="service">
+                        <option value="">Select a service area</option>
+                        <option value="ai-solutions">Artificial Intelligence Solutions</option>
+                        <option value="generative-ai">Generative AI Applications</option>
+                        <option value="ai-agents">AI Agents & Agentic Systems</option>
+                        <option value="automation">Intelligent Automation</option>
+                        <option value="data-science">Data Science & Analytics</option>
+                        <option value="predictive">Predictive Analytics</option>
+                        <option value="computer-vision">Computer Vision & OCR</option>
+                        <option value="cloud-ai">Cloud AI Solutions</option>
+                        <option value="custom">Custom AI Development</option>
+                        <option value="marketing-ai">Marketing AI & Growth Systems</option>
+                    </select>
                 </div>
                 <div class="form-field full" style="margin-bottom: 1.5rem;">
                     <label for="f-requirement">Project Requirements *</label>
@@ -804,7 +789,7 @@
                 <li><a href="#contact">Book Consultation</a></li>
                 <li><a href="#tech-stack">Tech Stack</a></li>
                 <li><a href="#process">Our Process</a></li>
-                <li><a href="mailto:solutions@northarc.ai">Email Us</a></li>
+                <li><a href="mailto:northarc.support@gmail.com">Email Us</a></li>
             </ul>
         </div>
     </div>
