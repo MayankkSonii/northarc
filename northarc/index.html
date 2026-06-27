@@ -84,28 +84,7 @@
         </div>
 
         <div class="hero-visual">
-            <!-- Dynamic 3D Gyroscopic Neural Net Visual -->
-            <div class="hero-network-container">
-                <div class="core-glow"></div>
-                <!-- Inner Gyro Ring -->
-                <div class="orbit-ring ring-inner">
-                    <div class="ring-node"></div>
-                    <div class="ring-node"></div>
-                </div>
-                <!-- Middle Gyro Ring -->
-                <div class="orbit-ring ring-middle">
-                    <div class="ring-node"></div>
-                    <div class="ring-node"></div>
-                    <div class="ring-node"></div>
-                </div>
-                <!-- Outer Gyro Ring -->
-                <div class="orbit-ring ring-outer">
-                    <div class="ring-node"></div>
-                    <div class="ring-node"></div>
-                    <div class="ring-node"></div>
-                    <div class="ring-node"></div>
-                </div>
-            </div>
+            <canvas id="hero-neural-canvas" style="width: 100%; height: 100%; max-width: 480px; max-height: 480px; display: block; z-index: 2; pointer-events: auto;"></canvas>
         </div>
     </div>
 </section>
@@ -831,6 +810,7 @@
 <!-- Scripts -->
 <script src="js/canvas-bg.js"></script>
 <script src="js/main.js"></script>
+<script src="js/hero-canvas.js"></script>
 
 </body>
 </html>
