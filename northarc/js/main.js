@@ -522,45 +522,23 @@ document.addEventListener('DOMContentLoaded', () => {
             formStatusMsg.textContent = 'Encrypting payload...';
 
             try {
-                const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+                const res = await fetch('https://formspree.io/f/mlgybqgr', {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(payload),
+                });
 
-                if (isLocal) {
-                    // Submit to local Python server
-                    const res = await fetch('/api/inquiry', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload),
-                    });
-
-                    const data = await res.json();
-
-                    if (data.success) {
-                        formStatusMsg.style.color = '#28c840';
-                        formStatusMsg.textContent = `✓ Consultation request #${data.record_id} secured. We'll reach out within 24 hours.`;
-                        submitBtn.textContent = 'Request Submitted';
-                        contactForm.reset();
-                    } else {
-                        throw new Error(data.error || 'Submission failed.');
-                    }
+                if (res.ok) {
+                    formStatusMsg.style.color = '#28c840';
+                    formStatusMsg.textContent = `✓ Consultation request secured. We'll reach out within 24 hours.`;
+                    submitBtn.textContent = 'Request Submitted';
+                    contactForm.reset();
                 } else {
-                    // Submit to Netlify serverless forms in production
-                    const formData = new FormData(contactForm);
-                    formData.append('form-name', 'contact');
-
-                    const res = await fetch('/', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                        body: new URLSearchParams(formData).toString(),
-                    });
-
-                    if (res.ok) {
-                        formStatusMsg.style.color = '#28c840';
-                        formStatusMsg.textContent = `✓ Consultation request secured. We'll reach out within 24 hours.`;
-                        submitBtn.textContent = 'Request Submitted';
-                        contactForm.reset();
-                    } else {
-                        throw new Error('Submission failed.');
-                    }
+                    const data = await res.json();
+                    throw new Error(data.errors ? data.errors.map(e => e.message).join(', ') : 'Submission failed.');
                 }
 
                 setTimeout(() => {
