@@ -1,134 +1,167 @@
-/**
- * NorthArc — Scroll-Reactive Neural Network Background
- * Particles and binary streams shift, accelerate, and flow in response to scroll/swipe.
- */
-
 (function () {
     const canvas = document.getElementById('neural-canvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
 
-    let particles = [];
-    let mouse = { x: null, y: null, radius: 180 };
+    let dataPackets = [];
+    let impactRipples = [];
+    let bgNodes = [];
     let animationId;
-    let binaryStreams = [];
     
     let scrollVelocity = 0;
     let lastScrollY = window.scrollY;
 
+    const colors = {
+        primary: 'rgba(29, 117, 255, 1)',
+        secondary: 'rgba(77, 166, 255, 0.8)',
+        glow: 'rgba(29, 117, 255, 0.2)'
+    };
+
+    let centerX, centerY;
+
     function resize() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-        initParticles();
-        initBinaryStreams();
+        centerX = canvas.width / 2;
+        centerY = canvas.height / 2;
+        initBgNodes();
     }
 
-    class Particle {
+    // Background network nodes (slow, ambient)
+    class BgNode {
         constructor() {
             this.x = Math.random() * canvas.width;
             this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 2 + 0.8;
-            this.vx = (Math.random() - 0.5) * 0.5;
-            this.vy = (Math.random() - 0.5) * 0.5;
-            this.opacity = Math.random() * 0.35 + 0.25;
+            this.vx = (Math.random() - 0.5) * 0.2;
+            this.vy = (Math.random() - 0.5) * 0.2;
         }
-
-        draw() {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(29, 117, 255, ${this.opacity})`;
-            ctx.fill();
-        }
-
         update() {
-            // Apply scroll velocity to particle movement (particles fly upwards when scrolling down)
             this.x += this.vx;
-            this.y += this.vy - scrollVelocity * 0.15;
-
-            // Bounce / wrap coordinates
-            if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+            this.y += this.vy - scrollVelocity * 0.1; // subtle scroll effect
+            
+            if (this.x < 0) this.x = canvas.width;
+            if (this.x > canvas.width) this.x = 0;
             if (this.y < 0) this.y = canvas.height;
             if (this.y > canvas.height) this.y = 0;
-
-            // Mouse interaction - gentle attraction
-            if (mouse.x !== null && mouse.y !== null) {
-                const dx = mouse.x - this.x;
-                const dy = mouse.y - this.y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < mouse.radius) {
-                    const force = (mouse.radius - dist) / mouse.radius;
-                    this.x += (dx / dist) * force * 0.7;
-                    this.y += (dy / dist) * force * 0.7;
-                }
-            }
         }
     }
 
-    // Binary Streams (Matrix Rain-like effect in deep blue)
-    class BinaryStream {
-        constructor(x) {
-            this.x = x;
-            this.y = Math.random() * canvas.height;
-            this.speed = Math.random() * 1.2 + 0.4;
-            this.fontSize = Math.floor(Math.random() * 5 + 9);
-            this.chars = ['0', '1', 'f', 'x', 'a', 'b', 'c', 'd', 'e', '0', '1'];
-            this.value = '0';
+    // Data packets flowing towards the center
+    class DataPacket {
+        constructor() {
+            this.reset();
         }
-
-        draw() {
-            ctx.fillStyle = `rgba(29, 117, 255, 0.04)`; // very faint
-            ctx.font = `${this.fontSize}px monospace`;
-            ctx.fillText(this.value, this.x, this.y);
+        
+        reset() {
+            // Spawn on the edges
+            const edge = Math.floor(Math.random() * 4);
+            if (edge === 0) { this.x = Math.random() * canvas.width; this.y = -10; } // top
+            else if (edge === 1) { this.x = canvas.width + 10; this.y = Math.random() * canvas.height; } // right
+            else if (edge === 2) { this.x = Math.random() * canvas.width; this.y = canvas.height + 10; } // bottom
+            else { this.x = -10; this.y = Math.random() * canvas.height; } // left
+            
+            this.speed = Math.random() * 2 + 1;
+            this.size = Math.random() * 2 + 1.5;
+            this.active = true;
+            this.trail = [];
         }
 
         update() {
-            // Flow speed is modulated by scroll speed and direction
-            this.y += this.speed + scrollVelocity * 0.4;
+            if (!this.active) return;
             
-            // Periodically randomize character value to make it dynamic
-            if (Math.random() < 0.05) {
-                this.value = this.chars[Math.floor(Math.random() * this.chars.length)];
+            const dx = centerX - this.x;
+            const dy = centerY - this.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            
+            // Accelerate as it gets closer
+            const currentSpeed = this.speed + (1000 / Math.max(dist, 50));
+            
+            this.x += (dx / dist) * currentSpeed;
+            this.y += (dy / dist) * currentSpeed - scrollVelocity * 0.15;
+            
+            this.trail.push({x: this.x, y: this.y});
+            if (this.trail.length > 20) {
+                this.trail.shift();
             }
-
-            if (this.y > canvas.height) {
-                this.y = -20;
+            
+            if (dist < 40) {
+                // Impact!
+                this.active = false;
+                impactRipples.push(new Ripple(centerX, centerY));
             }
-            if (this.y < -20) {
-                this.y = canvas.height;
+        }
+        
+        draw() {
+            if (!this.active) return;
+            
+            // Draw trail
+            if (this.trail.length > 1) {
+                ctx.beginPath();
+                ctx.moveTo(this.trail[0].x, this.trail[0].y);
+                for (let i = 1; i < this.trail.length; i++) {
+                    ctx.lineTo(this.trail[i].x, this.trail[i].y);
+                }
+                ctx.strokeStyle = colors.glow;
+                ctx.lineWidth = this.size;
+                ctx.stroke();
             }
+            
+            // Draw packet
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = colors.primary;
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = colors.primary;
+            ctx.fill();
+            ctx.shadowBlur = 0;
         }
     }
 
-    function initParticles() {
-        particles = [];
-        const area = canvas.width * canvas.height;
-        const count = Math.min(Math.floor(area / 9500), 150);
+    // Impact ripples
+    class Ripple {
+        constructor(x, y) {
+            this.x = x;
+            this.y = y;
+            this.radius = 40;
+            this.alpha = 0.8;
+            this.speed = Math.random() * 1.5 + 1;
+        }
+        
+        update() {
+            this.radius += this.speed;
+            this.alpha -= 0.015;
+        }
+        
+        draw() {
+            if (this.alpha <= 0) return;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(29, 117, 255, ${this.alpha})`;
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+        }
+    }
+
+    function initBgNodes() {
+        bgNodes = [];
+        const count = Math.floor((canvas.width * canvas.height) / 12000);
         for (let i = 0; i < count; i++) {
-            particles.push(new Particle());
+            bgNodes.push(new BgNode());
         }
     }
 
-    function initBinaryStreams() {
-        binaryStreams = [];
-        const count = Math.floor(canvas.width / 45); // spacing
-        for (let i = 0; i < count; i++) {
-            binaryStreams.push(new BinaryStream(i * 45));
-        }
-    }
-
-    function drawConnections() {
-        const maxDist = 140;
-
-        for (let i = 0; i < particles.length; i++) {
-            for (let j = i + 1; j < particles.length; j++) {
-                const dx = particles[i].x - particles[j].x;
-                const dy = particles[i].y - particles[j].y;
+    function drawBgConnections() {
+        const maxDist = 150;
+        for (let i = 0; i < bgNodes.length; i++) {
+            for (let j = i + 1; j < bgNodes.length; j++) {
+                const dx = bgNodes[i].x - bgNodes[j].x;
+                const dy = bgNodes[i].y - bgNodes[j].y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
                 if (dist < maxDist) {
-                    const alpha = (1 - dist / maxDist) * 0.12;
+                    const alpha = (1 - dist / maxDist) * 0.15;
                     ctx.beginPath();
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.moveTo(bgNodes[i].x, bgNodes[i].y);
+                    ctx.lineTo(bgNodes[j].x, bgNodes[j].y);
                     ctx.strokeStyle = `rgba(29, 117, 255, ${alpha})`;
                     ctx.lineWidth = 0.8;
                     ctx.stroke();
@@ -140,53 +173,59 @@
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        // Draw radial background gradient
+        // Draw radial background gradient (sleek, professional dark mode)
         const grad = ctx.createRadialGradient(
-            canvas.width * 0.5, canvas.height * 0.4, 0,
-            canvas.width * 0.5, canvas.height * 0.4, Math.max(canvas.width, canvas.height) * 0.7
+            canvas.width * 0.5, canvas.height * 0.5, 0,
+            canvas.width * 0.5, canvas.height * 0.5, Math.max(canvas.width, canvas.height) * 0.8
         );
-        grad.addColorStop(0, '#02050b');
-        grad.addColorStop(0.5, '#000000');
+        grad.addColorStop(0, '#040914'); 
         grad.addColorStop(1, '#000000');
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        // Decay scroll velocity over time (friction)
         scrollVelocity *= 0.95;
 
-        // Draw and update binary streams in background
-        for (const stream of binaryStreams) {
-            stream.update();
-            stream.draw();
+        // Draw ambient network
+        for (let n of bgNodes) {
+            n.update();
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, 1.5, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(77, 166, 255, 0.4)';
+            ctx.fill();
+        }
+        drawBgConnections();
+
+        // Spawn new data packets
+        if (Math.random() < 0.1) {
+            dataPackets.push(new DataPacket());
         }
 
-        // Draw particles and lines
-        for (const p of particles) {
-            p.update();
-            p.draw();
+        // Update & draw packets
+        for (let i = dataPackets.length - 1; i >= 0; i--) {
+            dataPackets[i].update();
+            dataPackets[i].draw();
+            if (!dataPackets[i].active) {
+                dataPackets.splice(i, 1);
+            }
         }
-        drawConnections();
+
+        // Update & draw impact ripples
+        for (let i = impactRipples.length - 1; i >= 0; i--) {
+            impactRipples[i].update();
+            impactRipples[i].draw();
+            if (impactRipples[i].alpha <= 0) {
+                impactRipples.splice(i, 1);
+            }
+        }
 
         animationId = requestAnimationFrame(animate);
     }
 
-    // Capture scroll speed and direction
     window.addEventListener('scroll', () => {
         const currentY = window.scrollY;
         scrollVelocity = currentY - lastScrollY;
         lastScrollY = currentY;
     }, { passive: true });
-
-    // Event listeners
-    window.addEventListener('mousemove', (e) => {
-        mouse.x = e.clientX;
-        mouse.y = e.clientY;
-    });
-
-    window.addEventListener('mouseleave', () => {
-        mouse.x = null;
-        mouse.y = null;
-    });
 
     window.addEventListener('resize', () => {
         cancelAnimationFrame(animationId);
@@ -194,7 +233,6 @@
         animate();
     });
 
-    // Init
     resize();
     animate();
 })();
