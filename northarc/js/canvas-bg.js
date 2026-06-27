@@ -3,144 +3,166 @@
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
 
-    let dataLines = [];
-    let dataPulses = [];
+    let particles = [];
     let animationId;
+    let time = 0;
     
     let scrollVelocity = 0;
     let lastScrollY = window.scrollY;
 
-    const colors = {
-        pulse: 'rgba(77, 166, 255, 1)',
-        pulseGlow: 'rgba(29, 117, 255, 0.6)',
-        line: 'rgba(41, 98, 255, 0.1)'
-    };
+    let targetX, targetY;
 
     function resize() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-        initDataLines();
+        // The gyroscopic sphere is on the right side on desktop, center on mobile
+        targetX = window.innerWidth > 768 ? canvas.width * 0.75 : canvas.width * 0.5;
+        targetY = canvas.height * 0.5;
+        initParticles();
     }
 
-    class DataLine {
-        constructor(y, angle) {
-            this.y = y;
-            this.baseY = y;
-            this.angle = angle; // Slight angle for dynamism
+    class RiverParticle {
+        constructor() {
+            this.reset();
+            // Randomize starting Y to fill the screen initially
+            this.y = Math.random() * canvas.height; 
+            for(let i=0; i<40; i++) {
+                this.history.push({x: this.x, y: this.y});
+            }
         }
         
-        draw() {
-            ctx.beginPath();
-            ctx.moveTo(0, this.y);
-            ctx.lineTo(canvas.width, this.y + Math.tan(this.angle) * canvas.width);
-            ctx.strokeStyle = colors.line;
-            ctx.lineWidth = 1;
-            ctx.stroke();
-        }
-
-        update() {
-            // Slight vertical shift based on scroll for interactivity
-            this.y = this.baseY - scrollVelocity * 0.1;
-            // Gradually return to base Y (spring effect)
-            this.y += (this.baseY - this.y) * 0.05;
-        }
-    }
-
-    class DataPulse {
-        constructor(line) {
-            this.line = line;
-            this.direction = Math.random() > 0.5 ? 1 : -1;
-            this.x = this.direction === 1 ? -100 : canvas.width + 100;
-            this.speed = (Math.random() * 10 + 5) * this.direction;
-            this.length = Math.random() * 200 + 50;
-            this.thickness = Math.random() * 1.5 + 1;
+        reset() {
+            // Spawn mostly at the top left/center
+            this.x = (Math.random() * canvas.width * 0.9) - 100;
+            this.y = -20 - Math.random() * 150;
+            this.vx = Math.random() * 0.8 + 0.2; // gentle drift right
+            this.vy = Math.random() * 1.5 + 1.0; // gentle fall
+            
+            // Extremely delicate, thin lines
+            this.size = Math.random() * 0.6 + 0.1; 
+            this.baseAlpha = Math.random() * 0.3 + 0.05;
+            
+            this.noiseOffset = Math.random() * 1000;
+            
+            this.history = [];
             this.active = true;
         }
 
         update() {
-            // Scroll velocity affects horizontal speed slightly
-            let currentSpeed = this.speed;
-            if (scrollVelocity !== 0) {
-                 currentSpeed += (scrollVelocity * 0.05 * this.direction);
+            if (!this.active) return;
+            
+            // Wavy river flow using sine waves
+            let wave = Math.sin(this.y * 0.003 + time * 0.005 + this.noiseOffset);
+            
+            const dx = targetX - this.x;
+            const dy = targetY - this.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            
+            let pullStrength = 0;
+            if (dist < 600) {
+                // Smooth gravitational pull towards the core
+                pullStrength = Math.pow((600 - dist) / 600, 2) * 0.035;
+                
+                // Add a swirling (tangential) force when close
+                if (dist < 300) {
+                    const angle = Math.atan2(dy, dx);
+                    // 90 degrees tangent
+                    const tangentX = Math.cos(angle + Math.PI/2);
+                    const tangentY = Math.sin(angle + Math.PI/2);
+                    this.vx += tangentX * pullStrength * 0.8;
+                    this.vy += tangentY * pullStrength * 0.8;
+                }
             }
             
-            this.x += currentSpeed;
+            this.vx += (wave * 0.015) + (dx * pullStrength * 0.01);
+            this.vy += (dy * pullStrength * 0.01);
             
-            if ((this.direction === 1 && this.x > canvas.width + this.length + 100) ||
-                (this.direction === -1 && this.x < -this.length - 100)) {
-                this.active = false;
+            // Fluid friction
+            this.vx *= 0.985;
+            this.vy *= 0.985;
+            
+            // Keep flowing downwards if not heavily pulled
+            if (this.vy < 0.5 && pullStrength < 0.005) {
+                this.vy += 0.02;
+            }
+            
+            // Scroll interactivity
+            this.y -= scrollVelocity * 0.15;
+            
+            this.x += this.vx;
+            this.y += this.vy;
+            
+            this.history.push({x: this.x, y: this.y});
+            if (this.history.length > 45) { // Long elegant tails
+                this.history.shift();
+            }
+            
+            // Reset if it hits the core or falls way off screen
+            if (dist < 25 || this.y > canvas.height + 150 || this.x > canvas.width + 150) {
+                this.reset();
             }
         }
-
+        
         draw() {
-            const currentY = this.line.y + Math.tan(this.line.angle) * this.x;
-            const tailX = this.x - this.length * this.direction;
-            const tailY = this.line.y + Math.tan(this.line.angle) * tailX;
-
-            ctx.beginPath();
-            ctx.moveTo(this.x, currentY);
-            ctx.lineTo(tailX, tailY);
+            if (!this.active || this.history.length < 2) return;
             
-            // Gradient for the pulse (bright head, fading tail)
-            const gradient = ctx.createLinearGradient(this.x, currentY, tailX, tailY);
-            gradient.addColorStop(0, colors.pulse);
-            gradient.addColorStop(1, 'transparent');
-
-            ctx.strokeStyle = gradient;
-            ctx.lineWidth = this.thickness;
-            ctx.shadowBlur = 12;
-            ctx.shadowColor = colors.pulseGlow;
+            ctx.beginPath();
+            ctx.moveTo(this.history[0].x, this.history[0].y);
+            
+            for (let i = 1; i < this.history.length; i++) {
+                ctx.lineTo(this.history[i].x, this.history[i].y);
+            }
+            
+            // The tail is a delicate, faint line
+            ctx.strokeStyle = `rgba(120, 190, 255, ${this.baseAlpha})`;
+            ctx.lineWidth = this.size;
             ctx.stroke();
-            ctx.shadowBlur = 0; // reset
+            
+            // The head is a tiny bright spark of data
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size * 1.5, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(220, 240, 255, ${this.baseAlpha + 0.3})`;
+            ctx.fill();
         }
     }
 
-    function initDataLines() {
-        dataLines = [];
-        dataPulses = [];
-        const numLines = Math.floor(canvas.height / 45); // Spacing between lines
-        for (let i = 0; i < numLines; i++) {
-            // Horizontal lines with random slight angles to create a perspective mesh
-            const y = (i * 45) + (Math.random() * 20 - 10);
-            const angle = (Math.random() - 0.5) * 0.12; 
-            dataLines.push(new DataLine(y, angle));
+    function initParticles() {
+        particles = [];
+        // Dense enough to look like a river, sparse enough to be delicate
+        const count = Math.floor((canvas.width * canvas.height) / 7500); 
+        for (let i = 0; i < count; i++) {
+            particles.push(new RiverParticle());
         }
     }
 
     function animate() {
+        // Very deep, elegant dark background
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        // Dark background gradient
         const grad = ctx.createRadialGradient(
-            canvas.width * 0.5, canvas.height * 0.5, 0,
-            canvas.width * 0.5, canvas.height * 0.5, Math.max(canvas.width, canvas.height) * 0.8
+            targetX, targetY, 0,
+            canvas.width * 0.5, canvas.height * 0.5, Math.max(canvas.width, canvas.height)
         );
-        grad.addColorStop(0, '#040914'); 
-        grad.addColorStop(1, '#000000');
+        grad.addColorStop(0, '#040b1a'); // Faint deep blue glow around the processing core
+        grad.addColorStop(1, '#010205'); // Deep midnight black edges
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        scrollVelocity *= 0.92; // scroll friction
+        scrollVelocity *= 0.9;
+        time += 1;
 
-        // Draw underlying circuit lines
-        for (let line of dataLines) {
-            line.update();
-            line.draw();
-        }
+        // Draw a subtle "event horizon" absorption glow at the core
+        ctx.beginPath();
+        ctx.arc(targetX, targetY, 90, 0, Math.PI * 2);
+        const coreGrad = ctx.createRadialGradient(targetX, targetY, 0, targetX, targetY, 90);
+        coreGrad.addColorStop(0, 'rgba(29, 117, 255, 0.08)');
+        coreGrad.addColorStop(0.5, 'rgba(29, 117, 255, 0.03)');
+        coreGrad.addColorStop(1, 'transparent');
+        ctx.fillStyle = coreGrad;
+        ctx.fill();
 
-        // Spawn new data pulses periodically
-        if (Math.random() < 0.15) {
-            const randomLine = dataLines[Math.floor(Math.random() * dataLines.length)];
-            dataPulses.push(new DataPulse(randomLine));
-        }
-
-        // Update & draw pulses
-        for (let i = dataPulses.length - 1; i >= 0; i--) {
-            dataPulses[i].update();
-            dataPulses[i].draw();
-            if (!dataPulses[i].active) {
-                dataPulses.splice(i, 1);
-            }
+        for (let p of particles) {
+            p.update();
+            p.draw();
         }
 
         animationId = requestAnimationFrame(animate);
