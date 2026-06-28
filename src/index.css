@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+:root {
+  --color-bg: #080B12;
+  --color-surface: #0F1420;
+  --color-surface-elevated: #151C2E;
+  --color-border: #1E2A45;
+  --color-primary: #2563EB;
+  --color-secondary: #7C3AED;
+  --color-glow: #06B6D4;
+  --color-text-primary: #F1F5F9;
+  --color-text-secondary: #94A3B8;
+  --color-text-muted: #475569;
+}
+
+:root.light-mode {
+  --color-bg: #FAFBFF;
+  --color-surface: #FFFFFF;
+  --color-surface-elevated: #F1F5F9;
+  --color-border: #E2E8F0;
+  --color-primary: #2563EB;
+  --color-secondary: #7C3AED;
+  --color-glow: #06B6D4;
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #475569;
+  --color-text-muted: #94A3B8;
+}
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-surface-elevated: var(--color-surface-elevated);
+  --color-border: var(--color-border);
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-glow: var(--color-glow);
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-muted: var(--color-text-muted);
+}
+
+/* Base custom styles to handle seamless transitions and floating orbs */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: var(--font-sans);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+/* CSS Grid background pattern */
+.grid-bg {
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+}
+
+.grid-bg-dark {
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, rgba(30, 42, 69, 0.15) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(30, 42, 69, 0.15) 1px, transparent 1px);
+}
+
+/* Background gradient floating orbs animation */
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.05);
+  }
+}
+
+@keyframes float-delay {
+  0%, 100% {
+    transform: translateY(0px) scale(1.05);
+  }
+  50% {
+    transform: translateY(20px) scale(1);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 12s ease-in-out infinite;
+}
+
+.animate-float-delay {
+  animation: float-delay 15s ease-in-out infinite;
+}
+
