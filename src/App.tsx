@@ -478,10 +478,15 @@ export default function App() {
     setIsSubmitting(true);
     setSubmitError(null);
 
-    fetch('/api/inquiry', {
+    const endpoint = import.meta.env.VITE_INQUIRY_API_URL || (import.meta.env.DEV
+      ? '/api/inquiry'
+      : 'https://formspree.io/f/mlgybqgr');
+
+    fetch(endpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
       },
       body: JSON.stringify({
         name: formData.fullName,
@@ -493,8 +498,8 @@ export default function App() {
       }),
     })
       .then(async (res) => {
-        const data = await res.json();
-        if (res.ok && data.success) {
+        const data = await res.json().catch(() => ({}));
+        if (res.ok) {
           setIsSubmitting(false);
           setFormSubmitted(true);
           setFormData({
@@ -506,7 +511,8 @@ export default function App() {
             projectRequirements: ""
           });
         } else {
-          throw new Error(data.error || "Submission failed. Please try again.");
+          const errorMsg = data.error || (data.errors && data.errors.map((e: any) => e.message).join(', ')) || "Submission failed. Please try again.";
+          throw new Error(errorMsg);
         }
       })
       .catch((err) => {
