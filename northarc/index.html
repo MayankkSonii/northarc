@@ -50,70 +50,113 @@
 <!-- ═══════════════════════════════════════════════════════════════════════ -->
 <!--  HERO                                                                  -->
 <!-- ═══════════════════════════════════════════════════════════════════════ -->
-<section id="home" class="section-full">
-    <div class="hero-grid" style="padding: 0 var(--side-padding);">
-        <div class="hero-content">
-            <div class="hero-badge">
-                <span class="hero-badge-dot"></span>
-                AI &nbsp;|&nbsp; Data Science &nbsp;|&nbsp; Analytics &nbsp;|&nbsp; Automation
-            </div>
-            <h1 class="hero-title">
-                Building <span class="highlight gradient-text">Intelligent Systems</span> for Modern Businesses.
-            </h1>
-            <p class="hero-desc">
-                We help organizations harness the power of Artificial Intelligence, Data Science, Generative AI, and Intelligent Automation to drive measurable business impact — from strategy to production deployment.
-            </p>
-            <div class="hero-actions">
-                <a href="#contact" class="btn btn-primary">Book a Consultation</a>
-                <a href="#services" class="btn btn-outline">Explore Services</a>
-            </div>
-            <div class="hero-stats">
-                <div class="hero-stat-item">
-                    <span class="hero-stat-num" data-count="50" data-suffix="+">0+</span>
-                    <span class="hero-stat-label">AI Systems Built</span>
-                </div>
-                <div class="hero-stat-item">
-                    <span class="hero-stat-num" data-count="3.5" data-suffix="x">0x</span>
-                    <span class="hero-stat-label">Average Client ROI</span>
-                </div>
-                <div class="hero-stat-item">
-                    <span class="hero-stat-num" data-count="95" data-suffix="%">0%</span>
-                    <span class="hero-stat-label">Model Accuracy</span>
-                </div>
-            </div>
-        </div>
+<section id="home" class="hero-track">
+    <div class="hero-sticky-container">
+        <!-- The neural canvas background -->
+        <canvas id="neural-canvas"></canvas>
 
-        <div class="hero-visual">
-            <div class="neural-sphere">
-                <div class="sphere-core"></div>
-                <div class="sphere-halo"></div>
-                
-                <!-- Gyroscopic Orbit Rings -->
-                <div class="sphere-orbit o1">
-                    <div class="orbit-node"></div>
-                </div>
-                <div class="sphere-orbit o2">
-                    <div class="orbit-node"></div>
-                </div>
-                <div class="sphere-orbit o3">
-                    <div class="orbit-node"></div>
+        <div class="hero-grid" style="padding: 0 var(--side-padding);">
+            <div class="hero-text-container">
+                <!-- Theme 1 -->
+                <div class="hero-content theme-block active" data-theme="1">
+                    <div class="hero-badge">
+                        <span class="hero-badge-dot"></span>
+                        AI &nbsp;|&nbsp; Strategy
+                    </div>
+                    <h1 class="hero-title">
+                        Building <span class="highlight gradient-text">Intelligent Systems</span> for Modern Businesses.
+                    </h1>
+                    <p class="hero-desc">
+                        We help organizations harness the power of Artificial Intelligence to drive measurable business impact — from strategy to production deployment.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#contact" class="btn btn-primary">Book a Consultation</a>
+                    </div>
                 </div>
 
-                <!-- Animated Signal Lines SVG -->
-                <svg class="sphere-lines" viewBox="0 0 200 200">
-                    <line x1="100" y1="100" x2="60" y2="40" stroke="rgba(77, 166, 255, 0.4)" stroke-dasharray="8 6" stroke-width="1.5">
-                        <animate attributeName="stroke-dashoffset" values="100;0" dur="4s" repeatCount="indefinite"/>
-                    </line>
-                    <line x1="100" y1="100" x2="150" y2="60" stroke="rgba(77, 166, 255, 0.4)" stroke-dasharray="6 4" stroke-width="1.5">
-                        <animate attributeName="stroke-dashoffset" values="0;100" dur="3s" repeatCount="indefinite"/>
-                    </line>
-                    <line x1="100" y1="100" x2="80" y2="160" stroke="rgba(77, 166, 255, 0.4)" stroke-dasharray="8 4" stroke-width="1.5">
-                        <animate attributeName="stroke-dashoffset" values="100;0" dur="2.5s" repeatCount="indefinite"/>
-                    </line>
-                    <line x1="100" y1="100" x2="140" y2="140" stroke="rgba(77, 166, 255, 0.4)" stroke-dasharray="10 5" stroke-width="1.5">
-                        <animate attributeName="stroke-dashoffset" values="0;100" dur="3.5s" repeatCount="indefinite"/>
-                    </line>
-                </svg>
+                <!-- Theme 2 -->
+                <div class="hero-content theme-block" data-theme="2">
+                    <div class="hero-badge">
+                        <span class="hero-badge-dot" style="background: var(--blue-glow); box-shadow: 0 0 10px var(--blue-glow);"></span>
+                        Data Science &nbsp;|&nbsp; Analytics
+                    </div>
+                    <h1 class="hero-title">
+                        Unlocking the <span class="highlight gradient-text">Hidden Value</span> in Your Data.
+                    </h1>
+                    <p class="hero-desc">
+                        Transform raw data into predictive insights. Our advanced data science capabilities enable real-time analytics and predictive forecasting at scale.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#services" class="btn btn-primary">Explore Analytics</a>
+                    </div>
+                </div>
+
+                <!-- Theme 3 -->
+                <div class="hero-content theme-block" data-theme="3">
+                    <div class="hero-badge">
+                        <span class="hero-badge-dot" style="background: #a371f7; box-shadow: 0 0 10px #a371f7;"></span>
+                        Intelligent Automation &nbsp;|&nbsp; Generative AI
+                    </div>
+                    <h1 class="hero-title">
+                        Automating the <span class="highlight gradient-text">Future of Work.</span>
+                    </h1>
+                    <p class="hero-desc">
+                        Deploy autonomous agent networks and generative AI workflows to radically improve efficiency, reduce operational overhead, and scale indefinitely.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#contact" class="btn btn-primary">Start Automating</a>
+                    </div>
+                </div>
+
+                <!-- Shared Stats -->
+                <div class="hero-stats">
+                    <div class="hero-stat-item">
+                        <span class="hero-stat-num" data-count="50" data-suffix="+">0+</span>
+                        <span class="hero-stat-label">AI Systems Built</span>
+                    </div>
+                    <div class="hero-stat-item">
+                        <span class="hero-stat-num" data-count="3.5" data-suffix="x">0x</span>
+                        <span class="hero-stat-label">Average Client ROI</span>
+                    </div>
+                    <div class="hero-stat-item">
+                        <span class="hero-stat-num" data-count="95" data-suffix="%">0%</span>
+                        <span class="hero-stat-label">Model Accuracy</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="neural-sphere">
+                    <div class="sphere-core"></div>
+                    <div class="sphere-halo"></div>
+                    
+                    <!-- Gyroscopic Orbit Rings -->
+                    <div class="sphere-orbit o1">
+                        <div class="orbit-node"></div>
+                    </div>
+                    <div class="sphere-orbit o2">
+                        <div class="orbit-node"></div>
+                    </div>
+                    <div class="sphere-orbit o3">
+                        <div class="orbit-node"></div>
+                    </div>
+
+                    <!-- Animated Signal Lines SVG -->
+                    <svg class="sphere-lines" viewBox="0 0 200 200">
+                        <line x1="100" y1="100" x2="60" y2="40" stroke="rgba(77, 166, 255, 0.4)" stroke-dasharray="8 6" stroke-width="1.5">
+                            <animate attributeName="stroke-dashoffset" values="100;0" dur="4s" repeatCount="indefinite"/>
+                        </line>
+                        <line x1="100" y1="100" x2="150" y2="60" stroke="rgba(77, 166, 255, 0.4)" stroke-dasharray="6 4" stroke-width="1.5">
+                            <animate attributeName="stroke-dashoffset" values="0;100" dur="3s" repeatCount="indefinite"/>
+                        </line>
+                        <line x1="100" y1="100" x2="80" y2="160" stroke="rgba(77, 166, 255, 0.4)" stroke-dasharray="8 4" stroke-width="1.5">
+                            <animate attributeName="stroke-dashoffset" values="100;0" dur="2.5s" repeatCount="indefinite"/>
+                        </line>
+                        <line x1="100" y1="100" x2="140" y2="140" stroke="rgba(77, 166, 255, 0.4)" stroke-dasharray="10 5" stroke-width="1.5">
+                            <animate attributeName="stroke-dashoffset" values="0;100" dur="3.5s" repeatCount="indefinite"/>
+                        </line>
+                    </svg>
+                </div>
             </div>
         </div>
     </div>

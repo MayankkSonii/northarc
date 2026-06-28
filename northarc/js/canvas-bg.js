@@ -138,12 +138,35 @@
     function animate() {
         // Very deep, elegant dark background
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Read global progress set by main.js
+        const progress = window.heroScrollProgress || 0;
+        
+        // Interpolate core glow color based on progress
+        // 0: Deep Blue, 0.5: Cyan, 1: Purple
+        let coreR = 29, coreG = 117, coreB = 255; // Default Blue
+        if (progress > 0 && progress <= 0.5) {
+            // Shift to Cyan
+            const p = progress * 2; // 0 to 1
+            coreR = 29 - p * 19; 
+            coreG = 117 + p * 63; 
+        } else if (progress > 0.5) {
+            // Shift to Purple
+            const p = (progress - 0.5) * 2; // 0 to 1
+            coreR = 10 + p * 153; 
+            coreG = 180 - p * 67; 
+            coreB = 255 - p * 8; 
+        }
+
+        const coreColorStart = `rgba(${Math.floor(coreR)}, ${Math.floor(coreG)}, ${Math.floor(coreB)}, 0.12)`;
+        const coreColorMid = `rgba(${Math.floor(coreR)}, ${Math.floor(coreG)}, ${Math.floor(coreB)}, 0.05)`;
+        
         const grad = ctx.createRadialGradient(
             targetX, targetY, 0,
             canvas.width * 0.5, canvas.height * 0.5, Math.max(canvas.width, canvas.height)
         );
-        grad.addColorStop(0, '#040b1a'); // Faint deep blue glow around the processing core
-        grad.addColorStop(1, '#010205'); // Deep midnight black edges
+        grad.addColorStop(0, '#040b1a'); 
+        grad.addColorStop(1, '#010205'); 
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -154,8 +177,8 @@
         ctx.beginPath();
         ctx.arc(targetX, targetY, 90, 0, Math.PI * 2);
         const coreGrad = ctx.createRadialGradient(targetX, targetY, 0, targetX, targetY, 90);
-        coreGrad.addColorStop(0, 'rgba(29, 117, 255, 0.08)');
-        coreGrad.addColorStop(0.5, 'rgba(29, 117, 255, 0.03)');
+        coreGrad.addColorStop(0, coreColorStart);
+        coreGrad.addColorStop(0.5, coreColorMid);
         coreGrad.addColorStop(1, 'transparent');
         ctx.fillStyle = coreGrad;
         ctx.fill();
