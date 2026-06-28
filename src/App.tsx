@@ -4,6 +4,7 @@
  */
 
 import React, { useState, useEffect, useRef } from "react";
+import logoImg from "./narc.png";
 import { 
   SERVICES, 
   INDUSTRIES, 
@@ -405,9 +406,8 @@ export default function App() {
     fullName: "",
     businessEmail: "",
     companyName: "",
-    phoneNumber: "",
+    phoneNumber: "+91",
     serviceInterest: "",
-    projectBudget: "",
     projectRequirements: ""
   });
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
@@ -467,7 +467,6 @@ export default function App() {
     }
     if (!formData.companyName.trim()) errors.companyName = "Company Name is required";
     if (!formData.serviceInterest) errors.serviceInterest = "Please select a service";
-    if (!formData.projectBudget) errors.projectBudget = "Please select a budget range";
 
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors);
@@ -490,7 +489,6 @@ export default function App() {
         company: formData.companyName,
         phone: formData.phoneNumber,
         service: formData.serviceInterest,
-        budget: formData.projectBudget,
         requirement: formData.projectRequirements,
       }),
     })
@@ -503,9 +501,8 @@ export default function App() {
             fullName: "",
             businessEmail: "",
             companyName: "",
-            phoneNumber: "",
+            phoneNumber: "+91",
             serviceInterest: "",
-            projectBudget: "",
             projectRequirements: ""
           });
         } else {
@@ -547,13 +544,13 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
           
           {/* Logo */}
-          <a href="#home" className="flex items-center space-x-2 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/25 group-hover:scale-105 transition-transform duration-300">
-              <span className="text-white font-mono font-bold text-xl tracking-tight">N</span>
+          <a href="#home" className="flex items-center space-x-3 group">
+            <div className="relative w-10 h-10 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+              <img src={logoImg} alt="NorthArc Logo" className="w-full h-full object-contain" />
             </div>
             <div className="flex flex-col">
               <span className="text-xl font-bold tracking-tight font-display text-text-primary group-hover:text-primary transition-colors duration-200">NorthArc</span>
-              <span className="text-[9px] uppercase tracking-widest text-text-muted font-semibold">Connecting Intelligence</span>
+              <span className="text-[9px] uppercase tracking-widest text-text-muted font-semibold">Connecting Intelligence to Impact</span>
             </div>
           </a>
 
@@ -1835,7 +1832,7 @@ export default function App() {
                   {
                     icon: MapPin,
                     title: "Headquarters",
-                    content: "San Francisco, CA & London, UK",
+                    content: "Ahmedabad, Gujarat",
                     accent: "text-primary"
                   },
                   {
@@ -1847,7 +1844,7 @@ export default function App() {
                   {
                     icon: Phone,
                     title: "Direct Line",
-                    content: <a href="tel:+1415800NARC" className="hover:text-text-primary transition-colors">+1 (415) 800-NARC</a>,
+                    content: <a href="tel:+918849969336" className="hover:text-text-primary transition-colors">+91 884 996 9336</a>,
                     accent: "text-glow"
                   },
                   {
@@ -1997,60 +1994,33 @@ export default function App() {
                             name="phoneNumber"
                             value={formData.phoneNumber}
                             onChange={handleInputChange}
-                            placeholder="+1 (555) 000-0000"
+                            placeholder="+91 99999 99999"
                             className="w-full bg-surface-elevated/45 border-b border-border hover:border-primary/50 focus:border-primary px-1.5 py-3 text-sm text-text-primary placeholder:text-text-muted focus:outline-none transition-colors"
                           />
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        {/* Service Interest Dropdown */}
-                        <div className="space-y-2">
-                          <label className="text-xs font-bold uppercase tracking-wider text-text-muted block">
-                            Service Interest *
-                          </label>
-                          <select
-                            name="serviceInterest"
-                            value={formData.serviceInterest}
-                            onChange={handleInputChange}
-                            className={`w-full bg-surface bg-surface-elevated/45 border-b border-border hover:border-primary/50 focus:border-primary px-1.5 py-3 text-sm text-text-primary focus:outline-none transition-colors ${
-                              formErrors.serviceInterest ? "border-red-500" : ""
-                            }`}
-                          >
-                            <option value="">Select Service Area</option>
-                            {SERVICES.map((s, i) => (
-                              <option key={i} value={s.title}>{s.title}</option>
-                            ))}
-                          </select>
-                          {formErrors.serviceInterest && (
-                            <p className="text-xs text-red-500 font-medium">{formErrors.serviceInterest}</p>
-                          )}
-                        </div>
-
-                        {/* Budget Dropdown */}
-                        <div className="space-y-2">
-                          <label className="text-xs font-bold uppercase tracking-wider text-text-muted block">
-                            Project Budget *
-                          </label>
-                          <select
-                            name="projectBudget"
-                            value={formData.projectBudget}
-                            onChange={handleInputChange}
-                            className={`w-full bg-surface bg-surface-elevated/45 border-b border-border hover:border-primary/50 focus:border-primary px-1.5 py-3 text-sm text-text-primary focus:outline-none transition-colors ${
-                              formErrors.projectBudget ? "border-red-500" : ""
-                            }`}
-                          >
-                            <option value="">Select Budget Range</option>
-                            <option value="< $25,000">&lt; $25,000</option>
-                            <option value="$25,000 - $50,000">$25,000 - $50,000</option>
-                            <option value="$50,000 - $100,000">$50,000 - $100,000</option>
-                            <option value="$100,000 - $250,000">$100,000 - $250,000</option>
-                            <option value="$250,000+">$250,000+</option>
-                          </select>
-                          {formErrors.projectBudget && (
-                            <p className="text-xs text-red-500 font-medium">{formErrors.projectBudget}</p>
-                          )}
-                        </div>
+                      {/* Service Interest Dropdown */}
+                      <div className="space-y-2">
+                        <label className="text-xs font-bold uppercase tracking-wider text-text-muted block">
+                          Service Interest *
+                        </label>
+                        <select
+                          name="serviceInterest"
+                          value={formData.serviceInterest}
+                          onChange={handleInputChange}
+                          className={`w-full bg-surface bg-surface-elevated/45 border-b border-border hover:border-primary/50 focus:border-primary px-1.5 py-3 text-sm text-text-primary focus:outline-none transition-colors ${
+                            formErrors.serviceInterest ? "border-red-500" : ""
+                          }`}
+                        >
+                          <option value="">Select Service Area</option>
+                          {SERVICES.map((s, i) => (
+                            <option key={i} value={s.title}>{s.title}</option>
+                          ))}
+                        </select>
+                        {formErrors.serviceInterest && (
+                          <p className="text-xs text-red-500 font-medium">{formErrors.serviceInterest}</p>
+                        )}
                       </div>
 
                       {/* Requirements Textarea */}
@@ -2117,13 +2087,13 @@ export default function App() {
             
             {/* Column 1: Logo & Tagline */}
             <div className="lg:col-span-4 space-y-6">
-              <a href="#home" className="flex items-center space-x-2">
-                <div className="w-9 h-9 rounded-lg bg-gradient-to-tr from-primary to-secondary flex items-center justify-center">
-                  <span className="text-white font-mono font-bold text-lg tracking-tight">N</span>
+              <a href="#home" className="flex items-center space-x-3">
+                <div className="relative w-9 h-9 flex items-center justify-center">
+                  <img src={logoImg} alt="NorthArc Logo" className="w-full h-full object-contain" />
                 </div>
                 <div className="flex flex-col">
                   <span className="text-lg font-bold tracking-tight font-display text-white">NorthArc</span>
-                  <span className="text-[8px] uppercase tracking-widest text-[#475569] font-semibold">Connecting Intelligence</span>
+                  <span className="text-[8px] uppercase tracking-widest text-[#475569] font-semibold">Connecting Intelligence to Impact</span>
                 </div>
               </a>
               
