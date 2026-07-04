@@ -20,11 +20,20 @@ export function ThreeDCanvas() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    // Get CSS variables for colors
+    const getCssVar = (name: string) => {
+      return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    };
+
+    const color1 = getCssVar("--canvas-color-1");
+    const color2 = getCssVar("--canvas-color-2");
+    const color3 = getCssVar("--canvas-color-3");
+    const colors = [color1, color2, color3];
+
     let animationFrameId: number;
     let width = (canvas.width = canvas.offsetWidth);
     let height = (canvas.height = canvas.offsetHeight);
 
-    const colors = ["#2563EB", "#7C3AED", "#06B6D4"]; // Blue, Purple, Cyan
     const numParticles = Math.min(65, Math.floor((width * height) / 18000)); // Adaptive count based on screensize
     const particles: Particle[] = [];
 
@@ -106,9 +115,26 @@ export function ThreeDCanvas() {
 
           // Connection threshold
           if (dist < 120) {
+            // Use the first color for lines with opacity
             const alpha = (1 - dist / 120) * 0.18;
-            ctx.strokeStyle = `rgba(37, 99, 235, ${alpha})`;
-            
+            // We need to convert the color string to rgba? We can use the color and set opacity.
+            // Since the color is a string like "#2563EB", we can't directly change opacity.
+            // Instead, we can use the color and set the globalAlpha, or we can parse the color.
+            // For simplicity, we'll use the first color and set the alpha via rgba string.
+            // But note: the color might be in any format (hex, rgb, etc). We'll assume hex for now.
+            // Alternatively, we can use the color and set the globalAlpha of the context.
+            // Let's set the globalAlpha for the line and then reset.
+            // However, we are drawing multiple lines, so we can set the strokeStyle to the color with alpha.
+            // We'll convert the hex to rgba.
+            // Since we know the color is hex, we can do:
+            const hex = color1.replace("#", "");
+            const r = parseInt(hex.substring(0, 2), 16);
+            const g = parseInt(hex.substring(2, 4), 16);
+            const b = parseInt(hex.substring(4, 6), 16);
+            const strokeColor = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+
+            ctx.strokeStyle = strokeColor;
+
             ctx.beginPath();
             ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(p2.x, p2.y);
