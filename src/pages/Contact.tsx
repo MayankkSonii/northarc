@@ -264,7 +264,7 @@ export default function Contact() {
                             name="phoneNumber"
                             value={formData.phoneNumber}
                             onChange={handleInputChange}
-                            placeholder="+1 (555) 000-0000"
+                            placeholder="+91 1234567890"
                             className="w-full bg-surface-elevated/45 border-b border-border hover:border-primary/50 focus:border-primary px-1.5 py-3 text-sm text-text-primary placeholder:text-text-muted focus:outline-none transition-colors"
                           />
                         </div>
