@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "motion/react";
 import { staggerContainer, staggerItem, fadeUpVariant, viewportOnce } from "../../lib/animations";
 import { AnimatedHeroVisual } from "../../components/AnimatedHeroVisual";
+import { useSEO, breadcrumbJsonLd, SITE_URL, SITE_NAME } from "../../lib/seo";
 import {
   ArrowRight,
   ArrowDown,
@@ -13,6 +14,30 @@ import {
 } from "lucide-react";
 
 export default function AiMl() {
+  useSEO({
+    title: "AI & Machine Learning Development",
+    description:
+      "NorthArc builds and deploys custom AI and machine learning — LLM apps, RAG search, and predictive models that cut costs and drive measurable business outcomes.",
+    path: "/expertise/ai-ml",
+    jsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        serviceType: "AI & Machine Learning Development",
+        name: "AI & Machine Learning Development",
+        description:
+          "Custom AI and machine learning engineering — deep learning models, generative AI and LLM applications, RAG search, and autonomous agents delivered to production.",
+        provider: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+        areaServed: "Worldwide",
+        url: `${SITE_URL}/expertise/ai-ml`,
+      },
+      breadcrumbJsonLd([
+        { name: "Home", path: "/" },
+        { name: "AI & Machine Learning", path: "/expertise/ai-ml" },
+      ]),
+    ],
+  });
+
   const capabilities = [
     { icon: Brain, title: "Custom Deep Learning", desc: "Train proprietary neural network weights, classifiers, and predictive forecasting arrays." },
     { icon: Sparkles, title: "Generative AI & LLMs", desc: "Integrate frontier LLMs (Llama-3, GPT-4) and configure parameter-efficient fine-tuning (PEFT)." },
@@ -51,7 +76,7 @@ export default function AiMl() {
             AI and Machine Learning
           </h1>
           <p className="text-sm sm:text-base text-text-secondary font-light max-w-xl leading-relaxed" variants={staggerItem}>
-            We build state-of-the-art neural architectures, fine-tune open-source models, and deploy autonomous agent networks. Tracing intelligence pipelines from raw dataset ingestion to sub-100ms inference.
+            We turn your data into decisions — building custom models, fine-tuning frontier LLMs, and deploying autonomous agents that automate work and answer questions with production-grade accuracy and speed.
           </p>
           <div className="pt-4" variants={staggerItem}>
             <a

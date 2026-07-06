@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "motion/react";
 import { AnimatedHeroVisual } from "../../components/AnimatedHeroVisual";
+import { useSEO, breadcrumbJsonLd, SITE_URL, SITE_NAME } from "../../lib/seo";
 import {
   ArrowRight,
   ArrowDown,
@@ -12,6 +13,30 @@ import {
 } from "lucide-react";
 
 export default function WebMobile() {
+  useSEO({
+    title: "Web & Mobile App Development — AI-Ready Products",
+    description:
+      "NorthArc engineers fast, AI-ready web and mobile apps that lift engagement — native iOS/Android, React Native, Flutter, offline-first sync, and 60fps UX.",
+    path: "/expertise/web-mobile",
+    jsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        serviceType: "Web & Mobile App Development",
+        name: "Web & Mobile App Engineering",
+        description:
+          "High-performance, AI-ready web and mobile product engineering — native iOS and Android, cross-platform React Native and Flutter, and Next.js web apps built for scale and engagement.",
+        provider: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+        areaServed: "Worldwide",
+        url: `${SITE_URL}/expertise/web-mobile`,
+      },
+      breadcrumbJsonLd([
+        { name: "Home", path: "/" },
+        { name: "Web & Mobile", path: "/expertise/web-mobile" },
+      ]),
+    ],
+  });
+
   const capabilities = [
     { icon: Smartphone, title: "Native iOS Apps", desc: "Construct high-fidelity, optimized client codebases using Swift and SwiftUI libraries." },
     { icon: SmartphoneIcon, title: "Native Android Apps", desc: "Build responsive, multi-device compatible Android platforms using Kotlin." },
@@ -49,7 +74,7 @@ export default function WebMobile() {
             Web & Mobile App Engineering
           </h1>
           <p className="text-sm sm:text-base text-text-secondary font-light max-w-xl leading-relaxed">
-            We engineer high-fidelity web applications and native/cross-platform mobile apps. From offline-first synchronization logic to microsecond rendering, we deliver top-tier mobile products.
+            We engineer high-fidelity web applications and native/cross-platform mobile apps, ready for AI-powered features. From offline-first synchronization logic to buttery 60fps rendering, we deliver products that measurably lift engagement.
           </p>
           <div className="pt-4">
             <a

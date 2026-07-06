@@ -2,38 +2,63 @@ import React from "react";
 import { motion } from "motion/react";
 import { staggerContainer, staggerItem, fadeUpVariant, viewportOnce } from "../../lib/animations";
 import { AnimatedHeroVisual } from "../../components/AnimatedHeroVisual";
+import { useSEO, breadcrumbJsonLd, SITE_URL, SITE_NAME } from "../../lib/seo";
 import {
-  Check,
   ArrowRight,
   ArrowDown,
-  Cpu,
-  Settings,
-  Network,
-  Layers
+  Check,
+  Sparkles,
+  MessageSquare,
+  BookOpen,
+  Bot
 } from "lucide-react";
 
-export default function Iot() {
+export default function GenerativeAi() {
+  useSEO({
+    title: "Generative AI & LLM Development",
+    description:
+      "NorthArc builds enterprise generative AI — RAG knowledge assistants, copilots and AI agents that turn your data into instant answers and automate work.",
+    path: "/expertise/generative-ai",
+    jsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        serviceType: "Generative AI & LLM Development",
+        name: "Generative AI & LLM Development",
+        description:
+          "Enterprise generative AI engineering — retrieval-augmented generation, AI copilots and assistants, autonomous agents, and fine-tuned LLM applications delivered to production.",
+        provider: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+        areaServed: "Worldwide",
+        url: `${SITE_URL}/expertise/generative-ai`,
+      },
+      breadcrumbJsonLd([
+        { name: "Home", path: "/" },
+        { name: "Generative AI & LLMs", path: "/expertise/generative-ai" },
+      ]),
+    ],
+  });
+
   const capabilities = [
-    { icon: Cpu, title: "Firmware Engineering", desc: "Write low-level firmware in C/C++ for Microcontrollers, ESP32, STM32, and ARM modules." },
-    { icon: Network, title: "IoT Protocol Integration", desc: "Configure high-reliability telemetry protocols (MQTT, CoAP, WebSockets, gRPC)." },
-    { icon: Settings, title: "Edge Processing", desc: "Build local model inference routines using optimized TensorFlow Lite or custom weights." },
-    { icon: Layers, title: "Hardware Integration", desc: "Interface sensors, calibrate memory loops, and control hardware communications." }
+    { icon: BookOpen, title: "Knowledge Assistants (RAG)", desc: "Give your team instant, sourced answers from your own documents, policies and data — grounded, not hallucinated." },
+    { icon: Bot, title: "AI Agents & Automation", desc: "Deploy autonomous agents that take action across your tools, complete multi-step tasks, and offload repetitive work." },
+    { icon: MessageSquare, title: "Copilots & Assistants", desc: "Embed AI copilots into your product and internal workflows so people get from question to outcome in seconds." },
+    { icon: Sparkles, title: "Fine-Tuning & LLM Integration", desc: "Adapt frontier models to your domain, voice and data — connecting LLMs securely into the systems you already run." }
   ];
 
   const processSteps = [
-    { num: "01", title: "Hardware Scoping & Requirements", desc: "Analyze chip choices, calculate energy profiles, and map sensor signals." },
-    { num: "02", title: "Firmware Blueprint Design", desc: "Draft memory partitions, configure register values, and outline data pipelines." },
-    { num: "03", title: "Local Code Development", desc: "Write firmware scripts, set up local debuggers, and verify logic timings." },
-    { num: "04", title: "Network Integration", desc: "Establish secure MQTT TLS connections, write payload formats, and set up brokers." },
-    { num: "05", title: "Staging Tests & Calibrations", desc: "Execute load checks on ESP32/ARM, monitor battery consumption, and calibrate sensors." },
-    { num: "06", title: "Production Deploy & Firmware OTA", desc: "Deploy finalized bytecodes, configure OTA updater services, and launch dashboards." }
+    { num: "01", title: "Use-Case & ROI Framing", desc: "Identify the highest-value workflows, define success metrics, and scope where generative AI actually moves the number." },
+    { num: "02", title: "Knowledge Ingestion", desc: "Connect and clean your documents and data sources, then chunk and embed them into a governed knowledge base." },
+    { num: "03", title: "Grounded Retrieval Design", desc: "Build retrieval and prompting so answers stay accurate, cite their sources, and respect access permissions." },
+    { num: "04", title: "Agent & Copilot Build", desc: "Compose tool-using agents and copilots with guardrails, human-in-the-loop checks, and safe action boundaries." },
+    { num: "05", title: "Evaluation & Guardrails", desc: "Test for accuracy, hallucination and safety with evaluation sets, then harden prompts and fallback behaviour." },
+    { num: "06", title: "Deployment & Monitoring", desc: "Ship to production with cost controls, latency tuning, usage analytics, and continuous quality monitoring." }
   ];
 
   const highlights = [
-    "Average energy consumption optimized to increase battery life by up to 35%.",
-    "Secure firmware communication protocols using local TLS encryption.",
-    "Edge model calculations running in under 50ms on ARM chips.",
-    "Robust OTA updater modules providing secure firmware releases."
+    "Answers grounded in your own data with cited sources — not model guesswork.",
+    "Access-aware retrieval so users only ever see what they are permitted to.",
+    "Evaluation and guardrail suites that measure accuracy and catch hallucinations.",
+    "Cost and latency optimised through caching, routing and right-sized models."
   ];
 
   return (
@@ -42,17 +67,16 @@ export default function Iot() {
       {/* Wave Decorative Orbs */}
       <div className="absolute right-[-10%] top-[5%] w-[50vw] h-[50vw] rounded-full bg-gradient-to-tr from-primary/10 to-primary/15 blur-[130px] pointer-events-none z-0"></div>
       <div className="absolute left-[-8%] bottom-[15%] w-[45vw] h-[45vw] rounded-full bg-gradient-to-br from-secondary/8 to-glow/5 blur-[120px] pointer-events-none z-0 animate-float-delay"></div>
-      <div className="absolute left-[-8%] bottom-[15%] w-[45vw] h-[45vw] rounded-full bg-gradient-to-br from-secondary/8 to-glow/5 blur-[120px] pointer-events-none z-0 animate-float-delay"></div>
 
-      {/* HERO SECTION */}
+      {/* 1. HERO SECTION */}
       <section className="min-h-screen flex flex-col justify-between px-6 md:px-12 lg:px-24 pt-28 pb-10 relative z-10 max-w-7xl mx-auto">
         <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="space-y-8 max-w-3xl">
-          <span className="text-xs font-bold uppercase tracking-widest text-primary font-mono block" variants={staggerItem}>EXPERTISE / IOT & EMBEDDED</span>
+          <span className="text-xs font-bold uppercase tracking-widest text-primary font-mono block" variants={staggerItem}>EXPERTISE / GENERATIVE AI & LLMS</span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight text-text-primary leading-[1.08]" variants={staggerItem}>
-            IoT & Embedded Systems
+            Generative AI and LLMs
           </h1>
           <p className="text-sm sm:text-base text-text-secondary font-light max-w-xl leading-relaxed" variants={staggerItem}>
-            We write low-level C/C++ firmware, configure secure telemetry networks, and deploy edge model pipelines for physical hardware.
+            We put your organisation&rsquo;s knowledge to work — building RAG assistants, copilots and autonomous agents that answer questions instantly from your own data and automate the work that slows your team down.
           </p>
           <div className="pt-4" variants={staggerItem}>
             <a
@@ -65,7 +89,7 @@ export default function Iot() {
           </div>
         </motion.div>
         <div className="pointer-events-none absolute right-6 top-[calc(50%+40px)] hidden w-[42%] -translate-y-1/2 lg:block">
-          <AnimatedHeroVisual icon={Cpu} title="Edge network" eyebrow="Connected devices" scene="cloud" />
+          <AnimatedHeroVisual icon={Sparkles} title="Knowledge assistant" eyebrow="Generative AI" scene="ai" />
         </div>
 
         {/* Scroll Indicator */}
@@ -77,13 +101,13 @@ export default function Iot() {
         </div>
       </section>
 
-      {/* CORE CAPABILITIES */}
+      {/* 2. CORE CAPABILITIES */}
       <section className="py-16 px-6 md:px-12 lg:px-24 border-t border-border/10 relative z-10 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           <div className="lg:col-span-4">
-            <h2 className="text-2xl sm:text-3xl font-light tracking-tight" variants={fadeUpVariant} initial="hidden" whileInView="visible" viewport={viewportOnce}>Embedded Focus</h2>
-            <p className="text-sm text-text-secondary font-light mt-4 leading-relaxed" variants={fadeUpVariant} initial="hidden" whileInView="visible" viewport={viewportOnce}>
-              We compile highly optimized firmware outputs. We manage memory limitations and prioritize energy optimizations to maintain hardware runtime limits.
+            <h2 className="text-2xl sm:text-3xl font-light tracking-tight">What We Build</h2>
+            <p className="text-sm text-text-secondary font-light mt-4 leading-relaxed">
+              We turn frontier language models into dependable business tools — grounded in your data, wrapped in guardrails, and measured against outcomes that matter.
             </p>
           </div>
           <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-8 lg:pl-12 border-l border-border/10">
@@ -103,13 +127,13 @@ export default function Iot() {
         </div>
       </section>
 
-      {/* PROCESS STEPS */}
+      {/* 3. PROCESS STEPS */}
       <section className="py-16 px-6 md:px-12 lg:px-24 border-t border-border/10 relative z-10 max-w-7xl mx-auto">
         <div className="space-y-10">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-light tracking-tight">The Firmware Journey</h2>
+            <h2 className="text-2xl sm:text-3xl font-light tracking-tight">The Generative AI Process</h2>
             <p className="text-sm text-text-secondary font-light mt-2 max-w-md">
-              A systematic overview of how we compile C/C++ source code to ARM and ESP32 nodes.
+              A systematic path from a high-value use case to a trustworthy assistant running in production.
             </p>
           </div>
 
@@ -125,13 +149,13 @@ export default function Iot() {
         </div>
       </section>
 
-      {/* GUARANTEES CHECKLIST & CTA */}
+      {/* 4. GUARANTEES CHECKLIST & CTA */}
       <section className="py-20 px-6 md:px-12 lg:px-24 border-t border-border/10 relative z-10 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-6 space-y-6">
-            <h2 className="text-3xl font-light tracking-tight">Technical Standards</h2>
+            <h2 className="text-3xl font-light tracking-tight">Built for Trust in Production</h2>
             <p className="text-sm text-text-secondary font-light leading-relaxed">
-              We leverage modern toolchains and security configurations. All firmware modules undergo memory profiling and power tests before final release.
+              Generative AI only creates value when people trust the answers. Every assistant we ship is grounded in your data, evaluated for accuracy, and protected by guardrails before it reaches a single user.
             </p>
             <div className="space-y-4">
               {highlights.map((h, i) => (
@@ -146,15 +170,15 @@ export default function Iot() {
           </div>
           <div className="lg:col-span-6 flex justify-center lg:justify-end">
             <div className="max-w-md w-full rounded-3xl bg-surface/50 border border-border/10 p-8 text-center space-y-6">
-              <h3 className="text-xl font-bold text-text-primary">Have firmware to compile?</h3>
+              <h3 className="text-xl font-bold text-text-primary">Have a knowledge or automation problem?</h3>
               <p className="text-xs text-text-secondary font-light">
-                Connect with our firmware architects to evaluate microcontrollers, map telemetry payloads, and budget development cycles.
+                Talk to our AI engineers about turning your documents, data and workflows into a grounded assistant or agent that pays for itself.
               </p>
               <a
                 href="/contact"
                 className="w-full inline-flex items-center justify-center gap-2 border border-primary bg-primary hover:bg-transparent text-text-primary hover:text-primary rounded-full py-4 text-sm font-semibold transition-all duration-300 group"
               >
-                <span>Discuss Your Project</span>
+                <span>Request a GenAI Consult</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
@@ -165,11 +189,3 @@ export default function Iot() {
     </div>
   );
 }
-
-
-
-
-
-
-
-

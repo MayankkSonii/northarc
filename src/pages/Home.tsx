@@ -1,26 +1,137 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { 
-  ArrowRight, 
-  Brain, 
-  Sparkles, 
-  Cpu, 
-  Layers, 
-  Zap, 
-  ShieldCheck, 
-  LineChart, 
-  Briefcase, 
-  DollarSign, 
-  Activity, 
-  MapPin, 
-  Mail, 
-  Phone, 
-  Clock, 
-  Check, 
-  Send 
+import {
+  ArrowRight,
+  Brain,
+  Layers,
+  Zap,
+  ShieldCheck,
+  LineChart,
+  Briefcase,
+  Activity,
+  MapPin,
+  Mail,
+  Phone,
+  Clock,
+  Check,
+  Send,
+  Sparkles,
+  Bot,
+  ScanText,
+  BarChart3,
+  TrendingUp
 } from "lucide-react";
 import { SERVICES, DEPLOYMENT_STEPS, SOLUTIONS } from "../data";
+import { products } from "../data/productsData";
+import { industries, functions } from "../data/solutionsData";
+import { caseStudies } from "../data/caseStudiesData";
 import { ThreeDCanvas } from "../components/ThreeDCanvas";
+import { useSEO, SITE_URL } from "../lib/seo";
+import { staggerContainer, staggerItem, viewportOnce } from "../lib/animations";
+
+// ProfessionalService structured data for the home route.
+// (The Organization schema lives statically in index.html — not duplicated here.)
+const HOME_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": `${SITE_URL}/#professional-service`,
+  name: "NorthArc",
+  url: SITE_URL,
+  slogan: "Connecting Intelligence to Impact.",
+  description:
+    "AI engineering, data science, and intelligent automation company helping enterprises turn data and operations into measurable business outcomes.",
+  email: "solutions@northarc.in",
+  telephone: "+91-8849969336",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Ahmedabad",
+    addressRegion: "Gujarat",
+    addressCountry: "IN",
+  },
+  areaServed: "Worldwide",
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "AI Engineering, Data Science & Intelligent Automation Services",
+    itemListElement: [
+      ...SERVICES.map((s) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: s.title,
+          description: s.description,
+        },
+      })),
+      ...products.map((p) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: p.name,
+          description: p.summary,
+          url: `${SITE_URL}/products/${p.slug}`,
+        },
+      })),
+    ],
+  },
+};
+
+// Outcome-led capability band — "what we do" mapped to business value.
+const CAPABILITIES = [
+  {
+    icon: Bot,
+    title: "Intelligent Automation",
+    outcome: "Take the manual, repetitive work off your teams so they focus on what moves the business.",
+  },
+  {
+    icon: Sparkles,
+    title: "Generative AI & Assistants",
+    outcome: "Turn your own knowledge into instant, trusted answers — with citations your teams can verify.",
+  },
+  {
+    icon: Brain,
+    title: "Autonomous AI Agents",
+    outcome: "Deploy agents that research, decide, and act across your systems to run workflows end to end.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Predictive Machine Learning",
+    outcome: "Forecast demand, score leads, and flag churn before it happens to protect and grow revenue.",
+  },
+  {
+    icon: ScanText,
+    title: "Document AI",
+    outcome: "Eliminate manual data entry by turning forms, contracts, and scans into clean, validated data.",
+  },
+  {
+    icon: BarChart3,
+    title: "Analytics & Decision Intelligence",
+    outcome: "Give every team self-serve answers from your data in plain language — decisions in seconds, not days.",
+  },
+];
+
+// A curated selection of products for the Home preview grid.
+const PRODUCT_PREVIEW_SLUGS = [
+  "voice-ai-calling-agent",
+  "rag-knowledge-assistant",
+  "predictive-lead-scoring",
+  "ai-sales-agent",
+  "document-ai-ocr",
+  "ai-analytics-copilot",
+];
+const PREVIEW_PRODUCTS = PRODUCT_PREVIEW_SLUGS
+  .map((slug) => products.find((p) => p.slug === slug))
+  .filter((p): p is (typeof products)[number] => Boolean(p));
+
+// Featured, metric-bearing case studies for the highlights strip.
+const HIGHLIGHT_STUDIES = caseStudies.filter((c) => c.featured).slice(0, 3);
+
+// A few industry + function solutions for the "solutions by industry & function" section.
+const SOLUTION_PREVIEW = [...industries.slice(0, 4), ...functions.slice(0, 2)];
+
+// Trust band — platforms and frameworks the delivery runs on (text chips, no external assets).
+const TRUST_CHIPS = [
+  "AWS", "Microsoft Azure", "Google Cloud", "OpenAI", "Anthropic Claude",
+  "Google Gemini", "LangChain", "PyTorch", "TensorFlow", "BigQuery", "Vertex AI", "scikit-learn",
+];
 
 // Animated Stats Counter Component
 interface AnimatedCounterProps {
@@ -230,7 +341,7 @@ function TechFilterGrid() {
                 ) : (
                   <img
                     src={`https://cdn.simpleicons.org/${item.slug}/${item.color.replace("#", "")}`}
-                    alt={item.name}
+                    alt={`${item.name} technology logo`}
                     className="w-12 h-12 object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
                   />
                 )}
@@ -264,12 +375,12 @@ function SolutionsSection() {
           transition={{ duration: 0.7 }}
           className="space-y-4 content-space-sm max-w-2xl text-left"
         >
-          <span className="text-xs font-bold uppercase tracking-widest text-primary font-mono block">SYSTEM SOLUTIONS</span>
+          <span className="text-xs font-bold uppercase tracking-widest text-primary font-mono block">AI SOLUTIONS</span>
           <h2 className="text-3xl md:text-5xl font-light tracking-tight text-text-primary leading-[1.1]">
-            Enterprise AI Frameworks
+            AI Solutions, Engineered for Outcomes
           </h2>
           <p className="text-base text-text-secondary font-light leading-relaxed">
-            Highly secure architectures designed to optimize datasets, compile agent logic pipelines, and execute model predictions.
+            Field-tested solution blueprints that automate your operations, put institutional knowledge to work, and forecast what happens next — deployed securely in your own cloud.
           </p>
         </motion.div>
 
@@ -322,7 +433,7 @@ function SolutionsSection() {
                 <div className="space-y-8 z-10 text-left">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-border/80">
                     <div>
-                      <span className="text-[10px] font-bold tracking-widest font-mono text-primary uppercase block">FRAMEWORK BLUEPRINT</span>
+                      <span className="text-[10px] font-bold tracking-widest font-mono text-primary uppercase block">SOLUTION BLUEPRINT</span>
                       <h3 className="text-2xl font-bold font-display tracking-tight text-text-primary mt-1">
                         {activeSolution.title}
                       </h3>
@@ -355,7 +466,7 @@ function SolutionsSection() {
 href="/contact"
                     className="px-6 py-3 rounded-full border border-border/30 text-text-primary hover:bg-bg hover:text-text-primary bg-transparent inline-flex items-center space-x-2 text-xs font-semibold transition-all cursor-pointer"
                   >
-                    <span>Inquire Framework</span>
+                    <span>Discuss This Solution</span>
                     <ArrowRight className="w-4 h-4" />
                   </a>
                 </div>
@@ -369,6 +480,14 @@ href="/contact"
 }
 
 export default function Home() {
+  useSEO({
+    title: "NorthArc — AI Engineering, Data Science & Intelligent Automation",
+    description:
+      "NorthArc engineers AI automation, data science and GenAI systems that cut costs, speed decisions and turn enterprise data into measurable business impact.",
+    path: "/",
+    jsonLd: HOME_JSON_LD,
+  });
+
   const [formData, setFormData] = useState({
     fullName: "",
     businessEmail: "",
@@ -483,7 +602,7 @@ export default function Home() {
             </h1>
 
             <p className="text-sm sm:text-base text-text-secondary font-light max-w-xl leading-relaxed">
-              We engineer production-grade algorithmic pipelines, autonomous agent networks, and semantic index arrays. Tracing your systems from Discovery to scale-ready VPC container isolation.
+              We turn your data and operations into production-grade AI — intelligent automation, predictive analytics, and GenAI systems engineered to cut costs, accelerate decisions, and grow revenue.
             </p>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-5 pt-2">
@@ -539,7 +658,7 @@ export default function Home() {
                     Enterprise AI Architecture
                   </h3>
                   <p className="text-xs text-text-secondary leading-relaxed font-light">
-                    Scaling secure RAG models and agents in containerized Kubernetes nodes. Seamlessly auditing datasets and pipeline metrics.
+                    Secure, monitored AI running in your own cloud — answering from your knowledge, automating your workflows, and reporting every metric back to the business.
                   </p>
                 </div>
 
@@ -577,7 +696,7 @@ export default function Home() {
             </div>
 
             <p className="text-base md:text-lg text-text-secondary leading-relaxed font-light">
-              NorthArc is a specialized AI, Data Science, and Intelligent Systems firm that bridges the gap between cutting-edge research and real-world business outcomes. We engineer production-grade AI solutions — from foundation model integrations and autonomous agent networks to custom neural architectures and enterprise data pipelines. Our team operates at the intersection of deep algorithmic expertise and pragmatic systems engineering.
+              NorthArc is an AI engineering, data science, and intelligent automation firm that turns your data and operations into measurable business results. We automate the manual work that slows your teams down, put your own knowledge to work through GenAI, and forecast what happens next with predictive models — all delivered as production-grade systems inside your own secure cloud. Deep technical expertise, applied to the outcomes your business actually reports on.
             </p>
           </motion.div>
 
@@ -595,9 +714,9 @@ export default function Home() {
                   <Zap className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-base font-bold text-text-primary">Production-First Engineering</h4>
+                  <h3 className="text-base font-bold text-text-primary">Production-First Engineering</h3>
                   <p className="text-sm text-text-secondary mt-1 leading-relaxed font-light">
-                    Every model and pipeline ships containerized, monitored, and production-ready.
+                    Every model and pipeline ships containerized, monitored, and production-ready — no proofs-of-concept left stranded on a laptop.
                   </p>
                 </div>
               </div>
@@ -613,15 +732,15 @@ export default function Home() {
             >
               <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-2xl"></div>
               <div className="flex items-center justify-between">
-                <span className="text-sm font-semibold font-mono text-text-muted uppercase tracking-wider">Track Record</span>
+                <span className="text-sm font-semibold font-mono text-text-muted uppercase tracking-wider">Experience</span>
                 <div className="p-2 rounded-xl bg-primary/10 text-primary">
                   <Briefcase className="w-5 h-5" />
                 </div>
               </div>
-              <h3 className="text-3xl font-extrabold font-display text-text-primary mt-4 tracking-tight">
-                <AnimatedCounter value="50+" />
-              </h3>
-              <p className="text-sm font-semibold text-text-secondary mt-2">AI Systems Built & Deployed</p>
+              <p className="text-3xl font-extrabold font-display text-text-primary mt-4 tracking-tight">
+                <span className="font-mono tabular-nums font-bold">3.5+</span>
+              </p>
+              <p className="text-sm font-semibold text-text-secondary mt-2">Years across AI, Data Science &amp; ML delivery</p>
             </motion.div>
 
             {/* Pillar 2 */}
@@ -637,9 +756,9 @@ export default function Home() {
                   <ShieldCheck className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-base font-bold text-text-primary">Enterprise-Grade Security</h4>
+                  <h3 className="text-base font-bold text-text-primary">Enterprise-Grade Security</h3>
                   <p className="text-sm text-text-secondary mt-1 leading-relaxed font-light">
-                    SOC-2 aligned architectures with VPC isolation, IAM governance, and full audit trails.
+                    Architected for VPC isolation, IAM governance, and full audit trails so your data never leaves your control.
                   </p>
                 </div>
               </div>
@@ -655,15 +774,15 @@ export default function Home() {
             >
               <div className="absolute top-0 right-0 w-24 h-24 bg-secondary/5 rounded-full blur-2xl"></div>
               <div className="flex items-center justify-between">
-                <span className="text-sm font-semibold font-mono text-text-muted uppercase tracking-wider">Client Value</span>
+                <span className="text-sm font-semibold font-mono text-text-muted uppercase tracking-wider">Capabilities</span>
                 <div className="p-2 rounded-xl bg-secondary/10 text-secondary">
-                  <DollarSign className="w-5 h-5" />
+                  <Layers className="w-5 h-5" />
                 </div>
               </div>
-              <h3 className="text-3xl font-extrabold font-display text-text-primary mt-4 tracking-tight">
-                <AnimatedCounter value="3x" />
-              </h3>
-              <p className="text-sm font-semibold text-text-secondary mt-2">Average Investment ROI</p>
+              <p className="text-3xl font-extrabold font-display text-text-primary mt-4 tracking-tight">
+                <AnimatedCounter value="12" />
+              </p>
+              <p className="text-sm font-semibold text-text-secondary mt-2">AI, data science &amp; automation service lines</p>
             </motion.div>
 
             {/* Pillar 3 */}
@@ -679,9 +798,9 @@ export default function Home() {
                   <LineChart className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-base font-bold text-text-primary">Measurable Outcomes</h4>
+                  <h3 className="text-base font-bold text-text-primary">Measurable Outcomes</h3>
                   <p className="text-sm text-text-secondary mt-1 leading-relaxed font-light">
-                    We tie every project to concrete business KPIs — revenue gains, cost savings, time reductions.
+                    We tie every engagement to a concrete business KPI — revenue gained, cost removed, or hours returned to your team.
                   </p>
                 </div>
               </div>
@@ -697,17 +816,140 @@ export default function Home() {
             >
               <div className="absolute top-0 right-0 w-24 h-24 bg-glow/5 rounded-full blur-2xl"></div>
               <div className="flex items-center justify-between">
-                <span className="text-sm font-semibold font-mono text-text-muted uppercase tracking-wider">Engineering Quality</span>
+                <span className="text-sm font-semibold font-mono text-text-muted uppercase tracking-wider">Deployment</span>
                 <div className="p-2 rounded-xl bg-glow/10 text-glow">
                   <Activity className="w-5 h-5" />
                 </div>
               </div>
-              <h3 className="text-3xl font-extrabold font-display text-text-primary mt-4 tracking-tight">
-                <AnimatedCounter value="97%" />
-              </h3>
-              <p className="text-sm font-semibold text-text-secondary mt-2">In-Production Accuracy</p>
+              <p className="text-3xl font-extrabold font-display text-text-primary mt-4 tracking-tight">
+                <AnimatedCounter value="100%" />
+              </p>
+              <p className="text-sm font-semibold text-text-secondary mt-2">Delivered inside your own secure cloud</p>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* 2.5 CAPABILITIES BAND — outcome-led "what we do" */}
+      <section id="capabilities" className="section-padding-sm bg-bg relative border-t border-border/40">
+        <div className="absolute top-0 right-1/4 w-[30vw] h-[30vw] rounded-full bg-primary/5 blur-[130px] pointer-events-none"></div>
+        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 text-left">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7 }}
+            className="space-y-4 content-space-sm max-w-2xl"
+          >
+            <span className="text-xs font-bold uppercase tracking-widest text-primary font-mono block">WHAT WE DO</span>
+            <h2 className="text-3xl md:text-5xl font-light tracking-tight text-text-primary leading-[1.1]">
+              One partner across the full AI spectrum
+            </h2>
+            <p className="text-base text-text-secondary font-light leading-relaxed">
+              From automating manual work to forecasting what happens next — every capability is delivered as a production-grade system, tied to a business metric you already report on.
+            </p>
+          </motion.div>
+
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 section-gap-sm"
+          >
+            {CAPABILITIES.map((cap) => {
+              const Icon = cap.icon;
+              return (
+                <motion.div
+                  key={cap.title}
+                  variants={staggerItem}
+                  className="group p-6 rounded-2xl bg-surface border border-border hover:border-primary/45 transition-all duration-300 shadow-sm h-full flex flex-col"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                    <Icon className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-lg font-bold font-display tracking-tight text-text-primary group-hover:text-primary transition-colors">
+                    {cap.title}
+                  </h3>
+                  <p className="text-sm text-text-secondary mt-2 leading-relaxed font-light">
+                    {cap.outcome}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* 2.6 AI PRODUCTS PREVIEW */}
+      <section id="products" className="section-padding-sm bg-surface/20 relative border-t border-border/40">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 text-left">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7 }}
+            className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 content-space-sm"
+          >
+            <div className="space-y-4 max-w-2xl">
+              <span className="text-xs font-bold uppercase tracking-widest text-primary font-mono block">AI PRODUCTS</span>
+              <h2 className="text-3xl md:text-5xl font-light tracking-tight text-text-primary leading-[1.1]">
+                Deploy-ready AI, built for outcomes
+              </h2>
+              <p className="text-base text-text-secondary font-light leading-relaxed">
+                Battle-tested product blueprints — voice and support agents, predictive models, document AI, and analytics copilots — configured to your data and deployed in your own secure cloud.
+              </p>
+            </div>
+            <a
+              href="/products"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:gap-3 transition-all shrink-0 whitespace-nowrap"
+            >
+              <span>View all products</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </motion.div>
+
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 section-gap-sm"
+          >
+            {PREVIEW_PRODUCTS.map((product) => {
+              const Icon = product.icon;
+              return (
+                <motion.a
+                  key={product.slug}
+                  href={`/products/${product.slug}`}
+                  variants={staggerItem}
+                  className="group relative p-6 rounded-2xl bg-surface border border-border hover:border-primary/50 transition-all duration-300 shadow-sm h-full flex flex-col overflow-hidden"
+                >
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-colors pointer-events-none"></div>
+                  <div className="flex items-center justify-between mb-5 relative z-10">
+                    <div
+                      className="w-12 h-12 rounded-xl flex items-center justify-center transition-transform group-hover:scale-110"
+                      style={{ backgroundColor: `${product.accentColor}1a`, color: product.accentColor }}
+                    >
+                      <Icon className="w-6 h-6" />
+                    </div>
+                    <span className="text-[10px] font-bold font-mono uppercase tracking-wider text-text-muted px-2.5 py-1 rounded-full border border-border bg-surface-elevated/50">
+                      {product.category}
+                    </span>
+                  </div>
+                  <h3 className="text-lg font-bold font-display tracking-tight text-text-primary group-hover:text-primary transition-colors relative z-10">
+                    {product.name}
+                  </h3>
+                  <p className="text-sm text-text-secondary mt-2 leading-relaxed font-light flex-grow relative z-10">
+                    {product.tagline}
+                  </p>
+                  <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary mt-5 group-hover:gap-2.5 transition-all relative z-10">
+                    Explore product <ArrowRight className="w-3.5 h-3.5" />
+                  </span>
+                </motion.a>
+              );
+            })}
+          </motion.div>
         </div>
       </section>
 
@@ -727,7 +969,7 @@ export default function Home() {
               Our 5-Step Process
             </h2>
             <p className="text-base text-text-secondary font-light leading-relaxed">
-              We approach every engagement with surgical alignment, tracing goals from audit to active production monitoring.
+              A disciplined path from first audit to live production — every phase mapped to the business metric it is meant to move.
             </p>
           </motion.div>
 
@@ -773,7 +1015,161 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 3.4 CASE STUDY HIGHLIGHTS */}
+      <section id="case-studies" className="section-padding-sm bg-bg relative border-t border-border/40">
+        <div className="absolute bottom-0 left-1/4 w-[32vw] h-[32vw] rounded-full bg-secondary/5 blur-[130px] pointer-events-none"></div>
+        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 text-left">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7 }}
+            className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 content-space-sm"
+          >
+            <div className="space-y-4 max-w-2xl">
+              <span className="text-xs font-bold uppercase tracking-widest text-primary font-mono block">PROVEN IMPACT</span>
+              <h2 className="text-3xl md:text-5xl font-light tracking-tight text-text-primary leading-[1.1]">
+                Results our team has delivered
+              </h2>
+              <p className="text-base text-text-secondary font-light leading-relaxed">
+                Real predictive-ML engagements delivered by our team across insurance, consumer services, and enterprise data — measured in the numbers the business cares about.
+              </p>
+            </div>
+            <a
+              href="/resources/case-studies"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:gap-3 transition-all shrink-0 whitespace-nowrap"
+            >
+              <span>All case studies</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </motion.div>
+
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            className="grid grid-cols-1 lg:grid-cols-3 section-gap-sm"
+          >
+            {HIGHLIGHT_STUDIES.map((study) => {
+              const Icon = study.icon;
+              const headline = study.metrics[0];
+              return (
+                <motion.a
+                  key={study.slug}
+                  href={`/resources/case-studies/${study.slug}`}
+                  variants={staggerItem}
+                  className="group relative p-7 rounded-3xl bg-surface border border-border hover:border-primary/50 transition-all duration-300 shadow-sm h-full flex flex-col overflow-hidden"
+                >
+                  <div className="absolute inset-0 grid-bg opacity-10 pointer-events-none"></div>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors pointer-events-none"></div>
+
+                  <div className="flex items-center justify-between mb-6 relative z-10">
+                    <div
+                      className="w-11 h-11 rounded-xl flex items-center justify-center"
+                      style={{ backgroundColor: `${study.accentColor}1a`, color: study.accentColor }}
+                    >
+                      <Icon className="w-5 h-5" />
+                    </div>
+                    <span className="text-[10px] font-bold font-mono uppercase tracking-wider text-text-muted px-2.5 py-1 rounded-full border border-border bg-surface-elevated/50">
+                      {study.industry}
+                    </span>
+                  </div>
+
+                  <div className="relative z-10">
+                    <p className="text-4xl font-extrabold font-display tracking-tight text-primary">
+                      {headline.value}
+                    </p>
+                    <p className="text-xs font-semibold font-mono uppercase tracking-wider text-text-muted mt-1">
+                      {headline.label}
+                    </p>
+                  </div>
+
+                  <p className="text-sm text-text-secondary mt-5 leading-relaxed font-light flex-grow relative z-10">
+                    {study.excerpt}
+                  </p>
+
+                  <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary mt-6 group-hover:gap-2.5 transition-all relative z-10">
+                    Read the case study <ArrowRight className="w-3.5 h-3.5" />
+                  </span>
+                </motion.a>
+              );
+            })}
+          </motion.div>
+        </div>
+      </section>
+
       <SolutionsSection />
+
+      {/* 3.6 SOLUTIONS BY INDUSTRY & FUNCTION */}
+      <section id="industries" className="section-padding-sm bg-surface/20 relative border-t border-border/40">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 text-left">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7 }}
+            className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 content-space-sm"
+          >
+            <div className="space-y-4 max-w-2xl">
+              <span className="text-xs font-bold uppercase tracking-widest text-primary font-mono block">BY INDUSTRY &amp; FUNCTION</span>
+              <h2 className="text-3xl md:text-5xl font-light tracking-tight text-text-primary leading-[1.1]">
+                AI shaped to your world
+              </h2>
+              <p className="text-base text-text-secondary font-light leading-relaxed">
+                We package our products and models into solution playbooks for the industries and business functions where they move the needle fastest.
+              </p>
+            </div>
+            <a
+              href="/solutions"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:gap-3 transition-all shrink-0 whitespace-nowrap"
+            >
+              <span>Explore all solutions</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </motion.div>
+
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 section-gap-sm"
+          >
+            {SOLUTION_PREVIEW.map((sol) => {
+              const Icon = sol.icon;
+              return (
+                <motion.a
+                  key={sol.slug}
+                  href={`/solutions/${sol.slug}`}
+                  variants={staggerItem}
+                  className="group p-6 rounded-2xl bg-surface border border-border hover:border-primary/50 transition-all duration-300 shadow-sm h-full flex flex-col"
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <div
+                      className="w-11 h-11 rounded-xl flex items-center justify-center transition-transform group-hover:scale-110 shrink-0"
+                      style={{ backgroundColor: `${sol.accentColor}1a`, color: sol.accentColor }}
+                    >
+                      <Icon className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h3 className="text-base font-bold font-display tracking-tight text-text-primary group-hover:text-primary transition-colors leading-tight">
+                        {sol.title}
+                      </h3>
+                      <span className="text-[10px] font-bold font-mono uppercase tracking-wider text-text-muted">
+                        {sol.type === "industry" ? "Industry" : "Function"}
+                      </span>
+                    </div>
+                  </div>
+                  <p className="text-sm text-text-secondary leading-relaxed font-light flex-grow">
+                    {sol.tagline}
+                  </p>
+                </motion.a>
+              );
+            })}
+          </motion.div>
+        </div>
+      </section>
 
       {/* 3.5 TECH STACK SECTION (Tallium & Reference styled) */}
       <section className="section-padding-sm bg-bg relative border-t border-border/40">
@@ -787,16 +1183,81 @@ export default function Home() {
             className="space-y-4 content-space-sm max-w-3xl mx-auto"
           >
             <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight font-display text-text-primary">
-              Experience and skills you need
+              Built on a Production-Proven Stack
             </h2>
             <p className="text-sm md:text-base text-text-secondary font-light max-w-xl mx-auto">
-              From mainstream Technology Stack to the new and trendy things - we cover the full range.
+              Every technology we deploy earns its place by moving a business metric — from ML frameworks and LLM tooling to enterprise cloud infrastructure.
             </p>
           </motion.div>
 
           {/* Interactive filter switcher */}
           <TechFilterGrid />
 
+        </div>
+      </section>
+
+      {/* 3.8 TRUST / PLATFORM BAND */}
+      <section className="section-padding-sm bg-surface/20 relative border-t border-border/40">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
+            className="space-y-8"
+          >
+            <p className="text-xs font-bold uppercase tracking-widest text-text-muted font-mono">
+              Built on the platforms and models enterprises trust
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-3 max-w-4xl mx-auto">
+              {TRUST_CHIPS.map((chip) => (
+                <span
+                  key={chip}
+                  className="px-5 py-2.5 rounded-full text-sm font-semibold font-mono tracking-wide text-text-secondary bg-surface/60 border border-border hover:border-primary/40 hover:text-text-primary transition-all duration-300"
+                >
+                  {chip}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* 3.9 FINAL CTA BAND */}
+      <section className="section-padding-sm bg-bg relative border-t border-border/40 overflow-hidden">
+        <div className="absolute inset-0 grid-bg opacity-15 pointer-events-none"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[40vw] rounded-full bg-primary/10 blur-[140px] pointer-events-none"></div>
+        <div className="max-w-4xl mx-auto px-6 md:px-12 relative z-10 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7 }}
+            className="space-y-6"
+          >
+            <span className="text-xs font-bold uppercase tracking-widest text-primary font-mono block">CONNECTING INTELLIGENCE TO IMPACT</span>
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight font-display text-text-primary leading-[1.1]">
+              Ready to turn your data into a business advantage?
+            </h2>
+            <p className="text-base md:text-lg text-text-secondary font-light leading-relaxed max-w-2xl mx-auto">
+              Tell us where your operations slow down. We will map the highest-ROI AI opportunity and show you the business case before a line of code is written.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+              <a
+                href="/contact"
+                className="inline-flex items-center justify-center gap-2 border border-primary bg-primary hover:bg-transparent text-text-primary hover:text-primary rounded-full px-8 py-3.5 text-sm font-semibold transition-all duration-300 group cursor-pointer"
+              >
+                <span>Book a Consultation</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </a>
+              <a
+                href="/products"
+                className="inline-flex items-center justify-center gap-2 border border-primary/20 text-text-primary hover:bg-primary hover:text-text-primary hover:border-primary rounded-full px-8 py-3.5 text-sm font-semibold transition-all duration-300 cursor-pointer"
+              >
+                Explore AI Products
+              </a>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -819,16 +1280,16 @@ export default function Home() {
                   Book a Consultation
                 </h2>
                 <p className="text-base text-text-secondary font-light leading-relaxed">
-                  Partner with specialized systems engineers to audit your data bottlenecks and deploy robust, high-yielding architectures.
+                  Tell us where your operations slow down. We will map the highest-ROI AI opportunity and show you the business case before a line of code is written.
                 </p>
               </motion.div>
 
               <div className="space-y-6 pt-4">
                 {[
                   { icon: MapPin, title: "Headquarters", content: "Ahmedabad, Gujarat", accent: "text-primary" },
-                  { icon: Mail, title: "Solutions Desk", content: <a href="mailto:solutions@northarc.ai" className="text-primary hover:underline">solutions@northarc.ai</a>, accent: "text-secondary" },
+                  { icon: Mail, title: "Solutions Desk", content: <a href="mailto:solutions@northarc.in" className="text-primary hover:underline">solutions@northarc.in</a>, accent: "text-secondary" },
                   { icon: Phone, title: "Direct Line", content: <a href="tel:+918849969336" className="hover:text-text-primary transition-colors">+91 88499 69336</a>, accent: "text-glow" },
-                  { icon: Clock, title: "Guaranteed Response", content: "Within 48 business hours", accent: "text-text-muted" }
+                  { icon: Clock, title: "Response Time", content: "Within 24 business hours", accent: "text-text-muted" }
                 ].map((item, idx) => {
                   const Icon = item.icon;
                   return (
@@ -844,7 +1305,7 @@ export default function Home() {
                         <Icon className="w-5 h-5" />
                       </div>
                       <div className="pt-1">
-                        <h4 className="text-sm font-bold text-text-primary">{item.title}</h4>
+                        <h3 className="text-sm font-bold text-text-primary">{item.title}</h3>
                         <p className="text-sm text-text-secondary mt-0.5 font-light">{item.content}</p>
                       </div>
                     </motion.div>

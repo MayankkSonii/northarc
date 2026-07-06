@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "motion/react";
 import { AnimatedHeroVisual } from "../../components/AnimatedHeroVisual";
+import { useSEO, breadcrumbJsonLd, SITE_URL, SITE_NAME } from "../../lib/seo";
 import {
   Check,
   ArrowRight,
@@ -12,6 +13,30 @@ import {
 } from "lucide-react";
 
 export default function SupportMaintenance() {
+  useSEO({
+    title: "AI-Powered Application Support & Maintenance Services",
+    description:
+      "Keep systems always-on with NorthArc's AI-driven monitoring and maintenance — proactive anomaly detection, sub-15-minute incident response, and airtight SLAs.",
+    path: "/expertise/support-maintenance",
+    jsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        serviceType: "Application Support & Maintenance",
+        name: "AI-Powered Support & Maintenance",
+        description:
+          "Continuous, SLA-backed support and maintenance with intelligent monitoring — AI-assisted anomaly detection, security patching, performance tuning, and rapid incident response.",
+        provider: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+        areaServed: "Worldwide",
+        url: `${SITE_URL}/expertise/support-maintenance`,
+      },
+      breadcrumbJsonLd([
+        { name: "Home", path: "/" },
+        { name: "Support & Maintenance", path: "/expertise/support-maintenance" },
+      ]),
+    ],
+  });
+
   const capabilities = [
     { icon: Settings, title: "Infrastructure Updates", desc: "Keep server software versions up-to-date, patch database engines, and scale host layers." },
     { icon: ShieldCheck, title: "Security Patches", desc: "Audit dependency packages, evaluate security vulnerability notices, and integrate hotfixes." },
@@ -49,7 +74,7 @@ export default function SupportMaintenance() {
             Support & Maintenance
           </h1>
           <p className="text-sm sm:text-base text-text-secondary font-light max-w-xl leading-relaxed">
-            We provide continuous cloud systems monitoring, integrate regular security patches, and troubleshoot software issues under strict SLA contracts.
+            We keep your systems always-on with continuous, AI-assisted monitoring, proactive security patching, and rapid incident resolution under strict SLA contracts.
           </p>
           <div className="pt-4">
             <a
@@ -80,7 +105,7 @@ export default function SupportMaintenance() {
           <div className="lg:col-span-4">
             <h2 className="text-2xl sm:text-3xl font-light tracking-tight">Maintenance Focus</h2>
             <p className="text-sm text-text-secondary font-light mt-4 leading-relaxed">
-              We eliminate technical debt buildup. We prioritize regular package audits, server checks, and backup loops to maintain system safety.
+              We eliminate technical debt before it bites. Intelligent monitoring surfaces anomalies early, while regular package audits, server checks, and backup loops keep systems safe.
             </p>
           </div>
           <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-8 lg:pl-12 border-l border-border/10">

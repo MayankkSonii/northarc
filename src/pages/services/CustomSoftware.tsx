@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "motion/react";
 import { staggerContainer, staggerItem, fadeUpVariant, viewportOnce } from "../../lib/animations";
 import { AnimatedHeroVisual } from "../../components/AnimatedHeroVisual";
+import { useSEO, breadcrumbJsonLd, SITE_URL, SITE_NAME } from "../../lib/seo";
 import {
   ArrowRight,
   ArrowDown,
@@ -13,27 +14,51 @@ import {
 } from "lucide-react";
 
 export default function CustomSoftware() {
+  useSEO({
+    title: "AI Product Development Services — Full-Cycle Delivery",
+    description:
+      "Full-cycle AI product development from NorthArc — we design, build, and ship LLM applications, ML systems, and intelligent platforms that move business KPIs.",
+    path: "/services/full-cycle-development",
+    jsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        serviceType: "AI Product Development",
+        name: "Full-Cycle AI Product Development",
+        description:
+          "End-to-end delivery of AI products — LLM applications, machine learning systems, and intelligent web and mobile platforms — from architecture to production.",
+        provider: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+        areaServed: "Worldwide",
+        url: `${SITE_URL}/services/full-cycle-development`,
+      },
+      breadcrumbJsonLd([
+        { name: "Home", path: "/" },
+        { name: "AI Product Development", path: "/services/full-cycle-development" },
+      ]),
+    ],
+  });
+
   const capabilities = [
-    { icon: Layout, title: "Responsive Web Platforms", desc: "Build feature-rich corporate sites, SaaS interfaces, portals, and responsive admin dashboards." },
-    { icon: Smartphone, title: "Mobile Application Dev", desc: "Deliver high-fidelity native iOS and Android apps or cross-platform codebases (Flutter/React Native)." },
-    { icon: Cpu, title: "Microservices & API Systems", desc: "Structure asynchronous microservices architectures, RPC gateways, and database integrations." },
-    { icon: Server, title: "Cloud Integration & DevOps", desc: "Setup Docker files, configure Kubernetes node arrays, and deployment actions via CI/CD." }
+    { icon: Layout, title: "AI-Powered Web Platforms", desc: "Ship SaaS products, portals, and dashboards with intelligence built in — search, summarization, and recommendations your users actually feel." },
+    { icon: Smartphone, title: "Intelligent Mobile Apps", desc: "Deliver native iOS/Android or cross-platform apps with AI-assisted experiences that measurably lift engagement and retention." },
+    { icon: Cpu, title: "LLM Apps & ML Systems", desc: "Build assistants grounded in your own knowledge, prediction engines, and ML pipelines that turn raw data into faster, better decisions." },
+    { icon: Server, title: "MLOps & Cloud Deployment", desc: "Run models in production on monitored, autoscaling infrastructure with CI/CD — so accuracy and cost never drift silently." }
   ];
 
   const processSteps = [
-    { num: "01", title: "Product Concept & UI/UX Design", desc: "Formulate user personas, sketch low-fidelity wireframes, and design interactive Figma screens." },
-    { num: "02", title: "System Architecture Mapping", desc: "Select frameworks, map out database schemas, select hosting environments, and draft API endpoints." },
-    { num: "03", title: "Agile Development Sprints", desc: "Ship containerized code iterations bi-weekly, perform code audits, and monitor progress metrics." },
-    { num: "04", title: "QA Testing & Load Audits", desc: "Execute unit and automated regression tests, perform penetration checks, and verify load speeds." },
-    { num: "05", title: "Production Launch & Staging", desc: "Deploy containers to Kubernetes nodes, set up load balancers, and configure SSL certifications." },
-    { num: "06", title: "Continuous SLA Tuning", desc: "Manage server scaling, implement framework security patches, and monitor system bottlenecks." }
+    { num: "01", title: "AI Use-Case & Product Design", desc: "Identify the highest-ROI AI opportunities, define success metrics, and design user journeys before a line of code is written." },
+    { num: "02", title: "Architecture & Model Selection", desc: "Choose models, data pipelines, and hosting with build-vs-buy decisions grounded in accuracy and cost targets." },
+    { num: "03", title: "Agile Development Sprints", desc: "Ship working software bi-weekly — application code and model improvements land together with measurable progress." },
+    { num: "04", title: "Evaluation & QA Audits", desc: "Test beyond unit tests: model evaluation suites, regression checks, and load audits before anything reaches users." },
+    { num: "05", title: "Production Launch", desc: "Deploy to hardened cloud infrastructure with rollback plans, observability, and security controls in place from day one." },
+    { num: "06", title: "Continuous Improvement", desc: "Monitor accuracy, cost, and latency in production; retrain and tune so results improve with every release cycle." }
   ];
 
   const highlights = [
     "100% Intellectual Property (IP) ownership transferred upon final release.",
-    "Integrated web analytics dashboards to monitor user interactions in real-time.",
-    "Zero blocker vulnerabilities in release builds verified by automated testing.",
-    "Decoupled system architecture facilitating effortless scaling on demand."
+    "Live dashboards tracking the business metrics your AI is meant to move.",
+    "Model evaluation and security testing baked into every release build.",
+    "Decoupled architecture so AI capabilities scale with demand, not with cost."
   ];
 
   return (
@@ -46,12 +71,12 @@ export default function CustomSoftware() {
       {/* 1. HERO SECTION */}
       <section className="min-h-screen grid grid-cols-1 lg:grid-cols-12 gap-12 items-center px-6 md:px-12 lg:px-24 pt-28 pb-10 relative z-10 max-w-7xl mx-auto">
         <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="space-y-8 max-w-4xl lg:col-span-7">
-          <motion.span className="text-xs font-bold uppercase tracking-widest text-primary font-mono block" variants={staggerItem}>SERVICES / FULL-CYCLE DEVELOPMENT</motion.span>
+          <motion.span className="text-xs font-bold uppercase tracking-widest text-primary font-mono block" variants={staggerItem}>SERVICES / AI PRODUCT DEVELOPMENT</motion.span>
           <motion.h1 className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight text-text-primary leading-[1.08]" variants={staggerItem}>
-            Full-cycle Software Development
+            AI Product Development, End to End
           </motion.h1>
           <motion.p className="text-sm sm:text-base text-text-secondary font-light max-w-xl leading-relaxed" variants={staggerItem}>
-            Turn your strategic vision into robust, scalable software. We design and build secure web platforms, mobile applications, and backend systems from initial architecture design to production release.
+            Turn your strategic vision into intelligent software that pays for itself. We design, build, and operate LLM applications, machine learning systems, and AI-powered platforms — from first architecture decision to production release.
           </motion.p>
           <motion.div className="pt-4" variants={staggerItem}>
             <a
@@ -70,7 +95,7 @@ export default function CustomSoftware() {
           </motion.div>
         </motion.div>
         <div className="lg:col-span-5">
-          <AnimatedHeroVisual icon={Layout} title="Full-cycle build" eyebrow="Product engine" scene="product" />
+          <AnimatedHeroVisual icon={Layout} title="AI product build" eyebrow="Delivery engine" scene="product" />
         </div>
       </section>
 
@@ -80,7 +105,7 @@ export default function CustomSoftware() {
           <div className="lg:col-span-4">
             <h2 className="text-2xl sm:text-3xl font-light tracking-tight">Our Core Offerings</h2>
             <p className="text-sm text-text-secondary font-light mt-4 leading-relaxed">
-              We provide end-to-end SDLC solutions. We map client concepts to beautiful layouts, solid backend code, and reliable server deployments.
+              We deliver intelligent products end to end — from mapping the AI opportunity to production systems your customers and teams rely on daily.
             </p>
           </div>
           <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 content-gap lg:pl-12 border-l border-border/10">
@@ -104,9 +129,9 @@ export default function CustomSoftware() {
       <section className="section-padding-sm px-6 md:px-12 lg:px-24 border-t border-border/10 relative z-10 max-w-7xl mx-auto">
         <div className="content-gap">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-light tracking-tight">The Development Journey</h2>
+            <h2 className="text-2xl sm:text-3xl font-light tracking-tight">The Delivery Journey</h2>
             <p className="text-sm text-text-secondary font-light mt-2 max-w-md">
-              A detailed breakdown of how we transition mockups to active codebases.
+              How we take an AI product from validated concept to a system running in production.
             </p>
           </div>
 
@@ -128,7 +153,7 @@ export default function CustomSoftware() {
           <div className="lg:col-span-6 space-y-6">
             <h2 className="text-3xl font-light tracking-tight">Guaranteed Standards</h2>
             <p className="text-sm text-text-secondary font-light leading-relaxed">
-              We operate under standard SLAs. By auditing performance and code structures, we deliver robust software that scales easily with business growth.
+              We operate under clear SLAs. By auditing model performance, code quality, and infrastructure cost, we deliver intelligent systems that scale with business growth.
             </p>
             <div className="space-y-4">
               {highlights.map((h, i) => (
@@ -143,15 +168,15 @@ export default function CustomSoftware() {
           </div>
           <div className="lg:col-span-6 flex justify-center lg:justify-end">
             <motion.div variants={fadeUpVariant} initial="hidden" whileInView="visible" viewport={viewportOnce} className="max-w-md w-full rounded-3xl bg-surface/50 border border-border/10 p-8 text-center space-y-6">
-              <h3 className="text-xl font-bold">Have a project idea?</h3>
+              <h3 className="text-xl font-bold">Have an AI product idea?</h3>
               <p className="text-xs text-text-secondary font-light">
-                Connect with our architects to select technology stacks, budget development sprints, and schedule a kickoff meeting.
+                Connect with our AI architects to scope the solution, choose the right models, budget delivery sprints, and schedule a kickoff.
               </p>
               <a
                 href="/contact"
                 className="w-full inline-flex items-center justify-center gap-2 border border-primary bg-primary hover:bg-transparent text-text-primary hover:text-primary rounded-full py-4 text-sm font-semibold transition-all duration-300 group"
               >
-                <span>Request Custom Build</span>
+                <span>Scope Your AI Build</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
             </motion.div>

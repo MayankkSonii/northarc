@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "motion/react";
 import { staggerContainer, staggerItem, fadeUpVariant, viewportOnce } from "../../lib/animations";
 import { AnimatedHeroVisual } from "../../components/AnimatedHeroVisual";
+import { useSEO, breadcrumbJsonLd, SITE_URL, SITE_NAME } from "../../lib/seo";
 import {
   Check,
   ArrowRight,
@@ -13,6 +14,30 @@ import {
 } from "lucide-react";
 
 export default function DevopsSecurity() {
+  useSEO({
+    title: "DevOps & Cloud Security Engineering",
+    description:
+      "NorthArc automates DevOps and hardens cloud security — CI/CD, Kubernetes, and SOC-2-aligned cloud that ships faster and delivers zero-downtime releases.",
+    path: "/expertise/devops-security",
+    jsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        serviceType: "DevOps & Cloud Security Engineering",
+        name: "DevOps & Cloud Security Engineering",
+        description:
+          "Infrastructure as Code, CI/CD pipelines, Kubernetes orchestration, and SOC-2-aligned security and monitoring that let teams ship faster with zero-downtime deployments.",
+        provider: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+        areaServed: "Worldwide",
+        url: `${SITE_URL}/expertise/devops-security`,
+      },
+      breadcrumbJsonLd([
+        { name: "Home", path: "/" },
+        { name: "DevOps & Security", path: "/expertise/devops-security" },
+      ]),
+    ],
+  });
+
   const capabilities = [
     { icon: GitBranch, title: "Infrastructure as Code", desc: "Build reproducible, audited cloud containers using automated Terraform configurations." },
     { icon: Server, title: "Kubernetes Orchestration", desc: "Configure high-availability compute node arrays with Helm and Kubernetes steering wheels." },
@@ -51,7 +76,7 @@ export default function DevopsSecurity() {
             DevOps & Security Architecture
           </h1>
           <p className="text-sm sm:text-base text-text-secondary font-light max-w-xl leading-relaxed" variants={staggerItem}>
-            We architect SOC-2 level isolated cloud containers and high-performance server infrastructures. Automating development cycles with continuous integration, container clusters, and metric dashboard monitors.
+            We automate your delivery pipeline and harden your infrastructure — SOC-2-aligned cloud, CI/CD, and continuous monitoring that help your team ship faster with zero-downtime, secure releases.
           </p>
           <div className="pt-4" variants={staggerItem}>
             <a

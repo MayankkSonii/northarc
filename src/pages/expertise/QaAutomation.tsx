@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "motion/react";
 import { AnimatedHeroVisual } from "../../components/AnimatedHeroVisual";
+import { useSEO, breadcrumbJsonLd, SITE_URL, SITE_NAME } from "../../lib/seo";
 import {
   Check,
   ArrowRight,
@@ -12,8 +13,32 @@ import {
 } from "lucide-react";
 
 export default function QaAutomation() {
+  useSEO({
+    title: "QA & Intelligent Test Automation",
+    description:
+      "NorthArc delivers QA and intelligent test automation — AI-assisted test generation, CI/CD quality gates, and load audits that ship reliable software faster.",
+    path: "/expertise/qa-automation",
+    jsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        serviceType: "QA & Intelligent Test Automation",
+        name: "QA & Intelligent Test Automation",
+        description:
+          "Intelligent test automation across browser, API, and load testing — AI-assisted test generation and CI/CD quality gates that catch defects before release and accelerate delivery.",
+        provider: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+        areaServed: "Worldwide",
+        url: `${SITE_URL}/expertise/qa-automation`,
+      },
+      breadcrumbJsonLd([
+        { name: "Home", path: "/" },
+        { name: "QA & Intelligent Test Automation", path: "/expertise/qa-automation" },
+      ]),
+    ],
+  });
+
   const capabilities = [
-    { icon: CheckCircle, title: "Automated Browser Testing", desc: "Write comprehensive frontend integration tests in Playwright, Cypress, and Selenium." },
+    { icon: CheckCircle, title: "AI-Assisted Browser Testing", desc: "Generate and maintain comprehensive frontend integration tests in Playwright, Cypress, and Selenium — accelerated with AI-assisted test authoring." },
     { icon: Layers, title: "Integration & API Testing", desc: "Build automated test suites for REST and GraphQL endpoints verifying request payloads." },
     { icon: Cpu, title: "Load & Stress Testing", desc: "Simulate concurrent user workloads using k6, audit response rates, and identify server crashes." },
     { icon: ShieldCheck, title: "Vulnerability Scanning", desc: "Integrate static code analysis (SonarQube) and vulnerability checkers inside CI/CD." }
@@ -46,10 +71,10 @@ export default function QaAutomation() {
         <div className="space-y-8 max-w-3xl">
           <span className="text-xs font-bold uppercase tracking-widest text-primary font-mono block">EXPERTISE / QA & AUTOMATION</span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight text-text-primary leading-[1.08]">
-            QA & Test Automation
+            QA & Intelligent Test Automation
           </h1>
           <p className="text-sm sm:text-base text-text-secondary font-light max-w-xl leading-relaxed">
-            We write automated browser test suites, configure continuous integration diagnostic gates, and perform server load audits to prevent release blockers.
+            We help teams ship reliable software faster — AI-assisted browser test suites, CI/CD quality gates, and load audits that catch defects before your users ever do.
           </p>
           <div className="pt-4">
             <a

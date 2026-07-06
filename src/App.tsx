@@ -14,26 +14,26 @@ import {
   TrendingUp,
   Settings,
   ShieldCheck,
-  Lock,
   Smartphone,
-  Cpu,
   LineChart,
   RefreshCw,
   CheckCircle,
-  Gamepad,
   Mail,
   Linkedin,
   Twitter,
   Github,
   BookOpen,
   BarChart3,
-  Rss
+  Rss,
+  Building2,
+  Briefcase
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 // Page imports
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
+import NotFound from "./pages/NotFound";
 
 // Services subpage imports
 import DedicatedTeam from "./pages/services/DedicatedTeam";
@@ -45,15 +45,13 @@ import ItConsulting from "./pages/services/ItConsulting";
 import AiMl from "./pages/expertise/AiMl";
 import BigData from "./pages/expertise/BigData";
 import Reengineering from "./pages/expertise/Reengineering";
-import Iot from "./pages/expertise/Iot";
 import WebMobile from "./pages/expertise/WebMobile";
 import DevopsSecurity from "./pages/expertise/DevopsSecurity";
 import SupportMaintenance from "./pages/expertise/SupportMaintenance";
 import LowCode from "./pages/expertise/LowCode";
-import Web3Blockchain from "./pages/expertise/Web3Blockchain";
 import QaAutomation from "./pages/expertise/QaAutomation";
 import CloudNative from "./pages/expertise/CloudNative";
-import Gamification from "./pages/expertise/Gamification";
+import GenerativeAi from "./pages/expertise/GenerativeAi";
 
 // Resources subpage imports
 import CaseStudies from "./pages/resources/CaseStudies";
@@ -61,18 +59,36 @@ import Blogs from "./pages/resources/Blogs";
 import CaseStudyDetail from "./pages/resources/CaseStudyDetail";
 import BlogDetail from "./pages/resources/BlogDetail";
 
+// Products subpage imports
+import Products from "./pages/products/Products";
+import ProductDetail from "./pages/products/ProductDetail";
+import { products } from "./data/productsData";
+
+// Solutions subpage imports
+import Solutions from "./pages/solutions/Solutions";
+import SolutionDetail from "./pages/solutions/SolutionDetail";
+import { industries, functions } from "./data/solutionsData";
+
 // Component imports
 import { Footer } from "./components/Footer";
 import logo from "./narc.png";
 
+const THEME_STORAGE_KEY = "northarc-theme";
+
 export default function App() {
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  // Initialize from localStorage (an inline script in index.html pre-applies the
+  // same key before React mounts, so this avoids a flash of the wrong theme).
+  const [theme, setTheme] = useState<"dark" | "light">(() =>
+    localStorage.getItem(THEME_STORAGE_KEY) === "light" ? "light" : "dark"
+  );
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [mobileExpertiseOpen, setMobileExpertiseOpen] = useState(false);
+  const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
+  const [mobileSolutionsOpen, setMobileSolutionsOpen] = useState(false);
   const [mobileResourcesOpen, setMobileResourcesOpen] = useState(false);
-  const [desktopMegaOpen, setDesktopMegaOpen] = useState<"services" | "expertise" | "resources" | null>(null);
-  const megaMenuHoveredRef = React.useRef<"services" | "expertise" | "resources" | null>(null);
+  const [desktopMegaOpen, setDesktopMegaOpen] = useState<"services" | "expertise" | "products" | "solutions" | "resources" | null>(null);
+  const megaMenuHoveredRef = React.useRef<"services" | "expertise" | "products" | "solutions" | "resources" | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [scrollPercent, setScrollPercent] = useState(0);
 
@@ -87,6 +103,8 @@ export default function App() {
       setMobileMenuOpen(false);
       setMobileServicesOpen(false);
       setMobileExpertiseOpen(false);
+      setMobileProductsOpen(false);
+      setMobileSolutionsOpen(false);
       setMobileResourcesOpen(false);
       setDesktopMegaOpen(null);
 
@@ -212,7 +230,9 @@ export default function App() {
   }, []);
 
   const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
+    const next = theme === "dark" ? "light" : "dark";
+    setTheme(next);
+    localStorage.setItem(THEME_STORAGE_KEY, next);
   };
 
   const closeNavigationMenus = () => {
@@ -220,6 +240,8 @@ export default function App() {
     setMobileMenuOpen(false);
     setMobileServicesOpen(false);
     setMobileExpertiseOpen(false);
+    setMobileProductsOpen(false);
+    setMobileSolutionsOpen(false);
     setMobileResourcesOpen(false);
   };
 
@@ -244,8 +266,8 @@ export default function App() {
         return <BigData />;
       case "/expertise/reengineering":
         return <Reengineering />;
-      case "/expertise/iot":
-        return <Iot />;
+      case "/expertise/generative-ai":
+        return <GenerativeAi />;
       case "/expertise/web-mobile":
         return <WebMobile />;
       case "/expertise/devops-security":
@@ -254,18 +276,18 @@ export default function App() {
         return <SupportMaintenance />;
       case "/expertise/low-code":
         return <LowCode />;
-      case "/expertise/web3-blockchain":
-        return <Web3Blockchain />;
       case "/expertise/qa-automation":
         return <QaAutomation />;
       case "/expertise/cloud-native":
         return <CloudNative />;
-      case "/expertise/gamification":
-        return <Gamification />;
       case "/resources/case-studies":
         return <CaseStudies />;
       case "/resources/blogs":
         return <Blogs />;
+      case "/products":
+        return <Products />;
+      case "/solutions":
+        return <Solutions />;
       default:
         // Dynamic slug routing for detail pages
         if (currentPath.startsWith("/resources/case-studies/")) {
@@ -276,7 +298,15 @@ export default function App() {
           const slug = currentPath.replace("/resources/blogs/", "");
           return <BlogDetail slug={slug} />;
         }
-        return <Home />;
+        if (currentPath.startsWith("/products/")) {
+          const slug = currentPath.replace("/products/", "");
+          return <ProductDetail slug={slug} />;
+        }
+        if (currentPath.startsWith("/solutions/")) {
+          const slug = currentPath.replace("/solutions/", "");
+          return <SolutionDetail slug={slug} />;
+        }
+        return <NotFound />;
     }
   };
 
@@ -322,7 +352,7 @@ export default function App() {
           </a>
 
           {/* Desktop Links with Tallium-Style Mega Menus */}
-          <div className="hidden lg:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-6">
             <a href="/" onClick={closeNavigationMenus} className={navLinkClass("/")}>
               Home
               {currentPath === "/" && (
@@ -331,12 +361,19 @@ export default function App() {
             </a>
 
             {/* SERVICES MEGA MENU */}
+            {/* No `relative` here: the overlay below anchors to the fixed <nav>
+                (nearest positioned ancestor), so `top-full` always hugs the nav's
+                bottom edge regardless of its scrolled/unscrolled height. */}
             <div
-              className="relative py-2"
+              className="py-2"
               onMouseEnter={() => { setDesktopMegaOpen("services"); megaMenuHoveredRef.current = "services"; }}
               onMouseLeave={() => { megaMenuHoveredRef.current = null; setTimeout(() => { if (!megaMenuHoveredRef.current) setDesktopMegaOpen(null); }, 100); }}
             >
-              <button className={navLinkClass("/services")}>
+              <button
+                className={navLinkClass("/services")}
+                aria-haspopup="true"
+                aria-expanded={desktopMegaOpen === "services"}
+              >
                 Services
                 <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${desktopMegaOpen === "services" ? "rotate-180" : ""}`} />
                 {currentPath.startsWith("/services") && (
@@ -349,7 +386,7 @@ export default function App() {
                 onClick={closeNavigationMenus}
                 onMouseEnter={() => { megaMenuHoveredRef.current = "services"; }}
                 onMouseLeave={() => { megaMenuHoveredRef.current = null; }}
-                className={`fixed top-[73px] left-0 w-screen bg-surface/95 backdrop-blur-2xl border-b border-border shadow-2xl transition-all duration-300 z-50 py-10 px-12 md:px-24 ${desktopMegaOpen === "services"
+                className={`absolute top-full left-0 w-full bg-surface/95 backdrop-blur-2xl border-b border-border shadow-2xl transition-all duration-300 z-50 py-10 px-12 md:px-24 ${desktopMegaOpen === "services"
                     ? "opacity-100 translate-y-0 pointer-events-auto"
                     : "opacity-0 translate-y-2 pointer-events-none"
                   }`}>
@@ -380,9 +417,9 @@ export default function App() {
                         <div className="p-3 rounded-xl bg-primary/10 text-primary w-fit group-hover/card:bg-primary group-hover/card:text-white transition-all">
                           <Layers className="w-5 h-5" />
                         </div>
-                        <h4 className="text-base font-bold text-text-primary group-hover/card:text-primary transition-colors">Full-cycle Development</h4>
+                        <h4 className="text-base font-bold text-text-primary group-hover/card:text-primary transition-colors">AI Product Development</h4>
                       </div>
-                      <p className="text-xs text-text-secondary leading-relaxed font-light">Custom web & mobile apps, API architectures, databases.</p>
+                      <p className="text-xs text-text-secondary leading-relaxed font-light">Custom AI solutions, LLM apps, and ML systems — strategy to production.</p>
                     </a>
 
                     <a href="/services/team-augmentation" onClick={closeNavigationMenus} className="p-6 rounded-2xl bg-surface/40 border border-border/80 hover:border-primary/50 hover:bg-surface-elevated/40 transition-all duration-300 text-left group/card flex flex-col justify-between h-56">
@@ -390,9 +427,9 @@ export default function App() {
                         <div className="p-3 rounded-xl bg-primary/10 text-primary w-fit group-hover/card:bg-primary group-hover/card:text-white transition-all">
                           <Users className="w-5 h-5" />
                         </div>
-                        <h4 className="text-base font-bold text-text-primary group-hover/card:text-primary transition-colors">Software Team Augmentation</h4>
+                        <h4 className="text-base font-bold text-text-primary group-hover/card:text-primary transition-colors">AI Team Augmentation</h4>
                       </div>
-                      <p className="text-xs text-text-secondary leading-relaxed font-light">Full-time senior engineers, QA, PM, DevOps specialists.</p>
+                      <p className="text-xs text-text-secondary leading-relaxed font-light">Embedded AI/ML engineers and data scientists who ship inside your team.</p>
                     </a>
 
                     <a href="/services/transformation-consulting" onClick={closeNavigationMenus} className="p-6 rounded-2xl bg-surface/40 border border-border/80 hover:border-primary/50 hover:bg-surface-elevated/40 transition-all duration-300 text-left group/card flex flex-col justify-between h-56">
@@ -400,9 +437,9 @@ export default function App() {
                         <div className="p-3 rounded-xl bg-primary/10 text-primary w-fit group-hover/card:bg-primary group-hover/card:text-white transition-all">
                           <TrendingUp className="w-5 h-5" />
                         </div>
-                        <h4 className="text-base font-bold text-text-primary group-hover/card:text-primary transition-colors">Digital Transformation</h4>
+                        <h4 className="text-base font-bold text-text-primary group-hover/card:text-primary transition-colors">AI Transformation Consulting</h4>
                       </div>
-                      <p className="text-xs text-text-secondary leading-relaxed font-light">IT audits, legacy systems migrations, workflow automation.</p>
+                      <p className="text-xs text-text-secondary leading-relaxed font-light">AI readiness audits, automation roadmaps, intelligent workflows.</p>
                     </a>
 
                     <a href="/services/concept-design" onClick={closeNavigationMenus} className="p-6 rounded-2xl bg-surface/40 border border-border/80 hover:border-primary/50 hover:bg-surface-elevated/40 transition-all duration-300 text-left group/card flex flex-col justify-between h-56">
@@ -410,9 +447,9 @@ export default function App() {
                         <div className="p-3 rounded-xl bg-primary/10 text-primary w-fit group-hover/card:bg-primary group-hover/card:text-white transition-all">
                           <Brain className="w-5 h-5" />
                         </div>
-                        <h4 className="text-base font-bold text-text-primary group-hover/card:text-primary transition-colors">Product Concept & Design</h4>
+                        <h4 className="text-base font-bold text-text-primary group-hover/card:text-primary transition-colors">AI Product Concept & Design</h4>
                       </div>
-                      <p className="text-xs text-text-secondary leading-relaxed font-light">Figma wireframes, prototyping, technical roadmaps.</p>
+                      <p className="text-xs text-text-secondary leading-relaxed font-light">Wireframes, prototypes, and technical roadmaps for AI-driven products.</p>
                     </a>
                   </div>
 
@@ -421,12 +458,19 @@ export default function App() {
             </div>
 
             {/* EXPERTISE MEGA MENU */}
+            {/* No `relative` here: the overlay below anchors to the fixed <nav>
+                (nearest positioned ancestor), so `top-full` always hugs the nav's
+                bottom edge regardless of its scrolled/unscrolled height. */}
             <div
-              className="relative py-2"
+              className="py-2"
               onMouseEnter={() => { setDesktopMegaOpen("expertise"); megaMenuHoveredRef.current = "expertise"; }}
               onMouseLeave={() => { megaMenuHoveredRef.current = null; setTimeout(() => { if (!megaMenuHoveredRef.current) setDesktopMegaOpen(null); }, 100); }}
             >
-              <button className={navLinkClass("/expertise")}>
+              <button
+                className={navLinkClass("/expertise")}
+                aria-haspopup="true"
+                aria-expanded={desktopMegaOpen === "expertise"}
+              >
                 Expertise
                 <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${desktopMegaOpen === "expertise" ? "rotate-180" : ""}`} />
                 {currentPath.startsWith("/expertise") && (
@@ -439,7 +483,7 @@ export default function App() {
                 onClick={closeNavigationMenus}
                 onMouseEnter={() => { megaMenuHoveredRef.current = "expertise"; }}
                 onMouseLeave={() => { megaMenuHoveredRef.current = null; }}
-                className={`fixed top-[73px] left-0 w-screen bg-surface/95 backdrop-blur-2xl border-b border-border shadow-2xl transition-all duration-300 z-50 py-10 px-12 md:px-24 ${desktopMegaOpen === "expertise"
+                className={`absolute top-full left-0 w-full bg-surface/95 backdrop-blur-2xl border-b border-border shadow-2xl transition-all duration-300 z-50 py-10 px-12 md:px-24 ${desktopMegaOpen === "expertise"
                     ? "opacity-100 translate-y-0 pointer-events-auto"
                     : "opacity-0 translate-y-2 pointer-events-none"
                   }`}>
@@ -470,19 +514,19 @@ export default function App() {
                     <div className="flex flex-col space-y-4">
                       <a href="/expertise/ai-ml" onClick={closeNavigationMenus} className="flex items-center space-x-3 text-sm text-text-secondary hover:text-primary transition-colors font-medium py-1">
                         <Brain className="w-4.5 h-4.5 text-primary" />
-                        <span>AI and Machine Learning</span>
+                        <span>AI & Machine Learning</span>
+                      </a>
+                      <a href="/expertise/generative-ai" onClick={closeNavigationMenus} className="flex items-center space-x-3 text-sm text-text-secondary hover:text-primary transition-colors font-medium py-1">
+                        <Sparkles className="w-4.5 h-4.5 text-primary" />
+                        <span>Generative AI & LLMs</span>
                       </a>
                       <a href="/expertise/big-data" onClick={closeNavigationMenus} className="flex items-center space-x-3 text-sm text-text-secondary hover:text-primary transition-colors font-medium py-1">
                         <LineChart className="w-4.5 h-4.5 text-primary" />
-                        <span>Big Data & Data Science</span>
+                        <span>Data Science & Big Data</span>
                       </a>
                       <a href="/expertise/reengineering" onClick={closeNavigationMenus} className="flex items-center space-x-3 text-sm text-text-secondary hover:text-primary transition-colors font-medium py-1">
                         <RefreshCw className="w-4.5 h-4.5 text-primary" />
-                        <span>Refinement & Reengineering</span>
-                      </a>
-                      <a href="/expertise/iot" onClick={closeNavigationMenus} className="flex items-center space-x-3 text-sm text-text-secondary hover:text-primary transition-colors font-medium py-1">
-                        <Cpu className="w-4.5 h-4.5 text-primary" />
-                        <span>IoT & Embedded</span>
+                        <span>Modernization & Reengineering</span>
                       </a>
                     </div>
 
@@ -500,17 +544,13 @@ export default function App() {
                         <Settings className="w-4.5 h-4.5 text-primary" />
                         <span>Support & Maintenance</span>
                       </a>
-                      <a href="/expertise/low-code" onClick={closeNavigationMenus} className="flex items-center space-x-3 text-sm text-text-secondary hover:text-primary transition-colors font-medium py-1">
-                        <Layers className="w-4.5 h-4.5 text-primary" />
-                        <span>Low-code / No-code</span>
-                      </a>
                     </div>
 
                     {/* Column 3 */}
                     <div className="flex flex-col space-y-4">
-                      <a href="/expertise/web3-blockchain" onClick={closeNavigationMenus} className="flex items-center space-x-3 text-sm text-text-secondary hover:text-primary transition-colors font-medium py-1">
-                        <Lock className="w-4.5 h-4.5 text-primary" />
-                        <span>Web 3.0 & Blockchain</span>
+                      <a href="/expertise/low-code" onClick={closeNavigationMenus} className="flex items-center space-x-3 text-sm text-text-secondary hover:text-primary transition-colors font-medium py-1">
+                        <Layers className="w-4.5 h-4.5 text-primary" />
+                        <span>Low-code / No-code</span>
                       </a>
                       <a href="/expertise/qa-automation" onClick={closeNavigationMenus} className="flex items-center space-x-3 text-sm text-text-secondary hover:text-primary transition-colors font-medium py-1">
                         <CheckCircle className="w-4.5 h-4.5 text-primary" />
@@ -520,10 +560,192 @@ export default function App() {
                         <Layers className="w-4.5 h-4.5 text-primary" />
                         <span>Cloud-native Services</span>
                       </a>
-                      <a href="/expertise/gamification" onClick={closeNavigationMenus} className="flex items-center space-x-3 text-sm text-text-secondary hover:text-primary transition-colors font-medium py-1">
-                        <Gamepad className="w-4.5 h-4.5 text-primary" />
-                        <span>Gamification Mechanics</span>
-                      </a>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            {/* PRODUCTS MEGA MENU */}
+            {/* No `relative` here: the overlay below anchors to the fixed <nav>
+                (nearest positioned ancestor), so `top-full` always hugs the nav's
+                bottom edge regardless of its scrolled/unscrolled height. */}
+            <div
+              className="py-2"
+              onMouseEnter={() => { setDesktopMegaOpen("products"); megaMenuHoveredRef.current = "products"; }}
+              onMouseLeave={() => { megaMenuHoveredRef.current = null; setTimeout(() => { if (!megaMenuHoveredRef.current) setDesktopMegaOpen(null); }, 100); }}
+            >
+              <button
+                className={navLinkClass("/products")}
+                aria-haspopup="true"
+                aria-expanded={desktopMegaOpen === "products"}
+              >
+                Products
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${desktopMegaOpen === "products" ? "rotate-180" : ""}`} />
+                {currentPath.startsWith("/products") && (
+                  <motion.div layoutId="nav-underline" className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary" />
+                )}
+              </button>
+
+              {/* Full Width Mega Menu overlay */}
+              <div
+                onClick={closeNavigationMenus}
+                onMouseEnter={() => { megaMenuHoveredRef.current = "products"; }}
+                onMouseLeave={() => { megaMenuHoveredRef.current = null; }}
+                className={`absolute top-full left-0 w-full bg-surface/95 backdrop-blur-2xl border-b border-border shadow-2xl transition-all duration-300 z-50 py-10 px-12 md:px-24 ${desktopMegaOpen === "products"
+                    ? "opacity-100 translate-y-0 pointer-events-auto"
+                    : "opacity-0 translate-y-2 pointer-events-none"
+                  }`}>
+                <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10">
+
+                  {/* Left sidebar container */}
+                  <div className="lg:col-span-3 border-r border-border/80 pr-8 flex flex-col justify-between text-left space-y-6">
+                    <div className="space-y-3">
+                      <span className="text-[10px] font-mono tracking-widest text-primary uppercase font-bold">AI Products</span>
+                      <h3 className="text-xl font-extrabold text-text-primary leading-snug">
+                        Ready-to-deploy AI that ships business outcomes
+                      </h3>
+                      <p className="text-xs text-text-secondary font-light leading-relaxed">
+                        Production-grade agents, copilots, and predictive systems — built to plug into your stack.
+                      </p>
+                    </div>
+                    <a
+                      href="/products"
+                      onClick={closeNavigationMenus}
+                      className="px-5 py-3 rounded-xl bg-primary hover:bg-primary/95 text-white font-bold text-xs uppercase tracking-wider inline-flex items-center justify-center space-x-2 w-fit transition-all"
+                    >
+                      <span>View all products</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </a>
+                  </div>
+
+                  {/* Right grid — grouped by product category */}
+                  <div className="lg:col-span-9 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-6 text-left">
+                    {[...new Set(products.map((p) => p.category))].map((category) => (
+                      <div key={category} className="flex flex-col space-y-3">
+                        <span className="text-[10px] font-mono tracking-widest text-text-muted uppercase font-bold">{category}</span>
+                        {products.filter((p) => p.category === category).map((p) => {
+                          const Icon = p.icon;
+                          return (
+                            <a
+                              key={p.slug}
+                              href={`/products/${p.slug}`}
+                              onClick={closeNavigationMenus}
+                              className="flex items-center space-x-3 text-sm text-text-secondary hover:text-primary transition-colors font-medium py-1"
+                            >
+                              <Icon className="w-4.5 h-4.5 text-primary shrink-0" />
+                              <span>{p.name}</span>
+                            </a>
+                          );
+                        })}
+                      </div>
+                    ))}
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            {/* SOLUTIONS MEGA MENU */}
+            {/* No `relative` here: the overlay below anchors to the fixed <nav>
+                (nearest positioned ancestor), so `top-full` always hugs the nav's
+                bottom edge regardless of its scrolled/unscrolled height. */}
+            <div
+              className="py-2"
+              onMouseEnter={() => { setDesktopMegaOpen("solutions"); megaMenuHoveredRef.current = "solutions"; }}
+              onMouseLeave={() => { megaMenuHoveredRef.current = null; setTimeout(() => { if (!megaMenuHoveredRef.current) setDesktopMegaOpen(null); }, 100); }}
+            >
+              <button
+                className={navLinkClass("/solutions")}
+                aria-haspopup="true"
+                aria-expanded={desktopMegaOpen === "solutions"}
+              >
+                Solutions
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${desktopMegaOpen === "solutions" ? "rotate-180" : ""}`} />
+                {currentPath.startsWith("/solutions") && (
+                  <motion.div layoutId="nav-underline" className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary" />
+                )}
+              </button>
+
+              {/* Full Width Mega Menu overlay */}
+              <div
+                onClick={closeNavigationMenus}
+                onMouseEnter={() => { megaMenuHoveredRef.current = "solutions"; }}
+                onMouseLeave={() => { megaMenuHoveredRef.current = null; }}
+                className={`absolute top-full left-0 w-full bg-surface/95 backdrop-blur-2xl border-b border-border shadow-2xl transition-all duration-300 z-50 py-10 px-12 md:px-24 ${desktopMegaOpen === "solutions"
+                    ? "opacity-100 translate-y-0 pointer-events-auto"
+                    : "opacity-0 translate-y-2 pointer-events-none"
+                  }`}>
+                <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10">
+
+                  {/* Left sidebar container */}
+                  <div className="lg:col-span-3 border-r border-border/80 pr-8 flex flex-col justify-between text-left space-y-6">
+                    <div className="space-y-3">
+                      <span className="text-[10px] font-mono tracking-widest text-primary uppercase font-bold">Solutions</span>
+                      <h3 className="text-xl font-extrabold text-text-primary leading-snug">
+                        AI mapped to your industry and business function
+                      </h3>
+                      <p className="text-xs text-text-secondary font-light leading-relaxed">
+                        Outcome-focused solutions tailored to where you operate and what you need to move.
+                      </p>
+                    </div>
+                    <a
+                      href="/solutions"
+                      onClick={closeNavigationMenus}
+                      className="px-5 py-3 rounded-xl bg-primary hover:bg-primary/95 text-white font-bold text-xs uppercase tracking-wider inline-flex items-center justify-center space-x-2 w-fit transition-all"
+                    >
+                      <span>Explore solutions</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </a>
+                  </div>
+
+                  {/* Right — two columns: Industries and Business Functions */}
+                  <div className="lg:col-span-9 grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+
+                    {/* Industries */}
+                    <div className="flex flex-col space-y-3">
+                      <div className="flex items-center space-x-2 pb-1">
+                        <Building2 className="w-4 h-4 text-primary" />
+                        <span className="text-[10px] font-mono tracking-widest text-text-muted uppercase font-bold">By Industry</span>
+                      </div>
+                      {industries.map((s) => {
+                        const Icon = s.icon;
+                        return (
+                          <a
+                            key={s.slug}
+                            href={`/solutions/${s.slug}`}
+                            onClick={closeNavigationMenus}
+                            className="flex items-center space-x-3 text-sm text-text-secondary hover:text-primary transition-colors font-medium py-1"
+                          >
+                            <Icon className="w-4.5 h-4.5 text-primary shrink-0" />
+                            <span>{s.title}</span>
+                          </a>
+                        );
+                      })}
+                    </div>
+
+                    {/* Business Functions */}
+                    <div className="flex flex-col space-y-3">
+                      <div className="flex items-center space-x-2 pb-1">
+                        <Briefcase className="w-4 h-4 text-primary" />
+                        <span className="text-[10px] font-mono tracking-widest text-text-muted uppercase font-bold">By Business Function</span>
+                      </div>
+                      {functions.map((s) => {
+                        const Icon = s.icon;
+                        return (
+                          <a
+                            key={s.slug}
+                            href={`/solutions/${s.slug}`}
+                            onClick={closeNavigationMenus}
+                            className="flex items-center space-x-3 text-sm text-text-secondary hover:text-primary transition-colors font-medium py-1"
+                          >
+                            <Icon className="w-4.5 h-4.5 text-primary shrink-0" />
+                            <span>{s.title}</span>
+                          </a>
+                        );
+                      })}
                     </div>
 
                   </div>
@@ -533,12 +755,19 @@ export default function App() {
             </div>
 
             {/* RESOURCES MEGA MENU */}
+            {/* No `relative` here: the overlay below anchors to the fixed <nav>
+                (nearest positioned ancestor), so `top-full` always hugs the nav's
+                bottom edge regardless of its scrolled/unscrolled height. */}
             <div
-              className="relative py-2"
+              className="py-2"
               onMouseEnter={() => { setDesktopMegaOpen("resources"); megaMenuHoveredRef.current = "resources"; }}
               onMouseLeave={() => { megaMenuHoveredRef.current = null; setTimeout(() => { if (!megaMenuHoveredRef.current) setDesktopMegaOpen(null); }, 100); }}
             >
-              <button className={navLinkClass("/resources")}>
+              <button
+                className={navLinkClass("/resources")}
+                aria-haspopup="true"
+                aria-expanded={desktopMegaOpen === "resources"}
+              >
                 Resources
                 <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${desktopMegaOpen === "resources" ? "rotate-180" : ""}`} />
                 {currentPath.startsWith("/resources") && (
@@ -551,7 +780,7 @@ export default function App() {
                 onClick={closeNavigationMenus}
                 onMouseEnter={() => { megaMenuHoveredRef.current = "resources"; }}
                 onMouseLeave={() => { megaMenuHoveredRef.current = null; }}
-                className={`fixed top-[73px] left-0 w-screen bg-surface/95 backdrop-blur-2xl border-b border-border shadow-2xl transition-all duration-300 z-50 py-10 px-12 md:px-24 ${desktopMegaOpen === "resources"
+                className={`absolute top-full left-0 w-full bg-surface/95 backdrop-blur-2xl border-b border-border shadow-2xl transition-all duration-300 z-50 py-10 px-12 md:px-24 ${desktopMegaOpen === "resources"
                     ? "opacity-100 translate-y-0 pointer-events-auto"
                     : "opacity-0 translate-y-2 pointer-events-none"
                   }`}>
@@ -562,10 +791,10 @@ export default function App() {
                     <div className="space-y-3">
                       <span className="text-[10px] font-mono tracking-widest text-primary uppercase font-bold">Explore</span>
                       <h3 className="text-xl font-extrabold text-text-primary leading-snug">
-                        Knowledge from the analytics frontier
+                        Knowledge from the AI frontier
                       </h3>
                       <p className="text-xs text-text-secondary font-light leading-relaxed">
-                        Real client results, practitioner insights, and deep-dive guides.
+                        Practitioner insights, project deep-dives, and practical guides from our team.
                       </p>
                     </div>
                     <a
@@ -593,11 +822,11 @@ export default function App() {
                       <div>
                         <h4 className="text-base font-bold text-text-primary group-hover/card:text-primary transition-colors">Case Studies</h4>
                         <p className="text-xs text-text-secondary leading-relaxed font-light mt-1.5">
-                          See how leading brands achieved measurable results with data-driven analytics strategies.
+                          Explore AI, ML and data projects our team has delivered — real problems, real measurable outcomes.
                         </p>
                       </div>
                       <div className="flex flex-wrap gap-2 mt-auto">
-                        {["GA4", "BigQuery", "GTM", "Attribution"].map(tag => (
+                        {["AI/ML", "Predictive", "GenAI", "Automation"].map(tag => (
                           <span key={tag} className="text-[9px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded-full bg-surface-elevated border border-border text-text-muted">{tag}</span>
                         ))}
                       </div>
@@ -619,11 +848,11 @@ export default function App() {
                       <div>
                         <h4 className="text-base font-bold text-text-primary group-hover/card:text-primary transition-colors">Blog</h4>
                         <p className="text-xs text-text-secondary leading-relaxed font-light mt-1.5">
-                          Deep dives on GA4, BigQuery, AI analytics, and measurement engineering for data teams.
+                          Practical thinking on AI engineering, data science, and intelligent automation — written by the people who build it.
                         </p>
                       </div>
                       <div className="flex flex-wrap gap-2 mt-auto">
-                        {["Agentic AI", "Data Quality", "Analytics", "CRO"].map(tag => (
+                        {["GenAI", "Analytics", "ML", "Automation"].map(tag => (
                           <span key={tag} className="text-[9px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded-full bg-surface-elevated border border-border text-text-muted">{tag}</span>
                         ))}
                       </div>
@@ -697,6 +926,8 @@ export default function App() {
                 <div className="space-y-1">
                   <button
                     onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                    aria-haspopup="true"
+                    aria-expanded={mobileServicesOpen}
                     className="w-full text-base font-semibold text-text-secondary hover:text-primary py-1 flex items-center justify-between"
                   >
                     <span>Services</span>
@@ -704,10 +935,10 @@ export default function App() {
                   </button>
                   {mobileServicesOpen && (
                     <div className="pl-4 flex flex-col space-y-2 pt-1 pb-2 border-l border-border/80">
-                      <a href="/services/full-cycle-development" onClick={closeNavigationMenus} className="text-sm text-text-secondary hover:text-primary py-1">Full-cycle Development</a>
-                      <a href="/services/team-augmentation" onClick={closeNavigationMenus} className="text-sm text-text-secondary hover:text-primary py-1">Software Team Augmentation</a>
-                      <a href="/services/transformation-consulting" onClick={closeNavigationMenus} className="text-sm text-text-secondary hover:text-primary py-1">Digital Transformation</a>
-                      <a href="/services/concept-design" onClick={closeNavigationMenus} className="text-sm text-text-secondary hover:text-primary py-1">Product Concept & Design</a>
+                      <a href="/services/full-cycle-development" onClick={closeNavigationMenus} className="text-sm text-text-secondary hover:text-primary py-1">AI Product Development</a>
+                      <a href="/services/team-augmentation" onClick={closeNavigationMenus} className="text-sm text-text-secondary hover:text-primary py-1">AI Team Augmentation</a>
+                      <a href="/services/transformation-consulting" onClick={closeNavigationMenus} className="text-sm text-text-secondary hover:text-primary py-1">AI Transformation Consulting</a>
+                      <a href="/services/concept-design" onClick={closeNavigationMenus} className="text-sm text-text-secondary hover:text-primary py-1">AI Product Concept & Design</a>
                     </div>
                   )}
                 </div>
@@ -716,6 +947,8 @@ export default function App() {
                 <div className="space-y-1">
                   <button
                     onClick={() => setMobileExpertiseOpen(!mobileExpertiseOpen)}
+                    aria-haspopup="true"
+                    aria-expanded={mobileExpertiseOpen}
                     className="w-full text-base font-semibold text-text-secondary hover:text-primary py-1 flex items-center justify-between"
                   >
                     <span>Expertise</span>
@@ -723,18 +956,72 @@ export default function App() {
                   </button>
                   {mobileExpertiseOpen && (
                     <div className="pl-4 flex flex-col space-y-2 pt-1 pb-2 border-l border-border/80">
-                      <a href="/expertise/ai-ml" onClick={closeNavigationMenus} className="text-sm text-text-secondary hover:text-primary py-1 font-medium">AI and Machine Learning</a>
-                      <a href="/expertise/big-data" onClick={closeNavigationMenus} className="text-sm text-text-secondary hover:text-primary py-1 font-medium">Big Data & Data Science</a>
-                      <a href="/expertise/reengineering" onClick={closeNavigationMenus} className="text-sm text-text-secondary hover:text-primary py-1 font-medium">Refinement & Reengineering</a>
-                      <a href="/expertise/iot" onClick={closeNavigationMenus} className="text-sm text-text-secondary hover:text-primary py-1 font-medium">IoT & Embedded</a>
+                      <a href="/expertise/ai-ml" onClick={closeNavigationMenus} className="text-sm text-text-secondary hover:text-primary py-1 font-medium">AI & Machine Learning</a>
+                      <a href="/expertise/generative-ai" onClick={closeNavigationMenus} className="text-sm text-text-secondary hover:text-primary py-1 font-medium">Generative AI & LLMs</a>
+                      <a href="/expertise/big-data" onClick={closeNavigationMenus} className="text-sm text-text-secondary hover:text-primary py-1 font-medium">Data Science & Big Data</a>
+                      <a href="/expertise/reengineering" onClick={closeNavigationMenus} className="text-sm text-text-secondary hover:text-primary py-1 font-medium">Modernization & Reengineering</a>
                       <a href="/expertise/web-mobile" onClick={closeNavigationMenus} className="text-sm text-text-secondary hover:text-primary py-1 font-medium">Web & Mobile Apps</a>
                       <a href="/expertise/devops-security" onClick={closeNavigationMenus} className="text-sm text-text-secondary hover:text-primary py-1 font-medium">DevOps & Security</a>
                       <a href="/expertise/support-maintenance" onClick={closeNavigationMenus} className="text-sm text-text-secondary hover:text-primary py-1 font-medium">Support & Maintenance</a>
                       <a href="/expertise/low-code" onClick={closeNavigationMenus} className="text-sm text-text-secondary hover:text-primary py-1 font-medium">Low-code / No-code</a>
-                      <a href="/expertise/web3-blockchain" onClick={closeNavigationMenus} className="text-sm text-text-secondary hover:text-primary py-1 font-medium">Web 3.0 & Blockchain</a>
                       <a href="/expertise/qa-automation" onClick={closeNavigationMenus} className="text-sm text-text-secondary hover:text-primary py-1 font-medium">QA & Test Automation</a>
                       <a href="/expertise/cloud-native" onClick={closeNavigationMenus} className="text-sm text-text-secondary hover:text-primary py-1 font-medium">Cloud-native Services</a>
-                      <a href="/expertise/gamification" onClick={closeNavigationMenus} className="text-sm text-text-secondary hover:text-primary py-1 font-medium">Gamification Mechanics</a>
+                    </div>
+                  )}
+                </div>
+
+                {/* Mobile Products Collapsible */}
+                <div className="space-y-1">
+                  <button
+                    onClick={() => setMobileProductsOpen(!mobileProductsOpen)}
+                    aria-haspopup="true"
+                    aria-expanded={mobileProductsOpen}
+                    className="w-full text-base font-semibold text-text-secondary hover:text-primary py-1 flex items-center justify-between"
+                  >
+                    <span>Products</span>
+                    <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${mobileProductsOpen ? "rotate-180" : ""}`} />
+                  </button>
+                  {mobileProductsOpen && (
+                    <div className="pl-4 flex flex-col space-y-3 pt-1 pb-2 border-l border-border/80">
+                      {[...new Set(products.map((p) => p.category))].map((category) => (
+                        <div key={category} className="flex flex-col space-y-2">
+                          <span className="text-[10px] font-mono tracking-widest text-text-muted uppercase font-bold">{category}</span>
+                          {products.filter((p) => p.category === category).map((p) => (
+                            <a key={p.slug} href={`/products/${p.slug}`} onClick={closeNavigationMenus} className="text-sm text-text-secondary hover:text-primary py-1 font-medium">{p.name}</a>
+                          ))}
+                        </div>
+                      ))}
+                      <a href="/products" onClick={closeNavigationMenus} className="text-sm text-primary hover:text-primary py-1 font-semibold">View all products</a>
+                    </div>
+                  )}
+                </div>
+
+                {/* Mobile Solutions Collapsible */}
+                <div className="space-y-1">
+                  <button
+                    onClick={() => setMobileSolutionsOpen(!mobileSolutionsOpen)}
+                    aria-haspopup="true"
+                    aria-expanded={mobileSolutionsOpen}
+                    className="w-full text-base font-semibold text-text-secondary hover:text-primary py-1 flex items-center justify-between"
+                  >
+                    <span>Solutions</span>
+                    <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${mobileSolutionsOpen ? "rotate-180" : ""}`} />
+                  </button>
+                  {mobileSolutionsOpen && (
+                    <div className="pl-4 flex flex-col space-y-3 pt-1 pb-2 border-l border-border/80">
+                      <div className="flex flex-col space-y-2">
+                        <span className="text-[10px] font-mono tracking-widest text-text-muted uppercase font-bold">By Industry</span>
+                        {industries.map((s) => (
+                          <a key={s.slug} href={`/solutions/${s.slug}`} onClick={closeNavigationMenus} className="text-sm text-text-secondary hover:text-primary py-1 font-medium">{s.title}</a>
+                        ))}
+                      </div>
+                      <div className="flex flex-col space-y-2">
+                        <span className="text-[10px] font-mono tracking-widest text-text-muted uppercase font-bold">By Business Function</span>
+                        {functions.map((s) => (
+                          <a key={s.slug} href={`/solutions/${s.slug}`} onClick={closeNavigationMenus} className="text-sm text-text-secondary hover:text-primary py-1 font-medium">{s.title}</a>
+                        ))}
+                      </div>
+                      <a href="/solutions" onClick={closeNavigationMenus} className="text-sm text-primary hover:text-primary py-1 font-semibold">Explore all solutions</a>
                     </div>
                   )}
                 </div>
@@ -743,6 +1030,8 @@ export default function App() {
                 <div className="space-y-1">
                   <button
                     onClick={() => setMobileResourcesOpen(!mobileResourcesOpen)}
+                    aria-haspopup="true"
+                    aria-expanded={mobileResourcesOpen}
                     className="w-full text-base font-semibold text-text-secondary hover:text-primary py-1 flex items-center justify-between"
                   >
                     <span>Resources</span>

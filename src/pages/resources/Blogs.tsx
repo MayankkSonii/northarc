@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { staggerContainer, staggerItem, fadeUpVariant, viewportOnce, staggerDelay } from "../../lib/animations";
+import { staggerContainer, staggerItem, staggerDelay } from "../../lib/animations";
 import { AnimatedHeroVisual } from "../../components/AnimatedHeroVisual";
+import { useSEO, breadcrumbJsonLd } from "../../lib/seo";
 import {
   ArrowRight,
   ArrowDown,
@@ -21,6 +22,17 @@ const allCategories = [
 ];
 
 export default function Blogs() {
+  useSEO({
+    title: "Blog — AI Engineering & Data Science Insights",
+    description:
+      "Practical guides and strategic insights on AI engineering, GA4, BigQuery, agentic AI, and data analytics — helping teams turn data into business impact.",
+    path: "/resources/blogs",
+    jsonLd: breadcrumbJsonLd([
+      { name: "Home", path: "/" },
+      { name: "Blog", path: "/resources/blogs" },
+    ]),
+  });
+
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [hoveredId, setHoveredId] = useState<number | null>(null);
@@ -45,18 +57,18 @@ export default function Blogs() {
       {/* ── HERO ── */}
       <section className="min-h-[58vh] flex flex-col justify-between px-6 md:px-12 lg:px-24 pt-40 pb-12 relative z-10 max-w-7xl mx-auto">
         <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="space-y-6 max-w-3xl">
-          <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary font-mono block" variants={staggerItem}>
+          <motion.span className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary font-mono block" variants={staggerItem}>
             Resources / Blog
-          </span>
-          <h1 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-light tracking-tight text-text-primary leading-[1.1]" variants={staggerItem}>
+          </motion.span>
+          <motion.h1 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-light tracking-tight text-text-primary leading-[1.1]" variants={staggerItem}>
             Insights from the<br />
             <span className="text-primary font-semibold">analytics frontier</span>
-          </h1>
-          <p className="text-sm sm:text-base text-text-secondary font-light max-w-2xl leading-relaxed" variants={staggerItem}>
+          </motion.h1>
+          <motion.p className="text-sm sm:text-base text-text-secondary font-light max-w-2xl leading-relaxed" variants={staggerItem}>
             Deep dives, practical guides, and strategic frameworks on GA4, BigQuery, AI-powered analytics,
             and data engineering — written by practitioners for practitioners.
-          </p>
-          <div className="flex flex-wrap items-center gap-6 pt-1 text-xs text-text-muted font-mono" variants={staggerItem}>
+          </motion.p>
+          <motion.div className="flex flex-wrap items-center gap-6 pt-1 text-xs text-text-muted font-mono" variants={staggerItem}>
             <span className="flex items-center gap-2">
               <Rss className="w-3.5 h-3.5 text-primary" />
               {blogPosts.length} Articles
@@ -69,12 +81,12 @@ export default function Blogs() {
               <Tag className="w-3.5 h-3.5 text-primary" />
               Actionable Insights
             </span>
-          </div>
+          </motion.div>
         </motion.div>
         <div className="pointer-events-none absolute right-6 top-[calc(50%+40px)] hidden w-[38%] -translate-y-1/2 lg:block">
           <AnimatedHeroVisual icon={BookOpen} title="Insight stream" eyebrow="Research feed" scene="ai" />
         </div>
-        <div className="flex items-center gap-3 text-xs text-text-secondary font-mono opacity-60 pt-10 lg:pt-0" variants={staggerItem}>
+        <div className="flex items-center gap-3 text-xs text-text-secondary font-mono opacity-60 pt-10 lg:pt-0">
           <div className="w-8 h-8 rounded-full border border-border/30 flex items-center justify-center animate-bounce">
             <ArrowDown className="w-3.5 h-3.5" />
           </div>
@@ -89,6 +101,7 @@ export default function Blogs() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-text-muted" />
             <input
               type="text"
+              aria-label="Search articles"
               placeholder="Search articles…"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -249,6 +262,8 @@ export default function Blogs() {
                 <div className="flex flex-col sm:flex-row gap-3">
                   <input
                     type="email"
+                    name="email"
+                    aria-label="Email address"
                     placeholder="your@email.com"
                     className="flex-grow px-5 py-3.5 rounded-xl bg-surface border border-border text-sm text-text-primary placeholder-text-muted focus:outline-none focus:border-primary/50 transition-colors"
                   />

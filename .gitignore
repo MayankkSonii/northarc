@@ -6,3 +6,11 @@ coverage/
 *.log
 .env*
 !.env.example
+*.db
+*.db-journal
+*.sqlite
+
+# local tooling & python cache
+.claude/
+__pycache__/
+*.pyc

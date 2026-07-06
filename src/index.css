@@ -2,37 +2,38 @@
 @import "tailwindcss";
 
 :root {
-  --color-bg: #070B13;
-  --color-surface: #0E1321;
-  --color-surface-elevated: #161D30;
+  /* Dark theme — canonical NorthArc palette (two-blue scheme, no green) */
+  --color-bg: #050816;              /* canonical background */
+  --color-surface: #0B1F3A;         /* Navy — primary surface tone */
+  --color-surface-elevated: #12294D; /* lighter navy for elevated surfaces */
 
-  --color-border: #1E293B;
-  --color-border: #1E293B;
-  --color-primary: #10B981;
-  --color-secondary: #059669;
-  --color-glow: #10B981;
+  --color-border: #1E314F;          /* navy-tinted border */
+  --color-primary: #1D75FF;         /* Electric Blue — THE accent */
+  --color-secondary: #4DA6FF;       /* lighter steel blue (was green #059669) */
+  --color-glow: #4D94FF;            /* lighter blue derived from primary for glow */
   --color-text-primary: #FFFFFF;
   --color-text-secondary: #94A3B8;
   --color-text-muted: #64748B;
-  --canvas-color-1: #2563EB;
-  --canvas-color-2: #7C3AED;
-  --canvas-color-3: #06B6D4;
+  --canvas-color-1: #1D75FF;        /* Electric Blue */
+  --canvas-color-2: #4DA6FF;        /* steel blue */
+  --canvas-color-3: #0B1F3A;        /* Navy */
 }
 
 :root.light-mode {
+  /* Light theme — near-white bg, Electric Blue primary, navy/slate text (WCAG-safe) */
   --color-bg: #F8FAFC;
   --color-surface: #FFFFFF;
   --color-surface-elevated: #F1F5F9;
   --color-border: #E2E8F0;
-  --color-primary: #059669;
-  --color-secondary: #10B981;
-  --color-glow: #10B981;
-  --color-text-primary: #0F172A;
-  --color-text-secondary: #475569;
-  --color-text-muted: #94A3B8;
-  --canvas-color-1: #2563EB;
-  --canvas-color-2: #7C3AED;
-  --canvas-color-3: #06B6D4;
+  --color-primary: #1D75FF;         /* Electric Blue — accent (4.5:1+ as link/text on white) */
+  --color-secondary: #0B1F3A;       /* Navy secondary (was green #10B981) */
+  --color-glow: #1D75FF;
+  --color-text-primary: #0B1F3A;    /* Navy body/heading text (high contrast) */
+  --color-text-secondary: #475569;  /* slate */
+  --color-text-muted: #64748B;      /* darkened for 4.5:1 body contrast on light bg */
+  --canvas-color-1: #1D75FF;        /* Electric Blue */
+  --canvas-color-2: #4DA6FF;        /* steel blue */
+  --canvas-color-3: #0B1F3A;        /* Navy */
 }
 
 @theme {
@@ -40,13 +41,14 @@
   --font-display: "Space Grotesk", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
   
-  --color-bg: #070B13;
-  --color-surface: #0E1321;
-  --color-surface-elevated: #161D30;
-  --color-border: #1E293B;
-  --color-primary: #10B981;
-  --color-secondary: #059669;
-  --color-glow: #10B981;
+  /* Tailwind @theme mirror of the canonical dark palette */
+  --color-bg: #050816;
+  --color-surface: #0B1F3A;
+  --color-surface-elevated: #12294D;
+  --color-border: #1E314F;
+  --color-primary: #1D75FF;
+  --color-secondary: #4DA6FF;
+  --color-glow: #4D94FF;
   --color-text-primary: #FFFFFF;
   --color-text-secondary: #94A3B8;
   --color-text-muted: #64748B;
@@ -90,13 +92,14 @@
 
 .grid-bg-dark {
   background-size: 40px 40px;
-  background-image: linear-gradient(to right, rgba(99, 102, 241, 0.06) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(99, 102, 241, 0.06) 1px, transparent 1px);
+  /* Electric Blue grid lines (rgb 29,117,255) to match the accent */
+  background-image: linear-gradient(to right, rgba(29, 117, 255, 0.06) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(29, 117, 255, 0.06) 1px, transparent 1px);
 }
 
 /* Glassmorphism surfaces */
 .glass {
-  background: rgba(11, 15, 25, 0.65);
+  background: rgba(11, 31, 58, 0.55); /* navy tint (#0B1F3A) to match surface */
   backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.05);
 }

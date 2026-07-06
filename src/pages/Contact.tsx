@@ -10,15 +10,47 @@ import {
   Send
 } from "lucide-react";
 import { SERVICES } from "../data";
+import { useSEO, SITE_URL, SITE_NAME } from "../lib/seo";
 
 export default function Contact() {
+  useSEO({
+    title: "Contact Us — Book an AI Consultation",
+    description:
+      "Book an AI consulting and automation consultation with NorthArc in Ahmedabad. Our solutions desk responds within 24 business hours to map your roadmap.",
+    path: "/contact",
+    jsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        name: "Contact NorthArc",
+        url: `${SITE_URL}/contact`,
+        description:
+          "Book an AI consulting and intelligent automation consultation with NorthArc. Based in Ahmedabad, responding within 24 business hours.",
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        name: SITE_NAME,
+        url: SITE_URL,
+        contactPoint: {
+          "@type": "ContactPoint",
+          contactType: "sales",
+          email: "solutions@northarc.in",
+          telephone: "+91-88499-69336",
+          areaServed: "IN",
+        },
+      },
+    ],
+  });
+
   const [formData, setFormData] = useState({
     fullName: "",
     businessEmail: "",
     companyName: "",
     phoneNumber: "",
     serviceInterest: "",
-    projectRequirements: ""
+    projectRequirements: "",
+    website: "" // honeypot — real users never fill this; server rejects non-empty
   });
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -72,6 +104,7 @@ export default function Contact() {
         phone: formData.phoneNumber,
         service: formData.serviceInterest,
         requirement: formData.projectRequirements,
+        website: formData.website,
       }),
     })
       .then(async (res) => {
@@ -85,7 +118,8 @@ export default function Contact() {
             companyName: "",
             phoneNumber: "",
             serviceInterest: "",
-            projectRequirements: ""
+            projectRequirements: "",
+            website: ""
           });
         } else {
           const errorMsg = data.error || (data.errors && data.errors.map((e: any) => e.message).join(', ')) || "Submission failed. Please try again.";
@@ -129,9 +163,9 @@ export default function Contact() {
               <div className="space-y-6 pt-4">
                 {[
                   { icon: MapPin, title: "Headquarters", content: "Ahmedabad, Gujarat", accent: "text-primary" },
-                  { icon: Mail, title: "Solutions Desk", content: <a href="mailto:solutions@northarc.ai" className="text-primary hover:underline">solutions@northarc.ai</a>, accent: "text-secondary" },
+                  { icon: Mail, title: "Solutions Desk", content: <a href="mailto:solutions@northarc.in" className="text-primary hover:underline">solutions@northarc.in</a>, accent: "text-secondary" },
                   { icon: Phone, title: "Direct Line", content: <a href="tel:+918849969336" className="hover:text-text-primary transition-colors">+91 88499 69336</a>, accent: "text-glow" },
-                  { icon: Clock, title: "Guaranteed Response", content: "Within 48 business hours", accent: "text-text-muted" }
+                  { icon: Clock, title: "Guaranteed Response", content: "Within 24 business hours", accent: "text-text-muted" }
                 ].map((item, idx) => {
                   const Icon = item.icon;
                   return (
@@ -195,12 +229,38 @@ export default function Contact() {
                       onSubmit={handleFormSubmit}
                       className="space-y-6 relative z-10"
                     >
+                      {/*
+                        Honeypot anti-spam field. Kept off-screen (not display:none, which
+                        many bots detect) and out of the tab/accessibility tree. Real users
+                        never see or fill it; the server rejects submissions where it is
+                        non-empty.
+                      */}
+                      <input
+                        type="text"
+                        id="website"
+                        name="website"
+                        value={formData.website}
+                        onChange={handleInputChange}
+                        tabIndex={-1}
+                        autoComplete="off"
+                        aria-hidden="true"
+                        style={{
+                          position: "absolute",
+                          left: "-9999px",
+                          top: "auto",
+                          width: "1px",
+                          height: "1px",
+                          overflow: "hidden"
+                        }}
+                      />
+
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div className="space-y-2">
-                          <label className="text-xs font-bold uppercase tracking-wider text-text-muted block text-left">
+                          <label htmlFor="fullName" className="text-xs font-bold uppercase tracking-wider text-text-muted block text-left">
                             Full Name *
                           </label>
                           <input
+                            id="fullName"
                             type="text"
                             name="fullName"
                             value={formData.fullName}
@@ -216,10 +276,11 @@ export default function Contact() {
                         </div>
 
                         <div className="space-y-2">
-                          <label className="text-xs font-bold uppercase tracking-wider text-text-muted block text-left">
+                          <label htmlFor="businessEmail" className="text-xs font-bold uppercase tracking-wider text-text-muted block text-left">
                             Business Email *
                           </label>
                           <input
+                            id="businessEmail"
                             type="email"
                             name="businessEmail"
                             value={formData.businessEmail}
@@ -237,10 +298,11 @@ export default function Contact() {
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div className="space-y-2">
-                          <label className="text-xs font-bold uppercase tracking-wider text-text-muted block text-left">
+                          <label htmlFor="companyName" className="text-xs font-bold uppercase tracking-wider text-text-muted block text-left">
                             Company Name *
                           </label>
                           <input
+                            id="companyName"
                             type="text"
                             name="companyName"
                             value={formData.companyName}
@@ -256,10 +318,11 @@ export default function Contact() {
                         </div>
 
                         <div className="space-y-2">
-                          <label className="text-xs font-bold uppercase tracking-wider text-text-muted block text-left">
+                          <label htmlFor="phoneNumber" className="text-xs font-bold uppercase tracking-wider text-text-muted block text-left">
                             Phone Number
                           </label>
                           <input
+                            id="phoneNumber"
                             type="tel"
                             name="phoneNumber"
                             value={formData.phoneNumber}
@@ -271,10 +334,11 @@ export default function Contact() {
                       </div>
 
                       <div className="space-y-2">
-                        <label className="text-xs font-bold uppercase tracking-wider text-text-muted block text-left">
+                        <label htmlFor="serviceInterest" className="text-xs font-bold uppercase tracking-wider text-text-muted block text-left">
                           Service Interest *
                         </label>
                         <select
+                          id="serviceInterest"
                           name="serviceInterest"
                           value={formData.serviceInterest}
                           onChange={handleInputChange}
@@ -293,10 +357,11 @@ export default function Contact() {
                       </div>
 
                       <div className="space-y-2">
-                        <label className="text-xs font-bold uppercase tracking-wider text-text-muted block text-left">
+                        <label htmlFor="projectRequirements" className="text-xs font-bold uppercase tracking-wider text-text-muted block text-left">
                           Project Requirements
                         </label>
                         <textarea
+                          id="projectRequirements"
                           name="projectRequirements"
                           value={formData.projectRequirements}
                           onChange={handleInputChange}
@@ -318,7 +383,7 @@ export default function Contact() {
                         {isSubmitting ? (
                           <>
                             <div className="w-5 h-5 rounded-full border-2 border-white/30 border-t-white animate-spin"></div>
-                            <span>Requesting Secure Bridge...</span>
+                            <span>Sending request...</span>
                           </>
                         ) : (
                           <>

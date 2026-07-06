@@ -1,20 +1,45 @@
 import React from "react";
 import { motion } from "motion/react";
 import { AnimatedHeroVisual } from "../../components/AnimatedHeroVisual";
-import { 
-  Check, 
-  ArrowRight, 
-  ArrowDown, 
-  Layers, 
-  Settings, 
-  Cpu, 
-  Smartphone 
+import { useSEO, breadcrumbJsonLd, SITE_URL, SITE_NAME } from "../../lib/seo";
+import {
+  Check,
+  ArrowRight,
+  ArrowDown,
+  Layers,
+  Settings,
+  Cpu,
+  Smartphone
 } from "lucide-react";
 
 export default function LowCode() {
+  useSEO({
+    title: "AI-Assisted Low-Code Delivery",
+    description:
+      "NorthArc ships internal tools, dashboards, and portals in days with AI-assisted low-code delivery — Retool, FlutterFlow, and custom logic on secure backends.",
+    path: "/expertise/low-code",
+    jsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        serviceType: "AI-Assisted Low-Code Delivery",
+        name: "AI-Assisted Low-Code Delivery",
+        description:
+          "Rapid delivery of internal tools, admin dashboards, and customer portals using AI-assisted low-code platforms and custom serverless logic bridges connected to secure enterprise data.",
+        provider: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+        areaServed: "Worldwide",
+        url: `${SITE_URL}/expertise/low-code`,
+      },
+      breadcrumbJsonLd([
+        { name: "Home", path: "/" },
+        { name: "AI-Assisted Low-Code Delivery", path: "/expertise/low-code" },
+      ]),
+    ],
+  });
+
   const capabilities = [
     { icon: Layers, title: "Platform Integrations", desc: "Integrate and configure enterprise low-code systems (FlutterFlow, Retool, Bubble, Webflow)." },
-    { icon: Settings, title: "Custom Logic Bridges", desc: "Develop Node/Python serverless logic to extend default platform operations." },
+    { icon: Settings, title: "Custom & AI Logic Bridges", desc: "Develop Node/Python serverless logic — including AI and LLM calls — to extend platform operations with automation and intelligence." },
     { icon: Cpu, title: "Database Configurations", desc: "Connect frontend builders to SQL, Firestore, or Postgres databases via secure REST APIs." },
     { icon: Smartphone, title: "Rapid UI Prototyping", desc: "Deploy internal admin tools, dashboard panels, and customer portals in days." }
   ];
@@ -46,10 +71,10 @@ export default function LowCode() {
         <div className="space-y-8 max-w-3xl">
           <span className="text-xs font-bold uppercase tracking-widest text-primary font-mono block">EXPERTISE / RETOOL & LOW-CODE</span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight text-text-primary leading-[1.08]">
-            Low-code / No-code Integrations
+            AI-Assisted Low-Code Delivery
           </h1>
           <p className="text-sm sm:text-base text-text-secondary font-light max-w-xl leading-relaxed">
-            We build internal tools, database admin dashboards, and custom client portals rapidly by integrating Retool, FlutterFlow, and Bubble builders with secure serverless backends.
+            We get internal tools, admin dashboards, and customer portals into your team's hands in days — pairing AI-assisted low-code platforms like Retool and FlutterFlow with custom serverless logic wired to your secure data.
           </p>
           <div className="pt-4">
             <a 

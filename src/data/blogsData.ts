@@ -24,18 +24,18 @@ export interface BlogPost {
 export const blogPosts: BlogPost[] = [
   {
     id: 1,
-    slug: "agentic-web-bot-traffic-ga4",
-    category: "Agentic AI",
-    tags: ["AI Agents", "GA4", "Bot Traffic"],
-    title: "The Agentic Web Problem: Bot Traffic in GA4 Explained",
+    slug: "ai-agents-are-reshaping-the-web",
+    category: "AI Agents",
+    tags: ["AI Agents", "Agentic AI", "Autonomous Systems"],
+    title: "AI Agents Are Now Your Customers: What the Agentic Web Means for Your Business",
     excerpt:
-      "As AI agents increasingly browse the web autonomously, your GA4 data is being polluted with non-human traffic. Learn how to identify agentic bot sessions, filter them correctly, and protect your measurement integrity.",
+      "Autonomous AI agents are already browsing, comparing, and buying on the open web. Learn how the agentic shift changes how customers reach you, how to tell agent traffic from human traffic, and how to prepare your digital experience for a world where software makes the purchase.",
     date: "Jul 2026",
     readTime: "8 min read",
-    accentColor: "#10B981",
+    accentColor: "#1D75FF",
     featured: true,
-    author: "Analytics Engineering Team",
-    authorRole: "Data & Analytics",
+    author: "NorthArc Team",
+    authorRole: "AI Engineering",
     sections: [
       {
         type: "h2",
@@ -208,18 +208,18 @@ ORDER BY events_per_second DESC`,
   },
   {
     id: 2,
-    slug: "ai-incident-diagnosis-analytics",
-    category: "AI Analytics",
-    tags: ["AI", "Data Pipelines", "Root Cause Analysis"],
-    title: "AI Incident Diagnosis: From Alert to Answer in Seconds",
+    slug: "llm-agents-for-incident-diagnosis",
+    category: "AI Engineering",
+    tags: ["LLM Agents", "AIOps", "Root Cause Analysis"],
+    title: "LLM Agents for Incident Diagnosis: From Alert to Answer in Seconds",
     excerpt:
-      "When your data pipeline fails at 2am, every minute costs you. We explore how AI-powered incident diagnosis systems can automatically detect anomalies, trace root causes, and surface actionable fixes — before your CMO notices.",
+      "When a critical system fails at 2am, every minute costs you. We explore how LLM-powered diagnostic agents automatically detect anomalies, reason over logs and dependencies, and surface the root cause with a fix — turning hours of firefighting into a two-paragraph summary.",
     date: "Jun 2026",
     readTime: "6 min read",
-    accentColor: "#F59E0B",
+    accentColor: "#4DA6FF",
     featured: true,
-    author: "Data Engineering Team",
-    authorRole: "Analytics Engineering",
+    author: "NorthArc Team",
+    authorRole: "AI Engineering",
     sections: [
       {
         type: "h2",
@@ -337,163 +337,164 @@ Provide:
   },
   {
     id: 3,
-    slug: "ga4-data-pipeline-explained",
-    category: "GA4",
-    tags: ["GA4", "Data Pipeline", "BigQuery"],
-    title: "GA4 Data Pipeline: What Happens Between Collection and Report",
+    slug: "feature-pipelines-for-production-ml",
+    category: "MLOps",
+    tags: ["Feature Engineering", "ML Pipelines", "MLOps"],
+    title: "Feature Pipelines for Production ML: From Raw Events to Model-Ready Signals",
     excerpt:
-      "GA4 doesn't show you raw hits — it processes, samples, and aggregates them before they reach your reports. Understanding this pipeline is critical for data teams who need to know when to trust their numbers.",
+      "A model is only as good as the features you feed it. This guide walks through the pipeline that turns raw behavioural and transactional data into reliable, model-ready features — and the design choices that separate a demo from a system your business can trust in production.",
     date: "Jun 2026",
     readTime: "7 min read",
     accentColor: "#6366F1",
     featured: false,
-    author: "Analytics Engineering Team",
-    authorRole: "Data & Analytics",
+    author: "NorthArc Team",
+    authorRole: "AI Engineering",
     sections: [
       {
         type: "h2",
-        content: "The GA4 Data Pipeline: A Mental Model",
+        content: "The Feature Pipeline: A Mental Model",
       },
       {
         type: "p",
         content:
-          "Many analytics practitioners treat GA4 as a black box: events go in, reports come out. But between collection and reporting, GA4 applies a series of transformations — some transparent, some not — that materially affect your numbers. Understanding this pipeline helps you know when to trust your reports, when to be suspicious, and when to go to BigQuery for the unmodified truth.",
+          "Most teams obsess over model architecture and neglect the pipeline that produces the features the model learns from. Yet in production ML, the feature pipeline is where the majority of accuracy — and the majority of failures — actually live. Between raw event data and a model-ready feature vector sits a series of transformations that materially affect what your model can learn and how reliably it performs after deployment.",
       },
       {
         type: "h2",
-        content: "Stage 1: Collection",
+        content: "Stage 1: Ingestion",
       },
       {
         type: "p",
         content:
-          "GA4 collects data through the Measurement Protocol, gtag.js, Firebase SDK, or Google Tag Manager. At this stage, events are structured with a name, timestamp, and parameter payload. The collection layer applies minimal transformation — primarily validation (rejecting malformed events) and deduplication (within a short time window).",
+          "Raw signal arrives from many sources — behavioural event streams, transactional systems, CRM records, and third-party enrichment. At this stage the priority is faithful capture: validating schemas, rejecting malformed records, and deduplicating within a short window. Resist the urge to transform here. The ingestion layer's only job is to land trustworthy raw data that everything downstream can depend on.",
       },
       {
         type: "h2",
-        content: "Stage 2: Processing",
+        content: "Stage 2: Transformation & Feature Engineering",
       },
       {
         type: "p",
         content:
-          "Processing is where most of the interesting — and potentially surprising — transformations happen. GA4 applies:",
+          "This is where most of the value — and most of the subtle bugs — are created. A robust feature layer applies:",
       },
       {
         type: "ul",
         items: [
-          "Session attribution: events are grouped into sessions using a 30-minute inactivity timeout (configurable to 1–7.5 hours)",
-          "Source/medium attribution: traffic source is assigned to the session using last-non-direct attribution by default",
-          "User identification: events are associated with a user via user_id (if set), device ID, or modelled identity",
-          "Bot filtering: known bots from the IAB list are removed (but not all bots — see our agentic traffic article)",
-          "Spam filtering: GA4 applies proprietary spam detection that can occasionally remove legitimate traffic",
-          "Conversion crediting: conversion events are attributed back to the traffic source that drove the session",
+          "Entity resolution: stitching events to a stable user or account ID across devices and sessions",
+          "Windowed aggregations: recency, frequency, and monetary features computed over rolling time windows",
+          "Behavioural sequences: ordered event paths that capture intent, not just counts",
+          "Categorical encoding and normalisation applied consistently between training and serving",
+          "Leakage guards: ensuring no feature encodes information that would not be available at prediction time",
+          "First-party enrichment: joining expert-engineered domain features that generic models never see",
         ],
       },
       {
         type: "h2",
-        content: "Stage 3: Aggregation & Reporting",
+        content: "Stage 3: The Training / Serving Boundary",
       },
       {
         type: "p",
         content:
-          "GA4's standard reports show pre-aggregated data, not row-level event data. This is why standard reports are fast and don't sample — the aggregation is already done. However, this also means that ad-hoc analysis questions that weren't anticipated in the aggregation design can't be answered from standard reports.",
+          "The single most common cause of a model that performs well offline but fails in production is training/serving skew — the features computed at training time are subtly different from those computed at inference. A disciplined feature pipeline computes features through shared logic so that the same transformation runs in batch training and in real-time serving. When that logic diverges, your offline metrics become fiction.",
       },
       {
         type: "h3",
-        content: "When Sampling Applies",
+        content: "Batch vs. Real-Time Features",
       },
       {
         type: "p",
         content:
-          "Sampling in GA4 applies specifically in Explorations (not standard reports) when your date range includes more than a threshold number of events. When sampling is active, GA4 analyses a representative subset of your data and extrapolates. The sampling percentage is shown in the Exploration interface.",
+          "Not every feature needs to be fresh to the second. Design your pipeline in tiers: T-1 batch features for slow-moving signals (lifetime value, historical propensity), hourly features for medium-velocity behaviour, and real-time features for in-session intent. Matching feature freshness to the decision being made keeps cost down without sacrificing the accuracy that actually moves the outcome.",
       },
       {
         type: "callout",
         content:
-          "If sampling is affecting your analysis, the BigQuery export is your escape route. BigQuery contains 100% of raw, unsampled event data — and you can apply any aggregation logic you need at query time.",
+          "If a feature is expensive to compute in real time but only marginally improves the model, precompute it in batch. The goal is not maximum freshness everywhere — it is the right freshness for each signal that drives the decision.",
       },
       {
         type: "h2",
-        content: "Stage 4: BigQuery Export",
+        content: "Stage 4: The Feature Store",
       },
       {
         type: "p",
         content:
-          "The BigQuery export runs daily (for the previous day's data) or streaming (for near-real-time data). It contains a row per event, with all parameters available as columns. Critically, this data is not processed the same way as GA4 reports in all dimensions — session and user attribution logic may differ slightly from what you see in the GA4 interface.",
+          "A feature store gives your organisation a single, versioned source of truth for features — reused across models, consistent between training and serving, and monitored for drift. Even a lightweight feature store pays for itself the first time two teams stop re-deriving the same customer feature three slightly different ways and getting three slightly different answers.",
       },
       {
         type: "h2",
-        content: "Practical Implications for Data Teams",
+        content: "Practical Implications for AI Teams",
       },
       {
         type: "ul",
         items: [
-          "Never compare GA4 standard report numbers with BigQuery-derived numbers and expect them to match exactly — they use different processing paths",
-          "For accurate funnel analysis on large datasets, use BigQuery — not GA4 Explorations which may sample",
-          "Session-level metrics in BigQuery require reconstruction using session_id — they aren't pre-calculated",
-          "The 'engaged session' definition in GA4 (>10s or conversion or >1 page) is applied at processing time — you can reconstruct it in BigQuery but must apply the same logic",
-          "Data in GA4 standard reports can change up to 72 hours after collection as late-arriving events are processed",
+          "Version your features the way you version code — a silent change to a transformation is a silent change to every model that consumes it",
+          "Monitor feature distributions in production; drift in an input is an early warning long before accuracy visibly degrades",
+          "Guard aggressively against leakage — a feature that looks predictive offline but uses future information will collapse in production",
+          "Share transformation logic between training and serving to eliminate skew",
+          "Treat data freshness as a design parameter per feature, not a single global setting",
         ],
       },
       {
         type: "quote",
         content:
-          "\"The most important thing to understand about GA4 is that 'the data' isn't a single thing — it's a family of derived views of an underlying event stream. Each view makes different tradeoffs between freshness, completeness, and granularity.\"",
+          "\"The most important thing to understand about a production model is that 'the data' isn't a single thing — it's a family of derived features of an underlying event stream. Every transformation on the path to the model is a design decision that shows up later as accuracy or as an incident.\"",
       },
     ],
   },
   {
     id: 4,
-    slug: "data-quality-monitoring-analytics",
-    category: "Data Quality",
-    tags: ["Analytics Intelligence", "BigQuery", "Data Quality"],
-    title: "Data Quality Monitoring: Stop Bad Data Before It Hits Your CMO",
+    slug: "monitoring-ml-models-in-production",
+    category: "MLOps",
+    tags: ["Model Monitoring", "Data Drift", "MLOps"],
+    title: "Monitoring ML Models in Production: Catch Drift Before It Costs You",
     excerpt:
-      "Bad data that reaches leadership erodes trust in analytics. This guide walks through building automated data quality monitoring using BigQuery, scheduled queries, and alerting pipelines.",
+      "A model that was accurate at launch is not accurate forever. This guide walks through building automated monitoring for production ML — data drift, prediction drift, and input quality checks — so degrading models are caught and retrained before they quietly erode revenue.",
     date: "Jun 2026",
     readTime: "9 min read",
     accentColor: "#EC4899",
     featured: false,
-    author: "Data Engineering Team",
-    authorRole: "Analytics Engineering",
+    author: "NorthArc Team",
+    authorRole: "AI Engineering",
     sections: [
       {
         type: "h2",
-        content: "The High Cost of Bad Data Reaching Leadership",
+        content: "The Silent Failure of a Degrading Model",
       },
       {
         type: "p",
         content:
-          "Every analytics team has experienced it: a number in the weekly report that looks wrong. The CMO asks about it in the review meeting. You spend the next two hours investigating, discover it was a tracking bug from three days ago, and then spend the rest of the week explaining why the numbers were wrong and rebuilding trust. Data quality failures that reach decision makers don't just create extra work — they damage the credibility of the entire analytics function.",
+          "Traditional software fails loudly: it throws an error, a page goes down, someone gets paged. Machine learning fails silently. A churn model or a lead-scoring model keeps returning confident predictions long after the world it was trained on has shifted underneath it. Nobody gets an alert. The only symptom is a slow, invisible decline in the outcome the model was supposed to improve — until a quarter later someone asks why conversion is down. Monitoring is what turns that silent failure into an early, actionable signal.",
       },
       {
         type: "h2",
-        content: "The Four Dimensions of Data Quality",
+        content: "The Four Things You Must Monitor",
       },
       {
         type: "ul",
         items: [
-          "Completeness: Are all expected events and records present? (e.g., did today's GA4 export arrive? Does it have the expected row count?)",
-          "Accuracy: Do the values make sense given business context? (e.g., is the conversion rate within the normal range?)",
-          "Consistency: Do related metrics agree with each other? (e.g., does the transaction count in GA4 match the order count in the CRM?)",
-          "Timeliness: Did the data arrive when expected? (e.g., is the hourly pipeline running on schedule?)",
+          "Input data quality: are the features arriving complete, on time, and in the expected ranges the model was trained on?",
+          "Data drift: has the distribution of the inputs shifted away from the training distribution?",
+          "Prediction drift: has the distribution of the model's own outputs shifted in a way that isn't explained by seasonality?",
+          "Ground-truth performance: once actual outcomes arrive, how does live accuracy compare to the offline benchmark?",
         ],
       },
       {
         type: "h2",
-        content: "Building Your Data Quality Monitoring Stack",
+        content: "Building Your Model Monitoring Stack",
       },
       {
         type: "h3",
-        content: "Layer 1: Row Count & Freshness Checks",
+        content: "Layer 1: Input Freshness & Completeness Checks",
       },
       {
         type: "p",
         content:
-          "The simplest and most valuable checks are completeness checks: did the data arrive, and is there roughly the expected amount of it? These can be implemented as BigQuery scheduled queries that run immediately after each pipeline finishes.",
+          "The simplest and most valuable checks are completeness checks: did the feature data arrive, and is there roughly the expected amount of it before scoring runs? A model scoring against stale or partial features will produce confident nonsense. These checks can run immediately before each batch scoring job or continuously ahead of a real-time endpoint.",
       },
       {
         type: "code",
-        content: `-- Daily row count check with anomaly detection
+        content: `-- Daily scoring-volume check with anomaly detection
+-- Flags when today's feature/scoring row count deviates from the recent norm
 WITH daily_counts AS (
   SELECT
     event_date,
@@ -526,76 +527,76 @@ ORDER BY event_date DESC`,
       },
       {
         type: "h3",
-        content: "Layer 2: Business Rule Validation",
+        content: "Layer 2: Data & Prediction Drift Detection",
       },
       {
         type: "p",
         content:
-          "Beyond row counts, you need checks that verify your data makes business sense. These are domain-specific rules that encode what 'normal' looks like for your business:",
+          "Beyond volume checks, you need to know whether the world has shifted away from what the model learned. Compare live feature and output distributions against a training baseline using tests such as Population Stability Index (PSI) or Kolmogorov–Smirnov, and encode domain rules for what 'normal' looks like:",
       },
       {
         type: "ul",
         items: [
-          "Conversion rate should be between X% and Y% (based on historical range)",
-          "Revenue should not be zero on business days",
-          "Transaction count in GA4 should be within Z% of CRM transaction count",
-          "All expected traffic sources should be present (no major channel suddenly disappearing)",
-          "No individual dimension value should account for >90% of total sessions (spike detection)",
+          "Each key feature's distribution should stay within a stable PSI band versus the training snapshot",
+          "The model's predicted-positive rate should stay within its historical, seasonality-adjusted range",
+          "No single input category should suddenly dominate — a sign of an upstream data break",
+          "Null and out-of-range rates for critical features should stay below their trained tolerance",
+          "Score calibration should hold: predicted probabilities should still track observed outcomes",
         ],
       },
       {
         type: "h3",
-        content: "Layer 3: Cross-System Consistency Checks",
+        content: "Layer 3: Ground-Truth Performance Tracking",
       },
       {
         type: "p",
         content:
-          "The most sophisticated — and most valuable — checks compare data across systems. If GA4 says 1,247 transactions but your CRM recorded 1,089, that 12% discrepancy needs explanation before the weekly revenue report goes to leadership.",
+          "The most valuable checks arrive later, when actual outcomes become known. Once real conversions, churn events, or purchases land, join them back to the predictions the model made and track live precision, recall, and lift against the offline benchmark. A quiet gap between promised and delivered lift is the clearest signal that a retrain is overdue.",
       },
       {
         type: "h2",
-        content: "Alerting: Getting to the Right Person Fast",
+        content: "Alerting and the Retraining Loop",
       },
       {
         type: "p",
         content:
-          "Data quality checks are only useful if the right person is notified immediately when they fail. Build your alerting with clear severity levels: critical failures (pipeline down, zero data) go to PagerDuty or immediate Slack DMs. Warnings (anomalies, cross-system discrepancies) go to the team channel. Informational items go into a monitoring dashboard for daily review.",
+          "Monitoring is only useful if it drives action. Wire clear severity levels: a hard input break (missing features, pipeline down) pages on-call; sustained drift or a measured drop in live lift opens a retraining ticket; minor fluctuations flow to a dashboard for review. The end state is a closed loop where degradation is detected, a retrain is triggered, and the new model is validated before it replaces the old one.",
       },
       {
         type: "callout",
         content:
-          "The goal of data quality monitoring is not to achieve zero data quality issues — it's to ensure that when issues occur, they're caught and resolved before they affect any decision that matters.",
+          "The goal of model monitoring is not to keep a model frozen and perfect — it's to know, before your business does, when reality has drifted far enough that the model needs to be retrained.",
       },
       {
         type: "quote",
         content:
-          "\"We went from discovering data problems when our CMO asked about them, to discovering them 18 hours before the report is sent. That shift completely changed our relationship with leadership.\"",
+          "\"We used to find out a model had gone stale when the numbers it was supposed to move started sliding. Now drift alerts fire weeks earlier, and retraining is a scheduled event, not a fire drill.\"",
       },
     ],
   },
   {
     id: 5,
-    slug: "analytics-maturity-model",
-    category: "Analytics Strategy",
-    tags: ["Analytics Maturity", "Data Quality", "AI in Analytics"],
-    title: "Analytics Maturity Model: Which Stage Is Your Business At?",
+    slug: "ai-maturity-model",
+    category: "AI Strategy",
+    tags: ["AI Maturity", "AI Strategy", "Decision Intelligence"],
+    title: "The AI Maturity Model: Which Stage Is Your Business Really At?",
     excerpt:
-      "Most companies think they're more analytically mature than they really are. The Analytics Maturity Model cuts through the noise with a clear five-stage framework — from ad-hoc reporting to autonomous decision intelligence.",
+      "Most companies believe they're more AI-mature than they really are. The AI Maturity Model cuts through the hype with a clear five-stage framework — from descriptive reporting to autonomous, agent-driven decisions — so you can invest in the capability that actually moves you forward.",
     date: "Jun 2026",
     readTime: "5 min read",
-    accentColor: "#10B981",
+    accentColor: "#1D75FF",
     featured: false,
-    author: "Strategy Team",
-    authorRole: "Analytics Strategy",
+    author: "NorthArc Team",
+    authorRole: "AI Strategy",
     sections: [
       {
         type: "h2",
-        content: "Why Most Companies Overestimate Their Analytics Maturity",
+        content: "Why Most Companies Overestimate Their AI Maturity",
       },
       {
         type: "p",
         content:
-          "In our experience working with hundreds of organisations, there's a consistent pattern: companies grade their own analytics maturity significantly higher than an objective assessment would. A team that has GA4 installed and a couple of Looker Studio dashboards often describes themselves as 'data-driven.' A team that runs some SQL queries considers themselves 'advanced.' This overestimation matters because it prevents organisations from accurately diagnosing their actual constraints — and from investing in the right capabilities to address them.",
+          "In our experience working with dozens of organisations, there's a consistent pattern: companies grade their own AI maturity significantly higher than an objective assessment would. A team that has a few dashboards and has run a ChatGPT pilot often describes itself as 'AI-driven.' A team with one model in production considers itself 'advanced.' This overestimation matters because it prevents organisations from accurately diagnosing their real constraints — and from investing in the right capabilities to address them.",
       },
       {
         type: "h2",
@@ -608,12 +609,12 @@ ORDER BY event_date DESC`,
       {
         type: "p",
         content:
-          "At Stage 1, analytics means reporting. Teams produce regular reports — traffic, conversions, revenue — that describe what happened in the past. Data is typically collected in one or two tools, reports are largely manual or templated, and analytics is reactive: you look at data after decisions are made, not before.",
+          "At Stage 1, intelligence means reporting. Teams produce regular reports — traffic, conversions, revenue — that describe what happened in the past. Data is typically collected in one or two tools, reports are largely manual or templated, and the organisation is reactive: it looks at data after decisions are made, not before. There is no model in the loop.",
       },
       {
         type: "p",
         content:
-          "Hallmarks: Standard GA4 reports, monthly PowerPoint decks, manual Excel manipulation. Most organisations are here, even if they don't know it.",
+          "Hallmarks: standard dashboards, monthly decks, manual spreadsheet work, and AI limited to occasional ad-hoc use of a chatbot. Most organisations are here, even if they describe themselves otherwise.",
       },
       {
         type: "h3",
@@ -622,7 +623,7 @@ ORDER BY event_date DESC`,
       {
         type: "p",
         content:
-          "Stage 2 organisations have moved beyond reporting to investigation. When a metric changes, they have the tools and skills to understand why. This requires more sophisticated data infrastructure: BigQuery for ad-hoc analysis, funnel visualisations, cohort analysis, and a culture of asking questions rather than just producing outputs.",
+          "Stage 2 organisations have moved beyond reporting to investigation. When a metric changes, they have the data foundation and skills to understand why. This requires a real data warehouse, clean and well-modelled data, cohort and funnel analysis, and — increasingly — LLM-assisted analysis that lets a business user interrogate data in natural language. This is the essential data foundation that everything above it depends on.",
       },
       {
         type: "h3",
@@ -631,7 +632,7 @@ ORDER BY event_date DESC`,
       {
         type: "p",
         content:
-          "Predictive analytics uses historical patterns to forecast future outcomes. Churn prediction models, demand forecasting, customer lifetime value models, and propensity to purchase scores are all Stage 3 capabilities. This stage requires ML infrastructure, data science expertise, and — critically — a business culture willing to make decisions based on model outputs rather than intuition.",
+          "Predictive ML uses historical patterns to forecast future outcomes. Churn prediction, demand forecasting, customer lifetime value, and propensity-to-purchase scoring are all Stage 3 capabilities. This stage requires ML infrastructure, data science expertise, and — critically — a business culture willing to make decisions based on model outputs rather than intuition. This is where AI starts producing measurable financial return.",
       },
       {
         type: "h3",
@@ -640,7 +641,7 @@ ORDER BY event_date DESC`,
       {
         type: "p",
         content:
-          "Prescriptive analytics doesn't just tell you what will happen — it tells you what to do about it. Recommendation engines, automated bid management, dynamic pricing algorithms, and personalisation systems are all prescriptive. The system doesn't just surface an insight; it takes or recommends an action.",
+          "Prescriptive AI doesn't just tell you what will happen — it tells you what to do about it. Recommendation engines, next-best-action systems, dynamic pricing, and personalisation are all prescriptive. Retrieval-augmented (RAG) assistants that answer from your own knowledge base and recommend an action also live here. The system doesn't just surface an insight; it recommends or takes the action.",
       },
       {
         type: "h3",
@@ -649,7 +650,7 @@ ORDER BY event_date DESC`,
       {
         type: "p",
         content:
-          "At Stage 5, analytics systems make decisions autonomously, within defined guardrails. Algorithmic trading, fully automated marketing campaigns, self-optimising product ranking — these are Stage 5 capabilities. Human oversight moves from decision-making to objective-setting and guardrail management.",
+          "At Stage 5, AI systems make and execute decisions autonomously within defined guardrails. Agentic workflows that plan and act across multiple steps, self-optimising campaigns, and closed-loop automation are Stage 5 capabilities. Human oversight moves from making each decision to setting objectives and managing guardrails.",
       },
       {
         type: "h2",
@@ -659,55 +660,55 @@ ORDER BY event_date DESC`,
         type: "ul",
         items: [
           "Can your team answer 'why' questions about metric changes within 24 hours? (Stage 2 threshold)",
-          "Do you have any working predictive models in production? (Stage 3 threshold)",
-          "Are any decisions made automatically based on model outputs? (Stage 4 threshold)",
-          "Do you have autonomous systems that act without human approval? (Stage 5 threshold)",
+          "Do you have any working predictive ML models in production? (Stage 3 threshold)",
+          "Are any actions recommended or taken automatically based on model outputs? (Stage 4 threshold)",
+          "Do you have agentic systems that plan and act without human approval? (Stage 5 threshold)",
         ],
       },
       {
         type: "callout",
         content:
-          "There's no universal 'right' stage to be at. Stage 5 autonomy is appropriate for some decisions (bid management) and completely inappropriate for others (customer communications). The goal is to be at the right stage for each type of decision you make.",
+          "There's no universal 'right' stage to be at. Stage 5 autonomy is appropriate for some decisions (bid management, ranking) and completely inappropriate for others (high-stakes customer communications). The goal is to be at the right stage for each type of decision you make.",
       },
       {
         type: "h2",
-        content: "The Most Impactful Transition: Stage 1 to Stage 2",
+        content: "The Most Impactful Transition: Stage 2 to Stage 3",
       },
       {
         type: "p",
         content:
-          "In practice, the most transformative analytics investment for most organisations is the transition from Stage 1 to Stage 2: from reporting what happened to understanding why. This transition requires a data warehouse, reliable data pipelines, and the analytical skills to use them. It doesn't require ML, AI, or data science. But it requires more investment than most organisations realise — and more cultural change than any technology can provide.",
+          "Every organisation wants to jump straight to autonomous agents, but the transition that unlocks the most value for most businesses is Stage 2 to Stage 3: from understanding why something happened to reliably predicting what will happen and acting on it. That is where AI stops being a talking point and starts changing the numbers. It depends on a trustworthy data foundation, ML infrastructure, and — most of all — the organisational willingness to let a model, rather than a gut feeling, drive a decision.",
       },
       {
         type: "quote",
         content:
-          "\"Every organisation wants to talk about AI and predictive analytics. But most of them can't yet reliably answer 'why did our conversion rate drop last Tuesday?' Fix the diagnostic gap first.\"",
+          "\"Every organisation wants to talk about autonomous AI agents. But most can't yet reliably predict which customers will churn next month. Build the predictive foundation first — the autonomy is only as trustworthy as the models underneath it.\"",
       },
     ],
   },
   {
     id: 6,
-    slug: "bigquery-pipeline-failures-ai-agents",
-    category: "BigQuery",
-    tags: ["BigQuery", "AI Agents", "GCP"],
-    title: "BigQuery Pipeline Failures: How AI Agents Fix Them First",
+    slug: "self-healing-data-pipelines-ai-agents",
+    category: "AI Agents",
+    tags: ["AI Agents", "Self-Healing Pipelines", "AIOps"],
+    title: "Self-Healing Data Pipelines: How AI Agents Fix Failures First",
     excerpt:
-      "Pipeline failures in BigQuery are inevitable — but slow recovery is not. We examine how autonomous AI agents can monitor your scheduled queries, detect failures in real time, and trigger self-healing playbooks.",
+      "Data pipeline failures are inevitable — slow recovery is not. We examine how autonomous AI agents monitor your jobs, detect failures in real time, reason over the error with an LLM, and run self-healing playbooks that resolve routine breaks before a human ever wakes up.",
     date: "Jun 2026",
     readTime: "7 min read",
     accentColor: "#8B5CF6",
     featured: false,
-    author: "Data Engineering Team",
-    authorRole: "Analytics Engineering",
+    author: "NorthArc Team",
+    authorRole: "AI Engineering",
     sections: [
       {
         type: "h2",
-        content: "The Anatomy of a BigQuery Pipeline Failure",
+        content: "The Anatomy of a Data Pipeline Failure",
       },
       {
         type: "p",
         content:
-          "BigQuery pipeline failures fall into a small number of common categories, each with recognisable signatures and known remediation paths. This is what makes them excellent candidates for AI-assisted (or even autonomous) resolution:",
+          "Whatever warehouse or orchestrator you run on, data pipeline failures fall into a small number of common categories, each with recognisable signatures and known remediation paths. That predictability is exactly what makes them excellent candidates for AI-assisted — or even fully autonomous — resolution:",
       },
       {
         type: "ul",
@@ -824,7 +825,7 @@ def handle_pipeline_failure(job_id: str, error: dict) -> str:
     readTime: "12 min read",
     accentColor: "#06B6D4",
     featured: false,
-    author: "Analytics Engineering Team",
+    author: "NorthArc Team",
     authorRole: "Data & Analytics",
     sections: [
       {
@@ -946,27 +947,27 @@ def handle_pipeline_failure(job_id: str, error: dict) -> str:
   },
   {
     id: 8,
-    slug: "ab-testing-process-framework",
-    category: "CRO",
-    tags: ["A/B Testing", "CRO", "Experimentation"],
-    title: "How to do A/B Testing: A Proven Process and Framework",
+    slug: "experimentation-framework-for-ai-features",
+    category: "Experimentation",
+    tags: ["Experimentation", "A/B Testing", "AI Evaluation"],
+    title: "How to Evaluate AI Features: A Proven Experimentation Framework",
     excerpt:
-      "Most A/B tests fail not because of bad ideas — but because of bad process. This guide gives you a repeatable, statistically sound framework for running experiments that produce decisions your team can act on confidently.",
+      "Shipping an AI feature without a rigorous experiment is how you convince yourself something works when it doesn't. This guide gives you a repeatable, statistically sound framework for testing AI-driven changes — from model-scored audiences to LLM-powered experiences — so you act on real lift, not the demo effect.",
     date: "May 2026",
     readTime: "10 min read",
     accentColor: "#F59E0B",
     featured: false,
-    author: "Optimisation Team",
-    authorRole: "CRO & Experimentation",
+    author: "NorthArc Team",
+    authorRole: "AI Engineering",
     sections: [
       {
         type: "h2",
-        content: "Why Most A/B Tests Are a Waste of Time",
+        content: "Why Most AI Experiments Prove Nothing",
       },
       {
         type: "p",
         content:
-          "The failure rate for A/B tests is alarmingly high — not in the sense that tests show no winner (that's expected and fine) but in the sense that many tests produce results that teams can't act on. Either the test ran too short, the sample size was too small, the winning variant's improvement was within the margin of error, or the methodology was flawed in a way that invalidated the result. Good testing isn't about running more tests — it's about running better ones.",
+          "AI features are especially easy to fool yourself about. A model-scored audience, a new recommendation engine, or an LLM-powered flow always looks impressive in a demo — but the demo effect is not lift. The failure rate for experiments is alarmingly high, not because tests show no winner (that's expected and fine) but because many produce results teams can't act on: the test ran too short, the sample was too small, the improvement fell within the margin of error, or the methodology was flawed in a way that invalidated the result. Good evaluation isn't about running more tests — it's about running ones that give you a decision you can trust. The framework below applies whether you're testing a button colour or a large language model.",
       },
       {
         type: "h2",

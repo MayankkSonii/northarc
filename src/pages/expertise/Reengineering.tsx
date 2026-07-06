@@ -1,19 +1,44 @@
 import React from "react";
 import { motion } from "motion/react";
 import { AnimatedHeroVisual } from "../../components/AnimatedHeroVisual";
-import { 
-  Check, 
-  ArrowRight, 
-  ArrowDown, 
-  RefreshCw, 
-  Layers, 
-  Settings, 
-  ShieldCheck 
+import { useSEO, breadcrumbJsonLd, SITE_URL, SITE_NAME } from "../../lib/seo";
+import {
+  Check,
+  ArrowRight,
+  ArrowDown,
+  RefreshCw,
+  Layers,
+  Settings,
+  ShieldCheck
 } from "lucide-react";
 
 export default function Reengineering() {
+  useSEO({
+    title: "Legacy System Reengineering with AI",
+    description:
+      "NorthArc modernizes legacy systems with AI — refactoring technical debt into decoupled, cloud-native services that cut costs, boost reliability, stay AI-ready.",
+    path: "/expertise/reengineering",
+    jsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        serviceType: "Legacy System Reengineering",
+        name: "Legacy System Reengineering with AI",
+        description:
+          "Modernization of legacy software using AI-assisted refactoring — decoupling monoliths into cloud-native microservices, retiring technical debt, and making systems ready for intelligent automation.",
+        provider: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+        areaServed: "Worldwide",
+        url: `${SITE_URL}/expertise/reengineering`,
+      },
+      breadcrumbJsonLd([
+        { name: "Home", path: "/" },
+        { name: "Legacy System Reengineering with AI", path: "/expertise/reengineering" },
+      ]),
+    ],
+  });
+
   const capabilities = [
-    { icon: RefreshCw, title: "Code Refactoring & Cleanup", desc: "Rewrite outdated code segments, extract modular frameworks, and remove technical debt." },
+    { icon: RefreshCw, title: "AI-Assisted Code Refactoring", desc: "Rewrite outdated code, extract modular frameworks, and retire technical debt faster with AI-assisted refactoring and review." },
     { icon: Layers, title: "Database Schema Tuning", desc: "Redefine database models, optimize slow index structures, and configure caching." },
     { icon: Settings, title: "System Decoupling", desc: "Break down bulky monolithic servers into decoupled microservices to improve reliability." },
     { icon: ShieldCheck, title: "Security Modernization", desc: "Tweak authentication loops, integrate modern SSL keys, and apply data encryption standards." }
@@ -46,10 +71,10 @@ export default function Reengineering() {
         <div className="space-y-8 max-w-3xl">
           <span className="text-xs font-bold uppercase tracking-widest text-primary font-mono block">EXPERTISE / REENGINEERING</span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight text-text-primary leading-[1.08]">
-            Refinement & Reengineering
+            Legacy System Reengineering with AI
           </h1>
           <p className="text-sm sm:text-base text-text-secondary font-light max-w-xl leading-relaxed">
-            We modernize legacy monolithic softwares, refactor technical debt, and transform outdated architectures into decoupled cloud microservices.
+            We modernize aging systems into decoupled, cloud-native services — retiring technical debt with AI-assisted refactoring so your platform runs leaner, more reliably, and ready for intelligent automation.
           </p>
           <div className="pt-4">
             <a 

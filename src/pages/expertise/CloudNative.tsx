@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "motion/react";
 import { AnimatedHeroVisual } from "../../components/AnimatedHeroVisual";
+import { useSEO, breadcrumbJsonLd, SITE_URL, SITE_NAME } from "../../lib/seo";
 import {
   Check,
   ArrowRight,
@@ -13,6 +14,30 @@ import {
 import { staggerContainer, staggerItem, fadeUpVariant, viewportOnce } from "../../lib/animations";
 
 export default function CloudNative() {
+  useSEO({
+    title: "Cloud-Native Development & Microservices",
+    description:
+      "NorthArc architects cloud-native platforms — elastic containers, serverless, and microservices that scale on demand and cut infrastructure costs.",
+    path: "/expertise/cloud-native",
+    jsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        serviceType: "Cloud-Native Development",
+        name: "Cloud-Native Development & Microservices",
+        description:
+          "Cloud-native engineering — elastic container clusters, serverless architectures, distributed storage, and gRPC microservices built to scale reliably and control cost.",
+        provider: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+        areaServed: "Worldwide",
+        url: `${SITE_URL}/expertise/cloud-native`,
+      },
+      breadcrumbJsonLd([
+        { name: "Home", path: "/" },
+        { name: "Cloud-Native", path: "/expertise/cloud-native" },
+      ]),
+    ],
+  });
+
   const capabilities = [
     { icon: Server, title: "Elastic Container Arrays", desc: "Build highly scalable, isolated cloud services using container cluster models." },
     { icon: Cpu, title: "Serverless Architectures", desc: "Configure serverless cloud logic layers minimizing runtime compute overheads." },
@@ -51,7 +76,7 @@ export default function CloudNative() {
             Cloud-native Services
           </h1>
           <p className="text-sm sm:text-base text-text-secondary font-light max-w-xl leading-relaxed" variants={staggerItem}>
-            We architect globally distributed microservices, deploy elastic container configurations, and set up secure serverless compute clusters.
+            We architect globally distributed microservices, elastic containers, and secure serverless clusters that scale automatically through traffic spikes while keeping your infrastructure costs in check.
           </p>
           <div className="pt-4" variants={staggerItem}>
             <a

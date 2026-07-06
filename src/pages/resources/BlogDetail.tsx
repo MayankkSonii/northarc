@@ -1,6 +1,6 @@
-import React from "react";
 import { motion } from "motion/react";
-import { staggerContainer, staggerItem, fadeUpVariant, viewportOnce } from "../../lib/animations";
+import { staggerContainer, staggerItem } from "../../lib/animations";
+import { useSEO, breadcrumbJsonLd, SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from "../../lib/seo";
 import {
   ArrowLeft,
   Calendar,
@@ -19,14 +19,62 @@ interface Props {
   slug: string;
 }
 
+/** Trim text to ~155 chars at a word boundary for meta descriptions. */
+function trimDescription(text: string, max = 155): string {
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max);
+  const lastSpace = cut.lastIndexOf(" ");
+  return `${cut.slice(0, lastSpace > 0 ? lastSpace : max).replace(/[\s,;:.—-]+$/, "")}…`;
+}
+
 export default function BlogDetail({ slug }: Props) {
   const post = blogPosts.find((p) => p.slug === slug);
+  const path = `/resources/blogs/${slug}`;
+
+  const description = post
+    ? trimDescription(post.excerpt)
+    : "The article you are looking for could not be found. Explore the NorthArc blog for insights on AI engineering, data science, and intelligent automation.";
+
+  useSEO({
+    title: post ? post.title : "Article Not Found",
+    description,
+    path,
+    type: "article",
+    noindex: !post,
+    jsonLd: post
+      ? [
+          {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            headline: post.title,
+            description,
+            datePublished: post.date,
+            author: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+            publisher: {
+              "@type": "Organization",
+              name: SITE_NAME,
+              url: SITE_URL,
+              logo: { "@type": "ImageObject", url: DEFAULT_OG_IMAGE },
+            },
+            image: DEFAULT_OG_IMAGE,
+            mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE_URL}${path}` },
+            articleSection: post.category,
+            keywords: post.tags.join(", "),
+          },
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Blog", path: "/resources/blogs" },
+            { name: post.title, path },
+          ]),
+        ]
+      : undefined,
+  });
 
   if (!post) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-bg text-text-primary">
         <div className="text-center space-y-4">
-          <p className="text-4xl font-light opacity-30">404</p>
+          <h1 className="text-4xl font-light opacity-30">404</h1>
           <p className="text-text-muted">Article not found.</p>
           <a href="/resources/blogs" className="inline-flex items-center gap-2 text-sm text-primary hover:underline mt-4">
             <ArrowLeft className="w-4 h-4" /> Back to Blog
@@ -57,21 +105,21 @@ export default function BlogDetail({ slug }: Props) {
       <section className="px-6 md:px-12 lg:px-24 pt-40 pb-10 relative z-10 max-w-5xl mx-auto">
         <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="space-y-6">
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-xs text-text-muted font-mono mb-8" variants={staggerItem}>
+          <motion.nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-text-muted font-mono mb-8" variants={staggerItem}>
             <a href="/resources/blogs" className="hover:text-primary transition-colors">Blog</a>
             <ChevronRight className="w-3 h-3" />
             <span className="text-text-secondary truncate max-w-[220px]">{post.category}</span>
-          </nav>
+          </motion.nav>
 
           {/* Back link */}
-          <a
+          <motion.a
             href="/resources/blogs"
             className="inline-flex items-center gap-2 text-xs font-semibold text-text-muted hover:text-primary transition-colors mb-8 group"
             variants={staggerItem}
           >
             <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
             All Articles
-          </a>
+          </motion.a>
 
           <motion.div
             variants={staggerContainer}
@@ -80,26 +128,26 @@ export default function BlogDetail({ slug }: Props) {
             className="space-y-6 text-left"
           >
             {/* Category badge */}
-            <span
+            <motion.span
               className="text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full border inline-block"
               style={{ color: post.accentColor, borderColor: `${post.accentColor}40`, background: `${post.accentColor}10` }}
               variants={staggerItem}
             >
               {post.category}
-            </span>
+            </motion.span>
 
             {/* Title */}
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-text-primary leading-[1.1]" variants={staggerItem}>
+            <motion.h1 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-text-primary leading-[1.1]" variants={staggerItem}>
               {post.title}
-            </h1>
+            </motion.h1>
 
             {/* Excerpt */}
-            <p className="text-base text-text-secondary leading-relaxed max-w-3xl" variants={staggerItem}>
+            <motion.p className="text-base text-text-secondary leading-relaxed max-w-3xl" variants={staggerItem}>
               {post.excerpt}
-            </p>
+            </motion.p>
 
             {/* Meta strip */}
-            <div className="flex flex-wrap items-center gap-6 text-xs text-text-muted pt-2 border-t border-border/30 py-4" variants={staggerItem}>
+            <motion.div className="flex flex-wrap items-center gap-6 text-xs text-text-muted pt-2 border-t border-border/30 py-4" variants={staggerItem}>
               <span className="flex items-center gap-1.5">
                 <User className="w-3.5 h-3.5" style={{ color: post.accentColor }} />
                 <span>{post.author}</span>
@@ -114,17 +162,17 @@ export default function BlogDetail({ slug }: Props) {
                 <Clock className="w-3.5 h-3.5" style={{ color: post.accentColor }} />
                 {post.readTime}
               </span>
-            </div>
+            </motion.div>
 
             {/* Tags */}
-            <div className="flex flex-wrap gap-2" variants={staggerItem}>
+            <motion.div className="flex flex-wrap gap-2" variants={staggerItem}>
               {post.tags.map((tag) => (
-                <span key={tag} className="inline-flex items-center gap-1 text-[10px] font-mono px-2.5 py-1 rounded-lg bg-surface-elevated border border-border text-text-muted" variants={staggerItem}>
+                <span key={tag} className="inline-flex items-center gap-1 text-[10px] font-mono px-2.5 py-1 rounded-lg bg-surface-elevated border border-border text-text-muted">
                   <Tag className="w-2.5 h-2.5" />
                   {tag}
                 </span>
               ))}
-            </div>
+            </motion.div>
           </motion.div>
         </motion.div>
       </section>

@@ -3,30 +3,77 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NorthArc | Enterprise AI, Data Science & Intelligent Systems</title>
-    
+    <title>NorthArc | AI Engineering, Data Science & Automation</title>
+
     <!-- Search Engine Optimization (SEO) Meta Tags -->
-    <meta name="description" content="NorthArc engineers production-grade AI solutions, advanced data science systems, generative language networks, and automated workflows to solve critical enterprise operational bottlenecks." />
-    <meta name="keywords" content="Enterprise AI, Data Science Consulting, Generative AI Agency, Machine Learning Engineers, Python AI, LLM Integration, LangChain, OpenAI, PyTorch, Custom AI Solutions" />
+    <meta name="description" content="NorthArc engineers enterprise AI, data science and intelligent automation that cut costs, speed decisions and turn your data into measurable impact." />
+    <meta name="keywords" content="AI Engineering, Enterprise AI Solutions, Data Science Consulting, Intelligent Automation, Machine Learning, Generative AI, AI Strategy, Custom AI Development, India" />
     <meta name="author" content="NorthArc" />
     <meta name="robots" content="index, follow" />
-    
+    <meta name="theme-color" content="#050816" />
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://northarc.ai/" />
-    <meta property="og:title" content="NorthArc | Enterprise AI, Data Science & Intelligent Systems" />
-    <meta property="og:description" content="We build robust, customized AI architectures and production-grade pipelines to drive measurable business impact." />
-    <meta property="og:image" content="https://northarc.ai/og-preview.png" />
+    <meta property="og:url" content="https://northarc.in/" />
+    <meta property="og:site_name" content="NorthArc" />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="og:title" content="NorthArc | AI Engineering, Data Science & Automation" />
+    <meta property="og:description" content="NorthArc engineers enterprise AI, data science and intelligent automation that cut costs, speed decisions and turn your data into measurable impact." />
+    <meta property="og:image" content="https://northarc.in/og-image.png" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://northarc.ai/" />
-    <meta name="twitter:title" content="NorthArc | Enterprise AI & Data Science" />
-    <meta name="twitter:description" content="We engineer production-grade AI integrations and multi-agent workflows from strategy to deployment." />
-    <meta name="twitter:image" content="https://northarc.ai/og-preview.png" />
-    
-    <!-- Favicon -->
-<link rel="icon" type="image/png" href="/src/narc.png" />  </head>
+    <meta name="twitter:url" content="https://northarc.in/" />
+    <meta name="twitter:title" content="NorthArc | AI Engineering, Data Science & Automation" />
+    <meta name="twitter:description" content="NorthArc engineers enterprise AI, data science and intelligent automation that cut costs, speed decisions and turn your data into measurable impact." />
+    <meta name="twitter:image" content="https://northarc.in/og-image.png" />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+
+    <!-- Structured Data: Organization + WebSite -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://northarc.in/#organization",
+          "name": "NorthArc",
+          "url": "https://northarc.in",
+          "logo": "https://northarc.in/favicon.png",
+          "email": "solutions@northarc.in",
+          "telephone": "+91-88499-69336",
+          "slogan": "Connecting Intelligence to Impact.",
+          "description": "NorthArc is an AI engineering, data science and intelligent automation company helping enterprises cut costs, speed decisions and turn data into measurable business impact.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Ahmedabad",
+            "addressRegion": "Gujarat",
+            "addressCountry": "IN"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://northarc.in/#website",
+          "name": "NorthArc",
+          "url": "https://northarc.in",
+          "publisher": { "@id": "https://northarc.in/#organization" }
+        }
+      ]
+    }
+    </script>
+
+    <!-- Theme bootstrap: apply saved light theme before first paint to avoid flash -->
+    <script>
+      try {
+        if (localStorage.getItem('northarc-theme') === 'light') {
+          document.documentElement.classList.add('light-mode');
+        }
+      } catch (e) {}
+    </script>
+  </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>

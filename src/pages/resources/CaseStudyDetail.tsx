@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "motion/react";
-import { staggerContainer, staggerItem, fadeUpVariant, viewportOnce } from "../../lib/animations";
+import { staggerContainer, staggerItem, fadeUpVariant } from "../../lib/animations";
+import { useSEO, breadcrumbJsonLd, SITE_URL, SITE_NAME } from "../../lib/seo";
 import {
   ArrowLeft,
   ArrowRight,
@@ -20,6 +21,46 @@ interface Props {
 
 export default function CaseStudyDetail({ slug }: Props) {
   const cs = caseStudies.find((c) => c.slug === slug);
+  const path = `/resources/case-studies/${slug}`;
+
+  // Meta description from the study summary, trimmed to ~155 chars on a word boundary.
+  const description = cs
+    ? cs.excerpt.length > 155
+      ? `${cs.excerpt.slice(0, 152).replace(/\s+\S*$/, "")}…`
+      : cs.excerpt
+    : "This case study could not be found. Browse all NorthArc AI, data science and analytics engineering case studies instead.";
+
+  useSEO(
+    cs
+      ? {
+          title: cs.title,
+          description,
+          path,
+          type: "article",
+          jsonLd: [
+            {
+              "@context": "https://schema.org",
+              "@type": "Article",
+              headline: cs.title,
+              description,
+              about: cs.category.join(", "),
+              author: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+              publisher: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+              mainEntityOfPage: `${SITE_URL}${path}`,
+            },
+            breadcrumbJsonLd([
+              { name: "Case Studies", path: "/resources/case-studies" },
+              { name: cs.title, path },
+            ]),
+          ],
+        }
+      : {
+          title: "Case Study Not Found",
+          description,
+          path,
+          noindex: true,
+        }
+  );
 
   if (!cs) {
     return (
@@ -52,21 +93,21 @@ export default function CaseStudyDetail({ slug }: Props) {
       <section className="px-6 md:px-12 lg:px-24 pt-40 pb-10 relative z-10 max-w-5xl mx-auto">
         <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="space-y-6">
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-xs text-text-muted font-mono mb-8" variants={staggerItem}>
+          <motion.nav className="flex items-center gap-2 text-xs text-text-muted font-mono mb-8" variants={staggerItem}>
             <a href="/resources/case-studies" className="hover:text-primary transition-colors">Case Studies</a>
             <ChevronRight className="w-3 h-3" />
             <span className="text-text-secondary truncate max-w-[200px]">{cs.client}</span>
-          </nav>
+          </motion.nav>
 
           {/* Back link */}
-          <a
+          <motion.a
             href="/resources/case-studies"
             className="inline-flex items-center gap-2 text-xs font-semibold text-text-muted hover:text-primary transition-colors mb-8 group"
             variants={staggerItem}
           >
             <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
             All Case Studies
-          </a>
+          </motion.a>
 
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -75,7 +116,7 @@ export default function CaseStudyDetail({ slug }: Props) {
             className="space-y-6"
           >
             {/* Meta row */}
-            <div className="flex flex-wrap items-center gap-3" variants={staggerItem}>
+            <div className="flex flex-wrap items-center gap-3">
               <div
                 className="w-11 h-11 rounded-2xl flex items-center justify-center"
                 style={{ background: `${cs.accentColor}18`, border: `1px solid ${cs.accentColor}30` }}

@@ -49,7 +49,7 @@ export const SERVICES: Service[] = [
   {
     id: 2,
     title: "Generative AI Applications",
-    description: "Custom LLM integrations, prompt engineering architectures, fine-tuned language models, and structured content generation systems for enterprise knowledge workflows.",
+    description: "Put your own knowledge to work so teams get instant, accurate answers — powered by custom LLM integrations, fine-tuned models, and secure enterprise knowledge workflows.",
     category: "core",
     categoryLabel: "Core AI"
   },
@@ -70,7 +70,7 @@ export const SERVICES: Service[] = [
   {
     id: 5,
     title: "Intelligent Automation",
-    description: "Replace repetitive manual operations with self-correcting automation pipelines — from invoice processing and data entry to customer routing and compliance checks.",
+    description: "Give hours back to your teams by replacing repetitive manual work with self-correcting automation — from invoice processing and data entry to customer routing and compliance checks.",
     category: "automation",
     categoryLabel: "Automation"
   },
@@ -105,7 +105,7 @@ export const SERVICES: Service[] = [
   {
     id: 10,
     title: "OCR & Document AI",
-    description: "Intelligent document parsing that extracts structured data from invoices, contracts, medical records, and handwritten forms with 95%+ field-level accuracy.",
+    description: "Eliminate manual document processing — intelligent parsing extracts clean, structured data from invoices, contracts, medical records, and handwritten forms.",
     category: "vision",
     categoryLabel: "Vision & Docs"
   },
@@ -130,49 +130,49 @@ export const INDUSTRIES: Industry[] = [
     emoji: "📣",
     name: "Marketing & AdTech",
     description: "Real-time audience segmentation, generative copy pipelines, multi-touch attribution, and algorithmic bidding optimizers.",
-    metric: "4.2x ROAS Improvement"
+    metric: "Higher return on ad spend"
   },
   {
     emoji: "🛍️",
     name: "Retail & E-Commerce",
     description: "Deep personalized recommendations, demand forecasting models, automated catalog tagging, and dynamic pricing layers.",
-    metric: "18% Stockout Reduction"
+    metric: "Fewer stockouts, more revenue"
   },
   {
     emoji: "📈",
     name: "Financial Services (FS)",
-    description: "HIPAA-grade predictive fraud detection, automated ledger anomaly audits, algorithmic risk mitigation, and compliance agents.",
-    metric: "92% Faster Audits"
+    description: "Predictive fraud detection, automated ledger anomaly audits, algorithmic risk mitigation, and compliance agents.",
+    metric: "Faster, cleaner audits"
   },
   {
     emoji: "🩺",
     name: "Healthcare & Biotech",
-    description: "Secure HIPAA-compliant EMR parsing, semantic research discovery engines, and automated patient intake systems.",
-    metric: "80% Processing Savings"
+    description: "Secure HIPAA-aligned EMR parsing, semantic research discovery engines, and automated patient intake systems.",
+    metric: "Less manual processing"
   },
   {
     emoji: "🎬",
     name: "Media & Entertainment",
     description: "Vector similarity video/audio tagging, conversational search graphs, and real-time customized user feed engines.",
-    metric: "2.5x Tagging Velocity"
+    metric: "Faster content tagging"
   },
   {
     emoji: "📚",
     name: "Publishing & NLP",
     description: "Context-aware automated citation crawlers, high-accuracy draft summary assist, and multi-language translation nets.",
-    metric: "65% Faster Edit Cycles"
+    metric: "Faster edit cycles"
   },
   {
     emoji: "💻",
     name: "AI/ML & Deep Learning",
     description: "Active model drift monitoring, custom embedding fine-tuning, autonomous agent networks, and cluster workload prediction.",
-    metric: "35% Latency Reduction"
+    metric: "Lower inference latency"
   },
   {
     emoji: "🏢",
     name: "Enterprise Operations",
     description: "Knowledge graph construction, cross-departmental secure automation, operational data warehouse sync, and visual KPI dashboards.",
-    metric: "Multi-Million Annual Savings"
+    metric: "Meaningful annual savings"
   }
 ];
 
@@ -271,45 +271,45 @@ export const SOLUTIONS: Solution[] = [
   {
     id: "workflows",
     title: "Intelligent Workflows",
-    description: "Streamline operational and back-office pipelines with self-correcting automation.",
+    description: "Take repetitive, error-prone operations off your team's plate with self-correcting automation that runs end to end.",
     bullets: [
-      "End-to-end API orchestration",
-      "Automated error recovery and visual logs",
+      "End-to-end API orchestration across your existing tools",
+      "Automated error recovery and human-readable logs",
       "Full system observability and audit trails"
     ],
-    metric: "45% operational speedup"
+    metric: "Fewer manual hours"
   },
   {
     id: "assistants",
     title: "AI Assistants",
-    description: "Empower teams with context-aware GenAI systems built on enterprise knowledge.",
+    description: "Give your teams instant, accurate answers from your own knowledge — grounded in your data, in your voice.",
     bullets: [
-      "High-fidelity RAG (Retrieval-Augmented Generation) pipelines",
+      "Answers grounded in your documents via RAG pipelines",
       "Custom brand guidelines and tone matching",
-      "Multi-source document synthesis & citation mapping"
+      "Multi-source synthesis with source citations"
     ],
-    metric: "90% faster document synthesis"
+    metric: "Faster answers"
   },
   {
     id: "predictive",
     title: "Predictive Forecasting",
-    description: "Anticipate market changes and equipment requirements with custom time-series models.",
+    description: "See demand, risk, and equipment failures before they happen with forecasting models tuned to your data.",
     bullets: [
-      "High-accuracy demand curve mapping",
+      "Demand curve and revenue forecasting",
       "Dynamic inventory level optimization",
       "Real-time sensor anomaly detection and alerting"
     ],
-    metric: "97.4% predictive accuracy"
+    metric: "Fewer surprises"
   },
   {
     id: "docs",
     title: "Document Automation",
-    description: "Unify structured and unstructured data formats into structured analytical tables.",
+    description: "Turn invoices, contracts, and forms into clean, structured data — no manual re-keying required.",
     bullets: [
-      "95%+ field-level extraction accuracy on handwriting",
+      "High-accuracy field extraction from typed and handwritten documents",
       "Automated contract metadata tagging and compliance checks",
-      "Multi-tenant HIPAA & GDPR aligned data handling"
+      "GDPR- and HIPAA-aligned data handling"
     ],
-    metric: "80% operational cost reduction"
+    metric: "Less manual data entry"
   }
 ];

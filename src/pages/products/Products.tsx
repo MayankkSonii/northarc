@@ -1,48 +1,68 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { staggerContainer, staggerItem, staggerDelay } from "../../lib/animations";
 import { AnimatedHeroVisual } from "../../components/AnimatedHeroVisual";
-import { useSEO } from "../../lib/seo";
+import { useSEO, breadcrumbJsonLd, SITE_URL } from "../../lib/seo";
 import {
   ArrowRight,
   ArrowDown,
-  TrendingUp,
-  Search,
   Filter,
+  Search,
+  Boxes,
+  Layers,
+  Sparkles,
   CheckCircle,
-  Building2,
 } from "lucide-react";
-import caseStudies from "../../data/caseStudiesData";
+import products from "../../data/productsData";
 
-// Derived from the AI/ML & data-science case-study data so the filter chips
-// always mirror the category tags present in caseStudiesData.ts.
-const allCategories = [
+// Ordered category list for filter pills — "All" first.
+const categories = [
   "All",
-  ...Array.from(new Set(caseStudies.flatMap((cs) => cs.category))),
+  ...Array.from(new Set(products.map((p) => p.category))),
 ];
 
-export default function CaseStudies() {
+export default function Products() {
   useSEO({
-    title: "AI & Machine Learning Case Studies",
+    title: "AI Products & Solutions Catalog",
     description:
-      "Real-world AI, machine learning and data science case studies from the NorthArc team — measurable outcomes across finance, retail, media, automotive and more.",
-    path: "/resources/case-studies",
+      "Explore NorthArc's catalog of production-ready AI products — voice agents, RAG assistants, predictive ML, document intelligence and agentic AI, all built for measurable business outcomes.",
+    path: "/products",
+    jsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: "NorthArc AI Products & Solutions",
+        description:
+          "Production-ready AI products spanning conversational AI, generative AI, predictive machine learning, document intelligence and agentic automation.",
+        numberOfItems: products.length,
+        itemListElement: products.map((p, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          name: p.name,
+          url: `${SITE_URL}/products/${p.slug}`,
+        })),
+      },
+      breadcrumbJsonLd([{ name: "Products", path: "/products" }]),
+    ],
   });
 
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [hoveredId, setHoveredId] = useState<number | null>(null);
 
-  const filtered = caseStudies.filter((cs) => {
-    const matchesCat = activeCategory === "All" || cs.category.includes(activeCategory);
+  const filtered = useMemo(() => {
     const q = searchQuery.toLowerCase();
-    const matchesSearch =
-      !q ||
-      cs.title.toLowerCase().includes(q) ||
-      cs.client.toLowerCase().includes(q) ||
-      cs.industry.toLowerCase().includes(q);
-    return matchesCat && matchesSearch;
-  });
+    return products.filter((p) => {
+      const matchesCat = activeCategory === "All" || p.category === activeCategory;
+      const matchesSearch =
+        !q ||
+        p.name.toLowerCase().includes(q) ||
+        p.tagline.toLowerCase().includes(q) ||
+        p.category.toLowerCase().includes(q) ||
+        p.summary.toLowerCase().includes(q);
+      return matchesCat && matchesSearch;
+    });
+  }, [activeCategory, searchQuery]);
 
   return (
     <div className="bg-bg min-h-screen text-text-primary relative overflow-hidden font-sans text-left">
@@ -54,43 +74,40 @@ export default function CaseStudies() {
       <section className="min-h-[60vh] flex flex-col justify-between px-6 md:px-12 lg:px-24 pt-40 pb-12 relative z-10 max-w-7xl mx-auto">
         <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="space-y-6 max-w-3xl">
           <motion.span className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary font-mono block" variants={staggerItem}>
-            Resources / Case Studies
+            Products
           </motion.span>
           <motion.h1 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-light tracking-tight text-text-primary leading-[1.1]" variants={staggerItem}>
-            Real problems,<br />
-            <span className="text-primary font-semibold">measurable results</span>
+            AI products,<br />
+            <span className="text-primary font-semibold">built for outcomes</span>
           </motion.h1>
           <motion.p className="text-sm sm:text-base text-text-secondary font-light max-w-2xl leading-relaxed" variants={staggerItem}>
-            Selected AI, machine learning and data science projects delivered by our team — helping
-            organisations across finance, retail, media, automotive and beyond turn data into
-            predictions and decisions they can act on.
-          </motion.p>
-          <motion.p className="text-[11px] text-text-muted font-mono leading-relaxed" variants={staggerItem}>
-            Engagements delivered by NorthArc&rsquo;s team across current and prior roles.
+            Production-ready AI you can deploy against a real business problem — from voice agents and
+            RAG assistants to predictive ML, document intelligence and agentic automation. Each one is
+            designed around the result it delivers, not the model behind it.
           </motion.p>
           <motion.div className="flex flex-wrap items-center gap-6 pt-1 text-xs text-text-muted font-mono" variants={staggerItem}>
             <span className="flex items-center gap-2">
-              <CheckCircle className="w-3.5 h-3.5 text-primary" />
-              {caseStudies.length} Case Studies
+              <Boxes className="w-3.5 h-3.5 text-primary" />
+              {products.length} Products
             </span>
             <span className="flex items-center gap-2">
-              <Building2 className="w-3.5 h-3.5 text-primary" />
-              8+ Industries
+              <Layers className="w-3.5 h-3.5 text-primary" />
+              {categories.length - 1} Categories
             </span>
             <span className="flex items-center gap-2">
-              <TrendingUp className="w-3.5 h-3.5 text-primary" />
-              Measurable ROI
+              <Sparkles className="w-3.5 h-3.5 text-primary" />
+              Outcome-led delivery
             </span>
           </motion.div>
         </motion.div>
         <div className="pointer-events-none absolute right-6 top-[calc(50%+40px)] hidden w-[38%] -translate-y-1/2 lg:block">
-          <AnimatedHeroVisual icon={TrendingUp} title="Delivered outcomes" eyebrow="Case evidence" scene="data" />
+          <AnimatedHeroVisual icon={Boxes} title="Deployable AI" eyebrow="Product catalog" scene="data" />
         </div>
         <div className="flex items-center gap-3 text-xs text-text-secondary font-mono opacity-60 pt-10 lg:pt-0">
           <div className="w-8 h-8 rounded-full border border-border/30 flex items-center justify-center animate-bounce">
             <ArrowDown className="w-3.5 h-3.5" />
           </div>
-          Scroll through case studies
+          Browse the catalog
         </div>
       </section>
 
@@ -102,7 +119,7 @@ export default function CaseStudies() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-text-muted" />
             <input
               type="text"
-              placeholder="Search case studies…"
+              placeholder="Search products…"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-9 pr-4 py-2 rounded-xl bg-surface border border-border text-xs text-text-primary placeholder-text-muted focus:outline-none focus:border-primary/40 transition-colors"
@@ -111,7 +128,7 @@ export default function CaseStudies() {
           {/* Category pills */}
           <div className="flex items-center gap-1.5 flex-wrap">
             <Filter className="w-3 h-3 text-text-muted flex-shrink-0" />
-            {allCategories.map((cat) => (
+            {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
@@ -131,42 +148,43 @@ export default function CaseStudies() {
       {/* ── GRID ── */}
       <section className="px-6 md:px-12 lg:px-24 py-14 relative z-10 max-w-7xl mx-auto">
         <p className="text-[11px] text-text-muted font-mono mb-8">
-          Showing <span className="text-primary font-semibold">{filtered.length}</span> of {caseStudies.length} case studies
+          Showing <span className="text-primary font-semibold">{filtered.length}</span> of {products.length} products
         </p>
 
         <AnimatePresence mode="popLayout">
           <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {filtered.map((cs, i) => {
-              const Icon = cs.icon;
-              const isHovered = hoveredId === cs.id;
+            {filtered.map((p, i) => {
+              const Icon = p.icon;
+              const isHovered = hoveredId === p.id;
+              const keyOutcome = p.outcomes[0];
               return (
                 <motion.a
-                  key={cs.id}
-                  href={`/resources/case-studies/${cs.slug}`}
+                  key={p.id}
+                  href={`/products/${p.slug}`}
                   layout
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.3, delay: i * staggerDelay }}
-                  onMouseEnter={() => setHoveredId(cs.id)}
+                  onMouseEnter={() => setHoveredId(p.id)}
                   onMouseLeave={() => setHoveredId(null)}
                   className="group relative flex flex-col rounded-2xl border bg-surface/50 backdrop-blur-sm overflow-hidden transition-all duration-300"
                   style={{
-                    borderColor: isHovered ? `${cs.accentColor}60` : "rgba(255,255,255,0.07)",
-                    boxShadow: isHovered ? `0 8px 32px ${cs.accentColor}18` : "none",
+                    borderColor: isHovered ? `${p.accentColor}60` : "rgba(255,255,255,0.07)",
+                    boxShadow: isHovered ? `0 8px 32px ${p.accentColor}18` : "none",
                   }}
                 >
                   {/* Top accent bar */}
                   <div
                     className="h-[3px] w-full transition-opacity duration-300"
-                    style={{ background: `linear-gradient(90deg, ${cs.accentColor}, ${cs.accentColor}40)`, opacity: isHovered ? 1 : 0.4 }}
+                    style={{ background: `linear-gradient(90deg, ${p.accentColor}, ${p.accentColor}40)`, opacity: isHovered ? 1 : 0.4 }}
                   />
 
                   {/* Hover radial glow */}
                   <div
                     className="absolute inset-0 pointer-events-none transition-opacity duration-500"
                     style={{
-                      background: `radial-gradient(ellipse at 50% 0%, ${cs.accentColor}10 0%, transparent 65%)`,
+                      background: `radial-gradient(ellipse at 50% 0%, ${p.accentColor}10 0%, transparent 65%)`,
                       opacity: isHovered ? 1 : 0,
                     }}
                   />
@@ -175,53 +193,41 @@ export default function CaseStudies() {
                     {/* Icon + category row */}
                     <div className="flex items-start justify-between gap-3">
                       <div
-                        className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-110"
-                        style={{ background: `${cs.accentColor}18`, border: `1px solid ${cs.accentColor}35` }}
+                        className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-110"
+                        style={{ background: `${p.accentColor}18`, border: `1px solid ${p.accentColor}35` }}
                       >
-                        <Icon className="w-4.5 h-4.5" style={{ color: cs.accentColor }} />
+                        <Icon className="w-5 h-5" style={{ color: p.accentColor }} />
                       </div>
-                      <div className="flex gap-1.5 flex-wrap justify-end">
-                        {cs.category.slice(0, 2).map((cat) => (
-                          <span
-                            key={cat}
-                            className="text-[9px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full border"
-                            style={{ color: cs.accentColor, borderColor: `${cs.accentColor}35`, background: `${cs.accentColor}10` }}
-                          >
-                            {cat}
-                          </span>
-                        ))}
-                      </div>
+                      <span
+                        className="text-[9px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full border"
+                        style={{ color: p.accentColor, borderColor: `${p.accentColor}35`, background: `${p.accentColor}10` }}
+                      >
+                        {p.category}
+                      </span>
                     </div>
 
-                    {/* Client + industry */}
-                    <div>
-                      <p className="text-xs font-bold text-text-primary">{cs.client}</p>
-                      <p className="text-[10px] font-mono text-text-muted uppercase tracking-wider mt-0.5">{cs.industry}</p>
-                    </div>
-
-                    {/* Title */}
-                    <h3 className="text-sm font-medium leading-snug text-text-secondary group-hover:text-text-primary transition-colors duration-300 flex-grow">
-                      {cs.title}
+                    {/* Name */}
+                    <h3 className="text-base font-semibold leading-snug text-text-primary">
+                      {p.name}
                     </h3>
 
-                    {/* Metrics */}
-                    <div className="grid grid-cols-3 gap-2 pt-3 border-t border-border/20">
-                      {cs.metrics.map((m) => (
-                        <div key={m.label} className="text-center">
-                          <p className="text-sm font-bold leading-tight" style={{ color: cs.accentColor }}>
-                            {m.value}
-                          </p>
-                          <p className="text-[9px] text-text-muted mt-0.5 leading-tight">{m.label}</p>
-                        </div>
-                      ))}
+                    {/* Tagline */}
+                    <p className="text-xs text-text-secondary leading-relaxed flex-grow">
+                      {p.tagline}
+                    </p>
+
+                    {/* Key outcome */}
+                    <div className="flex items-start gap-2 pt-3 border-t border-border/20">
+                      <CheckCircle className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" style={{ color: p.accentColor }} />
+                      <p className="text-[11px] text-text-muted leading-snug">{keyOutcome}</p>
                     </div>
 
                     {/* CTA */}
                     <div
                       className="flex items-center gap-1.5 text-[11px] font-semibold mt-1 transition-all duration-300 opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0"
-                      style={{ color: cs.accentColor }}
+                      style={{ color: p.accentColor }}
                     >
-                      Read case study
+                      Explore product
                       <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
@@ -234,7 +240,7 @@ export default function CaseStudies() {
         {filtered.length === 0 && (
           <div className="text-center py-28 text-text-muted">
             <Search className="w-10 h-10 mx-auto mb-4 opacity-20" />
-            <p className="text-sm">No case studies match your filters.</p>
+            <p className="text-sm">No products match your filters.</p>
           </div>
         )}
       </section>
@@ -246,20 +252,20 @@ export default function CaseStudies() {
             <div className="absolute inset-0 bg-gradient-to-br from-primary/6 via-transparent to-purple-500/6 pointer-events-none" />
             <div className="absolute -top-1/4 left-1/2 -translate-x-1/2 w-[40vw] h-[40vw] rounded-full bg-primary/8 blur-[100px] pointer-events-none" />
             <span className="text-[10px] font-mono uppercase tracking-widest text-primary font-bold block mb-4">
-              Start Your Journey
+              Let's Build
             </span>
             <h2 className="text-3xl sm:text-4xl font-light tracking-tight text-text-primary mb-4">
-              Ready to put this expertise{" "}
-              <span className="text-primary font-semibold">to work for you?</span>
+              Not sure which product{" "}
+              <span className="text-primary font-semibold">fits your problem?</span>
             </h2>
             <p className="text-sm text-text-secondary max-w-xl mx-auto mb-8">
-              Tell us about your data and AI challenges. We'll design a strategy that delivers results you can actually act on.
+              Tell us the outcome you're after. We'll map the right AI product — or tailor one — to your data, systems and goals.
             </p>
             <a
               href="/contact"
               className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-primary hover:bg-primary/90 text-white font-bold text-sm shadow-lg shadow-primary/20 transition-all duration-300 hover:-translate-y-0.5"
             >
-              Book a free consultation
+              Talk to our team
               <ArrowRight className="w-4 h-4" />
             </a>
           </div>

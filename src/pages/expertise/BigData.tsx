@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "motion/react";
 import { staggerContainer, staggerItem, fadeUpVariant, viewportOnce } from "../../lib/animations";
 import { AnimatedHeroVisual } from "../../components/AnimatedHeroVisual";
+import { useSEO, breadcrumbJsonLd, SITE_URL, SITE_NAME } from "../../lib/seo";
 import {
   Check,
   ArrowRight,
@@ -13,6 +14,30 @@ import {
 } from "lucide-react";
 
 export default function BigData() {
+  useSEO({
+    title: "Big Data & Data Science Engineering",
+    description:
+      "NorthArc engineers petabyte-scale data lakes, real-time pipelines, and analytics that turn raw data into business intelligence and faster, smarter decisions.",
+    path: "/expertise/big-data",
+    jsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        serviceType: "Big Data & Data Science Engineering",
+        name: "Big Data & Data Science Engineering",
+        description:
+          "Data lake engineering, real-time stream processing, data science analytics, and ML feature stores that turn enterprise data into measurable business intelligence.",
+        provider: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+        areaServed: "Worldwide",
+        url: `${SITE_URL}/expertise/big-data`,
+      },
+      breadcrumbJsonLd([
+        { name: "Home", path: "/" },
+        { name: "Big Data & Data Science", path: "/expertise/big-data" },
+      ]),
+    ],
+  });
+
   const capabilities = [
     { icon: Database, title: "Data Lake Engineering", desc: "Build petabyte-scale data lakes, warehouse schemas, and parquet storage configurations." },
     { icon: LineChart, title: "Data Science Analytics", desc: "Develop regression arrays, feature correlation matrices, and customized statistical profiles." },
@@ -50,7 +75,7 @@ export default function BigData() {
             Big Data & Data Science
           </h1>
           <p className="text-sm sm:text-base text-text-secondary font-light max-w-xl leading-relaxed" variants={staggerItem}>
-            We engineer petabyte-scale data lakes, compile data science pipelines, and deploy real-time analytics dashboards to extract business intelligence.
+            We engineer petabyte-scale data lakes, real-time pipelines, and analytics dashboards that turn scattered raw data into trusted business intelligence your teams can act on in seconds.
           </p>
           <div className="pt-4" variants={staggerItem}>
             <a
