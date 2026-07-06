@@ -49,28 +49,28 @@ export const SERVICES: Service[] = [
   {
     id: 2,
     title: "Generative AI Applications",
-    description: "Put your own knowledge to work so teams get instant, accurate answers — powered by custom LLM integrations, fine-tuned models, and secure enterprise knowledge workflows.",
+    description: "Empower your teams with instant, accurate answers drawn from your own data, using custom language models and secure workflows.",
     category: "core",
     categoryLabel: "Core AI"
   },
   {
     id: 3,
     title: "AI Agents & Agentic Systems",
-    description: "Autonomous multi-step software agents that browse, query, reason, and execute across APIs, databases, and external tools — with full observability and recovery logic.",
+    description: "Deploy autonomous software agents that can browse, query, and act across your existing tools and databases. They handle complex workflows reliably from start to finish.",
     category: "automation",
     categoryLabel: "Automation"
   },
   {
     id: 4,
     title: "Custom AI Development",
-    description: "Proprietary neural network architectures trained on your domain data — from custom NLP models and computer vision classifiers to specialized recommendation engines.",
+    description: "Proprietary neural network architectures trained on your specific data, ranging from custom NLP models and computer vision classifiers to targeted recommendation engines.",
     category: "core",
     categoryLabel: "Core AI"
   },
   {
     id: 5,
     title: "Intelligent Automation",
-    description: "Give hours back to your teams by replacing repetitive manual work with self-correcting automation — from invoice processing and data entry to customer routing and compliance checks.",
+    description: "Free up your team's time by replacing repetitive tasks with reliable automation, such as invoice processing, data entry, and customer routing.",
     category: "automation",
     categoryLabel: "Automation"
   },
@@ -105,7 +105,7 @@ export const SERVICES: Service[] = [
   {
     id: 10,
     title: "OCR & Document AI",
-    description: "Eliminate manual document processing — intelligent parsing extracts clean, structured data from invoices, contracts, medical records, and handwritten forms.",
+    description: "Stop manually processing documents. Our intelligent parsing extracts clean, structured data directly from invoices, contracts, medical records, and handwritten forms.",
     category: "vision",
     categoryLabel: "Vision & Docs"
   },
@@ -119,7 +119,7 @@ export const SERVICES: Service[] = [
   {
     id: 12,
     title: "Cloud AI Solutions",
-    description: "Architecting scalable, secure cloud deployments on AWS and GCP — from serverless inference APIs and GPU training clusters to managed vector databases and CI/CD pipelines.",
+    description: "We build scalable and secure cloud infrastructure on AWS and GCP, including serverless APIs, GPU clusters, and vector databases.",
     category: "cloud",
     categoryLabel: "Cloud & Infra"
   }
@@ -282,7 +282,7 @@ export const SOLUTIONS: Solution[] = [
   {
     id: "assistants",
     title: "AI Assistants",
-    description: "Give your teams instant, accurate answers from your own knowledge — grounded in your data, in your voice.",
+    description: "Give your teams instant, accurate answers from your own knowledge, grounded in your data, in your voice.",
     bullets: [
       "Answers grounded in your documents via RAG pipelines",
       "Custom brand guidelines and tone matching",
@@ -304,7 +304,7 @@ export const SOLUTIONS: Solution[] = [
   {
     id: "docs",
     title: "Document Automation",
-    description: "Turn invoices, contracts, and forms into clean, structured data — no manual re-keying required.",
+    description: "Turn invoices, contracts, and forms into clean, structured data, no manual re-keying required.",
     bullets: [
       "High-accuracy field extraction from typed and handwritten documents",
       "Automated contract metadata tagging and compliance checks",

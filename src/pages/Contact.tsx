@@ -14,7 +14,7 @@ import { useSEO, SITE_URL, SITE_NAME } from "../lib/seo";
 
 export default function Contact() {
   useSEO({
-    title: "Contact Us — Book an AI Consultation",
+    title: "Contact Us - Book an AI Consultation",
     description:
       "Book an AI consulting and automation consultation with NorthArc in Ahmedabad. Our solutions desk responds within 24 business hours to map your roadmap.",
     path: "/contact",
@@ -50,7 +50,7 @@ export default function Contact() {
     phoneNumber: "",
     serviceInterest: "",
     projectRequirements: "",
-    website: "" // honeypot — real users never fill this; server rejects non-empty
+    website: "" // honeypot, real users never fill this; server rejects non-empty
   });
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const [formSubmitted, setFormSubmitted] = useState(false);

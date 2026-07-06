@@ -70,7 +70,7 @@ export default function Solutions() {
   useSEO({
     title: "AI Solutions by Industry & Business Function",
     description:
-      "NorthArc AI solutions mapped to your industry and business function — healthcare, finance, retail, sales, support, operations and more, each built for measurable outcomes.",
+      "NorthArc AI solutions mapped to your industry and business function, healthcare, finance, retail, sales, support, operations and more, each built for measurable outcomes.",
     path: "/solutions",
     jsonLd: [
       {
@@ -108,7 +108,7 @@ export default function Solutions() {
             <span className="text-primary font-semibold">your industry and your team</span>
           </motion.h1>
           <motion.p className="text-sm sm:text-base text-text-secondary font-light max-w-2xl leading-relaxed" variants={staggerItem}>
-            We map production-ready AI to the problems you actually face — whether that's a whole industry's
+            We map production-ready AI to the problems you actually face, whether that's a whole industry's
             workflows or a single business function. Every solution is designed around the outcome it delivers,
             not the model behind it.
           </motion.p>
@@ -149,7 +149,7 @@ export default function Solutions() {
           Built for how your <span className="text-primary font-semibold">industry works</span>
         </h2>
         <p className="text-sm text-text-secondary font-light max-w-2xl mb-10 leading-relaxed">
-          AI tuned to the data, workflows, and compliance realities of your sector — from patient risk in
+          AI tuned to the data, workflows, and compliance realities of your sector, from patient risk in
           healthcare to demand planning in manufacturing.
         </p>
         <motion.div
@@ -174,7 +174,7 @@ export default function Solutions() {
           Built for what your <span className="text-primary font-semibold">team does</span>
         </h2>
         <p className="text-sm text-text-secondary font-light max-w-2xl mb-10 leading-relaxed">
-          AI mapped to the functions that run your business — so sales, support, operations, finance, and HR
+          AI mapped to the functions that run your business, so sales, support, operations, finance, and HR
           each get the leverage that matters most to them.
         </p>
         <motion.div
@@ -202,7 +202,7 @@ export default function Solutions() {
               <span className="text-primary font-semibold">use case?</span>
             </h2>
             <p className="text-sm text-text-secondary max-w-xl mx-auto mb-8">
-              Tell us the outcome you're after. We'll map the right AI solution — or tailor one — to your
+              Tell us the outcome you're after. We'll map the right AI solution, or tailor one, to your
               industry, data, systems and goals.
             </p>
             <a

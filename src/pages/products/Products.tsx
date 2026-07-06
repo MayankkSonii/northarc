@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import products from "../../data/productsData";
 
-// Ordered category list for filter pills — "All" first.
+// Ordered category list for filter pills, "All" first.
 const categories = [
   "All",
   ...Array.from(new Set(products.map((p) => p.category))),
@@ -25,7 +25,7 @@ export default function Products() {
   useSEO({
     title: "AI Products & Solutions Catalog",
     description:
-      "Explore NorthArc's catalog of production-ready AI products — voice agents, RAG assistants, predictive ML, document intelligence and agentic AI, all built for measurable business outcomes.",
+      "Explore NorthArc's catalog of production-ready AI products, voice agents, RAG assistants, predictive ML, document intelligence and agentic AI, all built for measurable business outcomes.",
     path: "/products",
     jsonLd: [
       {
@@ -81,7 +81,7 @@ export default function Products() {
             <span className="text-primary font-semibold">built for outcomes</span>
           </motion.h1>
           <motion.p className="text-sm sm:text-base text-text-secondary font-light max-w-2xl leading-relaxed" variants={staggerItem}>
-            Production-ready AI you can deploy against a real business problem — from voice agents and
+            Production-ready AI you can deploy against a real business problem, from voice agents and
             RAG assistants to predictive ML, document intelligence and agentic automation. Each one is
             designed around the result it delivers, not the model behind it.
           </motion.p>
@@ -259,7 +259,7 @@ export default function Products() {
               <span className="text-primary font-semibold">fits your problem?</span>
             </h2>
             <p className="text-sm text-text-secondary max-w-xl mx-auto mb-8">
-              Tell us the outcome you're after. We'll map the right AI product — or tailor one — to your data, systems and goals.
+              Tell us the outcome you're after. We'll map the right AI product, or tailor one, to your data, systems and goals.
             </p>
             <a
               href="/contact"

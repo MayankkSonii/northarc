@@ -41,7 +41,7 @@ export const caseStudies: CaseStudy[] = [
     category: ["Predictive ML", "Lead Scoring"],
     title: "Predictive Lead Scoring Drives +22% Incremental Sales for a Life Insurer",
     excerpt:
-      "A large life insurer was spending equally on every lead regardless of intent. Our team built a multi-algorithm propensity model on GA4, BigQuery and CRM data that ranks every prospect in real time — lifting incremental sales by 22%.",
+      "A large life insurer was spending equally on every lead regardless of intent. Our team built a multi-algorithm propensity model on GA4, BigQuery and CRM data that ranks every prospect in real time, lifting incremental sales by 22%.",
     metrics: [
       { label: "Incremental Sales", value: "+22%" },
       { label: "Models Evaluated", value: "10-12" },
@@ -51,7 +51,7 @@ export const caseStudies: CaseStudy[] = [
     accentColor: "#1D75FF",
     featured: true,
     challenge:
-      "One of India's largest life insurers was generating a high volume of digital leads but had no way to tell a serious buyer from a casual browser at the moment of contact. Every lead was routed to the tele-sales floor with equal priority, so agents spent the same effort on prospects who would never convert as on those ready to buy. Marketing had rich behavioural data in GA4, transactional history in the CRM, and event-level data in BigQuery — but none of it was being used to predict who would actually purchase a policy.",
+      "One of India's largest life insurers was generating a high volume of digital leads but had no way to tell a serious buyer from a casual browser at the moment of contact. Every lead was routed to the tele-sales floor with equal priority, so agents spent the same effort on prospects who would never convert as on those ready to buy. Marketing had rich behavioural data in GA4, transactional history in the CRM, and event-level data in BigQuery, but none of it was being used to predict who would actually purchase a policy.",
     solution:
       "Our team built a predictive lead-scoring system that assigns every prospect a real-time propensity-to-buy score, combining GA4 behavioural signals, CRM history and BigQuery event data. Rather than a single model, we trained and ensembled 10-12 candidate algorithms and maintained separate web and app models to reflect the very different journeys on each surface.",
     sections: [
@@ -62,7 +62,7 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "p",
         content:
-          "In high-consideration financial products, intent is everything. Two prospects can fill the same form on the same day and have completely different probabilities of buying — one has compared three plans and read the claims-ratio page twice, the other bounced in from a discount ad. The insurer's tele-sales team had no signal to distinguish them, so limited agent capacity was spread evenly across leads of wildly different quality.",
+          "In high-consideration financial products, intent is everything. Two prospects can fill the same form on the same day and have completely different probabilities of buying, one has compared three plans and read the claims-ratio page twice, the other bounced in from a discount ad. The insurer's tele-sales team had no signal to distinguish them, so limited agent capacity was spread evenly across leads of wildly different quality.",
       },
       {
         type: "ul",
@@ -80,7 +80,7 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "p",
         content:
-          "We framed the task as a supervised classification problem — will this lead convert within the policy-buying window — and invested heavily in feature engineering across first-party data. Expert-derived features consistently outperformed the generic conversion probabilities available out of the box in GA4.",
+          "We framed the task as a supervised classification problem, will this lead convert within the policy-buying window, and invested heavily in feature engineering across first-party data. Expert-derived features consistently outperformed the generic conversion probabilities available out of the box in GA4.",
       },
       {
         type: "ul",
@@ -103,7 +103,7 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "quote",
         content:
-          "\"For the first time our agents open a lead already knowing how likely it is to close. High-propensity leads get called in minutes now, not hours. That single change is what moved the sales number.\" — Head of Digital Sales",
+          "\"For the first time our agents open a lead already knowing how likely it is to close. High-propensity leads get called in minutes now, not hours. That single change is what moved the sales number.\" - Head of Digital Sales",
       },
       {
         type: "h2",
@@ -123,7 +123,7 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "callout",
         content:
-          "Key Insight: The lift did not come from a fancier model — it came from putting a trustworthy propensity score in front of the sales team at the moment of contact, so finite agent capacity is spent on the leads most likely to buy.",
+          "Key Insight: The lift did not come from a fancier model, it came from putting a trustworthy propensity score in front of the sales team at the moment of contact, so finite agent capacity is spent on the leads most likely to buy.",
       },
     ],
     technologies: ["BigQuery ML", "Python (scikit-learn / XGBoost)", "GA4 BigQuery Export", "CRM Integration", "Vertex AI", "Cloud Functions"],
@@ -138,7 +138,7 @@ export const caseStudies: CaseStudy[] = [
     category: ["Predictive ML", "Lead Scoring"],
     title: "ML-Scored Audiences Lift Conversion Rate by 30% for a Home-Services Brand",
     excerpt:
-      "A national home-services brand was targeting broad audiences with generic bids. Our team scored users by purchase propensity and exported ML-ranked GA audiences straight into the ad platforms — raising conversion rate by 30%.",
+      "A national home-services brand was targeting broad audiences with generic bids. Our team scored users by purchase propensity and exported ML-ranked GA audiences straight into the ad platforms, raising conversion rate by 30%.",
     metrics: [
       { label: "Conversion Rate", value: "+30%" },
       { label: "Audiences Activated", value: "ML-scored" },
@@ -150,7 +150,7 @@ export const caseStudies: CaseStudy[] = [
     challenge:
       "A well-known home-services brand (water purifiers, appliances, service plans) was acquiring leads through paid media but treating its audience as one undifferentiated pool. Bids and creative were the same for a first-time visitor and a returning high-intent user. The brand had strong first-party data in GA4 and its CRM, but that data was not being turned into a signal the ad platforms could act on.",
     solution:
-      "Our team built a propensity model that scores each user's likelihood to convert, then operationalised those scores as ML-ranked audience segments exported directly into Google and Meta ad platforms — so budget concentrates on the users most likely to buy.",
+      "Our team built a propensity model that scores each user's likelihood to convert, then operationalised those scores as ML-ranked audience segments exported directly into Google and Meta ad platforms, so budget concentrates on the users most likely to buy.",
     sections: [
       {
         type: "h2",
@@ -159,7 +159,7 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "p",
         content:
-          "Paid media rewards precision. When every impression is priced the same regardless of who sees it, spend leaks toward users who will never convert. The opportunity was to let a model decide who is worth bidding up on — and to make that decision continuously as behaviour changes.",
+          "Paid media rewards precision. When every impression is priced the same regardless of who sees it, spend leaks toward users who will never convert. The opportunity was to let a model decide who is worth bidding up on, and to make that decision continuously as behaviour changes.",
       },
       {
         type: "ul",
@@ -177,12 +177,12 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "p",
         content:
-          "The value is in activation, not just prediction. We built a pipeline that refreshes audience membership on a schedule, so a user who suddenly shows high intent is promoted into the high-propensity audience automatically and the ad platform bids accordingly — no manual list-pulling.",
+          "The value is in activation, not just prediction. We built a pipeline that refreshes audience membership on a schedule, so a user who suddenly shows high intent is promoted into the high-propensity audience automatically and the ad platform bids accordingly, no manual list-pulling.",
       },
       {
         type: "quote",
         content:
-          "\"We stopped paying premium prices to reach people who were never going to buy. The model tells the ad platforms who to chase, and our conversion rate followed.\" — Head of Performance Marketing",
+          "\"We stopped paying premium prices to reach people who were never going to buy. The model tells the ad platforms who to chase, and our conversion rate followed.\" - Head of Performance Marketing",
       },
       {
         type: "metrics-grid",
@@ -212,7 +212,7 @@ export const caseStudies: CaseStudy[] = [
     category: ["Predictive ML", "Attribution ML"],
     title: "Cost per Lead Cut by 26% for a Two-Wheeler Manufacturer with ML-Driven Spend",
     excerpt:
-      "A premium two-wheeler manufacturer was over-paying for leads across a crowded channel mix. Our team combined propensity scoring with ML-based attribution to reallocate spend toward what actually drives qualified leads — cutting cost per lead by 26%.",
+      "A premium two-wheeler manufacturer was over-paying for leads across a crowded channel mix. Our team combined propensity scoring with ML-based attribution to reallocate spend toward what actually drives qualified leads, cutting cost per lead by 26%.",
     metrics: [
       { label: "Cost per Lead", value: "−26%" },
       { label: "Lead Quality", value: "Higher" },
@@ -224,7 +224,7 @@ export const caseStudies: CaseStudy[] = [
     challenge:
       "A premium two-wheeler manufacturer was running lead-generation campaigns across search, social, display and video, but was optimising each channel to last-click cost per lead. That metric rewarded cheap, low-quality leads and punished channels that built genuine intent. Cost per lead was rising and the sales funnel was clogged with prospects who never showed up for a test ride.",
     solution:
-      "Our team paired a lead-quality propensity model with a data-driven attribution model, so spend decisions optimise for the cost of an actual qualified lead — not the cost of any form-fill. Budget was systematically shifted toward the channels and audiences the models identified as genuinely productive.",
+      "Our team paired a lead-quality propensity model with a data-driven attribution model, so spend decisions optimise for the cost of an actual qualified lead, not the cost of any form-fill. Budget was systematically shifted toward the channels and audiences the models identified as genuinely productive.",
     sections: [
       {
         type: "h2",
@@ -265,7 +265,7 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "quote",
         content:
-          "\"Once we stopped optimising to the cheapest form-fill and started optimising to the cheapest good lead, our cost per lead dropped and our showroom footfall went up at the same time.\" — Digital Marketing Head",
+          "\"Once we stopped optimising to the cheapest form-fill and started optimising to the cheapest good lead, our cost per lead dropped and our showroom footfall went up at the same time.\" - Digital Marketing Head",
       },
       {
         type: "metrics-grid",
@@ -280,7 +280,7 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "callout",
         content:
-          "Key Insight: Cost per lead is only meaningful when the leads are comparable. Scoring lead quality and attributing credit correctly turned a rising-CPL problem into a 26% reduction — with better leads, not just cheaper ones.",
+          "Key Insight: Cost per lead is only meaningful when the leads are comparable. Scoring lead quality and attributing credit correctly turned a rising-CPL problem into a 26% reduction, with better leads, not just cheaper ones.",
       },
     ],
     technologies: ["Python (scikit-learn / XGBoost)", "BigQuery", "Data-Driven Attribution", "GA4 BigQuery Export", "Google Ads API", "Looker Studio"],
@@ -295,7 +295,7 @@ export const caseStudies: CaseStudy[] = [
     category: ["Predictive ML", "Churn"],
     title: "Churn Prediction Model Flags At-Risk Users Before They Leave",
     excerpt:
-      "A consumer app was losing users with no early warning. Our team built a churn-prediction model on behavioural event data that identifies users at risk within a defined window — powering targeted retention campaigns that reach users while they can still be saved.",
+      "A consumer app was losing users with no early warning. Our team built a churn-prediction model on behavioural event data that identifies users at risk within a defined window, powering targeted retention campaigns that reach users while they can still be saved.",
     metrics: [
       { label: "Early Warning", value: "In-window" },
       { label: "Model", value: "Interpretable" },
@@ -304,7 +304,7 @@ export const caseStudies: CaseStudy[] = [
     icon: LineChart,
     accentColor: "#4DA6FF",
     challenge:
-      "A consumer mobile app with a large active base was seeing steady attrition but had no way to predict it. Retention efforts were reactive — win-back messages went out only after a user had already gone dark, by which point re-engagement rates were dismal. The team needed to know who was about to churn while there was still time to act.",
+      "A consumer mobile app with a large active base was seeing steady attrition but had no way to predict it. Retention efforts were reactive, win-back messages went out only after a user had already gone dark, by which point re-engagement rates were dismal. The team needed to know who was about to churn while there was still time to act.",
     solution:
       "Our team built a churn-prediction model trained on behavioural event data that estimates each user's probability of churning within a defined window, so retention campaigns can target at-risk users proactively rather than chasing users who have already left.",
     sections: [
@@ -315,7 +315,7 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "p",
         content:
-          "The economics of retention flip entirely depending on timing. Reaching a user who is drifting — declining sessions, lengthening gaps between opens, dropping feature usage — is far cheaper and more effective than trying to resurrect someone who churned weeks ago. The whole value of a churn model is buying that lead time.",
+          "The economics of retention flip entirely depending on timing. Reaching a user who is drifting, declining sessions, lengthening gaps between opens, dropping feature usage, is far cheaper and more effective than trying to resurrect someone who churned weeks ago. The whole value of a churn model is buying that lead time.",
       },
       {
         type: "ul",
@@ -333,12 +333,12 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "p",
         content:
-          "A churn score is only useful if it triggers the right intervention. We connected the model output to the retention stack so that users crossing a risk threshold flow into targeted campaigns — with the churn reason informing which message and incentive they receive.",
+          "A churn score is only useful if it triggers the right intervention. We connected the model output to the retention stack so that users crossing a risk threshold flow into targeted campaigns, with the churn reason informing which message and incentive they receive.",
       },
       {
         type: "quote",
         content:
-          "\"We used to fire win-back emails at people who were already gone. Now we reach them while they're wavering — and the model tells us what's pulling them away.\" — Head of Growth",
+          "\"We used to fire win-back emails at people who were already gone. Now we reach them while they're wavering, and the model tells us what's pulling them away.\" - Head of Growth",
       },
       {
         type: "metrics-grid",
@@ -353,12 +353,12 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "callout",
         content:
-          "Key Insight: The point of a churn model is not to explain attrition after the fact — it is to buy enough lead time to change the outcome. Predicting churn inside an actionable window is what makes retention spend pay off.",
+          "Key Insight: The point of a churn model is not to explain attrition after the fact, it is to buy enough lead time to change the outcome. Predicting churn inside an actionable window is what makes retention spend pay off.",
       },
     ],
     technologies: ["Python (scikit-learn / XGBoost)", "BigQuery ML", "GA4 / Firebase Events", "Cloud Functions", "CRM / Marketing Automation"],
     outcome:
-      "The app now identifies at-risk users before they lapse, routing them into targeted retention journeys informed by the predicted churn driver — shifting retention from reactive win-back to proactive save.",
+      "The app now identifies at-risk users before they lapse, routing them into targeted retention journeys informed by the predicted churn driver, shifting retention from reactive win-back to proactive save.",
   },
   {
     id: 5,
@@ -368,7 +368,7 @@ export const caseStudies: CaseStudy[] = [
     category: ["Recommenders", "Predictive ML"],
     title: "Content Recommendation Engine Lifts Engagement and Conversion by 30%",
     excerpt:
-      "A digital publisher's readers consumed one article and left. Our team built a content recommendation engine that surfaces the next best read for each user — increasing engagement and conversion by 30%.",
+      "A digital publisher's readers consumed one article and left. Our team built a content recommendation engine that surfaces the next best read for each user, increasing engagement and conversion by 30%.",
     metrics: [
       { label: "Engagement / Conversion", value: "+30%" },
       { label: "Personalisation", value: "Per-user" },
@@ -377,9 +377,9 @@ export const caseStudies: CaseStudy[] = [
     icon: LineChart,
     accentColor: "#1D75FF",
     challenge:
-      "A digital content publisher was winning traffic but failing to keep it. Readers arrived on a single article from search or social and left immediately — the site had no intelligent way to surface what each reader should read next. Generic 'most popular' modules ignored individual interest and left a large recirculation opportunity untapped.",
+      "A digital content publisher was winning traffic but failing to keep it. Readers arrived on a single article from search or social and left immediately, the site had no intelligent way to surface what each reader should read next. Generic 'most popular' modules ignored individual interest and left a large recirculation opportunity untapped.",
     solution:
-      "Our team built a content recommendation engine that models each user's content affinity from their reading behaviour and serves personalised next-article recommendations — turning single-article visits into multi-article sessions.",
+      "Our team built a content recommendation engine that models each user's content affinity from their reading behaviour and serves personalised next-article recommendations, turning single-article visits into multi-article sessions.",
     sections: [
       {
         type: "h2",
@@ -388,7 +388,7 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "p",
         content:
-          "For an ad- and subscription-supported publisher, the second article a reader consumes is disproportionately valuable — it deepens engagement, raises subscription intent, and multiplies ad inventory. A static 'trending now' block treats a sports reader and a business reader identically and leaves that value on the table.",
+          "For an ad- and subscription-supported publisher, the second article a reader consumes is disproportionately valuable, it deepens engagement, raises subscription intent, and multiplies ad inventory. A static 'trending now' block treats a sports reader and a business reader identically and leaves that value on the table.",
       },
       {
         type: "ul",
@@ -396,7 +396,7 @@ export const caseStudies: CaseStudy[] = [
           "Built content affinity profiles from per-user reading history and on-page behaviour",
           "Combined collaborative signals (what similar readers read next) with content-based similarity",
           "Ranked candidate articles by predicted likelihood of engagement for each individual reader",
-          "Served recommendations at the point of highest intent — the end of an actively-read article",
+          "Served recommendations at the point of highest intent, the end of an actively-read article",
         ],
       },
       {
@@ -406,12 +406,12 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "p",
         content:
-          "Because the engine learns from each interaction, recommendations sharpen as a reader's history grows. The more a user reads, the better the next suggestion — which is precisely the flywheel a content business wants.",
+          "Because the engine learns from each interaction, recommendations sharpen as a reader's history grows. The more a user reads, the better the next suggestion, which is precisely the flywheel a content business wants.",
       },
       {
         type: "quote",
         content:
-          "\"Recirculation used to be an afterthought. Now the recommendation engine is one of our highest-performing surfaces — it's the difference between a bounce and a session.\" — Head of Product",
+          "\"Recirculation used to be an afterthought. Now the recommendation engine is one of our highest-performing surfaces, it's the difference between a bounce and a session.\" - Head of Product",
       },
       {
         type: "metrics-grid",
@@ -441,7 +441,7 @@ export const caseStudies: CaseStudy[] = [
     category: ["Recommenders", "Predictive ML"],
     title: "Cross-Category Product Recommendations Increase CTR by 30%",
     excerpt:
-      "A multi-category retailer's recommendations were stuck within a single category. Our team built a cross-category recommender that connects behaviour across the catalogue — lifting recommendation click-through rate by 30%.",
+      "A multi-category retailer's recommendations were stuck within a single category. Our team built a cross-category recommender that connects behaviour across the catalogue, lifting recommendation click-through rate by 30%.",
     metrics: [
       { label: "Recommendation CTR", value: "+30%" },
       { label: "Scope", value: "Cross-Category" },
@@ -450,7 +450,7 @@ export const caseStudies: CaseStudy[] = [
     icon: BarChart3,
     accentColor: "#4DA6FF",
     challenge:
-      "A large multi-category online retailer had recommendations that only worked within a category — a shopper browsing electronics never saw the relevant home or lifestyle products that similar shoppers frequently bought alongside. This siloed logic missed the retailer's biggest advantage: the breadth of its catalogue and the cross-category patterns hidden in its purchase data.",
+      "A large multi-category online retailer had recommendations that only worked within a category, a shopper browsing electronics never saw the relevant home or lifestyle products that similar shoppers frequently bought alongside. This siloed logic missed the retailer's biggest advantage: the breadth of its catalogue and the cross-category patterns hidden in its purchase data.",
     solution:
       "Our team built a cross-category recommendation model that learns affinities across the entire catalogue, surfacing complementary products from other categories and broadening baskets rather than merely deepening a single one.",
     sections: [
@@ -484,7 +484,7 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "quote",
         content:
-          "\"Our recommendations finally reflect how people actually shop with us — across categories. The lift in click-through was immediate and it broadened baskets, not just deepened them.\" — VP E-commerce",
+          "\"Our recommendations finally reflect how people actually shop with us, across categories. The lift in click-through was immediate and it broadened baskets, not just deepened them.\". VP E-commerce",
       },
       {
         type: "metrics-grid",
@@ -504,7 +504,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     technologies: ["Python (implicit / ALS)", "BigQuery", "GA4 BigQuery Export", "Vertex AI Matching Engine", "Recommendation API", "Cloud Run"],
     outcome:
-      "The retailer's recommendations now span its full catalogue, surfacing complementary cross-category products that shoppers respond to — increasing recommendation click-through rate by 30% and broadening average baskets.",
+      "The retailer's recommendations now span its full catalogue, surfacing complementary cross-category products that shoppers respond to, increasing recommendation click-through rate by 30% and broadening average baskets.",
   },
   {
     id: 7,
@@ -514,7 +514,7 @@ export const caseStudies: CaseStudy[] = [
     category: ["Forecasting", "Predictive ML"],
     title: "Demand Forecasting Sharpens Inventory and Campaign Planning",
     excerpt:
-      "An omnichannel retailer planned demand on gut feel and last year's numbers. Our team built seasonality-aware forecasting models on first-party data that anticipate demand at SKU and channel level — turning planning into a data-driven, forward-looking process.",
+      "An omnichannel retailer planned demand on gut feel and last year's numbers. Our team built seasonality-aware forecasting models on first-party data that anticipate demand at SKU and channel level, turning planning into a data-driven, forward-looking process.",
     metrics: [
       { label: "Granularity", value: "SKU × Channel" },
       { label: "Seasonality", value: "Modelled" },
@@ -523,9 +523,9 @@ export const caseStudies: CaseStudy[] = [
     icon: TrendingUp,
     accentColor: "#1D75FF",
     challenge:
-      "An omnichannel retail chain planned inventory and marketing largely by extrapolating last year's totals and applying manual judgement. That approach missed shifting seasonality, promotional interactions, and channel-level differences — leading to stockouts on hot items, overstock on slow ones, and campaign budgets that were set before anyone knew what demand would look like.",
+      "An omnichannel retail chain planned inventory and marketing largely by extrapolating last year's totals and applying manual judgement. That approach missed shifting seasonality, promotional interactions, and channel-level differences, leading to stockouts on hot items, overstock on slow ones, and campaign budgets that were set before anyone knew what demand would look like.",
     solution:
-      "Our team built demand-forecasting models that project future demand at SKU and channel granularity, explicitly encoding seasonality and promotional effects using first-party sales and behavioural data — giving planners a forward-looking view instead of a rear-view mirror.",
+      "Our team built demand-forecasting models that project future demand at SKU and channel granularity, explicitly encoding seasonality and promotional effects using first-party sales and behavioural data, giving planners a forward-looking view instead of a rear-view mirror.",
     sections: [
       {
         type: "h2",
@@ -534,7 +534,7 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "p",
         content:
-          "Extrapolating last year's numbers assumes the future looks like the past. It rarely does — demand shifts with seasonality, price, promotions, and channel mix. A forecasting model that learns these drivers lets planners commit inventory and budget with far more confidence than a manual guess.",
+          "Extrapolating last year's numbers assumes the future looks like the past. It rarely does, demand shifts with seasonality, price, promotions, and channel mix. A forecasting model that learns these drivers lets planners commit inventory and budget with far more confidence than a manual guess.",
       },
       {
         type: "ul",
@@ -557,7 +557,7 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "quote",
         content:
-          "\"We're planning off what demand is going to be, not what it was last year. Stockouts on our fast movers dropped and we stopped over-committing budget ahead of soft periods.\" — Head of Planning",
+          "\"We're planning off what demand is going to be, not what it was last year. Stockouts on our fast movers dropped and we stopped over-committing budget ahead of soft periods.\" - Head of Planning",
       },
       {
         type: "metrics-grid",
@@ -577,7 +577,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     technologies: ["Python (Prophet / statsmodels / XGBoost)", "BigQuery", "GA4 BigQuery Export", "Vertex AI", "Looker Studio", "Cloud Composer"],
     outcome:
-      "The retailer replaced backward-looking manual planning with seasonality-aware, SKU- and channel-level demand forecasts — enabling sharper inventory commitments and better-timed marketing investment.",
+      "The retailer replaced backward-looking manual planning with seasonality-aware, SKU- and channel-level demand forecasts, enabling sharper inventory commitments and better-timed marketing investment.",
   },
   {
     id: 8,
@@ -587,7 +587,7 @@ export const caseStudies: CaseStudy[] = [
     category: ["Propensity", "Forecasting"],
     title: "Propensity & Lifetime-Value Modelling on First-Party Data",
     excerpt:
-      "A subscription business treated all customers as equally valuable. Using our PredictN approach — propensity, LTV and forecasting built on first-party data and expert feature engineering — our team modelled who to invest in and how much they are worth.",
+      "A subscription business treated all customers as equally valuable. Using our PredictN approach, propensity, LTV and forecasting built on first-party data and expert feature engineering, our team modelled who to invest in and how much they are worth.",
     metrics: [
       { label: "Signals Modelled", value: "Propensity + LTV" },
       { label: "Data", value: "First-Party" },
@@ -598,7 +598,7 @@ export const caseStudies: CaseStudy[] = [
     challenge:
       "A subscription consumer business was acquiring and serving all customers with the same intensity, unable to distinguish a high-lifetime-value loyalist from a one-and-done trial user. Marketing had access to generic GA4 predictive metrics, but those out-of-the-box scores were too coarse to drive confident budget and CRM decisions on real money.",
     solution:
-      "Our team applied the PredictN approach — combining propensity scoring, lifetime-value modelling and forecasting on first-party data with expert feature engineering. Purpose-built models on the business's own data consistently outperformed the generic predictions available in GA4.",
+      "Our team applied the PredictN approach, combining propensity scoring, lifetime-value modelling and forecasting on first-party data with expert feature engineering. Purpose-built models on the business's own data consistently outperformed the generic predictions available in GA4.",
     sections: [
       {
         type: "h2",
@@ -607,7 +607,7 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "p",
         content:
-          "Off-the-shelf GA4 predictive metrics are a useful starting point, but they are trained generically and treat every business the same. A subscription business with distinctive retention dynamics needs models trained on its own first-party data and its own definition of value — which is where expert feature engineering makes the difference.",
+          "Off-the-shelf GA4 predictive metrics are a useful starting point, but they are trained generically and treat every business the same. A subscription business with distinctive retention dynamics needs models trained on its own first-party data and its own definition of value, which is where expert feature engineering makes the difference.",
       },
       {
         type: "ul",
@@ -630,7 +630,7 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "quote",
         content:
-          "\"The generic scores were directionally fine but we couldn't bet budget on them. Models built on our own data — with real feature engineering — gave us numbers we trust enough to allocate spend against.\" — Head of CRM",
+          "\"The generic scores were directionally fine but we couldn't bet budget on them. Models built on our own data, with real feature engineering, gave us numbers we trust enough to allocate spend against.\" - Head of CRM",
       },
       {
         type: "metrics-grid",
@@ -650,7 +650,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     technologies: ["Python (scikit-learn / lifetimes)", "BigQuery ML", "GA4 BigQuery Export", "CRM Integration", "Vertex AI", "Looker Studio"],
     outcome:
-      "The business now tiers acquisition and retention investment by predicted propensity and lifetime value, using first-party models that outperform generic GA4 metrics — turning 'treat everyone the same' into value-based decisioning.",
+      "The business now tiers acquisition and retention investment by predicted propensity and lifetime value, using first-party models that outperform generic GA4 metrics, turning 'treat everyone the same' into value-based decisioning.",
   },
   {
     id: 9,
@@ -669,9 +669,9 @@ export const caseStudies: CaseStudy[] = [
     icon: BarChart3,
     accentColor: "#1D75FF",
     challenge:
-      "A consumer brand was segmenting its customers by broad demographics — age bands, city tiers — and messaging each group generically. These segments correlated poorly with actual behaviour, so campaigns were relevant to almost no one in particular. The brand had rich first-party behavioural data but no rigorous way to find the customer groups that actually behave differently.",
+      "A consumer brand was segmenting its customers by broad demographics, age bands, city tiers, and messaging each group generically. These segments correlated poorly with actual behaviour, so campaigns were relevant to almost no one in particular. The brand had rich first-party behavioural data but no rigorous way to find the customer groups that actually behave differently.",
     solution:
-      "Our team built an ML-driven segmentation using unsupervised learning on first-party behavioural, transactional and engagement data, revealing natural customer cohorts — then operationalised those segments across CRM and media so messaging matches how each cohort actually behaves.",
+      "Our team built an ML-driven segmentation using unsupervised learning on first-party behavioural, transactional and engagement data, revealing natural customer cohorts, then operationalised those segments across CRM and media so messaging matches how each cohort actually behaves.",
     sections: [
       {
         type: "h2",
@@ -680,7 +680,7 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "p",
         content:
-          "Demographic segments are convenient but weak — two customers of the same age and city can behave completely differently. Behaviour-based segmentation groups customers by what they do (recency, frequency, category affinity, engagement patterns), producing cohorts that respond to different messages and offers.",
+          "Demographic segments are convenient but weak, two customers of the same age and city can behave completely differently. Behaviour-based segmentation groups customers by what they do (recency, frequency, category affinity, engagement patterns), producing cohorts that respond to different messages and offers.",
       },
       {
         type: "ul",
@@ -698,12 +698,12 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "p",
         content:
-          "A statistical cluster only earns its keep once it changes what a customer receives. We translated each cohort into a clear persona with recommended messaging and offer strategy, and pushed segment membership into the systems that execute — so the segmentation drives real campaigns, not just a slide.",
+          "A statistical cluster only earns its keep once it changes what a customer receives. We translated each cohort into a clear persona with recommended messaging and offer strategy, and pushed segment membership into the systems that execute, so the segmentation drives real campaigns, not just a slide.",
       },
       {
         type: "quote",
         content:
-          "\"We finally stopped talking to 'women 25-34' and started talking to how people actually shop with us. The segments feel real because they're built from behaviour, and our campaigns got sharper overnight.\" — Marketing Director",
+          "\"We finally stopped talking to 'women 25-34' and started talking to how people actually shop with us. The segments feel real because they're built from behaviour, and our campaigns got sharper overnight.\" - Marketing Director",
       },
       {
         type: "metrics-grid",
@@ -723,7 +723,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     technologies: ["Python (scikit-learn)", "BigQuery", "GA4 BigQuery Export", "K-Means / Clustering", "CRM Integration", "Looker Studio"],
     outcome:
-      "The brand replaced demographic guesswork with behaviour-based cohorts derived from its own data, activated across CRM and media — making messaging, offers and lifecycle journeys measurably more relevant to how customers actually behave.",
+      "The brand replaced demographic guesswork with behaviour-based cohorts derived from its own data, activated across CRM and media, making messaging, offers and lifecycle journeys measurably more relevant to how customers actually behave.",
   },
   {
     id: 10,
@@ -733,7 +733,7 @@ export const caseStudies: CaseStudy[] = [
     category: ["MLOps", "Predictive ML"],
     title: "Real-Time Predictive Scoring Pipeline with Production-Grade MLOps",
     excerpt:
-      "Good models were stuck in notebooks. Our team built the MLOps backbone — GA4 and BigQuery data pipelines, T-1, hourly and real-time scoring, monitoring and retraining — that puts predictive scores into production reliably and keeps them accurate.",
+      "Good models were stuck in notebooks. Our team built the MLOps backbone. GA4 and BigQuery data pipelines, T-1, hourly and real-time scoring, monitoring and retraining, that puts predictive scores into production reliably and keeps them accurate.",
     metrics: [
       { label: "Scoring Modes", value: "T-1 / Hourly / Real-time" },
       { label: "Monitoring", value: "Drift + Health" },
@@ -743,9 +743,9 @@ export const caseStudies: CaseStudy[] = [
     accentColor: "#4DA6FF",
     featured: true,
     challenge:
-      "An enterprise data and marketing team had proven the value of predictive models — lead scoring, propensity, churn — but every model lived in an analyst's notebook. Scores were produced manually and irregularly, there was no monitoring for accuracy decay, and pushing a model into a production system that could act on scores in real time was a recurring, painful project. The models were good; the operations around them were not.",
+      "An enterprise data and marketing team had proven the value of predictive models, lead scoring, propensity, churn, but every model lived in an analyst's notebook. Scores were produced manually and irregularly, there was no monitoring for accuracy decay, and pushing a model into a production system that could act on scores in real time was a recurring, painful project. The models were good; the operations around them were not.",
     solution:
-      "Our team built the MLOps pipeline that turns models into dependable production services: automated GA4-to-BigQuery data pipelines, a tiered scoring engine (T-1 batch, hourly, and real-time), monitoring for data and prediction drift, and scheduled retraining — so predictions are always available, fresh, and trustworthy.",
+      "Our team built the MLOps pipeline that turns models into dependable production services: automated GA4-to-BigQuery data pipelines, a tiered scoring engine (T-1 batch, hourly, and real-time), monitoring for data and prediction drift, and scheduled retraining, so predictions are always available, fresh, and trustworthy.",
     sections: [
       {
         type: "h2",
@@ -754,7 +754,7 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "p",
         content:
-          "Most of the value of a model is lost in the last mile — getting it into production, keeping it fed with clean data, serving predictions where they are needed, and noticing when it silently degrades. A model that scores brilliantly in a notebook but requires a human to run it once a week is not a production asset.",
+          "Most of the value of a model is lost in the last mile, getting it into production, keeping it fed with clean data, serving predictions where they are needed, and noticing when it silently degrades. A model that scores brilliantly in a notebook but requires a human to run it once a week is not a production asset.",
       },
       {
         type: "ul",
@@ -773,12 +773,12 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "p",
         content:
-          "In production, reliability is the feature that matters most. Downstream systems — the sales floor, the ad platforms, the CRM — depend on scores arriving on time and being correct. We engineered the pipeline so a failed data load or a drifting model surfaces as an alert, not as a silent bad decision.",
+          "In production, reliability is the feature that matters most. Downstream systems, the sales floor, the ad platforms, the CRM, depend on scores arriving on time and being correct. We engineered the pipeline so a failed data load or a drifting model surfaces as an alert, not as a silent bad decision.",
       },
       {
         type: "quote",
         content:
-          "\"Our models used to be a person running a notebook. Now they're a service — scores land on schedule, real-time scoring just works, and we get told when something drifts before it costs us anything.\" — Head of Data",
+          "\"Our models used to be a person running a notebook. Now they're a service, scores land on schedule, real-time scoring just works, and we get told when something drifts before it costs us anything.\" - Head of Data",
       },
       {
         type: "metrics-grid",
@@ -794,12 +794,12 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "callout",
         content:
-          "Key Insight: The difference between a model and a machine-learning product is everything that happens after training. A disciplined MLOps pipeline — pipelines, tiered serving, monitoring, retraining — is what lets predictive scoring be trusted in production.",
+          "Key Insight: The difference between a model and a machine-learning product is everything that happens after training. A disciplined MLOps pipeline, pipelines, tiered serving, monitoring, retraining, is what lets predictive scoring be trusted in production.",
       },
     ],
     technologies: ["Vertex AI Pipelines", "BigQuery ML", "GA4 BigQuery Export", "Cloud Functions / Cloud Run", "Model Registry", "Cloud Monitoring"],
     outcome:
-      "Predictive scoring became a dependable production service rather than a manual analyst task — with automated data pipelines, T-1/hourly/real-time serving, drift monitoring and scheduled retraining keeping scores available, fresh and accurate.",
+      "Predictive scoring became a dependable production service rather than a manual analyst task, with automated data pipelines, T-1/hourly/real-time serving, drift monitoring and scheduled retraining keeping scores available, fresh and accurate.",
   },
   {
     id: 11,
@@ -809,7 +809,7 @@ export const caseStudies: CaseStudy[] = [
     category: ["Attribution ML", "Forecasting"],
     title: "ML-Based Marketing-Mix & Attribution Modelling Reveals True Channel ROI",
     excerpt:
-      "A multi-channel advertiser optimised to last-click and starved its intent-building channels. Our team combined data-driven attribution with marketing-mix modelling to quantify each channel's true contribution — enabling confident, ML-guided budget reallocation.",
+      "A multi-channel advertiser optimised to last-click and starved its intent-building channels. Our team combined data-driven attribution with marketing-mix modelling to quantify each channel's true contribution, enabling confident, ML-guided budget reallocation.",
     metrics: [
       { label: "Attribution", value: "Data-Driven" },
       { label: "Channels Modelled", value: "Full Mix" },
@@ -820,7 +820,7 @@ export const caseStudies: CaseStudy[] = [
     challenge:
       "A multi-channel advertiser was allocating budget on last-click attribution, which systematically over-credited bottom-funnel channels (brand search, shopping) and made upper-funnel channels (video, display, social) look worthless. Leadership suspected they were starving the very channels that built demand, but had no rigorous, model-based way to prove it or to decide how to reallocate.",
     solution:
-      "Our team combined data-driven, path-level attribution with marketing-mix modelling to measure each channel's true incremental contribution across the full journey — then translated the model into concrete, confidence-weighted budget reallocation recommendations.",
+      "Our team combined data-driven, path-level attribution with marketing-mix modelling to measure each channel's true incremental contribution across the full journey, then translated the model into concrete, confidence-weighted budget reallocation recommendations.",
     sections: [
       {
         type: "h2",
@@ -847,12 +847,12 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "p",
         content:
-          "The output is not a report — it is a budget decision. We turned the modelled contributions and response curves into a reallocation plan: pull spend from saturated, over-credited channels and fund undervalued intent-builders up to the point where their marginal return still beats the alternative.",
+          "The output is not a report, it is a budget decision. We turned the modelled contributions and response curves into a reallocation plan: pull spend from saturated, over-credited channels and fund undervalued intent-builders up to the point where their marginal return still beats the alternative.",
       },
       {
         type: "quote",
         content:
-          "\"Last-click told us to cut the channels that were actually building our demand. The combined attribution and mix model gave us the evidence to reallocate with confidence instead of fear.\" — VP Marketing",
+          "\"Last-click told us to cut the channels that were actually building our demand. The combined attribution and mix model gave us the evidence to reallocate with confidence instead of fear.\" - VP Marketing",
       },
       {
         type: "metrics-grid",
@@ -872,7 +872,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     technologies: ["Python (marketing-mix modelling)", "BigQuery", "Data-Driven Attribution", "GA4 BigQuery Export", "Google Ads API", "Looker Studio"],
     outcome:
-      "By triangulating data-driven attribution with marketing-mix modelling, the advertiser quantified each channel's true incremental contribution and reallocated budget with confidence — funding demand-building channels that last-click had wrongly written off.",
+      "By triangulating data-driven attribution with marketing-mix modelling, the advertiser quantified each channel's true incremental contribution and reallocated budget with confidence, funding demand-building channels that last-click had wrongly written off.",
   },
 ];
 

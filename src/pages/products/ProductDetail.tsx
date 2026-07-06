@@ -103,7 +103,7 @@ export default function ProductDetail({ slug }: Props) {
   const prev = currentIndex > 0 ? products[currentIndex - 1] : null;
   const next = currentIndex < products.length - 1 ? products[currentIndex + 1] : null;
 
-  // Related products: same category first, then fill from the rest — never the current one.
+  // Related products: same category first, then fill from the rest, never the current one.
   const related = [
     ...products.filter((p) => p.slug !== slug && p.category === product.category),
     ...products.filter((p) => p.slug !== slug && p.category !== product.category),

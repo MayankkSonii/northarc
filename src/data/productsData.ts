@@ -41,14 +41,14 @@ export const products: Product[] = [
     icon: PhoneCall,
     accentColor: "#1D75FF",
     summary:
-      "An always-on voice agent that makes and answers calls in natural, human-sounding speech. It qualifies leads, books appointments, confirms orders, and follows up — handling thousands of simultaneous conversations without hold music, missed calls, or overtime. Every call is transcribed, scored, and pushed straight into your CRM.",
+      "An always-on voice agent that makes and answers calls in natural, human-sounding speech. It qualifies leads, books appointments, confirms orders, and follows up, handling thousands of simultaneous conversations without hold music, missed calls, or overtime. Every call is transcribed, scored, and pushed straight into your CRM.",
     problem:
       "Sales and support teams lose revenue to unanswered calls, slow follow-up, and the sheer cost of staffing phone lines across time zones and peak hours. Manual dialing and voicemail tag mean hot leads go cold and routine confirmations eat entire shifts.",
     howItWorks: [
       "Connects to your telephony, CRM, and calendar so the agent has full context before it ever dials or answers.",
       "Understands intent in real time using low-latency speech recognition and a conversation policy tuned to your scripts and compliance rules.",
       "Responds in natural, brand-matched speech, handling interruptions, objections, and multi-turn dialogue like a trained rep.",
-      "Takes action mid-call — books the meeting, updates the record, triggers a payment link, or warm-transfers to a human.",
+      "Takes action mid-call, books the meeting, updates the record, triggers a payment link, or warm-transfers to a human.",
       "Logs a full transcript, outcome, and sentiment score to your systems for coaching and pipeline visibility.",
     ],
     outcomes: [
@@ -82,7 +82,7 @@ export const products: Product[] = [
     icon: BookOpen,
     accentColor: "#4DA6FF",
     summary:
-      "A secure assistant that answers questions from your own documents, wikis, policies, and data — with citations you can verify. Instead of searching folders and pinging colleagues, your team asks in plain language and gets grounded, source-linked answers in seconds.",
+      "A secure assistant that answers questions from your own documents, wikis, policies, and data, with citations you can verify. Instead of searching folders and pinging colleagues, your team asks in plain language and gets grounded, source-linked answers in seconds.",
     problem:
       "Critical knowledge is scattered across drives, wikis, tickets, and inboxes. Employees waste hours hunting for the right document, experts get interrupted with repeat questions, and new hires take months to become productive.",
     howItWorks: [
@@ -117,18 +117,18 @@ export const products: Product[] = [
     id: 3,
     slug: "ai-support-agent",
     name: "AI Customer Support Agent",
-    tagline: "Resolve support tickets automatically — around the clock.",
+    tagline: "Resolve support tickets automatically, around the clock.",
     category: "Conversational AI",
     icon: Headphones,
     accentColor: "#0EA5E9",
     summary:
-      "A support agent that handles customer conversations across chat, email, and messaging — resolving common issues end to end and escalating the rest with full context. It deflects repetitive tickets, keeps response times near-instant, and frees your team for high-value work.",
+      "A support agent that handles customer conversations across chat, email, and messaging, resolving common issues end to end and escalating the rest with full context. It deflects repetitive tickets, keeps response times near-instant, and frees your team for high-value work.",
     problem:
       "Support teams are buried in repetitive tickets, response times slip during peak periods, and staffing 24/7 coverage across channels is expensive. Customers churn when they wait too long for simple answers.",
     howItWorks: [
       "Connects to your help desk, knowledge base, and order or account systems for full customer context.",
       "Understands the customer's intent across chat, email, and messaging channels in their own language.",
-      "Resolves common requests directly — order status, refunds, password resets, account changes — by taking real actions.",
+      "Resolves common requests directly, order status, refunds, password resets, account changes, by taking real actions.",
       "Escalates complex or sensitive cases to a human agent with a complete conversation summary.",
       "Learns from resolved tickets and agent feedback to expand what it can handle over time.",
     ],
@@ -169,7 +169,7 @@ export const products: Product[] = [
     howItWorks: [
       "Unifies first-party data across web, app, CRM, and marketing platforms into a single lead profile.",
       "Engineers behavioral, demographic, and seasonality-aware features that actually predict conversion.",
-      "Trains and blends multiple algorithms — often 10 to 12 models — with separate web and app models for accuracy.",
+      "Trains and blends multiple algorithms, often 10 to 12 models, with separate web and app models for accuracy.",
       "Scores leads in real time, hourly, or on a T-1 batch and pushes rankings back to sales and ad platforms.",
       "Continuously retrains on new outcomes so accuracy compounds over time.",
     ],
@@ -199,12 +199,12 @@ export const products: Product[] = [
     id: 5,
     slug: "churn-prediction",
     name: "Churn Prediction",
-    tagline: "Know who's about to leave — before they do.",
+    tagline: "Know who's about to leave, before they do.",
     category: "Predictive ML",
     icon: TrendingDown,
     accentColor: "#4DA6FF",
     summary:
-      "A predictive model that flags users and customers at risk of churning within a defined window, with enough lead time to act. It turns engagement, transaction, and support signals into a ranked risk list that powers targeted retention — not blanket discounts.",
+      "A predictive model that flags users and customers at risk of churning within a defined window, with enough lead time to act. It turns engagement, transaction, and support signals into a ranked risk list that powers targeted retention, not blanket discounts.",
     problem:
       "Businesses usually discover churn only after it happens, when win-back is expensive and unlikely. Retention teams lack the early, prioritized signal needed to intervene with the right customers at the right moment.",
     howItWorks: [
@@ -249,7 +249,7 @@ export const products: Product[] = [
     problem:
       "Generic, one-size-fits-all merchandising buries relevant products and content. Without personalization, engagement stalls, cross-sell opportunities are missed, and customers leave without discovering what they actually wanted.",
     howItWorks: [
-      "Captures user behavior — views, clicks, purchases, and content consumption — in real time.",
+      "Captures user behavior, views, clicks, purchases, and content consumption, in real time.",
       "Learns user and item affinities using collaborative filtering and content-based models.",
       "Generates ranked recommendations for each user and context, including cross-category suggestions.",
       "Serves recommendations via API to web, app, email, and ad channels with low latency.",
@@ -281,7 +281,7 @@ export const products: Product[] = [
     id: 7,
     slug: "demand-forecasting",
     name: "Demand Forecasting",
-    tagline: "Stock, staff, and plan with confidence — not guesswork.",
+    tagline: "Stock, staff, and plan with confidence, not guesswork.",
     category: "Predictive ML",
     icon: LineChart,
     accentColor: "#0EA5E9",
@@ -327,7 +327,7 @@ export const products: Product[] = [
     icon: Users,
     accentColor: "#1D75FF",
     summary:
-      "Data-driven segmentation that groups customers by behavior, value, and lifecycle stage — going far beyond basic demographics. It reveals actionable segments and lifetime-value tiers so marketing, product, and CX can target each group with precision.",
+      "Data-driven segmentation that groups customers by behavior, value, and lifecycle stage, going far beyond basic demographics. It reveals actionable segments and lifetime-value tiers so marketing, product, and CX can target each group with precision.",
     problem:
       "Treating all customers the same wastes budget and dilutes messaging. Static, demographic-only segments miss the behavioral patterns that actually drive value, leaving teams unable to personalize at scale.",
     howItWorks: [
@@ -368,7 +368,7 @@ export const products: Product[] = [
     icon: ScanText,
     accentColor: "#4DA6FF",
     summary:
-      "An intelligent document platform that reads, understands, and extracts structured data from forms, contracts, IDs, and scans — including messy handwriting and low-quality images. It converts paperwork into clean, validated data your systems can use instantly.",
+      "An intelligent document platform that reads, understands, and extracts structured data from forms, contracts, IDs, and scans, including messy handwriting and low-quality images. It converts paperwork into clean, validated data your systems can use instantly.",
     problem:
       "Teams spend countless hours manually keying data from documents, introducing errors and delays. Traditional OCR breaks on varied layouts, handwriting, and poor scans, forcing expensive human review.",
     howItWorks: [
@@ -376,7 +376,7 @@ export const products: Product[] = [
       "Uses OCR and layout-aware AI to read text, tables, and handwriting across varied templates.",
       "Extracts the specific fields you need and structures them into clean, typed data.",
       "Validates and cross-checks extracted values against business rules and reference data.",
-      "Delivers structured output to your database, ERP, or workflow — flagging only low-confidence items for review.",
+      "Delivers structured output to your database, ERP, or workflow, flagging only low-confidence items for review.",
     ],
     outcomes: [
       "Cut document processing time by up to 90% with automated extraction.",
@@ -409,9 +409,9 @@ export const products: Product[] = [
     icon: ReceiptText,
     accentColor: "#6366F1",
     summary:
-      "End-to-end automation for accounts payable that captures invoices, extracts line items, matches them against purchase orders, and posts to your ERP — with exceptions routed for approval. It slashes manual AP effort and accelerates the entire pay cycle.",
+      "End-to-end automation for accounts payable that captures invoices, extracts line items, matches them against purchase orders, and posts to your ERP, with exceptions routed for approval. It slashes manual AP effort and accelerates the entire pay cycle.",
     problem:
-      "Accounts payable teams manually enter invoices, chase approvals, and reconcile against purchase orders — a slow, error-prone process that causes late payments, missed discounts, and no real-time spend visibility.",
+      "Accounts payable teams manually enter invoices, chase approvals, and reconcile against purchase orders, a slow, error-prone process that causes late payments, missed discounts, and no real-time spend visibility.",
     howItWorks: [
       "Captures invoices automatically from email, portals, and uploads in any format.",
       "Extracts header and line-item data using document AI tuned for financial documents.",
@@ -450,7 +450,7 @@ export const products: Product[] = [
     icon: Handshake,
     accentColor: "#0EA5E9",
     summary:
-      "An agentic sales rep that researches prospects, personalizes outreach, qualifies interest, and books meetings across email and chat — autonomously and at scale. It executes multi-step sales plays, updates your CRM, and hands warm, qualified opportunities to your closers.",
+      "An agentic sales rep that researches prospects, personalizes outreach, qualifies interest, and books meetings across email and chat, autonomously and at scale. It executes multi-step sales plays, updates your CRM, and hands warm, qualified opportunities to your closers.",
     problem:
       "Sales development is expensive and inconsistent. Reps spend more time on research and admin than selling, follow-up falls through the cracks, and pipeline generation doesn't scale without linear headcount growth.",
     howItWorks: [
@@ -462,7 +462,7 @@ export const products: Product[] = [
     ],
     outcomes: [
       "Generate more qualified pipeline without adding SDR headcount.",
-      "Reach every lead with personalized, timely follow-up — no drop-off.",
+      "Reach every lead with personalized, timely follow-up, no drop-off.",
       "Book more meetings by responding in seconds, any hour.",
       "Free human reps to focus on high-value conversations and closing.",
     ],

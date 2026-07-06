@@ -40,7 +40,7 @@ export const solutions: Solution[] = [
     accentColor: "#1D75FF",
     tagline: "Free clinicians from paperwork and predict patient risk earlier.",
     summary:
-      "We help hospitals, payers, and health-tech providers turn fragmented clinical and operational data into faster care and lower administrative cost — automating document-heavy workflows, surfacing patients at risk, and giving staff instant answers from policy and clinical knowledge, all inside secure, permission-aware systems.",
+      "We help hospitals, payers, and health-tech providers turn fragmented clinical and operational data into faster care and lower administrative cost, automating document-heavy workflows, surfacing patients at risk, and giving staff instant answers from policy and clinical knowledge, all inside secure, permission-aware systems.",
     challenges: [
       "Clinicians and back-office staff lose hours to manual data entry from forms, referrals, and scanned records.",
       "Patient and member risk signals are buried across EHR, claims, and engagement data until it is too late to intervene.",
@@ -70,7 +70,7 @@ export const solutions: Solution[] = [
     accentColor: "#4DA6FF",
     tagline: "Score risk, convert more policies, and automate the paperwork.",
     summary:
-      "We help banks, insurers, and lenders grow the book while cutting operational drag — ranking leads by true propensity to convert, predicting churn and default risk, and automating KYC, claims, and invoice workflows end to end, with governance and auditability built in.",
+      "We help banks, insurers, and lenders grow the book while cutting operational drag, ranking leads by true propensity to convert, predicting churn and default risk, and automating KYC, claims, and invoice workflows end to end, with governance and auditability built in.",
     challenges: [
       "Sales teams chase low-intent leads while high-propensity prospects go untouched.",
       "Customer and policyholder churn is discovered only after it happens, when win-back is expensive.",
@@ -100,7 +100,7 @@ export const solutions: Solution[] = [
     accentColor: "#0EA5E9",
     tagline: "Personalize every visit, forecast demand, and lift basket size.",
     summary:
-      "We help retailers and marketplaces grow revenue per customer and plan with confidence — serving real-time personalized recommendations, forecasting demand at SKU and store level, segmenting customers by value, and deflecting support tickets so teams focus on growth.",
+      "We help retailers and marketplaces grow revenue per customer and plan with confidence, serving real-time personalized recommendations, forecasting demand at SKU and store level, segmenting customers by value, and deflecting support tickets so teams focus on growth.",
     challenges: [
       "Generic, one-size-fits-all merchandising buries relevant products and stalls conversion.",
       "Inaccurate forecasts drive stockouts that lose sales and overstock that ties up cash.",
@@ -130,7 +130,7 @@ export const solutions: Solution[] = [
     accentColor: "#1D75FF",
     tagline: "Plan production accurately and automate the back office.",
     summary:
-      "We help manufacturers plan with precision and cut administrative overhead — forecasting demand across products and channels, automating invoice and document processing against POs, and making SOPs and technical knowledge instantly searchable on the floor.",
+      "We help manufacturers plan with precision and cut administrative overhead, forecasting demand across products and channels, automating invoice and document processing against POs, and making SOPs and technical knowledge instantly searchable on the floor.",
     challenges: [
       "Spreadsheet-based planning can't capture demand volatility across many SKUs and plants.",
       "Accounts payable teams manually key invoices and reconcile them against purchase orders.",
@@ -160,7 +160,7 @@ export const solutions: Solution[] = [
     accentColor: "#4DA6FF",
     tagline: "Forecast demand, automate documents, and keep customers informed.",
     summary:
-      "We help logistics and supply-chain operators run leaner and communicate faster — forecasting volume to plan fleet and warehouse capacity, automating shipping and customs paperwork, and handling status and tracking queries automatically across voice and chat.",
+      "We help logistics and supply-chain operators run leaner and communicate faster, forecasting volume to plan fleet and warehouse capacity, automating shipping and customs paperwork, and handling status and tracking queries automatically across voice and chat.",
     challenges: [
       "Volume and capacity planning are reactive, leading to costly under- or over-staffing.",
       "Shipping, customs, and proof-of-delivery documents are processed manually and slowly.",
@@ -190,7 +190,7 @@ export const solutions: Solution[] = [
     accentColor: "#6366F1",
     tagline: "Reduce churn, scale support, and generate pipeline autonomously.",
     summary:
-      "We help SaaS and technology companies grow net revenue retention and pipeline efficiency — predicting churn with lead time to act, deflecting support tickets at scale, generating qualified pipeline with autonomous agents, and giving every team self-serve analytics.",
+      "We help SaaS and technology companies grow net revenue retention and pipeline efficiency, predicting churn with lead time to act, deflecting support tickets at scale, generating qualified pipeline with autonomous agents, and giving every team self-serve analytics.",
     challenges: [
       "Churn is spotted too late, eroding recurring revenue and net retention.",
       "Support ticket volume scales linearly with customers and headcount.",
@@ -220,7 +220,7 @@ export const solutions: Solution[] = [
     accentColor: "#0EA5E9",
     tagline: "Lift engagement with personalization and unlock your archives.",
     summary:
-      "We help media and publishing businesses grow engagement and subscriber value — recommending the right content to every reader, segmenting audiences for retention, and turning vast content archives into an instantly searchable, cited knowledge base.",
+      "We help media and publishing businesses grow engagement and subscriber value, recommending the right content to every reader, segmenting audiences for retention, and turning vast content archives into an instantly searchable, cited knowledge base.",
     challenges: [
       "Undifferentiated content feeds fail to hold reader attention and drive subscriptions.",
       "Audiences are treated as one block, diluting retention and conversion campaigns.",
@@ -252,7 +252,7 @@ export const solutions: Solution[] = [
     accentColor: "#1D75FF",
     tagline: "Focus effort where it converts and generate pipeline 24/7.",
     summary:
-      "We help revenue teams spend effort where it pays off — ranking leads by true propensity to convert, building high-value audiences and segments, and deploying autonomous agents that research, personalize outreach, and book qualified meetings around the clock.",
+      "We help revenue teams spend effort where it pays off, ranking leads by true propensity to convert, building high-value audiences and segments, and deploying autonomous agents that research, personalize outreach, and book qualified meetings around the clock.",
     challenges: [
       "Reps waste time on low-intent leads while hot prospects slip through the cracks.",
       "Generic audiences and demographic segments miss the behavior that drives value.",
@@ -282,7 +282,7 @@ export const solutions: Solution[] = [
     accentColor: "#4DA6FF",
     tagline: "Resolve tickets automatically and answer instantly, 24/7.",
     summary:
-      "We help support organizations deliver instant, consistent service at lower cost — resolving common tickets end to end across every channel, answering inbound calls with human-quality voice agents, and grounding every response in your own knowledge with citations.",
+      "We help support organizations deliver instant, consistent service at lower cost, resolving common tickets end to end across every channel, answering inbound calls with human-quality voice agents, and grounding every response in your own knowledge with citations.",
     challenges: [
       "Teams are buried in repetitive tickets and response times slip during peaks.",
       "Staffing 24/7 coverage across channels and time zones is expensive.",
@@ -312,7 +312,7 @@ export const solutions: Solution[] = [
     accentColor: "#0EA5E9",
     tagline: "Automate document work and plan with data, not guesswork.",
     summary:
-      "We help operations teams remove manual drag and plan with confidence — automating document-heavy processes, forecasting demand for capacity and inventory planning, and giving teams instant, self-serve answers from operational data.",
+      "We help operations teams remove manual drag and plan with confidence, automating document-heavy processes, forecasting demand for capacity and inventory planning, and giving teams instant, self-serve answers from operational data.",
     challenges: [
       "Manual document processing and data entry consume hours and introduce errors.",
       "Planning relies on spreadsheets that can't capture volatility across the business.",
@@ -342,7 +342,7 @@ export const solutions: Solution[] = [
     accentColor: "#1D75FF",
     tagline: "Straight-through invoice processing and instant financial answers.",
     summary:
-      "We help finance teams close faster and cut manual effort — automating accounts payable from inbox to ERP, extracting and validating data from financial documents, and letting anyone query financial performance in plain English against governed metrics.",
+      "We help finance teams close faster and cut manual effort, automating accounts payable from inbox to ERP, extracting and validating data from financial documents, and letting anyone query financial performance in plain English against governed metrics.",
     challenges: [
       "AP teams manually key invoices, chase approvals, and reconcile against POs.",
       "Late payments and missed early-payment discounts erode margin.",
@@ -372,7 +372,7 @@ export const solutions: Solution[] = [
     accentColor: "#4DA6FF",
     tagline: "Answer employee questions instantly and predict attrition early.",
     summary:
-      "We help HR and talent teams scale support and retain people — giving employees an always-available assistant for policy and benefits questions, automating document-heavy onboarding, and predicting attrition risk with enough lead time to act.",
+      "We help HR and talent teams scale support and retain people, giving employees an always-available assistant for policy and benefits questions, automating document-heavy onboarding, and predicting attrition risk with enough lead time to act.",
     challenges: [
       "HR teams field the same policy, benefits, and leave questions endlessly.",
       "Onboarding and compliance paperwork is manual and slow.",

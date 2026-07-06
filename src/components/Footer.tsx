@@ -23,7 +23,7 @@ export function Footer() {
               </div>
             </a>
             <p className="text-xs text-text-secondary/50 font-light leading-relaxed">
-              AI Engineering, Data Science &amp; Intelligent Automation — connecting intelligence to impact by turning AI into measurable business outcomes.
+              AI Engineering, Data Science &amp; Intelligent Automation, connecting intelligence to impact by turning AI into measurable business outcomes.
             </p>
 
             {/* Contact details */}

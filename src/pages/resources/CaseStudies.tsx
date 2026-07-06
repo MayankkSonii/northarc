@@ -25,7 +25,7 @@ export default function CaseStudies() {
   useSEO({
     title: "AI & Machine Learning Case Studies",
     description:
-      "Real-world AI, machine learning and data science case studies from the NorthArc team — measurable outcomes across finance, retail, media, automotive and more.",
+      "Real-world AI, machine learning and data science case studies from the NorthArc team, measurable outcomes across finance, retail, media, automotive and more.",
     path: "/resources/case-studies",
   });
 
@@ -61,7 +61,7 @@ export default function CaseStudies() {
             <span className="text-primary font-semibold">measurable results</span>
           </motion.h1>
           <motion.p className="text-sm sm:text-base text-text-secondary font-light max-w-2xl leading-relaxed" variants={staggerItem}>
-            Selected AI, machine learning and data science projects delivered by our team — helping
+            Selected AI, machine learning and data science projects delivered by our team, helping
             organisations across finance, retail, media, automotive and beyond turn data into
             predictions and decisions they can act on.
           </motion.p>

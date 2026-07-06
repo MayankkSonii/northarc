@@ -44,7 +44,7 @@ export const blogPosts: BlogPost[] = [
       {
         type: "p",
         content:
-          "The web has always had bots — Googlebot, Bingbot, scraping scripts, uptime monitors. Analytics platforms like GA4 have long filtered known bot traffic using the IAB/ABC International Spiders and Bots List. But something fundamentally different is happening now. AI-powered agents are browsing the web not to index it, but to act on it — filling out forms, reading product descriptions, comparing prices, and navigating multi-step user flows. These agents look like humans to your analytics stack. And they're in your GA4 data right now.",
+          "The web has always had bots. Googlebot, Bingbot, scraping scripts, uptime monitors. Analytics platforms like GA4 have long filtered known bot traffic using the IAB/ABC International Spiders and Bots List. But something fundamentally different is happening now. AI-powered agents are browsing the web not to index it, but to act on it, filling out forms, reading product descriptions, comparing prices, and navigating multi-step user flows. These agents look like humans to your analytics stack. And they're in your GA4 data right now.",
       },
       {
         type: "h2",
@@ -60,10 +60,10 @@ export const blogPosts: BlogPost[] = [
         items: [
           "They use real browsers (often Chromium-based) that execute JavaScript and fire GA4 events normally",
           "They have realistic viewport sizes, user agents, and screen resolutions",
-          "They navigate multi-step flows — product pages, comparison pages, checkout flows",
+          "They navigate multi-step flows, product pages, comparison pages, checkout flows",
           "They generate session duration and engagement metrics that look human",
           "GA4's built-in bot filtering doesn't catch them because they aren't on known bot lists",
-          "They often trigger conversion events — add_to_cart, begin_checkout — that inflate your conversion metrics",
+          "They often trigger conversion events, add_to_cart, begin_checkout, that inflate your conversion metrics",
         ],
       },
       {
@@ -82,7 +82,7 @@ export const blogPosts: BlogPost[] = [
       {
         type: "p",
         content:
-          "AI agents can navigate pages far faster than humans. A session that views 12 product pages in 45 seconds — with engagement events on each — is almost certainly not human. In GA4 Explorations, filter for sessions with time_per_page below a human minimum threshold (typically < 3 seconds for content pages).",
+          "AI agents can navigate pages far faster than humans. A session that views 12 product pages in 45 seconds, with engagement events on each, is almost certainly not human. In GA4 Explorations, filter for sessions with time_per_page below a human minimum threshold (typically < 3 seconds for content pages).",
       },
       {
         type: "h3",
@@ -197,12 +197,12 @@ ORDER BY events_per_second DESC`,
       {
         type: "p",
         content:
-          "Agentic traffic isn't going away — it's going to grow dramatically as AI assistants, shopping agents, and research tools become mainstream. The analytics community needs to build detection and filtering into standard measurement frameworks, the same way we normalised spam filtering and bot exclusion in previous eras. Start auditing your GA4 data for agentic patterns now, before the signal-to-noise ratio deteriorates further.",
+          "Agentic traffic isn't going away, it's going to grow dramatically as AI assistants, shopping agents, and research tools become mainstream. The analytics community needs to build detection and filtering into standard measurement frameworks, the same way we normalised spam filtering and bot exclusion in previous eras. Start auditing your GA4 data for agentic patterns now, before the signal-to-noise ratio deteriorates further.",
       },
       {
         type: "quote",
         content:
-          "\"The question isn't whether AI agents are in your analytics data. They are. The question is what percentage of your conversion data they currently account for — and whether you have any idea.\"",
+          "\"The question isn't whether AI agents are in your analytics data. They are. The question is what percentage of your conversion data they currently account for, and whether you have any idea.\"",
       },
     ],
   },
@@ -213,7 +213,7 @@ ORDER BY events_per_second DESC`,
     tags: ["LLM Agents", "AIOps", "Root Cause Analysis"],
     title: "LLM Agents for Incident Diagnosis: From Alert to Answer in Seconds",
     excerpt:
-      "When a critical system fails at 2am, every minute costs you. We explore how LLM-powered diagnostic agents automatically detect anomalies, reason over logs and dependencies, and surface the root cause with a fix — turning hours of firefighting into a two-paragraph summary.",
+      "When a critical system fails at 2am, every minute costs you. We explore how LLM-powered diagnostic agents automatically detect anomalies, reason over logs and dependencies, and surface the root cause with a fix, turning hours of firefighting into a two-paragraph summary.",
     date: "Jun 2026",
     readTime: "6 min read",
     accentColor: "#4DA6FF",
@@ -228,7 +228,7 @@ ORDER BY events_per_second DESC`,
       {
         type: "p",
         content:
-          "Most analytics teams have some form of alerting — a Slack notification when a scheduled query fails, an email when a dashboard hasn't refreshed, maybe a PagerDuty integration for critical pipelines. These alerts tell you that something went wrong. They don't tell you what, why, or how to fix it. By the time a human investigates, identifies the root cause, and applies a fix, hours have passed. If the failure happened at 2am, the first person who knows about it might be the CMO wondering why the weekly report looks wrong.",
+          "Most analytics teams have some form of alerting, a Slack notification when a scheduled query fails, an email when a dashboard hasn't refreshed, maybe a PagerDuty integration for critical pipelines. These alerts tell you that something went wrong. They don't tell you what, why, or how to fix it. By the time a human investigates, identifies the root cause, and applies a fix, hours have passed. If the failure happened at 2am, the first person who knows about it might be the CMO wondering why the weekly report looks wrong.",
       },
       {
         type: "h2",
@@ -237,15 +237,15 @@ ORDER BY events_per_second DESC`,
       {
         type: "p",
         content:
-          "An effective AI incident diagnosis system doesn't just detect failures — it reasons about them. When a pipeline fails, the system should:",
+          "An effective AI incident diagnosis system doesn't just detect failures, it reasons about them. When a pipeline fails, the system should:",
       },
       {
         type: "ol",
         items: [
-          "Detect the anomaly automatically — without requiring a human to notice it",
+          "Detect the anomaly automatically, without requiring a human to notice it",
           "Classify the failure type based on error signatures and historical patterns",
           "Trace the root cause by walking the dependency graph upstream from the failure point",
-          "Assess the blast radius — which downstream reports, dashboards, and decisions are affected",
+          "Assess the blast radius, which downstream reports, dashboards, and decisions are affected",
           "Propose or execute a fix, or route the incident to the appropriate human with full context",
           "Log the resolution for future training data",
         ],
@@ -261,7 +261,7 @@ ORDER BY events_per_second DESC`,
       {
         type: "p",
         content:
-          "The foundation is statistical anomaly detection on your key pipeline metrics: row counts, null rates, value distributions, processing times. Tools like BigQuery ML's ARIMA_PLUS model can detect when a metric deviates from expected seasonal patterns — including distinguishing a genuine failure from a normal weekend traffic dip.",
+          "The foundation is statistical anomaly detection on your key pipeline metrics: row counts, null rates, value distributions, processing times. Tools like BigQuery ML's ARIMA_PLUS model can detect when a metric deviates from expected seasonal patterns, including distinguishing a genuine failure from a normal weekend traffic dip.",
       },
       {
         type: "h3",
@@ -270,7 +270,7 @@ ORDER BY events_per_second DESC`,
       {
         type: "p",
         content:
-          "Every table in your data warehouse has upstream dependencies — raw data sources, transformation jobs, external API calls. Maintaining a graph of these dependencies allows the system to answer 'if this table is wrong, what caused it?' rather than just 'this table is wrong.'",
+          "Every table in your data warehouse has upstream dependencies, raw data sources, transformation jobs, external API calls. Maintaining a graph of these dependencies allows the system to answer 'if this table is wrong, what caused it?' rather than just 'this table is wrong.'",
       },
       {
         type: "h3",
@@ -279,7 +279,7 @@ ORDER BY events_per_second DESC`,
       {
         type: "p",
         content:
-          "This is where modern AI changes the game. By providing an LLM with the error logs, the pipeline dependency graph, and historical incident patterns, you can generate natural language root cause summaries that a human analyst can immediately understand and act on — rather than raw stack traces.",
+          "This is where modern AI changes the game. By providing an LLM with the error logs, the pipeline dependency graph, and historical incident patterns, you can generate natural language root cause summaries that a human analyst can immediately understand and act on, rather than raw stack traces.",
       },
       {
         type: "code",
@@ -321,12 +321,12 @@ Provide:
       {
         type: "p",
         content:
-          "Teams that implement AI-powered incident diagnosis typically see mean time to resolution (MTTR) drop by 70–85%. More importantly, they shift from reactive firefighting to proactive reliability management — because the system surfaces patterns across incidents that humans would miss in one-off investigations.",
+          "Teams that implement AI-powered incident diagnosis typically see mean time to resolution (MTTR) drop by 70–85%. More importantly, they shift from reactive firefighting to proactive reliability management, because the system surfaces patterns across incidents that humans would miss in one-off investigations.",
       },
       {
         type: "callout",
         content:
-          "The goal isn't to replace human judgment — it's to ensure that when human judgment is needed, the human arrives with full context, not a blank error screen.",
+          "The goal isn't to replace human judgment, it's to ensure that when human judgment is needed, the human arrives with full context, not a blank error screen.",
       },
       {
         type: "quote",
@@ -342,7 +342,7 @@ Provide:
     tags: ["Feature Engineering", "ML Pipelines", "MLOps"],
     title: "Feature Pipelines for Production ML: From Raw Events to Model-Ready Signals",
     excerpt:
-      "A model is only as good as the features you feed it. This guide walks through the pipeline that turns raw behavioural and transactional data into reliable, model-ready features — and the design choices that separate a demo from a system your business can trust in production.",
+      "A model is only as good as the features you feed it. This guide walks through the pipeline that turns raw behavioural and transactional data into reliable, model-ready features, and the design choices that separate a demo from a system your business can trust in production.",
     date: "Jun 2026",
     readTime: "7 min read",
     accentColor: "#6366F1",
@@ -357,7 +357,7 @@ Provide:
       {
         type: "p",
         content:
-          "Most teams obsess over model architecture and neglect the pipeline that produces the features the model learns from. Yet in production ML, the feature pipeline is where the majority of accuracy — and the majority of failures — actually live. Between raw event data and a model-ready feature vector sits a series of transformations that materially affect what your model can learn and how reliably it performs after deployment.",
+          "Most teams obsess over model architecture and neglect the pipeline that produces the features the model learns from. Yet in production ML, the feature pipeline is where the majority of accuracy, and the majority of failures, actually live. Between raw event data and a model-ready feature vector sits a series of transformations that materially affect what your model can learn and how reliably it performs after deployment.",
       },
       {
         type: "h2",
@@ -366,7 +366,7 @@ Provide:
       {
         type: "p",
         content:
-          "Raw signal arrives from many sources — behavioural event streams, transactional systems, CRM records, and third-party enrichment. At this stage the priority is faithful capture: validating schemas, rejecting malformed records, and deduplicating within a short window. Resist the urge to transform here. The ingestion layer's only job is to land trustworthy raw data that everything downstream can depend on.",
+          "Raw signal arrives from many sources, behavioural event streams, transactional systems, CRM records, and third-party enrichment. At this stage the priority is faithful capture: validating schemas, rejecting malformed records, and deduplicating within a short window. Resist the urge to transform here. The ingestion layer's only job is to land trustworthy raw data that everything downstream can depend on.",
       },
       {
         type: "h2",
@@ -375,7 +375,7 @@ Provide:
       {
         type: "p",
         content:
-          "This is where most of the value — and most of the subtle bugs — are created. A robust feature layer applies:",
+          "This is where most of the value, and most of the subtle bugs, are created. A robust feature layer applies:",
       },
       {
         type: "ul",
@@ -395,7 +395,7 @@ Provide:
       {
         type: "p",
         content:
-          "The single most common cause of a model that performs well offline but fails in production is training/serving skew — the features computed at training time are subtly different from those computed at inference. A disciplined feature pipeline computes features through shared logic so that the same transformation runs in batch training and in real-time serving. When that logic diverges, your offline metrics become fiction.",
+          "The single most common cause of a model that performs well offline but fails in production is training/serving skew, the features computed at training time are subtly different from those computed at inference. A disciplined feature pipeline computes features through shared logic so that the same transformation runs in batch training and in real-time serving. When that logic diverges, your offline metrics become fiction.",
       },
       {
         type: "h3",
@@ -409,7 +409,7 @@ Provide:
       {
         type: "callout",
         content:
-          "If a feature is expensive to compute in real time but only marginally improves the model, precompute it in batch. The goal is not maximum freshness everywhere — it is the right freshness for each signal that drives the decision.",
+          "If a feature is expensive to compute in real time but only marginally improves the model, precompute it in batch. The goal is not maximum freshness everywhere, it is the right freshness for each signal that drives the decision.",
       },
       {
         type: "h2",
@@ -418,7 +418,7 @@ Provide:
       {
         type: "p",
         content:
-          "A feature store gives your organisation a single, versioned source of truth for features — reused across models, consistent between training and serving, and monitored for drift. Even a lightweight feature store pays for itself the first time two teams stop re-deriving the same customer feature three slightly different ways and getting three slightly different answers.",
+          "A feature store gives your organisation a single, versioned source of truth for features, reused across models, consistent between training and serving, and monitored for drift. Even a lightweight feature store pays for itself the first time two teams stop re-deriving the same customer feature three slightly different ways and getting three slightly different answers.",
       },
       {
         type: "h2",
@@ -427,9 +427,9 @@ Provide:
       {
         type: "ul",
         items: [
-          "Version your features the way you version code — a silent change to a transformation is a silent change to every model that consumes it",
+          "Version your features the way you version code, a silent change to a transformation is a silent change to every model that consumes it",
           "Monitor feature distributions in production; drift in an input is an early warning long before accuracy visibly degrades",
-          "Guard aggressively against leakage — a feature that looks predictive offline but uses future information will collapse in production",
+          "Guard aggressively against leakage, a feature that looks predictive offline but uses future information will collapse in production",
           "Share transformation logic between training and serving to eliminate skew",
           "Treat data freshness as a design parameter per feature, not a single global setting",
         ],
@@ -437,7 +437,7 @@ Provide:
       {
         type: "quote",
         content:
-          "\"The most important thing to understand about a production model is that 'the data' isn't a single thing — it's a family of derived features of an underlying event stream. Every transformation on the path to the model is a design decision that shows up later as accuracy or as an incident.\"",
+          "\"The most important thing to understand about a production model is that 'the data' isn't a single thing, it's a family of derived features of an underlying event stream. Every transformation on the path to the model is a design decision that shows up later as accuracy or as an incident.\"",
       },
     ],
   },
@@ -448,7 +448,7 @@ Provide:
     tags: ["Model Monitoring", "Data Drift", "MLOps"],
     title: "Monitoring ML Models in Production: Catch Drift Before It Costs You",
     excerpt:
-      "A model that was accurate at launch is not accurate forever. This guide walks through building automated monitoring for production ML — data drift, prediction drift, and input quality checks — so degrading models are caught and retrained before they quietly erode revenue.",
+      "A model that was accurate at launch is not accurate forever. This guide walks through building automated monitoring for production ML, data drift, prediction drift, and input quality checks, so degrading models are caught and retrained before they quietly erode revenue.",
     date: "Jun 2026",
     readTime: "9 min read",
     accentColor: "#EC4899",
@@ -463,7 +463,7 @@ Provide:
       {
         type: "p",
         content:
-          "Traditional software fails loudly: it throws an error, a page goes down, someone gets paged. Machine learning fails silently. A churn model or a lead-scoring model keeps returning confident predictions long after the world it was trained on has shifted underneath it. Nobody gets an alert. The only symptom is a slow, invisible decline in the outcome the model was supposed to improve — until a quarter later someone asks why conversion is down. Monitoring is what turns that silent failure into an early, actionable signal.",
+          "Traditional software fails loudly: it throws an error, a page goes down, someone gets paged. Machine learning fails silently. A churn model or a lead-scoring model keeps returning confident predictions long after the world it was trained on has shifted underneath it. Nobody gets an alert. The only symptom is a slow, invisible decline in the outcome the model was supposed to improve, until a quarter later someone asks why conversion is down. Monitoring is what turns that silent failure into an early, actionable signal.",
       },
       {
         type: "h2",
@@ -539,7 +539,7 @@ ORDER BY event_date DESC`,
         items: [
           "Each key feature's distribution should stay within a stable PSI band versus the training snapshot",
           "The model's predicted-positive rate should stay within its historical, seasonality-adjusted range",
-          "No single input category should suddenly dominate — a sign of an upstream data break",
+          "No single input category should suddenly dominate, a sign of an upstream data break",
           "Null and out-of-range rates for critical features should stay below their trained tolerance",
           "Score calibration should hold: predicted probabilities should still track observed outcomes",
         ],
@@ -565,7 +565,7 @@ ORDER BY event_date DESC`,
       {
         type: "callout",
         content:
-          "The goal of model monitoring is not to keep a model frozen and perfect — it's to know, before your business does, when reality has drifted far enough that the model needs to be retrained.",
+          "The goal of model monitoring is not to keep a model frozen and perfect, it's to know, before your business does, when reality has drifted far enough that the model needs to be retrained.",
       },
       {
         type: "quote",
@@ -581,7 +581,7 @@ ORDER BY event_date DESC`,
     tags: ["AI Maturity", "AI Strategy", "Decision Intelligence"],
     title: "The AI Maturity Model: Which Stage Is Your Business Really At?",
     excerpt:
-      "Most companies believe they're more AI-mature than they really are. The AI Maturity Model cuts through the hype with a clear five-stage framework — from descriptive reporting to autonomous, agent-driven decisions — so you can invest in the capability that actually moves you forward.",
+      "Most companies believe they're more AI-mature than they really are. The AI Maturity Model cuts through the hype with a clear five-stage framework, from descriptive reporting to autonomous, agent-driven decisions, so you can invest in the capability that actually moves you forward.",
     date: "Jun 2026",
     readTime: "5 min read",
     accentColor: "#1D75FF",
@@ -596,7 +596,7 @@ ORDER BY event_date DESC`,
       {
         type: "p",
         content:
-          "In our experience working with dozens of organisations, there's a consistent pattern: companies grade their own AI maturity significantly higher than an objective assessment would. A team that has a few dashboards and has run a ChatGPT pilot often describes itself as 'AI-driven.' A team with one model in production considers itself 'advanced.' This overestimation matters because it prevents organisations from accurately diagnosing their real constraints — and from investing in the right capabilities to address them.",
+          "In our experience working with dozens of organisations, there's a consistent pattern: companies grade their own AI maturity significantly higher than an objective assessment would. A team that has a few dashboards and has run a ChatGPT pilot often describes itself as 'AI-driven.' A team with one model in production considers itself 'advanced.' This overestimation matters because it prevents organisations from accurately diagnosing their real constraints, and from investing in the right capabilities to address them.",
       },
       {
         type: "h2",
@@ -604,12 +604,12 @@ ORDER BY event_date DESC`,
       },
       {
         type: "h3",
-        content: "Stage 1: Descriptive — What Happened?",
+        content: "Stage 1: Descriptive. What Happened?",
       },
       {
         type: "p",
         content:
-          "At Stage 1, intelligence means reporting. Teams produce regular reports — traffic, conversions, revenue — that describe what happened in the past. Data is typically collected in one or two tools, reports are largely manual or templated, and the organisation is reactive: it looks at data after decisions are made, not before. There is no model in the loop.",
+          "At Stage 1, intelligence means reporting. Teams produce regular reports, traffic, conversions, revenue, that describe what happened in the past. Data is typically collected in one or two tools, reports are largely manual or templated, and the organisation is reactive: it looks at data after decisions are made, not before. There is no model in the loop.",
       },
       {
         type: "p",
@@ -618,34 +618,34 @@ ORDER BY event_date DESC`,
       },
       {
         type: "h3",
-        content: "Stage 2: Diagnostic — Why Did It Happen?",
+        content: "Stage 2: Diagnostic. Why Did It Happen?",
       },
       {
         type: "p",
         content:
-          "Stage 2 organisations have moved beyond reporting to investigation. When a metric changes, they have the data foundation and skills to understand why. This requires a real data warehouse, clean and well-modelled data, cohort and funnel analysis, and — increasingly — LLM-assisted analysis that lets a business user interrogate data in natural language. This is the essential data foundation that everything above it depends on.",
+          "Stage 2 organisations have moved beyond reporting to investigation. When a metric changes, they have the data foundation and skills to understand why. This requires a real data warehouse, clean and well-modelled data, cohort and funnel analysis, and, increasingly. LLM-assisted analysis that lets a business user interrogate data in natural language. This is the essential data foundation that everything above it depends on.",
       },
       {
         type: "h3",
-        content: "Stage 3: Predictive — What Will Happen?",
+        content: "Stage 3: Predictive. What Will Happen?",
       },
       {
         type: "p",
         content:
-          "Predictive ML uses historical patterns to forecast future outcomes. Churn prediction, demand forecasting, customer lifetime value, and propensity-to-purchase scoring are all Stage 3 capabilities. This stage requires ML infrastructure, data science expertise, and — critically — a business culture willing to make decisions based on model outputs rather than intuition. This is where AI starts producing measurable financial return.",
+          "Predictive ML uses historical patterns to forecast future outcomes. Churn prediction, demand forecasting, customer lifetime value, and propensity-to-purchase scoring are all Stage 3 capabilities. This stage requires ML infrastructure, data science expertise, and, critically, a business culture willing to make decisions based on model outputs rather than intuition. This is where AI starts producing measurable financial return.",
       },
       {
         type: "h3",
-        content: "Stage 4: Prescriptive — What Should We Do?",
+        content: "Stage 4: Prescriptive. What Should We Do?",
       },
       {
         type: "p",
         content:
-          "Prescriptive AI doesn't just tell you what will happen — it tells you what to do about it. Recommendation engines, next-best-action systems, dynamic pricing, and personalisation are all prescriptive. Retrieval-augmented (RAG) assistants that answer from your own knowledge base and recommend an action also live here. The system doesn't just surface an insight; it recommends or takes the action.",
+          "Prescriptive AI doesn't just tell you what will happen, it tells you what to do about it. Recommendation engines, next-best-action systems, dynamic pricing, and personalisation are all prescriptive. Retrieval-augmented (RAG) assistants that answer from your own knowledge base and recommend an action also live here. The system doesn't just surface an insight; it recommends or takes the action.",
       },
       {
         type: "h3",
-        content: "Stage 5: Autonomous — What Is the System Deciding?",
+        content: "Stage 5: Autonomous. What Is the System Deciding?",
       },
       {
         type: "p",
@@ -677,12 +677,12 @@ ORDER BY event_date DESC`,
       {
         type: "p",
         content:
-          "Every organisation wants to jump straight to autonomous agents, but the transition that unlocks the most value for most businesses is Stage 2 to Stage 3: from understanding why something happened to reliably predicting what will happen and acting on it. That is where AI stops being a talking point and starts changing the numbers. It depends on a trustworthy data foundation, ML infrastructure, and — most of all — the organisational willingness to let a model, rather than a gut feeling, drive a decision.",
+          "Every organisation wants to jump straight to autonomous agents, but the transition that unlocks the most value for most businesses is Stage 2 to Stage 3: from understanding why something happened to reliably predicting what will happen and acting on it. That is where AI stops being a talking point and starts changing the numbers. It depends on a trustworthy data foundation, ML infrastructure, and, most of all, the organisational willingness to let a model, rather than a gut feeling, drive a decision.",
       },
       {
         type: "quote",
         content:
-          "\"Every organisation wants to talk about autonomous AI agents. But most can't yet reliably predict which customers will churn next month. Build the predictive foundation first — the autonomy is only as trustworthy as the models underneath it.\"",
+          "\"Every organisation wants to talk about autonomous AI agents. But most can't yet reliably predict which customers will churn next month. Build the predictive foundation first, the autonomy is only as trustworthy as the models underneath it.\"",
       },
     ],
   },
@@ -693,7 +693,7 @@ ORDER BY event_date DESC`,
     tags: ["AI Agents", "Self-Healing Pipelines", "AIOps"],
     title: "Self-Healing Data Pipelines: How AI Agents Fix Failures First",
     excerpt:
-      "Data pipeline failures are inevitable — slow recovery is not. We examine how autonomous AI agents monitor your jobs, detect failures in real time, reason over the error with an LLM, and run self-healing playbooks that resolve routine breaks before a human ever wakes up.",
+      "Data pipeline failures are inevitable, slow recovery is not. We examine how autonomous AI agents monitor your jobs, detect failures in real time, reason over the error with an LLM, and run self-healing playbooks that resolve routine breaks before a human ever wakes up.",
     date: "Jun 2026",
     readTime: "7 min read",
     accentColor: "#8B5CF6",
@@ -708,7 +708,7 @@ ORDER BY event_date DESC`,
       {
         type: "p",
         content:
-          "Whatever warehouse or orchestrator you run on, data pipeline failures fall into a small number of common categories, each with recognisable signatures and known remediation paths. That predictability is exactly what makes them excellent candidates for AI-assisted — or even fully autonomous — resolution:",
+          "Whatever warehouse or orchestrator you run on, data pipeline failures fall into a small number of common categories, each with recognisable signatures and known remediation paths. That predictability is exactly what makes them excellent candidates for AI-assisted, or even fully autonomous, resolution:",
       },
       {
         type: "ul",
@@ -737,7 +737,7 @@ ORDER BY event_date DESC`,
       {
         type: "p",
         content:
-          "Monitor BigQuery job completion events via Cloud Pub/Sub. Every scheduled query completion — success or failure — generates an event that can trigger your agent. Configure alerts for: job failures, jobs running longer than their SLA, and jobs producing fewer rows than expected.",
+          "Monitor BigQuery job completion events via Cloud Pub/Sub. Every scheduled query completion, success or failure, generates an event that can trigger your agent. Configure alerts for: job failures, jobs running longer than their SLA, and jobs producing fewer rows than expected.",
       },
       {
         type: "h3",
@@ -799,7 +799,7 @@ def handle_pipeline_failure(job_id: str, error: dict) -> str:
       {
         type: "p",
         content:
-          "Not all pipeline failures should be auto-remediated. Business logic errors, data quality failures with unknown root causes, and failures in pipelines feeding critical financial or compliance reporting should always involve a human. The goal of automation is to handle the routine and predictable failures — freeing human attention for the failures that genuinely require judgment.",
+          "Not all pipeline failures should be auto-remediated. Business logic errors, data quality failures with unknown root causes, and failures in pipelines feeding critical financial or compliance reporting should always involve a human. The goal of automation is to handle the routine and predictable failures, freeing human attention for the failures that genuinely require judgment.",
       },
       {
         type: "callout",
@@ -835,7 +835,7 @@ def handle_pipeline_failure(job_id: str, error: dict) -> str:
       {
         type: "p",
         content:
-          "'(Not Set)' in GA4 means that a dimension value was expected but not available for a given row of data. It's not a bug in GA4 — it's a signal that either the data was never collected, the data was collected but not associated with the session or user at report time, or the dimension you're looking at isn't applicable to the events you're analysing.",
+          "'(Not Set)' in GA4 means that a dimension value was expected but not available for a given row of data. It's not a bug in GA4, it's a signal that either the data was never collected, the data was collected but not associated with the session or user at report time, or the dimension you're looking at isn't applicable to the events you're analysing.",
       },
       {
         type: "p",
@@ -855,7 +855,7 @@ def handle_pipeline_failure(job_id: str, error: dict) -> str:
         type: "ul",
         items: [
           "Direct navigation without a landing page event (app sessions, cross-device sessions)",
-          "The page_view event fired before the session_start — a GTM sequencing issue",
+          "The page_view event fired before the session_start, a GTM sequencing issue",
           "Server-side rendering pages where the GA4 tag fires before the URL is populated",
           "App sessions being included in a web-focused report",
         ],
@@ -877,7 +877,7 @@ def handle_pipeline_failure(job_id: str, error: dict) -> str:
       {
         type: "ul",
         items: [
-          "Cross-domain tracking not configured — user crosses domains and loses session context",
+          "Cross-domain tracking not configured, user crosses domains and loses session context",
           "App-to-web handoffs without referral exclusions",
           "URL parameters being stripped by redirect chains before GA4 fires",
           "Sessions starting from events that don't have page_location set (some push notification flows)",
@@ -890,14 +890,14 @@ def handle_pipeline_failure(job_id: str, error: dict) -> str:
       {
         type: "p",
         content:
-          "If a custom dimension you've created shows (not set) for some events, the parameter simply wasn't included in those events when they fired. This is normal — not every event needs every custom dimension. However, if you're seeing (not set) for events where the parameter should always be present:",
+          "If a custom dimension you've created shows (not set) for some events, the parameter simply wasn't included in those events when they fired. This is normal, not every event needs every custom dimension. However, if you're seeing (not set) for events where the parameter should always be present:",
       },
       {
         type: "ul",
         items: [
           "Verify the parameter name in GTM matches exactly the custom dimension key registered in GA4 Admin (case-sensitive)",
-          "Check that the variable in GTM resolves correctly on those pages — undefined variables become undefined, not empty strings",
-          "Confirm the custom dimension is registered in GA4 Admin — unregistered parameters are still collected but won't appear in standard reports",
+          "Check that the variable in GTM resolves correctly on those pages, undefined variables become undefined, not empty strings",
+          "Confirm the custom dimension is registered in GA4 Admin, unregistered parameters are still collected but won't appear in standard reports",
           "Check if the parameter is being truncated (GA4 truncates parameter values over 100 characters for string parameters)",
         ],
       },
@@ -922,7 +922,7 @@ def handle_pipeline_failure(job_id: str, error: dict) -> str:
       {
         type: "p",
         content:
-          "When an audience condition includes a custom dimension that shows (not set) for many users, it usually means the dimension was registered after users had already established their profile. GA4 doesn't backfill dimension values — only future events will populate the dimension.",
+          "When an audience condition includes a custom dimension that shows (not set) for many users, it usually means the dimension was registered after users had already established their profile. GA4 doesn't backfill dimension values, only future events will populate the dimension.",
       },
       {
         type: "h2",
@@ -935,13 +935,13 @@ def handle_pipeline_failure(job_id: str, error: dict) -> str:
           "Check custom dimension values in the GA4 Realtime report during testing",
           "Export a sample of raw events from BigQuery weekly and audit for unexpected (not set) rates",
           "Set up automated data quality checks that alert when (not set) rate for critical dimensions exceeds a threshold",
-          "Document expected (not set) rates for each dimension — some (not set) is normal, unexpected increases are the signal",
+          "Document expected (not set) rates for each dimension, some (not set) is normal, unexpected increases are the signal",
         ],
       },
       {
         type: "quote",
         content:
-          "\"(Not Set) is GA4's way of telling you something about your measurement design. The question isn't just how to fix it — it's why it's appearing, which is often more informative than the fix itself.\"",
+          "\"(Not Set) is GA4's way of telling you something about your measurement design. The question isn't just how to fix it, it's why it's appearing, which is often more informative than the fix itself.\"",
       },
     ],
   },
@@ -952,7 +952,7 @@ def handle_pipeline_failure(job_id: str, error: dict) -> str:
     tags: ["Experimentation", "A/B Testing", "AI Evaluation"],
     title: "How to Evaluate AI Features: A Proven Experimentation Framework",
     excerpt:
-      "Shipping an AI feature without a rigorous experiment is how you convince yourself something works when it doesn't. This guide gives you a repeatable, statistically sound framework for testing AI-driven changes — from model-scored audiences to LLM-powered experiences — so you act on real lift, not the demo effect.",
+      "Shipping an AI feature without a rigorous experiment is how you convince yourself something works when it doesn't. This guide gives you a repeatable, statistically sound framework for testing AI-driven changes, from model-scored audiences to LLM-powered experiences, so you act on real lift, not the demo effect.",
     date: "May 2026",
     readTime: "10 min read",
     accentColor: "#F59E0B",
@@ -967,7 +967,7 @@ def handle_pipeline_failure(job_id: str, error: dict) -> str:
       {
         type: "p",
         content:
-          "AI features are especially easy to fool yourself about. A model-scored audience, a new recommendation engine, or an LLM-powered flow always looks impressive in a demo — but the demo effect is not lift. The failure rate for experiments is alarmingly high, not because tests show no winner (that's expected and fine) but because many produce results teams can't act on: the test ran too short, the sample was too small, the improvement fell within the margin of error, or the methodology was flawed in a way that invalidated the result. Good evaluation isn't about running more tests — it's about running ones that give you a decision you can trust. The framework below applies whether you're testing a button colour or a large language model.",
+          "AI features are especially easy to fool yourself about. A model-scored audience, a new recommendation engine, or an LLM-powered flow always looks impressive in a demo, but the demo effect is not lift. The failure rate for experiments is alarmingly high, not because tests show no winner (that's expected and fine) but because many produce results teams can't act on: the test ran too short, the sample was too small, the improvement fell within the margin of error, or the methodology was flawed in a way that invalidated the result. Good evaluation isn't about running more tests, it's about running ones that give you a decision you can trust. The framework below applies whether you're testing a button colour or a large language model.",
       },
       {
         type: "h2",
@@ -989,13 +989,13 @@ def handle_pipeline_failure(job_id: str, error: dict) -> str:
       {
         type: "p",
         content:
-          "This is where most tests go wrong. You cannot decide to stop a test when it looks like one variant is winning — that's p-hacking, and it produces false positives at a high rate. Before launching, calculate the required sample size based on:",
+          "This is where most tests go wrong. You cannot decide to stop a test when it looks like one variant is winning, that's p-hacking, and it produces false positives at a high rate. Before launching, calculate the required sample size based on:",
       },
       {
         type: "ul",
         items: [
           "Your current baseline conversion rate",
-          "The minimum detectable effect (MDE) — the smallest improvement worth acting on",
+          "The minimum detectable effect (MDE), the smallest improvement worth acting on",
           "Your required statistical power (typically 80%)",
           "Your desired significance threshold (typically 95% or p < 0.05)",
         ],
@@ -1003,7 +1003,7 @@ def handle_pipeline_failure(job_id: str, error: dict) -> str:
       {
         type: "p",
         content:
-          "If your required sample size will take more than 4–6 weeks to reach at your current traffic levels, consider whether the test is worth running at all — or whether you can increase the MDE threshold.",
+          "If your required sample size will take more than 4–6 weeks to reach at your current traffic levels, consider whether the test is worth running at all, or whether you can increase the MDE threshold.",
       },
       {
         type: "h3",
@@ -1021,7 +1021,7 @@ def handle_pipeline_failure(job_id: str, error: dict) -> str:
       {
         type: "p",
         content:
-          "Once launched: run for at least two full business cycles (typically two weeks minimum), don't make changes to either variant during the test, monitor for data collection issues but don't look at results until sample size is reached, and watch for novelty effect — a spike in the variant at launch that reverts as users habituate.",
+          "Once launched: run for at least two full business cycles (typically two weeks minimum), don't make changes to either variant during the test, monitor for data collection issues but don't look at results until sample size is reached, and watch for novelty effect, a spike in the variant at launch that reverts as users habituate.",
       },
       {
         type: "h3",
@@ -1030,7 +1030,7 @@ def handle_pipeline_failure(job_id: str, error: dict) -> str:
       {
         type: "p",
         content:
-          "When your pre-determined sample size is reached, analyse the primary metric and key secondary metrics. Record: the result (win/loss/inconclusive), the statistical significance, the observed effect size, and what you learned about your hypothesis. Then ship the winner or — equally valuable — document what you learned from an inconclusive result.",
+          "When your pre-determined sample size is reached, analyse the primary metric and key secondary metrics. Record: the result (win/loss/inconclusive), the statistical significance, the observed effect size, and what you learned about your hypothesis. Then ship the winner or, equally valuable, document what you learned from an inconclusive result.",
       },
       {
         type: "h2",
@@ -1039,23 +1039,23 @@ def handle_pipeline_failure(job_id: str, error: dict) -> str:
       {
         type: "ul",
         items: [
-          "Stopping tests early based on observed results — always run to your pre-calculated sample size",
-          "Testing multiple changes at once in an A/B test — that's a multivariate test and requires much more traffic",
-          "Not accounting for seasonality — don't run a test that spans Black Friday without acknowledging the confound",
-          "Using conversion rate as your only metric — also track revenue per visitor, AOV, and downstream metrics",
-          "Not running QA before launch — a broken test variant is worse than no test",
-          "Ignoring segment-level results — a test that loses overall might win strongly for a key segment, which is itself an insight",
+          "Stopping tests early based on observed results, always run to your pre-calculated sample size",
+          "Testing multiple changes at once in an A/B test, that's a multivariate test and requires much more traffic",
+          "Not accounting for seasonality, don't run a test that spans Black Friday without acknowledging the confound",
+          "Using conversion rate as your only metric, also track revenue per visitor, AOV, and downstream metrics",
+          "Not running QA before launch, a broken test variant is worse than no test",
+          "Ignoring segment-level results, a test that loses overall might win strongly for a key segment, which is itself an insight",
         ],
       },
       {
         type: "callout",
         content:
-          "The most valuable output of A/B testing is often not the winning variant — it's the validated understanding of why users behave the way they do. Document your learnings systematically, and you'll build a knowledge base that accelerates every future test.",
+          "The most valuable output of A/B testing is often not the winning variant, it's the validated understanding of why users behave the way they do. Document your learnings systematically, and you'll build a knowledge base that accelerates every future test.",
       },
       {
         type: "quote",
         content:
-          "\"An A/B test that tells you what doesn't work is worth just as much as one that tells you what does — as long as you had a good hypothesis that you actually learned from.\"",
+          "\"An A/B test that tells you what doesn't work is worth just as much as one that tells you what does, as long as you had a good hypothesis that you actually learned from.\"",
       },
     ],
   },

@@ -30,7 +30,7 @@ import { useSEO, SITE_URL } from "../lib/seo";
 import { staggerContainer, staggerItem, viewportOnce } from "../lib/animations";
 
 // ProfessionalService structured data for the home route.
-// (The Organization schema lives statically in index.html — not duplicated here.)
+// (The Organization schema lives statically in index.html, not duplicated here.)
 const HOME_JSON_LD = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
@@ -74,7 +74,7 @@ const HOME_JSON_LD = {
   },
 };
 
-// Outcome-led capability band — "what we do" mapped to business value.
+// Outcome-led capability band, "what we do" mapped to business value.
 const CAPABILITIES = [
   {
     icon: Bot,
@@ -84,7 +84,7 @@ const CAPABILITIES = [
   {
     icon: Sparkles,
     title: "Generative AI & Assistants",
-    outcome: "Turn your own knowledge into instant, trusted answers — with citations your teams can verify.",
+    outcome: "Provide instant, trusted answers using your own knowledge base, complete with citations your teams can verify.",
   },
   {
     icon: Brain,
@@ -104,7 +104,7 @@ const CAPABILITIES = [
   {
     icon: BarChart3,
     title: "Analytics & Decision Intelligence",
-    outcome: "Give every team self-serve answers from your data in plain language — decisions in seconds, not days.",
+    outcome: "Give every team self-serve answers from your data in plain language. Make decisions in seconds, not days.",
   },
 ];
 
@@ -127,7 +127,7 @@ const HIGHLIGHT_STUDIES = caseStudies.filter((c) => c.featured).slice(0, 3);
 // A few industry + function solutions for the "solutions by industry & function" section.
 const SOLUTION_PREVIEW = [...industries.slice(0, 4), ...functions.slice(0, 2)];
 
-// Trust band — platforms and frameworks the delivery runs on (text chips, no external assets).
+// Trust band, platforms and frameworks the delivery runs on (text chips, no external assets).
 const TRUST_CHIPS = [
   "AWS", "Microsoft Azure", "Google Cloud", "OpenAI", "Anthropic Claude",
   "Google Gemini", "LangChain", "PyTorch", "TensorFlow", "BigQuery", "Vertex AI", "scikit-learn",
@@ -380,7 +380,7 @@ function SolutionsSection() {
             AI Solutions, Engineered for Outcomes
           </h2>
           <p className="text-base text-text-secondary font-light leading-relaxed">
-            Field-tested solution blueprints that automate your operations, put institutional knowledge to work, and forecast what happens next — deployed securely in your own cloud.
+            Field-tested solution blueprints that automate your operations, leverage institutional knowledge, and forecast future trends. Every solution is deployed securely in your own cloud.
           </p>
         </motion.div>
 
@@ -481,7 +481,7 @@ href="/contact"
 
 export default function Home() {
   useSEO({
-    title: "NorthArc — AI Engineering, Data Science & Intelligent Automation",
+    title: "NorthArc: AI Engineering, Data Science & Intelligent Automation",
     description:
       "NorthArc engineers AI automation, data science and GenAI systems that cut costs, speed decisions and turn enterprise data into measurable business impact.",
     path: "/",
@@ -602,7 +602,7 @@ export default function Home() {
             </h1>
 
             <p className="text-sm sm:text-base text-text-secondary font-light max-w-xl leading-relaxed">
-              We turn your data and operations into production-grade AI — intelligent automation, predictive analytics, and GenAI systems engineered to cut costs, accelerate decisions, and grow revenue.
+              We build production-grade AI systems from your data. Our intelligent automation and predictive analytics are engineered to cut costs, accelerate decisions, and drive growth.
             </p>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-5 pt-2">
@@ -658,7 +658,7 @@ export default function Home() {
                     Enterprise AI Architecture
                   </h3>
                   <p className="text-xs text-text-secondary leading-relaxed font-light">
-                    Secure, monitored AI running in your own cloud — answering from your knowledge, automating your workflows, and reporting every metric back to the business.
+                    Secure, monitored AI running in your own cloud. We help you answer questions from your data, automate workflows, and report metrics directly to the business.
                   </p>
                 </div>
 
@@ -696,7 +696,7 @@ export default function Home() {
             </div>
 
             <p className="text-base md:text-lg text-text-secondary leading-relaxed font-light">
-              NorthArc is an AI engineering, data science, and intelligent automation firm that turns your data and operations into measurable business results. We automate the manual work that slows your teams down, put your own knowledge to work through GenAI, and forecast what happens next with predictive models — all delivered as production-grade systems inside your own secure cloud. Deep technical expertise, applied to the outcomes your business actually reports on.
+              NorthArc is an AI engineering, data science, and intelligent automation firm that turns your data and operations into measurable business results. We automate the manual work that slows your teams down, leverage your institutional knowledge through GenAI, and forecast future trends with predictive models. Every solution is delivered as a production-grade system inside your own secure cloud. We apply deep technical expertise to the outcomes your business actually reports on.
             </p>
           </motion.div>
 
@@ -716,7 +716,7 @@ export default function Home() {
                 <div>
                   <h3 className="text-base font-bold text-text-primary">Production-First Engineering</h3>
                   <p className="text-sm text-text-secondary mt-1 leading-relaxed font-light">
-                    Every model and pipeline ships containerized, monitored, and production-ready — no proofs-of-concept left stranded on a laptop.
+                    Every model and pipeline ships containerized, monitored, and production-ready. We don't leave proofs-of-concept stranded on a laptop.
                   </p>
                 </div>
               </div>
@@ -800,7 +800,7 @@ export default function Home() {
                 <div>
                   <h3 className="text-base font-bold text-text-primary">Measurable Outcomes</h3>
                   <p className="text-sm text-text-secondary mt-1 leading-relaxed font-light">
-                    We tie every engagement to a concrete business KPI — revenue gained, cost removed, or hours returned to your team.
+                    We tie every engagement to a concrete business KPI, whether that's revenue gained, cost removed, or hours returned to your team.
                   </p>
                 </div>
               </div>
@@ -830,7 +830,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2.5 CAPABILITIES BAND — outcome-led "what we do" */}
+      {/* 2.5 CAPABILITIES BAND, outcome-led "what we do" */}
       <section id="capabilities" className="section-padding-sm bg-bg relative border-t border-border/40">
         <div className="absolute top-0 right-1/4 w-[30vw] h-[30vw] rounded-full bg-primary/5 blur-[130px] pointer-events-none"></div>
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 text-left">
@@ -846,7 +846,7 @@ export default function Home() {
               One partner across the full AI spectrum
             </h2>
             <p className="text-base text-text-secondary font-light leading-relaxed">
-              From automating manual work to forecasting what happens next — every capability is delivered as a production-grade system, tied to a business metric you already report on.
+              From automating manual work to forecasting future trends, every capability is delivered as a production-grade system tied to a business metric you already report on.
             </p>
           </motion.div>
 
@@ -897,7 +897,7 @@ export default function Home() {
                 Deploy-ready AI, built for outcomes
               </h2>
               <p className="text-base text-text-secondary font-light leading-relaxed">
-                Battle-tested product blueprints — voice and support agents, predictive models, document AI, and analytics copilots — configured to your data and deployed in your own secure cloud.
+                Battle-tested product blueprints including voice and support agents, predictive models, document AI, and analytics copilots. We configure these to your data and deploy them in your own secure cloud.
               </p>
             </div>
             <a
@@ -969,7 +969,7 @@ export default function Home() {
               Our 5-Step Process
             </h2>
             <p className="text-base text-text-secondary font-light leading-relaxed">
-              A disciplined path from first audit to live production — every phase mapped to the business metric it is meant to move.
+              A disciplined path from first audit to live production, with every phase mapped to the business metric it is meant to move.
             </p>
           </motion.div>
 
@@ -1032,7 +1032,7 @@ export default function Home() {
                 Results our team has delivered
               </h2>
               <p className="text-base text-text-secondary font-light leading-relaxed">
-                Real predictive-ML engagements delivered by our team across insurance, consumer services, and enterprise data — measured in the numbers the business cares about.
+                Real predictive-ML engagements delivered by our team across insurance, consumer services, and enterprise data. We measure success in the numbers the business cares about.
               </p>
             </div>
             <a
@@ -1186,7 +1186,7 @@ export default function Home() {
               Built on a Production-Proven Stack
             </h2>
             <p className="text-sm md:text-base text-text-secondary font-light max-w-xl mx-auto">
-              Every technology we deploy earns its place by moving a business metric — from ML frameworks and LLM tooling to enterprise cloud infrastructure.
+              Every technology we deploy earns its place by moving a business metric, from ML frameworks and language model tooling to enterprise cloud infrastructure.
             </p>
           </motion.div>
 

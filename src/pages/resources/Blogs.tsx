@@ -23,9 +23,9 @@ const allCategories = [
 
 export default function Blogs() {
   useSEO({
-    title: "Blog — AI Engineering & Data Science Insights",
+    title: "Blog. AI Engineering & Data Science Insights",
     description:
-      "Practical guides and strategic insights on AI engineering, GA4, BigQuery, agentic AI, and data analytics — helping teams turn data into business impact.",
+      "Practical guides and strategic insights on AI engineering, GA4, BigQuery, agentic AI, and data analytics, helping teams turn data into business impact.",
     path: "/resources/blogs",
     jsonLd: breadcrumbJsonLd([
       { name: "Home", path: "/" },
@@ -66,7 +66,7 @@ export default function Blogs() {
           </motion.h1>
           <motion.p className="text-sm sm:text-base text-text-secondary font-light max-w-2xl leading-relaxed" variants={staggerItem}>
             Deep dives, practical guides, and strategic frameworks on GA4, BigQuery, AI-powered analytics,
-            and data engineering — written by practitioners for practitioners.
+            and data engineering, written by practitioners for practitioners.
           </motion.p>
           <motion.div className="flex flex-wrap items-center gap-6 pt-1 text-xs text-text-muted font-mono" variants={staggerItem}>
             <span className="flex items-center gap-2">
@@ -254,7 +254,7 @@ export default function Blogs() {
                   <span className="text-primary font-semibold">delivered</span>
                 </h2>
                 <p className="text-sm text-text-secondary leading-relaxed">
-                  Get the latest on GA4, BigQuery, AI analytics, and data engineering. No spam — just
+                  Get the latest on GA4, BigQuery, AI analytics, and data engineering. No spam, just
                   thoughtful, practitioner-level content.
                 </p>
               </div>

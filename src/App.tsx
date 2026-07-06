@@ -419,7 +419,7 @@ export default function App() {
                         </div>
                         <h4 className="text-base font-bold text-text-primary group-hover/card:text-primary transition-colors">AI Product Development</h4>
                       </div>
-                      <p className="text-xs text-text-secondary leading-relaxed font-light">Custom AI solutions, LLM apps, and ML systems — strategy to production.</p>
+                      <p className="text-xs text-text-secondary leading-relaxed font-light">Custom AI solutions, LLM apps, and ML systems, strategy to production.</p>
                     </a>
 
                     <a href="/services/team-augmentation" onClick={closeNavigationMenus} className="p-6 rounded-2xl bg-surface/40 border border-border/80 hover:border-primary/50 hover:bg-surface-elevated/40 transition-all duration-300 text-left group/card flex flex-col justify-between h-56">
@@ -608,7 +608,7 @@ export default function App() {
                         Ready-to-deploy AI that ships business outcomes
                       </h3>
                       <p className="text-xs text-text-secondary font-light leading-relaxed">
-                        Production-grade agents, copilots, and predictive systems — built to plug into your stack.
+                        Production-grade agents, copilots, and predictive systems, built to plug into your stack.
                       </p>
                     </div>
                     <a
@@ -621,7 +621,7 @@ export default function App() {
                     </a>
                   </div>
 
-                  {/* Right grid — grouped by product category */}
+                  {/* Right grid, grouped by product category */}
                   <div className="lg:col-span-9 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-6 text-left">
                     {[...new Set(products.map((p) => p.category))].map((category) => (
                       <div key={category} className="flex flex-col space-y-3">
@@ -701,7 +701,7 @@ export default function App() {
                     </a>
                   </div>
 
-                  {/* Right — two columns: Industries and Business Functions */}
+                  {/* Right, two columns: Industries and Business Functions */}
                   <div className="lg:col-span-9 grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
 
                     {/* Industries */}
@@ -822,7 +822,7 @@ export default function App() {
                       <div>
                         <h4 className="text-base font-bold text-text-primary group-hover/card:text-primary transition-colors">Case Studies</h4>
                         <p className="text-xs text-text-secondary leading-relaxed font-light mt-1.5">
-                          Explore AI, ML and data projects our team has delivered — real problems, real measurable outcomes.
+                          Explore AI, ML and data projects our team has delivered, real problems, real measurable outcomes.
                         </p>
                       </div>
                       <div className="flex flex-wrap gap-2 mt-auto">
@@ -848,7 +848,7 @@ export default function App() {
                       <div>
                         <h4 className="text-base font-bold text-text-primary group-hover/card:text-primary transition-colors">Blog</h4>
                         <p className="text-xs text-text-secondary leading-relaxed font-light mt-1.5">
-                          Practical thinking on AI engineering, data science, and intelligent automation — written by the people who build it.
+                          Practical thinking on AI engineering, data science, and intelligent automation, written by the people who build it.
                         </p>
                       </div>
                       <div className="flex flex-wrap gap-2 mt-auto">
@@ -1065,10 +1065,10 @@ export default function App() {
         <AnimatePresence mode="wait">
           <motion.div
             key={currentPath}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+            initial={{ opacity: 0, y: 10, filter: "blur(6px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            exit={{ opacity: 0, y: -6, filter: "blur(4px)" }}
+            transition={{ duration: 0.4, ease: [0.22, 0.61, 0.36, 1] }}
           >
             {renderPage()}
           </motion.div>
