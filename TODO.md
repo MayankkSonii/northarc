@@ -122,3 +122,4 @@ on-brand.
 ## 📁 Docs (this setup)
 
 - [x] Created CLAUDE.md, PROJECT_CONTEXT.md, SERVICES.md, BRAND_GUIDELINES.md, ROADMAP.md, SALES_PLAYBOOK.md, CONTENT_STRATEGY.md, TODO.md, README.md.
+- Trigger deployment
