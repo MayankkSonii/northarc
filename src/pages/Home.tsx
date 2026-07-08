@@ -19,7 +19,8 @@ import {
   Bot,
   ScanText,
   BarChart3,
-  TrendingUp
+  TrendingUp,
+  ChevronDown
 } from "lucide-react";
 import { SERVICES, DEPLOYMENT_STEPS, SOLUTIONS } from "../data";
 import { products } from "../data/productsData";
@@ -132,6 +133,113 @@ const TRUST_CHIPS = [
   "AWS", "Microsoft Azure", "Google Cloud", "OpenAI", "Anthropic Claude",
   "Google Gemini", "LangChain", "PyTorch", "TensorFlow", "BigQuery", "Vertex AI", "scikit-learn",
 ];
+
+// Frequently asked questions, also rendered as FAQPage structured data.
+const FAQ_ITEMS = [
+  {
+    question: "What does NorthArc actually build for clients?",
+    answer: "We build production-grade AI systems: LLM applications grounded in your own data, predictive machine learning models, intelligent automation pipelines, and the web and mobile platforms that surface them. Every engagement ships as working software running in your cloud, not a proof of concept.",
+  },
+  {
+    question: "How long does a typical AI engagement take?",
+    answer: "Most engagements move from opportunity audit to a first production release in 6 to 10 weeks, then continue in bi-weekly delivery sprints. Timelines scale with scope, we agree on milestones and success metrics before any build work starts.",
+  },
+  {
+    question: "Do you work with our existing cloud and tech stack?",
+    answer: "Yes. We deploy inside your own AWS, Azure, or GCP environment and integrate with your existing data warehouse, APIs, and CI/CD pipeline rather than asking you to adopt a new platform.",
+  },
+  {
+    question: "Do you offer team augmentation instead of full projects?",
+    answer: "Yes. Alongside full-cycle product delivery, we embed AI engineers and data scientists directly into your team on a dedicated basis, working inside your existing sprints and tooling.",
+  },
+  {
+    question: "Who owns the code and models you build?",
+    answer: "You do. 100% intellectual property ownership transfers to you on final release, including model weights, training pipelines, and source code.",
+  },
+  {
+    question: "Do you support us after launch?",
+    answer: "Yes. We monitor accuracy, cost, and latency in production and offer ongoing support and retraining plans so performance improves with every release rather than degrading over time.",
+  },
+];
+
+const FAQ_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ_ITEMS.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+};
+
+function FAQSection() {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  return (
+    <section id="faq" className="section-padding-sm bg-bg relative border-t border-border/40">
+      <div className="max-w-4xl mx-auto px-6 md:px-12 relative z-10 text-left">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7 }}
+          className="space-y-4 content-space-sm max-w-2xl"
+        >
+          <span className="text-xs font-bold uppercase tracking-widest text-primary font-mono block">FAQ</span>
+          <h2 className="text-3xl md:text-5xl font-light tracking-tight text-text-primary leading-[1.1]">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-base text-text-secondary font-light leading-relaxed">
+            Answers to what prospective partners ask us most before kicking off an engagement.
+          </p>
+        </motion.div>
+
+        <div className="space-y-3">
+          {FAQ_ITEMS.map((item, idx) => {
+            const isOpen = openIndex === idx;
+            return (
+              <motion.div
+                key={item.question}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.5, delay: idx * 0.05 }}
+                className="rounded-2xl border border-border bg-surface overflow-hidden"
+              >
+                <button
+                  onClick={() => setOpenIndex(isOpen ? null : idx)}
+                  aria-expanded={isOpen}
+                  className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
+                >
+                  <span className="text-sm md:text-base font-bold text-text-primary">{item.question}</span>
+                  <ChevronDown className={`w-4.5 h-4.5 text-primary shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
+                </button>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <p className="px-6 pb-5 text-sm text-text-secondary font-light leading-relaxed">
+                        {item.answer}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
 
 // Animated Stats Counter Component
 interface AnimatedCounterProps {
@@ -485,7 +593,7 @@ export default function Home() {
     description:
       "NorthArc engineers AI automation, data science and GenAI systems that cut costs, speed decisions and turn enterprise data into measurable business impact.",
     path: "/",
-    jsonLd: HOME_JSON_LD,
+    jsonLd: [HOME_JSON_LD, FAQ_JSON_LD],
   });
 
   const [formData, setFormData] = useState({
@@ -1222,6 +1330,8 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      <FAQSection />
 
       {/* 3.9 FINAL CTA BAND */}
       <section className="section-padding-sm bg-bg relative border-t border-border/40 overflow-hidden">

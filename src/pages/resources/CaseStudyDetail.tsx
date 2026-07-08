@@ -14,9 +14,28 @@ import {
   ChevronRight,
 } from "lucide-react";
 import caseStudies, { Section } from "../../data/caseStudiesData";
+import { solutions as allSolutions } from "../../data/solutionsData";
 
 interface Props {
   slug: string;
+}
+
+// Score solutions by shared words with the case study's industry/category tags,
+// so "Retail & E-commerce" or "Insurance & Finance" surface the right solution pages
+// even when the exact label doesn't match the solution's title verbatim.
+function relatedSolutions(industry: string, category: string[], limit = 3) {
+  const tags = [industry, ...category].join(" ").toLowerCase();
+  const words = tags.split(/[^a-z]+/).filter((w) => w.length > 2 && w !== "and");
+
+  const scored = allSolutions.map((sol) => {
+    const titleWords = sol.title.toLowerCase().split(/[^a-z]+/).filter(Boolean);
+    const score = titleWords.filter((w) => words.includes(w)).length;
+    return { sol, score };
+  });
+
+  const matched = scored.filter((s) => s.score > 0).sort((a, b) => b.score - a.score);
+  const result = matched.length > 0 ? matched.map((m) => m.sol) : allSolutions.filter((s) => s.type === "industry");
+  return result.slice(0, limit);
 }
 
 export default function CaseStudyDetail({ slug }: Props) {
@@ -80,6 +99,7 @@ export default function CaseStudyDetail({ slug }: Props) {
   const currentIndex = caseStudies.findIndex((c) => c.slug === slug);
   const prev = currentIndex > 0 ? caseStudies[currentIndex - 1] : null;
   const next = currentIndex < caseStudies.length - 1 ? caseStudies[currentIndex + 1] : null;
+  const related = relatedSolutions(cs.industry, cs.category);
 
   return (
     <div className="bg-bg min-h-screen text-text-primary relative overflow-hidden font-sans">
@@ -250,6 +270,34 @@ export default function CaseStudyDetail({ slug }: Props) {
           </div>
         </div>
       </section>
+
+      {/* ── RELATED SOLUTIONS ── */}
+      {related.length > 0 && (
+        <section className="px-6 md:px-12 lg:px-24 pb-4 relative z-10 max-w-5xl mx-auto text-left">
+          <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-text-muted block mb-4">Related Solutions</span>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {related.map((sol) => {
+              const SolIcon = sol.icon;
+              return (
+                <a
+                  key={sol.slug}
+                  href={`/solutions/${sol.slug}`}
+                  className="p-5 rounded-2xl border border-border bg-surface/40 hover:border-primary/40 transition-all group flex flex-col gap-3"
+                >
+                  <div
+                    className="w-9 h-9 rounded-xl flex items-center justify-center"
+                    style={{ backgroundColor: `${sol.accentColor}1a`, color: sol.accentColor }}
+                  >
+                    <SolIcon className="w-4.5 h-4.5" />
+                  </div>
+                  <p className="text-sm font-bold text-text-primary group-hover:text-primary transition-colors">{sol.title}</p>
+                  <p className="text-xs text-text-muted leading-relaxed line-clamp-2">{sol.tagline}</p>
+                </a>
+              );
+            })}
+          </div>
+        </section>
+      )}
 
       {/* ── PREV / NEXT ── */}
       <section className="px-6 md:px-12 lg:px-24 py-12 border-t border-border/20 relative z-10 max-w-5xl mx-auto">

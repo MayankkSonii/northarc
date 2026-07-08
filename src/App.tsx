@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense, lazy } from "react";
 import {
   Sun,
   Moon,
@@ -30,43 +30,44 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
-// Page imports
-import Home from "./pages/Home";
-import Contact from "./pages/Contact";
-import NotFound from "./pages/NotFound";
+// Page imports (lazy-loaded so each route ships its own chunk instead of
+// bundling all 24 pages into a single monolithic bundle)
+const Home = lazy(() => import("./pages/Home"));
+const Contact = lazy(() => import("./pages/Contact"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Services subpage imports
-import DedicatedTeam from "./pages/services/DedicatedTeam";
-import CustomSoftware from "./pages/services/CustomSoftware";
-import CtoService from "./pages/services/CtoService";
-import ItConsulting from "./pages/services/ItConsulting";
+const DedicatedTeam = lazy(() => import("./pages/services/DedicatedTeam"));
+const CustomSoftware = lazy(() => import("./pages/services/CustomSoftware"));
+const CtoService = lazy(() => import("./pages/services/CtoService"));
+const ItConsulting = lazy(() => import("./pages/services/ItConsulting"));
 
 // Expertise subpage imports
-import AiMl from "./pages/expertise/AiMl";
-import BigData from "./pages/expertise/BigData";
-import Reengineering from "./pages/expertise/Reengineering";
-import WebMobile from "./pages/expertise/WebMobile";
-import DevopsSecurity from "./pages/expertise/DevopsSecurity";
-import SupportMaintenance from "./pages/expertise/SupportMaintenance";
-import LowCode from "./pages/expertise/LowCode";
-import QaAutomation from "./pages/expertise/QaAutomation";
-import CloudNative from "./pages/expertise/CloudNative";
-import GenerativeAi from "./pages/expertise/GenerativeAi";
+const AiMl = lazy(() => import("./pages/expertise/AiMl"));
+const BigData = lazy(() => import("./pages/expertise/BigData"));
+const Reengineering = lazy(() => import("./pages/expertise/Reengineering"));
+const WebMobile = lazy(() => import("./pages/expertise/WebMobile"));
+const DevopsSecurity = lazy(() => import("./pages/expertise/DevopsSecurity"));
+const SupportMaintenance = lazy(() => import("./pages/expertise/SupportMaintenance"));
+const LowCode = lazy(() => import("./pages/expertise/LowCode"));
+const QaAutomation = lazy(() => import("./pages/expertise/QaAutomation"));
+const CloudNative = lazy(() => import("./pages/expertise/CloudNative"));
+const GenerativeAi = lazy(() => import("./pages/expertise/GenerativeAi"));
 
 // Resources subpage imports
-import CaseStudies from "./pages/resources/CaseStudies";
-import Blogs from "./pages/resources/Blogs";
-import CaseStudyDetail from "./pages/resources/CaseStudyDetail";
-import BlogDetail from "./pages/resources/BlogDetail";
+const CaseStudies = lazy(() => import("./pages/resources/CaseStudies"));
+const Blogs = lazy(() => import("./pages/resources/Blogs"));
+const CaseStudyDetail = lazy(() => import("./pages/resources/CaseStudyDetail"));
+const BlogDetail = lazy(() => import("./pages/resources/BlogDetail"));
 
 // Products subpage imports
-import Products from "./pages/products/Products";
-import ProductDetail from "./pages/products/ProductDetail";
+const Products = lazy(() => import("./pages/products/Products"));
+const ProductDetail = lazy(() => import("./pages/products/ProductDetail"));
 import { products } from "./data/productsData";
 
 // Solutions subpage imports
-import Solutions from "./pages/solutions/Solutions";
-import SolutionDetail from "./pages/solutions/SolutionDetail";
+const Solutions = lazy(() => import("./pages/solutions/Solutions"));
+const SolutionDetail = lazy(() => import("./pages/solutions/SolutionDetail"));
 import { industries, functions } from "./data/solutionsData";
 
 // Component imports
@@ -1070,7 +1071,7 @@ export default function App() {
             exit={{ opacity: 0, y: -6, filter: "blur(4px)" }}
             transition={{ duration: 0.4, ease: [0.22, 0.61, 0.36, 1] }}
           >
-            {renderPage()}
+            <Suspense fallback={<div className="min-h-screen" />}>{renderPage()}</Suspense>
           </motion.div>
         </AnimatePresence>
       </main>

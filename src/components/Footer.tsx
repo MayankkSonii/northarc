@@ -97,8 +97,12 @@ export function Footer() {
               <li><a href="/expertise/ai-ml" className="text-xs text-text-secondary/50 hover:text-primary transition-colors">AI &amp; Machine Learning</a></li>
               <li><a href="/expertise/generative-ai" className="text-xs text-text-secondary/50 hover:text-primary transition-colors">Generative AI</a></li>
               <li><a href="/expertise/big-data" className="text-xs text-text-secondary/50 hover:text-primary transition-colors">Data Science &amp; Big Data</a></li>
+              <li><a href="/expertise/reengineering" className="text-xs text-text-secondary/50 hover:text-primary transition-colors">Modernization &amp; Reengineering</a></li>
               <li><a href="/expertise/web-mobile" className="text-xs text-text-secondary/50 hover:text-primary transition-colors">Web &amp; Mobile Apps</a></li>
               <li><a href="/expertise/devops-security" className="text-xs text-text-secondary/50 hover:text-primary transition-colors">DevOps &amp; Security</a></li>
+              <li><a href="/expertise/support-maintenance" className="text-xs text-text-secondary/50 hover:text-primary transition-colors">Support &amp; Maintenance</a></li>
+              <li><a href="/expertise/low-code" className="text-xs text-text-secondary/50 hover:text-primary transition-colors">Low-code / No-code</a></li>
+              <li><a href="/expertise/qa-automation" className="text-xs text-text-secondary/50 hover:text-primary transition-colors">QA &amp; Test Automation</a></li>
               <li><a href="/expertise/cloud-native" className="text-xs text-text-secondary/50 hover:text-primary transition-colors">Cloud-native Services</a></li>
             </ul>
           </nav>

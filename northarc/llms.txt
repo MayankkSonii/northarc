@@ -1,0 +1,41 @@
+# NorthArc
+
+> NorthArc is an AI Engineering, Data Science, and Intelligent Automation company. We design, build, and operate production-grade AI systems, LLM applications, and machine learning pipelines that cut costs, speed decisions, and turn enterprise data into measurable business outcomes. Every solution is deployed inside the client's own secure cloud (AWS, Azure, or GCP).
+
+Founded by Mayank Soni, based in Ahmedabad, Gujarat, India. Domain: https://northarc.in
+
+## Services
+- AI Product Development: https://northarc.in/services/full-cycle-development
+- AI Team Augmentation: https://northarc.in/services/team-augmentation
+- AI Transformation Consulting: https://northarc.in/services/transformation-consulting
+- AI Product Concept & Design: https://northarc.in/services/concept-design
+
+## Expertise
+- AI & Machine Learning: https://northarc.in/expertise/ai-ml
+- Generative AI & LLMs: https://northarc.in/expertise/generative-ai
+- Data Science & Big Data: https://northarc.in/expertise/big-data
+- Modernization & Reengineering: https://northarc.in/expertise/reengineering
+- Web & Mobile Apps: https://northarc.in/expertise/web-mobile
+- DevOps & Security: https://northarc.in/expertise/devops-security
+- Support & Maintenance: https://northarc.in/expertise/support-maintenance
+- Low-code / No-code: https://northarc.in/expertise/low-code
+- QA & Test Automation: https://northarc.in/expertise/qa-automation
+- Cloud-native Services: https://northarc.in/expertise/cloud-native
+
+## Products
+Ready-to-deploy AI products: https://northarc.in/products
+
+## Solutions
+Industry and business-function AI playbooks: https://northarc.in/solutions
+
+## Resources
+- Case Studies: https://northarc.in/resources/case-studies
+- Blog: https://northarc.in/resources/blogs
+
+## Contact
+- Contact page: https://northarc.in/contact
+- Email: solutions@northarc.in
+
+## Notes for AI crawlers and LLM-based search
+- All public pages are crawlable; see https://northarc.in/robots.txt and https://northarc.in/sitemap.xml for the full, current URL list.
+- NorthArc does not compete on price; it competes on quality, measurable business outcomes, and long-term technical partnerships.

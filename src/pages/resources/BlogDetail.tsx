@@ -27,6 +27,32 @@ function trimDescription(text: string, max = 155): string {
   return `${cut.slice(0, lastSpace > 0 ? lastSpace : max).replace(/[\s,;:.—-]+$/, "")}…`;
 }
 
+// Prefer articles sharing the same category or tags over plain prev/next,
+// so "More Articles" surfaces topically relevant reading instead of publish order.
+function relatedArticles(post: (typeof blogPosts)[number], limit = 2) {
+  const scored = blogPosts
+    .filter((p) => p.slug !== post.slug)
+    .map((p) => {
+      let score = p.category === post.category ? 2 : 0;
+      score += p.tags.filter((t) => post.tags.includes(t)).length;
+      return { post: p, score };
+    });
+
+  const matched = scored.filter((s) => s.score > 0).sort((a, b) => b.score - a.score);
+
+  const currentIndex = blogPosts.findIndex((p) => p.slug === post.slug);
+  const prev = currentIndex > 0 ? blogPosts[currentIndex - 1] : null;
+  const next = currentIndex < blogPosts.length - 1 ? blogPosts[currentIndex + 1] : null;
+  const fallback = [prev, next].filter((p): p is (typeof blogPosts)[number] => !!p && p.slug !== post.slug);
+
+  const result = matched.map((m) => m.post);
+  for (const p of fallback) {
+    if (result.length >= limit) break;
+    if (!result.some((r) => r.slug === p.slug)) result.push(p);
+  }
+  return result.slice(0, limit);
+}
+
 export default function BlogDetail({ slug }: Props) {
   const post = blogPosts.find((p) => p.slug === slug);
   const path = `/resources/blogs/${slug}`;
@@ -87,6 +113,7 @@ export default function BlogDetail({ slug }: Props) {
   const currentIndex = blogPosts.findIndex((p) => p.slug === slug);
   const prev = currentIndex > 0 ? blogPosts[currentIndex - 1] : null;
   const next = currentIndex < blogPosts.length - 1 ? blogPosts[currentIndex + 1] : null;
+  const related = relatedArticles(post);
 
   // Calculate approximate read progress heading anchors
   const headings = post.sections
@@ -233,13 +260,13 @@ export default function BlogDetail({ slug }: Props) {
               </div>
 
               {/* Related articles */}
-              {(prev || next) && (
+              {related.length > 0 && (
                 <div className="p-5 rounded-2xl border border-border bg-surface/40 backdrop-blur-sm">
                   <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-text-muted block mb-4">
                     More Articles
                   </span>
                   <div className="space-y-3">
-                    {[prev, next].filter(Boolean).slice(0, 2).map((article) => article && (
+                    {related.map((article) => article && (
                       <a
                         key={article.slug}
                         href={`/resources/blogs/${article.slug}`}
