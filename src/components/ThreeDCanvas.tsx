@@ -42,11 +42,11 @@ export function ThreeDCanvas() {
     const renderer = new THREE.WebGLRenderer({
       canvas: canvas,
       alpha: true,
-      antialias: true,
+      antialias: false,
       powerPreference: "high-performance",
     });
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
 
     // Create a circular particle dot texture dynamically via Canvas
     const createCircleTexture = () => {
@@ -74,7 +74,7 @@ export function ThreeDCanvas() {
     const dotTexture = createCircleTexture();
 
     // Configuration
-    const numParticles = 80;
+    const numParticles = 48;
     const maxDistance = 6.0;
     const positions = new Float32Array(numParticles * 3);
     const velocities: { x: number; y: number; z: number }[] = [];
@@ -122,7 +122,7 @@ export function ThreeDCanvas() {
 
     // Line Segments Geometry
     // We allocate a maximum potential number of line vertices
-    const maxLines = 180;
+    const maxLines = 90;
     const linePositions = new Float32Array(maxLines * 2 * 3);
     const lineColors = new Float32Array(maxLines * 2 * 3);
     
@@ -173,6 +173,8 @@ export function ThreeDCanvas() {
     // Render loop state
     let isVisible = true;
     let animationFrameId: number;
+    let lastFrameTime = 0;
+    const frameInterval = 1000 / 30;
 
     // Use IntersectionObserver to stop render loop when hero is scrolled out of view
     const observer = new IntersectionObserver(
@@ -190,11 +192,17 @@ export function ThreeDCanvas() {
     const linePosAttr = lineGeometry.getAttribute("position") as THREE.BufferAttribute;
     const lineColorAttr = lineGeometry.getAttribute("color") as THREE.BufferAttribute;
 
-    const tick = () => {
+    const tick = (time = 0) => {
+      animationFrameId = requestAnimationFrame(tick);
+
       if (!isVisible) {
-        animationFrameId = requestAnimationFrame(tick);
         return;
       }
+
+      if (time - lastFrameTime < frameInterval) {
+        return;
+      }
+      lastFrameTime = time;
 
       // Smooth mouse lerping
       mouseRef.current.x += (mouseRef.current.targetX - mouseRef.current.x) * 0.1;
@@ -302,7 +310,6 @@ export function ThreeDCanvas() {
 
       renderer.render(scene, camera);
 
-      animationFrameId = requestAnimationFrame(tick);
     };
 
     tick();

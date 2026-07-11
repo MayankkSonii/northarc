@@ -93,6 +93,7 @@ export default function App() {
   const megaMenuHoveredRef = React.useRef<"services" | "expertise" | "products" | "solutions" | "resources" | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [scrollPercent, setScrollPercent] = useState(0);
+  const scrollStateRef = React.useRef({ isScrolled: false, scrollPercent: 0, ticking: false });
 
   // Router base path
   const [currentPath, setCurrentPath] = useState<string>(window.location.pathname);
@@ -217,17 +218,35 @@ export default function App() {
 
   // Scroll tracking
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+    const updateScrollState = () => {
+      scrollStateRef.current.ticking = false;
 
+      const nextIsScrolled = window.scrollY > 20;
       const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalHeight > 0) {
-        const scrolled = (window.scrollY / totalHeight) * 100;
-        setScrollPercent(Math.min(100, Math.max(0, scrolled)));
+      const nextScrollPercent =
+        totalHeight > 0
+          ? Math.min(100, Math.max(0, (window.scrollY / totalHeight) * 100))
+          : 0;
+
+      if (nextIsScrolled !== scrollStateRef.current.isScrolled) {
+        scrollStateRef.current.isScrolled = nextIsScrolled;
+        setIsScrolled(nextIsScrolled);
+      }
+
+      if (Math.abs(nextScrollPercent - scrollStateRef.current.scrollPercent) >= 1) {
+        scrollStateRef.current.scrollPercent = nextScrollPercent;
+        setScrollPercent(nextScrollPercent);
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => {
+      if (scrollStateRef.current.ticking) return;
+      scrollStateRef.current.ticking = true;
+      requestAnimationFrame(updateScrollState);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    updateScrollState();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -944,18 +963,18 @@ export default function App() {
                   opacity: 1,
                   height: "auto",
                   transition: {
-                    height: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
-                    opacity: { duration: 0.25 },
-                    staggerChildren: 0.04,
-                    delayChildren: 0.05,
+                    height: { duration: 0.2, ease: [0.22, 1, 0.36, 1] },
+                    opacity: { duration: 0.14 },
+                    staggerChildren: 0.015,
+                    delayChildren: 0.01,
                   }
                 },
                 exit: {
                   opacity: 0,
                   height: 0,
                   transition: {
-                    height: { duration: 0.3, ease: [0.22, 1, 0.36, 1] },
-                    opacity: { duration: 0.2 },
+                    height: { duration: 0.16, ease: [0.22, 1, 0.36, 1] },
+                    opacity: { duration: 0.12 },
                   }
                 }
               }}
@@ -964,8 +983,8 @@ export default function App() {
               <div className="px-6 py-8 space-y-4 flex flex-col">
                 <motion.a
                   variants={{
-                    hidden: { opacity: 0, x: -15 },
-                    visible: { opacity: 1, x: 0, transition: { duration: 0.3 } }
+                    hidden: { opacity: 0, x: -8 },
+                    visible: { opacity: 1, x: 0, transition: { duration: 0.16 } }
                   }}
                   href="/"
                   onClick={closeNavigationMenus}
@@ -977,8 +996,8 @@ export default function App() {
                 {/* Mobile Services Collapsible */}
                 <motion.div
                   variants={{
-                    hidden: { opacity: 0, x: -15 },
-                    visible: { opacity: 1, x: 0, transition: { duration: 0.3 } }
+                    hidden: { opacity: 0, x: -8 },
+                    visible: { opacity: 1, x: 0, transition: { duration: 0.16 } }
                   }}
                   className="space-y-1"
                 >
@@ -1004,8 +1023,8 @@ export default function App() {
                 {/* Mobile Expertise Collapsible */}
                 <motion.div
                   variants={{
-                    hidden: { opacity: 0, x: -15 },
-                    visible: { opacity: 1, x: 0, transition: { duration: 0.3 } }
+                    hidden: { opacity: 0, x: -8 },
+                    visible: { opacity: 1, x: 0, transition: { duration: 0.16 } }
                   }}
                   className="space-y-1"
                 >
@@ -1037,8 +1056,8 @@ export default function App() {
                 {/* Mobile Products Collapsible */}
                 <motion.div
                   variants={{
-                    hidden: { opacity: 0, x: -15 },
-                    visible: { opacity: 1, x: 0, transition: { duration: 0.3 } }
+                    hidden: { opacity: 0, x: -8 },
+                    visible: { opacity: 1, x: 0, transition: { duration: 0.16 } }
                   }}
                   className="space-y-1"
                 >
@@ -1069,8 +1088,8 @@ export default function App() {
                 {/* Mobile Solutions Collapsible */}
                 <motion.div
                   variants={{
-                    hidden: { opacity: 0, x: -15 },
-                    visible: { opacity: 1, x: 0, transition: { duration: 0.3 } }
+                    hidden: { opacity: 0, x: -8 },
+                    visible: { opacity: 1, x: 0, transition: { duration: 0.16 } }
                   }}
                   className="space-y-1"
                 >
@@ -1105,8 +1124,8 @@ export default function App() {
                 {/* Mobile Resources Collapsible */}
                 <motion.div
                   variants={{
-                    hidden: { opacity: 0, x: -15 },
-                    visible: { opacity: 1, x: 0, transition: { duration: 0.3 } }
+                    hidden: { opacity: 0, x: -8 },
+                    visible: { opacity: 1, x: 0, transition: { duration: 0.16 } }
                   }}
                   className="space-y-1"
                 >
@@ -1129,8 +1148,8 @@ export default function App() {
 
                 <motion.div
                   variants={{
-                    hidden: { opacity: 0, x: -15 },
-                    visible: { opacity: 1, x: 0, transition: { duration: 0.3 } }
+                    hidden: { opacity: 0, x: -8 },
+                    visible: { opacity: 1, x: 0, transition: { duration: 0.16 } }
                   }}
                   className="pt-4 border-t border-border"
                 >
@@ -1153,10 +1172,10 @@ export default function App() {
         <AnimatePresence mode="wait">
           <motion.div
             key={currentPath}
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.16, ease: [0.22, 1, 0.36, 1] }}
           >
             {renderPage()}
           </motion.div>

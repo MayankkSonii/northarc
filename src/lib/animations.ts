@@ -11,16 +11,16 @@ const easeInOut: [number, number, number, number] = [0.4, 0, 0.2, 1];
 
 export const springGentle: Transition = {
   type: "spring",
-  stiffness: 100,
-  damping: 20,
-  mass: 0.9,
+  stiffness: 170,
+  damping: 24,
+  mass: 0.7,
 };
 
 export const springSnappy: Transition = {
   type: "spring",
-  stiffness: 120,
-  damping: 18,
-  mass: 0.8,
+  stiffness: 190,
+  damping: 22,
+  mass: 0.65,
 };
 
 export const springBouncy: Transition = {
@@ -31,22 +31,22 @@ export const springBouncy: Transition = {
 };
 
 export const fadeTransition: Transition = {
-  duration: 0.55,
+  duration: 0.24,
   ease: easeOutSoft,
 };
 
-export const staggerDelay = 0.04;
+export const staggerDelay = 0.02;
 
 /* -------------------------------------------------------------------------- */
 /*  Core variants (existing, refined)                                         */
 /* -------------------------------------------------------------------------- */
 
 export const fadeUpVariant: Variants = {
-  hidden: { opacity: 0, y: 15 },
+  hidden: { opacity: 0, y: 8 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.4, ease: easeOutSoft },
+    transition: { duration: 0.24, ease: easeOutSoft },
   },
 };
 
@@ -54,25 +54,25 @@ export const fadeInVariant: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { duration: 0.45, ease: easeOutSoft },
+    transition: { duration: 0.2, ease: easeOutSoft },
   },
 };
 
 export const scaleInVariant: Variants = {
-  hidden: { opacity: 0, scale: 0.98 },
+  hidden: { opacity: 0, scale: 0.99 },
   visible: {
     opacity: 1,
     scale: 1,
-    transition: { duration: 0.4, ease: easeOutSoft },
+    transition: { duration: 0.24, ease: easeOutSoft },
   },
 };
 
 export const slideRightVariant: Variants = {
-  hidden: { opacity: 0, x: 16 },
+  hidden: { opacity: 0, x: 8 },
   visible: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.4, ease: easeOutSoft },
+    transition: { duration: 0.24, ease: easeOutSoft },
   },
 };
 
@@ -82,27 +82,27 @@ export const staggerContainer: Variants = {
     opacity: 1,
     transition: {
       staggerChildren: staggerDelay,
-      delayChildren: 0.04,
+      delayChildren: 0.01,
     },
   },
 };
 
 export const staggerItem: Variants = {
-  hidden: { opacity: 0, y: 15 },
+  hidden: { opacity: 0, y: 8 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.4, ease: easeOutSoft },
+    transition: { duration: 0.24, ease: easeOutSoft },
   },
 };
 
 export const heroVisualVariant: Variants = {
-  hidden: { opacity: 0, scale: 0.98, x: 16 },
+  hidden: { opacity: 0, scale: 0.99, x: 8 },
   visible: {
     opacity: 1,
     scale: 1,
     x: 0,
-    transition: { ...springGentle, delay: 0.1 },
+    transition: springGentle,
   },
 };
 
@@ -111,30 +111,30 @@ export const heroVisualVariant: Variants = {
 /* -------------------------------------------------------------------------- */
 
 export const slideLeftVariant: Variants = {
-  hidden: { opacity: 0, x: -16 },
+  hidden: { opacity: 0, x: -8 },
   visible: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.4, ease: easeOutSoft },
+    transition: { duration: 0.24, ease: easeOutSoft },
   },
 };
 
 export const slideUpSoft: Variants = {
-  hidden: { opacity: 0, y: 12 },
+  hidden: { opacity: 0, y: 8 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.4, ease: easeOutSoft },
+    transition: { duration: 0.24, ease: easeOutSoft },
   },
 };
 
 // More dramatic slide for hero headings
 export const slideUpLarge: Variants = {
-  hidden: { opacity: 0, y: 32 },
+  hidden: { opacity: 0, y: 14 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: easeOutSoft },
+    transition: { duration: 0.28, ease: easeOutSoft },
   },
 };
 
@@ -143,21 +143,20 @@ export const slideUpLarge: Variants = {
 /* -------------------------------------------------------------------------- */
 
 export const blurInVariant: Variants = {
-  hidden: { opacity: 0, filter: "blur(4px)" },
+  hidden: { opacity: 0, y: 8 },
   visible: {
     opacity: 1,
-    filter: "blur(0px)",
-    transition: { duration: 0.45, ease: easeOutSoft },
+    y: 0,
+    transition: { duration: 0.22, ease: easeOutSoft },
   },
 };
 
 export const blurInVariantFast: Variants = {
-  hidden: { opacity: 0, filter: "blur(3px)", scale: 0.99 },
+  hidden: { opacity: 0, scale: 0.995 },
   visible: {
     opacity: 1,
-    filter: "blur(0px)",
     scale: 1,
-    transition: { duration: 0.35, ease: easeOutSoft },
+    transition: { duration: 0.2, ease: easeOutSoft },
   },
 };
 
@@ -174,7 +173,7 @@ export const clipRevealVariant: Variants = {
   visible: {
     y: "0%",
     opacity: 1,
-    transition: { duration: 0.45, ease: easeOutSoft },
+    transition: { duration: 0.25, ease: easeOutSoft },
   },
 };
 
@@ -188,7 +187,7 @@ export const wordRevealContainer: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.035,
+      staggerChildren: 0.015,
       delayChildren: 0,
     },
   },
@@ -199,7 +198,7 @@ export const wordRevealItem: Variants = {
   visible: {
     y: "0%",
     opacity: 1,
-    transition: { duration: 0.4, ease: easeOutSoft },
+    transition: { duration: 0.22, ease: easeOutSoft },
   },
 };
 
@@ -209,7 +208,7 @@ export const wordRevealFastContainer: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.025,
+      staggerChildren: 0.012,
       delayChildren: 0,
     },
   },
@@ -221,7 +220,7 @@ export const charRevealContainer: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.015,
+      staggerChildren: 0.008,
       delayChildren: 0,
     },
   },
@@ -232,7 +231,7 @@ export const charRevealItem: Variants = {
   visible: {
     y: "0%",
     opacity: 1,
-    transition: { duration: 0.3, ease: easeOutSoft },
+    transition: { duration: 0.18, ease: easeOutSoft },
   },
 };
 
@@ -254,7 +253,7 @@ export const scaleInSubtle: Variants = {
   visible: {
     scale: 1,
     opacity: 1,
-    transition: { duration: 0.35, ease: easeOutBack },
+    transition: { duration: 0.2, ease: easeOutSoft },
   },
 };
 
@@ -263,9 +262,9 @@ export const scaleInSubtle: Variants = {
 /* -------------------------------------------------------------------------- */
 
 export const cardHoverLift = {
-  y: -5,
-  scale: 1.005,
-  transition: { duration: 0.2, ease: easeOutSoft },
+  y: -3,
+  scale: 1.002,
+  transition: { duration: 0.14, ease: easeOutSoft },
 };
 
 export const cardHoverGlow = {
@@ -281,7 +280,7 @@ export const timelineItemVariant: Variants = {
   visible: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.4, ease: easeOutSoft },
+    transition: { duration: 0.24, ease: easeOutSoft },
   },
 };
 
@@ -289,7 +288,7 @@ export const lineDrawVariant: Variants = {
   hidden: { scaleX: 0 },
   visible: {
     scaleX: 1,
-    transition: { duration: 0.65, ease: easeOutSoft },
+    transition: { duration: 0.35, ease: easeOutSoft },
   },
 };
 
@@ -297,7 +296,7 @@ export const lineDrawVerticalVariant: Variants = {
   hidden: { scaleY: 0 },
   visible: {
     scaleY: 1,
-    transition: { duration: 0.75, ease: easeOutSoft },
+    transition: { duration: 0.4, ease: easeOutSoft },
   },
 };
 
@@ -310,7 +309,7 @@ export const maskRevealVariant: Variants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.45, ease: easeOutSoft },
+    transition: { duration: 0.24, ease: easeOutSoft },
   },
 };
 
@@ -323,12 +322,12 @@ export const pageTransitionVariant: Variants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.35, ease: easeOutSoft },
+    transition: { duration: 0.18, ease: easeOutSoft },
   },
   exit: {
     opacity: 0,
     y: -6,
-    transition: { duration: 0.2, ease: easeInOut },
+    transition: { duration: 0.12, ease: easeInOut },
   },
 };
 
@@ -369,10 +368,10 @@ export const makeStagger = (delay = 0, stagger = staggerDelay): Variants => ({
 });
 
 export const makeStaggerFast = (delay = 0): Variants =>
-  makeStagger(delay, 0.03);
+  makeStagger(delay, 0.015);
 
 export const makeStaggerSlow = (delay = 0): Variants =>
-  makeStagger(delay, 0.08);
+  makeStagger(delay, 0.035);
 
 /* -------------------------------------------------------------------------- */
 /*  Viewport configs                                                           */
@@ -380,15 +379,15 @@ export const makeStaggerSlow = (delay = 0): Variants =>
 
 export const viewportOnce = {
   once: true,
-  margin: "-10px",
+  margin: "80px",
 } as const;
 
 export const viewportSoft = {
   once: true,
-  margin: "-10px",
+  margin: "120px",
 } as const;
 
 export const viewportEarly = {
   once: true,
-  margin: "0px",
+  margin: "160px",
 } as const;

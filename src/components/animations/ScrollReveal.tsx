@@ -27,7 +27,7 @@ const variantMap: Record<VariantName, Variants> = {
   fadeUp: fadeUpVariant,
   fadeIn: {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
+    visible: { opacity: 1, transition: { duration: 0.2, ease: [0.22, 1, 0.36, 1] } },
   },
   slideLeft: slideLeftVariant,
   slideRight: slideRightVariant,
@@ -73,17 +73,19 @@ export default function ScrollReveal({
   }
 
   const baseVariants = variantMap[variant];
+  const effectiveDelay = Math.min(delay, 0.08);
+  const effectiveDuration = duration ? Math.min(duration, 0.24) : undefined;
 
   // Apply custom delay/duration by overriding the transition
-  const customVariants: Variants = delay || duration
+  const customVariants: Variants = effectiveDelay || effectiveDuration
     ? {
         hidden: baseVariants.hidden,
         visible: {
           ...(baseVariants.visible as object),
           transition: {
             ...((baseVariants.visible as { transition?: object }).transition || {}),
-            ...(delay ? { delay } : {}),
-            ...(duration ? { duration } : {}),
+            ...(effectiveDelay ? { delay: effectiveDelay } : {}),
+            ...(effectiveDuration ? { duration: effectiveDuration } : {}),
           },
         },
       }

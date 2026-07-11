@@ -13,6 +13,7 @@ export default function CursorGlow() {
   const rafRef = useRef<number | null>(null);
   const posRef = useRef({ x: -999, y: -999 });
   const currentRef = useRef({ x: -999, y: -999 });
+  const visibleRef = useRef(false);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -23,10 +24,16 @@ export default function CursorGlow() {
 
     const handleMouseMove = (e: MouseEvent) => {
       posRef.current = { x: e.clientX, y: e.clientY };
-      if (!visible) setVisible(true);
+      if (!visibleRef.current) {
+        visibleRef.current = true;
+        setVisible(true);
+      }
     };
 
-    const handleMouseLeave = () => setVisible(false);
+    const handleMouseLeave = () => {
+      visibleRef.current = false;
+      setVisible(false);
+    };
 
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
     document.documentElement.addEventListener("mouseleave", handleMouseLeave);
@@ -36,7 +43,7 @@ export default function CursorGlow() {
 
     // Smooth follow using lerp in rAF
     const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
-    const LERP_FACTOR = 0.08; // slightly softer lerp for premium ease-out feel
+    const LERP_FACTOR = 0.16; // faster follow with less long-tail animation work
 
     const animate = () => {
       if (glowRef.current && posRef.current.x !== -999) {
@@ -60,7 +67,7 @@ export default function CursorGlow() {
       document.documentElement.removeEventListener("mouseleave", handleMouseLeave);
       if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
     };
-  }, [visible]);
+  }, []);
 
   return (
     <div

@@ -125,11 +125,11 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
           </motion.div>
         </motion.div>
 
-        {/* Wide framed visual panel - blur reveal on mount */}
+        {/* Wide framed visual panel */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.96, filter: "blur(12px)" }}
-          animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-          transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          initial={{ opacity: 0, scale: 0.99, y: 8 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.24, delay: 0.04, ease: [0.22, 1, 0.36, 1] }}
           className="relative mx-auto mt-16 max-w-6xl overflow-hidden rounded-3xl border border-border/20 bg-surface/40 backdrop-blur-sm"
         >
           <div

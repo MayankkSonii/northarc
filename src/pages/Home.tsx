@@ -262,10 +262,10 @@ function FAQSection() {
                 <AnimatePresence initial={false}>
                   {isOpen && (
                     <motion.div
-                      initial={{ height: 0, opacity: 0, filter: "blur(4px)" }}
-                      animate={{ height: "auto", opacity: 1, filter: "blur(0px)" }}
-                      exit={{ height: 0, opacity: 0, filter: "blur(4px)" }}
-                      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
                       className="overflow-hidden"
                     >
                       <div className="px-6 pb-6 pt-1">
@@ -774,16 +774,16 @@ export default function Home() {
 
         <div className="max-w-7xl mx-auto px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-10 items-center z-10 relative">
           <motion.div 
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
             className="lg:col-span-7 flex flex-col justify-center space-y-6 text-left"
           >
             {/* Badge — clips in from left */}
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
+              initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.2, delay: 0.02, ease: [0.22, 1, 0.36, 1] }}
               className="inline-flex items-center space-x-2.5 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 w-fit backdrop-blur-md"
             >
               <span className="w-2 h-2 rounded-full bg-glow animate-pulse"></span>
@@ -806,10 +806,10 @@ export default function Home() {
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={activeWordIdx}
-                    initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
-                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                    exit={{ opacity: 0, y: -20, filter: "blur(8px)" }}
-                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.16, ease: [0.22, 1, 0.36, 1] }}
                     style={{ display: "inline-block" }}
                   >
                     {words[activeWordIdx]}
@@ -819,18 +819,18 @@ export default function Home() {
             </h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.22, delay: 0.04, ease: [0.22, 1, 0.36, 1] }}
               className="text-sm sm:text-base text-text-secondary font-light max-w-xl leading-relaxed"
             >
               We build production-grade AI systems from your data. Our intelligent automation and predictive analytics are engineered to cut costs, accelerate decisions, and drive growth.
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.22, delay: 0.06, ease: [0.22, 1, 0.36, 1] }}
               className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2"
             >
               <a
@@ -852,9 +852,9 @@ export default function Home() {
 
           {/* Hero Premium Card Illustration — Enhanced 3D card */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.9, y: 30 }}
+            initial={{ opacity: 0, scale: 0.98, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
+            transition={{ duration: 0.26, ease: [0.22, 1, 0.36, 1], delay: 0.04 }}
             className="lg:col-span-5 relative flex items-center justify-center w-full z-10"
           >
             <div className="relative w-full max-w-[420px] py-12">
@@ -916,31 +916,6 @@ export default function Home() {
                   <p className="text-xs text-text-secondary leading-relaxed font-light">
                     Secure, monitored AI running in your own cloud. We help you answer questions from your data, automate workflows, and report metrics directly to the business.
                   </p>
-                </div>
-
-                {/* Live data ticker */}
-                <div className="space-y-2 z-10 mb-6">
-                  {[
-                    { label: "Model Accuracy", value: 94, color: "#1D75FF" },
-                    { label: "Automation Rate", value: 78, color: "#4DA6FF" },
-                    { label: "Cost Reduction", value: 60, color: "#4D94FF" },
-                  ].map((bar) => (
-                    <div key={bar.label} className="space-y-1">
-                      <div className="flex justify-between text-[9px] font-mono text-text-muted">
-                        <span>{bar.label}</span>
-                        <span>{bar.value}%</span>
-                      </div>
-                      <div className="h-1 bg-border/40 rounded-full overflow-hidden">
-                        <motion.div
-                          className="h-full rounded-full"
-                          style={{ backgroundColor: bar.color }}
-                          initial={{ width: 0 }}
-                          animate={{ width: `${bar.value}%` }}
-                          transition={{ duration: 1.5, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
-                        />
-                      </div>
-                    </div>
-                  ))}
                 </div>
 
                 <div className="flex items-center justify-between z-10 border-t border-border/80 pt-4">

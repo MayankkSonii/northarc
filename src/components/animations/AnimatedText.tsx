@@ -48,16 +48,17 @@ export default function AnimatedText({
   animateOnMount = false,
 }: AnimatedTextProps) {
   const TagEl = Tag as React.ElementType;
+  const effectiveDelay = Math.min(delay, animateOnMount ? 0.04 : 0.08);
 
   const revealVariant = {
-    hidden: { y: 12, opacity: 0 },
+    hidden: { y: 6, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.35,
+        duration: 0.18,
         ease: [0.22, 1, 0.36, 1],
-        delay: delay,
+        delay: effectiveDelay,
       },
     },
   };
