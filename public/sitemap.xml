@@ -105,86 +105,78 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- Products index -->
+  <!-- AI service accelerator pages -->
   <url>
-    <loc>https://northarc.in/products</loc>
-    <lastmod>2026-07-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Product detail pages -->
-  <url>
-    <loc>https://northarc.in/products/voice-ai-calling-agent</loc>
+    <loc>https://northarc.in/services/voice-ai-calling-agent</loc>
     <lastmod>2026-07-06</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://northarc.in/products/rag-knowledge-assistant</loc>
+    <loc>https://northarc.in/services/rag-knowledge-assistant</loc>
     <lastmod>2026-07-06</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://northarc.in/products/ai-support-agent</loc>
+    <loc>https://northarc.in/services/ai-support-agent</loc>
     <lastmod>2026-07-06</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://northarc.in/products/predictive-lead-scoring</loc>
+    <loc>https://northarc.in/services/predictive-lead-scoring</loc>
     <lastmod>2026-07-06</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://northarc.in/products/churn-prediction</loc>
+    <loc>https://northarc.in/services/churn-prediction</loc>
     <lastmod>2026-07-06</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://northarc.in/products/recommendation-engine</loc>
+    <loc>https://northarc.in/services/recommendation-engine</loc>
     <lastmod>2026-07-06</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://northarc.in/products/demand-forecasting</loc>
+    <loc>https://northarc.in/services/demand-forecasting</loc>
     <lastmod>2026-07-06</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://northarc.in/products/customer-segmentation</loc>
+    <loc>https://northarc.in/services/customer-segmentation</loc>
     <lastmod>2026-07-06</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://northarc.in/products/document-ai-ocr</loc>
+    <loc>https://northarc.in/services/document-ai-ocr</loc>
     <lastmod>2026-07-06</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://northarc.in/products/invoice-automation</loc>
+    <loc>https://northarc.in/services/invoice-automation</loc>
     <lastmod>2026-07-06</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://northarc.in/products/ai-sales-agent</loc>
+    <loc>https://northarc.in/services/ai-sales-agent</loc>
     <lastmod>2026-07-06</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://northarc.in/products/ai-analytics-copilot</loc>
+    <loc>https://northarc.in/services/ai-analytics-copilot</loc>
     <lastmod>2026-07-06</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
 
   <!-- Solutions index -->

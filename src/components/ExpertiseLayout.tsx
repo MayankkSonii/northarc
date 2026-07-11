@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "motion/react";
-import { ArrowRight, ArrowDown, Check, Quote } from "lucide-react";
+import { ArrowDown, ArrowRight, Check, Quote } from "lucide-react";
 import { AnimatedHeroVisual } from "./AnimatedHeroVisual";
 import type { PageContent } from "./pageLayoutTypes";
 import {
@@ -21,8 +21,8 @@ import ScrollReveal from "./animations/ScrollReveal";
 /**
  * ExpertiseLayout, "editorial capability dossier".
  *
- * Deliberately distinct from ServiceLayout:
- *  - HERO: asymmetric split (text left, AnimatedHeroVisual right, accent orb top-right)
+ * Defines the shared hero language:
+ *  - HERO: asymmetric split with text left and visual right, plus mobile fallback
  *  - DOMAINS: sticky editorial title left + hairline card grid right
  *  - PROCESS: vertical timeline with numbered accent nodes sliding in from the left
  *  - PROOF: checklist left + accent-tinted quote/stat card right
@@ -48,13 +48,13 @@ export default function ExpertiseLayout({ content }: { content: PageContent }) {
       />
 
       {/* 1. HERO, asymmetric split */}
-      <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24 pt-32 pb-20 lg:pt-40 lg:pb-28">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24 pt-24 pb-14 md:pt-28 lg:pt-32 lg:pb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
           <motion.div
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
-            className="lg:col-span-6 space-y-8"
+            className="lg:col-span-6 space-y-8 text-left"
           >
             <motion.span
               variants={staggerItem}
@@ -69,13 +69,13 @@ export default function ExpertiseLayout({ content }: { content: PageContent }) {
                 as="h1"
                 type="words"
                 animateOnMount
-                delay={0.15}
+                delay={0.04}
                 className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight leading-[1.08] text-text-primary"
               />
             </motion.div>
             <motion.p
               variants={staggerItem}
-              className="text-sm sm:text-base text-text-secondary font-light max-w-xl leading-relaxed"
+              className="max-w-xl text-sm sm:text-base text-text-secondary font-light leading-relaxed"
             >
               {content.intro}
             </motion.p>
@@ -93,9 +93,9 @@ export default function ExpertiseLayout({ content }: { content: PageContent }) {
             </motion.div>
             <motion.div
               variants={staggerItem}
-              className="flex items-center gap-3 text-xs text-text-secondary font-light font-mono opacity-80 pt-6"
+              className="flex items-center gap-3 text-xs text-text-secondary font-light font-mono opacity-80 pt-4"
             >
-              <div className="w-8 h-8 rounded-full border border-border/20 flex items-center justify-center animate-bounce">
+              <div className="w-8 h-8 rounded-full border border-border/20 flex items-center justify-center">
                 <ArrowDown className="w-3.5 h-3.5" />
               </div>
               <span>Scroll to explore the dossier</span>
@@ -110,6 +110,31 @@ export default function ExpertiseLayout({ content }: { content: PageContent }) {
               scene={content.heroScene as never}
               accentColor={accent}
             />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.98, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.24, delay: 0.04, ease: [0.22, 1, 0.36, 1] }}
+              className="relative mx-auto mt-4 flex min-h-[220px] max-w-md flex-col items-center justify-center gap-4 overflow-hidden rounded-3xl border border-border/20 bg-surface/40 p-8 text-center backdrop-blur-sm lg:hidden"
+            >
+              <div
+                className="pointer-events-none absolute inset-0 opacity-60"
+                style={{ background: `radial-gradient(circle at 50% 40%, ${accent}14, transparent 70%)` }}
+              />
+              <div className="relative flex flex-col items-center gap-4">
+                <div
+                  className="flex h-20 w-20 items-center justify-center rounded-2xl border"
+                  style={{ background: `${accent}18`, borderColor: `${accent}35` }}
+                >
+                  <HeroIcon className="h-9 w-9" style={{ color: accent }} />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-text-primary">{content.heroTitle}</p>
+                  <p className="mt-2 max-w-sm text-xs leading-relaxed text-text-secondary">
+                    {content.eyebrow} capability system, shaped for your data, users, and operating model.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>

@@ -133,7 +133,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="bg-bg min-h-screen text-text-primary relative overflow-hidden font-sans pt-28">
+    <div className="bg-bg min-h-screen text-text-primary relative overflow-hidden font-sans pt-24">
       <div className="absolute inset-0 pointer-events-none z-0">
         <div className="absolute top-[-10%] left-[-15%] w-[45vw] h-[45vw] rounded-full bg-gradient-to-tr from-primary/10 to-secondary/15 blur-[120px] animate-float-slow"></div>
         <div className="absolute bottom-[-10%] right-[-15%] w-[50vw] h-[50vw] rounded-full bg-gradient-to-br from-glow/10 to-secondary/10 blur-[130px] animate-float-delay"></div>

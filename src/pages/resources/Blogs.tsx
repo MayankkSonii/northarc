@@ -55,7 +55,7 @@ export default function Blogs() {
       <div className="absolute left-[-12%] top-[50%] w-[40vw] h-[40vw] rounded-full bg-gradient-to-br from-purple-500/5 to-secondary/5 blur-[130px] pointer-events-none z-0" />
 
       {/* ── HERO ── */}
-      <section className="min-h-[58vh] flex flex-col justify-between px-6 md:px-12 lg:px-24 pt-40 pb-12 relative z-10 max-w-7xl mx-auto">
+      <section className="min-h-[52vh] flex flex-col justify-between px-6 md:px-12 lg:px-24 pt-28 lg:pt-32 pb-12 relative z-10 max-w-7xl mx-auto">
         <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="space-y-6 max-w-3xl">
           <motion.span className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary font-mono block" variants={staggerItem}>
             Resources / Blog

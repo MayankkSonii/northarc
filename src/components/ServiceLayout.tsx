@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "motion/react";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowDown, ArrowRight, Check } from "lucide-react";
 import {
   staggerContainer,
   staggerItem,
@@ -24,9 +24,9 @@ import ScrollReveal from "./animations/ScrollReveal";
 /**
  * ServiceLayout, the "offering / delivery" design language.
  *
- * Deliberately the visual OPPOSITE of ExpertiseLayout (split hero + vertical
- * timeline + grid). Here the compositions are:
- *   1. Centered hero + full-width framed visual panel
+ * Follows ExpertiseLayout's asymmetric hero language while keeping distinct
+ * service-page body compositions:
+ *   1. Asymmetric split hero matching ExpertiseLayout
  *   2. Zig-zag alternating offering rows (the signature difference)
  *   3. Horizontal numbered step flow with connectors
  *   4. Benefits band + prominent gradient CTA card
@@ -78,14 +78,15 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
       />
 
       {/* ---------------------------------------------------------------- */}
-      {/* 1. HERO, centered text, wide framed visual panel below          */}
+      {/* 1. HERO, asymmetric split matching Expertise pages              */}
       {/* ---------------------------------------------------------------- */}
-      <section className="relative z-10 px-6 pt-32 pb-16 md:px-12 lg:px-24">
+      <section className="relative z-10 mx-auto max-w-7xl px-6 pt-24 pb-14 md:px-12 md:pt-28 lg:px-24 lg:pt-32 lg:pb-20">
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-8">
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           animate="visible"
-          className="mx-auto max-w-3xl text-center"
+          className="space-y-8 text-left lg:col-span-6"
         >
           <motion.span
             variants={staggerItem}
@@ -94,7 +95,7 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
           >
             {eyebrow}
           </motion.span>
-          <motion.div variants={staggerItem} className="mt-6">
+          <motion.div variants={staggerItem}>
             <AnimatedText
               text={title}
               as="h1"
@@ -106,11 +107,11 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
           </motion.div>
           <motion.p
             variants={staggerItem}
-            className="mx-auto mt-6 max-w-2xl text-sm font-light leading-relaxed text-text-secondary sm:text-base"
+            className="max-w-xl text-sm font-light leading-relaxed text-text-secondary sm:text-base"
           >
             {intro}
           </motion.p>
-          <motion.div variants={staggerItem} className="mt-8">
+          <motion.div variants={staggerItem} className="pt-2">
             <motion.a
               href={ctaHref}
               whileHover={{ scale: 1.04, y: -2 }}
@@ -123,20 +124,18 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </motion.a>
           </motion.div>
+          <motion.div
+            variants={staggerItem}
+            className="flex items-center gap-3 text-xs text-text-secondary font-light font-mono opacity-80 pt-4"
+          >
+            <div className="w-8 h-8 rounded-full border border-border/20 flex items-center justify-center">
+              <ArrowDown className="w-3.5 h-3.5" />
+            </div>
+            <span>Scroll to explore the service</span>
+          </motion.div>
         </motion.div>
 
-        {/* Wide framed visual panel */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.99, y: 8 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.24, delay: 0.04, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mx-auto mt-16 max-w-6xl overflow-hidden rounded-3xl border border-border/20 bg-surface/40 backdrop-blur-sm"
-        >
-          <div
-            className="pointer-events-none absolute inset-0 opacity-60"
-            style={{ background: `radial-gradient(circle at 50% 40%, ${accent}14, transparent 70%)` }}
-          />
-          <div className="relative flex min-h-[360px] items-center justify-center px-6 py-10">
+        <div className="lg:col-span-6">
             <AnimatedHeroVisual
               icon={heroIcon}
               title={heroTitle}
@@ -144,8 +143,17 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
               scene={scene}
               accentColor={accent}
             />
-            {/* Mobile fallback (AnimatedHeroVisual is lg:block only) */}
-            <div className="flex flex-col items-center gap-4 text-center lg:hidden">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.24, delay: 0.04, ease: [0.22, 1, 0.36, 1] }}
+            className="relative mx-auto mt-4 flex min-h-[220px] max-w-md flex-col items-center justify-center gap-4 overflow-hidden rounded-3xl border border-border/20 bg-surface/40 p-8 text-center backdrop-blur-sm lg:hidden"
+          >
+            <div
+              className="pointer-events-none absolute inset-0 opacity-60"
+              style={{ background: `radial-gradient(circle at 50% 40%, ${accent}14, transparent 70%)` }}
+            />
+            <div className="relative flex flex-col items-center gap-4">
               <div
                 className="flex h-20 w-20 items-center justify-center rounded-2xl border"
                 style={{ borderColor: `${accent}55`, background: `${accent}18` }}
@@ -154,8 +162,9 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
               </div>
               <p className="text-sm font-semibold text-text-primary">{heroTitle}</p>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
+        </div>
       </section>
 
       {/* ---------------------------------------------------------------- */}

@@ -129,7 +129,7 @@ export default function BlogDetail({ slug }: Props) {
       />
 
       {/* ── HERO ── */}
-      <section className="px-6 md:px-12 lg:px-24 pt-40 pb-10 relative z-10 max-w-5xl mx-auto">
+      <section className="px-6 md:px-12 lg:px-24 pt-28 lg:pt-32 pb-10 relative z-10 max-w-5xl mx-auto">
         <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="space-y-6">
           {/* Breadcrumb */}
           <motion.nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-text-muted font-mono mb-8" variants={staggerItem}>

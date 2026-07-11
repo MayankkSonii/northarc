@@ -22,8 +22,12 @@ Founded by Mayank Soni, based in Ahmedabad, Gujarat, India. Domain: https://nort
 - QA & Test Automation: https://northarc.in/expertise/qa-automation
 - Cloud-native Services: https://northarc.in/expertise/cloud-native
 
-## Products
-Ready-to-deploy AI products: https://northarc.in/products
+## AI Service Accelerators
+- Voice AI Calling Agent: https://northarc.in/services/voice-ai-calling-agent
+- RAG Knowledge Assistant: https://northarc.in/services/rag-knowledge-assistant
+- AI Customer Support Agent: https://northarc.in/services/ai-support-agent
+- Predictive Lead Scoring: https://northarc.in/services/predictive-lead-scoring
+- Document AI & OCR: https://northarc.in/services/document-ai-ocr
 
 ## Solutions
 Industry and business-function AI playbooks: https://northarc.in/solutions

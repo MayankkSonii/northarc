@@ -88,7 +88,7 @@ const HOME_JSON_LD = {
           "@type": "Service",
           name: p.name,
           description: p.summary,
-          url: `${SITE_URL}/products/${p.slug}`,
+          url: `${SITE_URL}/services/${p.slug}`,
         },
       })),
     ],
@@ -759,7 +759,7 @@ export default function Home() {
       {/* 1. HERO SECTION */}
       <section 
         id="home" 
-        className="relative min-h-screen flex items-center justify-center pt-28 pb-16 overflow-hidden bg-bg"
+        className="relative min-h-screen flex items-center justify-center pt-24 pb-14 overflow-hidden bg-bg"
       >
         <div className="absolute inset-0 z-0 overflow-hidden">
           <ThreeDCanvas />
@@ -1102,8 +1102,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2.6 AI PRODUCTS PREVIEW */}
-      <section id="products" className="section-padding-sm bg-surface/20 relative border-t border-border/40">
+      {/* 2.6 AI PRODUCTIZED SERVICE PREVIEW */}
+      <section id="service-products" className="section-padding-sm bg-surface/20 relative border-t border-border/40">
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 text-left">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -1113,7 +1113,7 @@ export default function Home() {
             className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 content-space-sm"
           >
             <div className="space-y-4 max-w-2xl">
-              <span className="text-xs font-bold uppercase tracking-widest text-primary font-mono block">AI PRODUCTS</span>
+              <span className="text-xs font-bold uppercase tracking-widest text-primary font-mono block">AI PRODUCTS INSIDE SERVICES</span>
               <h2 className="text-3xl md:text-5xl font-light tracking-tight text-text-primary leading-[1.1]">
                 Deploy-ready AI, built for outcomes
               </h2>
@@ -1122,10 +1122,10 @@ export default function Home() {
               </p>
             </div>
             <a
-              href="/products"
+              href="/services/full-cycle-development"
               className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:gap-3 transition-all shrink-0 whitespace-nowrap"
             >
-              <span>View all products</span>
+              <span>Explore product delivery</span>
               <ArrowRight className="w-4 h-4" />
             </a>
           </motion.div>
@@ -1142,7 +1142,7 @@ export default function Home() {
               return (
                 <motion.a
                   key={product.slug}
-                  href={`/products/${product.slug}`}
+                  href={`/services/${product.slug}`}
                   variants={{
                     hidden: { opacity: 0, y: 40, scale: 0.95 },
                     visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }
@@ -1170,7 +1170,7 @@ export default function Home() {
                     {product.tagline}
                   </p>
                   <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary mt-5 group-hover:gap-2.5 transition-all relative z-10">
-                    Explore product <ArrowRight className="w-3.5 h-3.5" />
+                    Explore as a service <ArrowRight className="w-3.5 h-3.5" />
                   </span>
                 </motion.a>
               );

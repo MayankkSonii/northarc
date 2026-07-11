@@ -94,15 +94,15 @@ export function Footer() {
             </ul>
           </motion.nav>
 
-          {/* Products */}
-          <nav aria-label="Footer products navigation" className="space-y-3">
-            <h4 className="text-[10px] font-bold font-mono tracking-widest text-text-secondary/60 uppercase">Products</h4>
+          {/* AI accelerators */}
+          <nav aria-label="Footer AI accelerators navigation" className="space-y-3">
+            <h4 className="text-[10px] font-bold font-mono tracking-widest text-text-secondary/60 uppercase">AI Accelerators</h4>
             <ul className="space-y-2">
-              <li><a href="/products/ai-support-agent" className="text-xs text-text-secondary/50 hover:text-primary transition-colors">AI Customer Support Agent</a></li>
-              <li><a href="/products/voice-ai-calling-agent" className="text-xs text-text-secondary/50 hover:text-primary transition-colors">Voice AI Calling Agent</a></li>
-              <li><a href="/products/rag-knowledge-assistant" className="text-xs text-text-secondary/50 hover:text-primary transition-colors">RAG Knowledge Assistant</a></li>
-              <li><a href="/products/predictive-lead-scoring" className="text-xs text-text-secondary/50 hover:text-primary transition-colors">Predictive Lead Scoring</a></li>
-              <li><a href="/products" className="text-xs text-primary/70 hover:text-primary transition-colors">All Products</a></li>
+              <li><a href="/services/ai-support-agent" className="text-xs text-text-secondary/50 hover:text-primary transition-colors">AI Customer Support Agent</a></li>
+              <li><a href="/services/voice-ai-calling-agent" className="text-xs text-text-secondary/50 hover:text-primary transition-colors">Voice AI Calling Agent</a></li>
+              <li><a href="/services/rag-knowledge-assistant" className="text-xs text-text-secondary/50 hover:text-primary transition-colors">RAG Knowledge Assistant</a></li>
+              <li><a href="/services/predictive-lead-scoring" className="text-xs text-text-secondary/50 hover:text-primary transition-colors">Predictive Lead Scoring</a></li>
+              <li><a href="/services/full-cycle-development" className="text-xs text-primary/70 hover:text-primary transition-colors">AI Delivery Services</a></li>
             </ul>
           </nav>
 

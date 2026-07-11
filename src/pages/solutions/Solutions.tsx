@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { industries, functions, solutions } from "../../data/solutionsData";
 import type { Solution } from "../../data/solutionsData";
+import AnimatedText from "../../components/animations/AnimatedText";
 
 function renderSolutionCard(s: Solution, index: number) {
   const Icon = s.icon;
@@ -98,21 +99,28 @@ export default function Solutions() {
       <div className="absolute right-[-12%] top-[45%] w-[40vw] h-[40vw] rounded-full bg-gradient-to-br from-secondary/5 to-glow/5 blur-[130px] pointer-events-none z-0" />
 
       {/* ── HERO ── */}
-      <section className="min-h-[60vh] flex flex-col justify-between px-6 md:px-12 lg:px-24 pt-40 pb-12 relative z-10 max-w-7xl mx-auto">
-        <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="space-y-6 max-w-3xl">
-          <motion.span className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary font-mono block" variants={staggerItem}>
+      <section className="relative z-10 mx-auto max-w-7xl px-6 pt-24 pb-14 md:px-12 md:pt-28 lg:px-24 lg:pt-32 lg:pb-20">
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-8">
+        <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="space-y-8 text-left lg:col-span-6">
+          <motion.span className="text-xs font-bold uppercase tracking-widest text-primary font-mono block" variants={staggerItem}>
             Solutions
           </motion.span>
-          <motion.h1 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-light tracking-tight text-text-primary leading-[1.1]" variants={staggerItem}>
-            AI solutions for<br />
-            <span className="text-primary font-semibold">your industry and your team</span>
-          </motion.h1>
-          <motion.p className="text-sm sm:text-base text-text-secondary font-light max-w-2xl leading-relaxed" variants={staggerItem}>
+          <motion.div variants={staggerItem}>
+            <AnimatedText
+              text="AI solutions for your industry and your team"
+              as="h1"
+              type="words"
+              animateOnMount
+              delay={0.04}
+              className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight text-text-primary leading-[1.08]"
+            />
+          </motion.div>
+          <motion.p className="max-w-xl text-sm sm:text-base text-text-secondary font-light leading-relaxed" variants={staggerItem}>
             We map production-ready AI to the problems you actually face, whether that's a whole industry's
             workflows or a single business function. Every solution is designed around the outcome it delivers,
             not the model behind it.
           </motion.p>
-          <motion.div className="flex flex-wrap items-center gap-6 pt-1 text-xs text-text-muted font-mono" variants={staggerItem}>
+          <motion.div className="flex flex-wrap items-center gap-4 sm:gap-6 pt-1 text-xs text-text-muted font-mono" variants={staggerItem}>
             <span className="flex items-center gap-2">
               <Building2 className="w-3.5 h-3.5 text-primary" />
               {industries.length} Industries
@@ -126,15 +134,39 @@ export default function Solutions() {
               Outcome-led delivery
             </span>
           </motion.div>
+          <motion.div
+            variants={staggerItem}
+            className="flex items-center gap-3 text-xs text-text-secondary font-light font-mono opacity-80 pt-4"
+          >
+            <div className="w-8 h-8 rounded-full border border-border/20 flex items-center justify-center">
+              <ArrowDown className="w-3.5 h-3.5" />
+            </div>
+            <span>Explore by industry or function</span>
+          </motion.div>
         </motion.div>
-        <div className="pointer-events-none absolute right-6 top-[calc(50%+40px)] hidden w-[38%] -translate-y-1/2 lg:block">
-          <AnimatedHeroVisual icon={Layers} title="Tailored AI" eyebrow="Solutions map" scene="data" />
+
+        <div className="lg:col-span-6">
+            <AnimatedHeroVisual icon={Layers} title="Tailored AI" eyebrow="Solutions map" scene="data" />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.24, delay: 0.04, ease: [0.22, 1, 0.36, 1] }}
+            className="relative mx-auto mt-4 flex min-h-[220px] max-w-md flex-col items-center justify-center gap-4 overflow-hidden rounded-3xl border border-border/20 bg-surface/40 p-8 text-center backdrop-blur-sm lg:hidden"
+          >
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 opacity-70" />
+            <div className="relative flex flex-col items-center gap-4 text-center">
+              <div className="flex h-20 w-20 items-center justify-center rounded-2xl border border-primary/30 bg-primary/10">
+                <Layers className="h-9 w-9 text-primary" />
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-text-primary">Tailored AI solution map</p>
+                <p className="mt-2 max-w-sm text-xs leading-relaxed text-text-secondary">
+                  Industry, function, data, and workflow signals mapped into one delivery plan.
+                </p>
+              </div>
+            </div>
+          </motion.div>
         </div>
-        <div className="flex items-center gap-3 text-xs text-text-secondary font-mono opacity-60 pt-10 lg:pt-0">
-          <div className="w-8 h-8 rounded-full border border-border/30 flex items-center justify-center animate-bounce">
-            <ArrowDown className="w-3.5 h-3.5" />
-          </div>
-          Explore by industry or function
         </div>
       </section>
 
