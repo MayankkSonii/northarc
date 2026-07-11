@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring } from "motion/react";
 import {
   ArrowRight,
   Brain,
@@ -20,7 +20,9 @@ import {
   ScanText,
   BarChart3,
   TrendingUp,
-  ChevronDown
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
 import { SERVICES, DEPLOYMENT_STEPS, SOLUTIONS } from "../data";
 import { products } from "../data/productsData";
@@ -28,7 +30,25 @@ import { industries, functions } from "../data/solutionsData";
 import { caseStudies } from "../data/caseStudiesData";
 import { ThreeDCanvas } from "../components/ThreeDCanvas";
 import { useSEO, SITE_URL } from "../lib/seo";
-import { staggerContainer, staggerItem, viewportOnce } from "../lib/animations";
+import {
+  staggerContainer,
+  staggerItem,
+  viewportOnce,
+  viewportSoft,
+  makeStagger,
+  fadeUpVariant,
+  slideLeftVariant,
+  slideRightVariant,
+  blurInVariant,
+  lineDrawVariant,
+  lineDrawVerticalVariant,
+  scalePopVariant,
+  wordRevealContainer,
+  wordRevealItem,
+} from "../lib/animations";
+import AnimatedText from "../components/animations/AnimatedText";
+import ScrollReveal from "../components/animations/ScrollReveal";
+import ParallaxSection from "../components/ParallaxSection";
 
 // ProfessionalService structured data for the home route.
 // (The Organization schema lives statically in index.html, not duplicated here.)
@@ -179,56 +199,81 @@ function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="section-padding-sm bg-bg relative border-t border-border/40">
+    <section id="faq" className="section-padding-sm bg-bg relative border-t border-border/40 overflow-hidden">
+      {/* Ambient glow */}
+      <div className="absolute top-1/3 left-1/4 w-[40vw] h-[40vw] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(29,117,255,0.04) 0%, transparent 70%)" }} />
       <div className="max-w-4xl mx-auto px-6 md:px-12 relative z-10 text-left">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.7 }}
-          className="space-y-4 content-space-sm max-w-2xl"
-        >
-          <span className="text-xs font-bold uppercase tracking-widest text-primary font-mono block">FAQ</span>
-          <h2 className="text-3xl md:text-5xl font-light tracking-tight text-text-primary leading-[1.1]">
-            Frequently Asked Questions
-          </h2>
-          <p className="text-base text-text-secondary font-light leading-relaxed">
-            Answers to what prospective partners ask us most before kicking off an engagement.
-          </p>
-        </motion.div>
+        <ScrollReveal variant="fadeUp" className="space-y-4 content-space-sm max-w-2xl">
+          <motion.span
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-xs font-bold uppercase tracking-widest text-primary font-mono block"
+          >
+            FAQ
+          </motion.span>
+          <AnimatedText
+            text="Frequently Asked Questions"
+            as="h2"
+            type="words"
+            className="text-3xl md:text-5xl font-light tracking-tight text-text-primary leading-[1.1]"
+          />
+          <ScrollReveal variant="fadeUp" delay={0.2}>
+            <p className="text-base text-text-secondary font-light leading-relaxed">
+              Answers to what prospective partners ask us most before kicking off an engagement.
+            </p>
+          </ScrollReveal>
+        </ScrollReveal>
 
         <div className="space-y-3">
           {FAQ_ITEMS.map((item, idx) => {
             const isOpen = openIndex === idx;
+            const fromLeft = idx % 2 === 0;
             return (
               <motion.div
                 key={item.question}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.5, delay: idx * 0.05 }}
-                className="rounded-2xl border border-border bg-surface overflow-hidden"
+                initial={{ opacity: 0, x: fromLeft ? -30 : 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.55, delay: idx * 0.04, ease: [0.22, 1, 0.36, 1] }}
+                className={`rounded-2xl border bg-surface overflow-hidden transition-all duration-300 ${
+                  isOpen
+                    ? "border-primary/40 shadow-lg shadow-primary/5"
+                    : "border-border hover:border-primary/20"
+                }`}
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : idx)}
                   aria-expanded={isOpen}
-                  className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
+                  className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left group"
                 >
-                  <span className="text-sm md:text-base font-bold text-text-primary">{item.question}</span>
-                  <ChevronDown className={`w-4.5 h-4.5 text-primary shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
+                  <span className={`text-sm md:text-base font-bold transition-colors duration-200 ${
+                    isOpen ? "text-primary" : "text-text-primary group-hover:text-primary"
+                  }`}>{item.question}</span>
+                  <div className={`w-8 h-8 rounded-full border flex items-center justify-center shrink-0 transition-all duration-300 ${
+                    isOpen
+                      ? "bg-primary border-primary text-white rotate-180"
+                      : "border-border text-text-secondary group-hover:border-primary/40 group-hover:text-primary"
+                  }`}>
+                    <ChevronDown className="w-4 h-4 transition-transform duration-300" />
+                  </div>
                 </button>
                 <AnimatePresence initial={false}>
                   {isOpen && (
                     <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
+                      initial={{ height: 0, opacity: 0, filter: "blur(4px)" }}
+                      animate={{ height: "auto", opacity: 1, filter: "blur(0px)" }}
+                      exit={{ height: 0, opacity: 0, filter: "blur(4px)" }}
+                      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                       className="overflow-hidden"
                     >
-                      <p className="px-6 pb-5 text-sm text-text-secondary font-light leading-relaxed">
-                        {item.answer}
-                      </p>
+                      <div className="px-6 pb-6 pt-1">
+                        <div className="h-px bg-border/50 mb-4" />
+                        <p className="text-sm text-text-secondary font-light leading-relaxed">
+                          {item.answer}
+                        </p>
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -402,6 +447,7 @@ const TECH_ITEMS: TechLogo[] = [
 
 function TechFilterGrid() {
   const [activeFilter, setActiveFilter] = useState("All");
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const categories = [
     "All", "Back-End", "Front-End", "iOS", "Android", "Cross-platform", "CMS", "E-Commerce", "Low-code", "Web 3", "Cloud & Databases", "AI & ML"
@@ -411,15 +457,27 @@ function TechFilterGrid() {
     ? TECH_ITEMS
     : TECH_ITEMS.filter(t => t.cats.includes(activeFilter));
 
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -240, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 240, behavior: "smooth" });
+    }
+  };
+
   return (
-    <div className="space-y-12">
+    <div className="space-y-8 max-w-6xl mx-auto py-4">
       {/* Scrollable pill tabs */}
-      <div className="flex flex-wrap items-center justify-center gap-3">
+      <div className="flex flex-wrap items-center justify-center gap-2">
         {categories.map((cat, i) => (
           <button
             key={i}
             onClick={() => setActiveFilter(cat)}
-            className={`px-5 py-2 rounded-full text-xs font-semibold font-mono tracking-wider transition-all duration-300 ${
+            className={`px-4 py-1.5 rounded-full text-xs font-semibold font-mono tracking-wider transition-all duration-300 ${
               activeFilter === cat
                 ? "bg-primary text-text-primary shadow-lg"
                 : "bg-surface-elevated/40 text-text-secondary border border-border hover:bg-surface-elevated/80 hover:text-text-primary"
@@ -430,38 +488,69 @@ function TechFilterGrid() {
         ))}
       </div>
 
-      {/* Grid of Logos */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 xl:grid-cols-8 gap-6 justify-center items-center max-w-6xl mx-auto py-8">
-        <AnimatePresence mode="popLayout">
-          {filteredItems.map((item, idx) => (
-            <motion.div
-              key={item.name}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.25 }}
-              className="flex flex-col items-center justify-center p-6 rounded-2xl bg-surface/30 border border-border/40 hover:border-primary/50 hover:bg-surface-elevated/40 transition-all duration-300 group cursor-pointer h-32 w-full text-center relative overflow-hidden"
-            >
-              {/* Logo container */}
-              <div className="transition-transform duration-300 group-hover:scale-110 flex items-center justify-center">
-                {item.customSvg ? (
-                  item.customSvg
-                ) : (
-                  <img
-                    src={`https://cdn.simpleicons.org/${item.slug}/${item.color.replace("#", "")}`}
-                    alt={`${item.name} technology logo`}
-                    className="w-12 h-12 object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
-                  />
-                )}
-              </div>
+      {/* Carousel Container */}
+      <div className="relative group/carousel px-4">
+        {/* Left Shadow Mask & Arrow */}
+        <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-bg to-transparent pointer-events-none z-20 transition-opacity duration-300 opacity-80" />
+        <button
+          onClick={scrollLeft}
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-surface/80 border border-border flex items-center justify-center text-text-primary shadow-lg hover:bg-primary hover:border-primary transition-all duration-200 opacity-0 group-hover/carousel:opacity-100 cursor-pointer"
+          aria-label="Scroll left"
+        >
+          <ChevronLeft className="w-5 h-5" />
+        </button>
 
-              {/* Title name */}
-              <span className="text-[10px] font-bold font-mono tracking-wide mt-3 text-text-secondary group-hover:text-text-primary transition-colors">
-                {item.name}
-              </span>
-            </motion.div>
-          ))}
-        </AnimatePresence>
+        {/* Right Shadow Mask & Arrow */}
+        <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-bg to-transparent pointer-events-none z-20 transition-opacity duration-300 opacity-80" />
+        <button
+          onClick={scrollRight}
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-surface/80 border border-border flex items-center justify-center text-text-primary shadow-lg hover:bg-primary hover:border-primary transition-all duration-200 opacity-0 group-hover/carousel:opacity-100 cursor-pointer"
+          aria-label="Scroll right"
+        >
+          <ChevronRight className="w-5 h-5" />
+        </button>
+
+        {/* Scrolling flex row */}
+        <div
+          ref={scrollContainerRef}
+          className="flex gap-4 overflow-x-auto py-6 px-12 scroll-smooth scrollbar-none snap-x snap-mandatory"
+          style={{ scrollbarWidth: "none" }}
+        >
+          <AnimatePresence mode="popLayout">
+            {filteredItems.map((item) => (
+              <motion.div
+                key={item.name}
+                layout
+                initial={{ opacity: 0, scale: 0.85, x: 20 }}
+                animate={{ opacity: 1, scale: 1, x: 0 }}
+                exit={{ opacity: 0, scale: 0.85, x: -20 }}
+                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                className="flex-shrink-0 w-36 sm:w-40 flex flex-col items-center justify-center p-5 rounded-2xl bg-surface/30 border border-border/40 hover:border-primary/50 hover:bg-surface-elevated/40 transition-colors duration-300 group cursor-pointer h-28 text-center snap-start relative overflow-hidden"
+              >
+                {/* Subtle border glow overlay */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 border border-primary/20 rounded-2xl pointer-events-none" />
+                
+                {/* Logo container */}
+                <div className="transition-transform duration-300 group-hover:scale-105 flex items-center justify-center h-10">
+                  {item.customSvg ? (
+                    item.customSvg
+                  ) : (
+                    <img
+                      src={`https://cdn.simpleicons.org/${item.slug}/${item.color.replace("#", "")}`}
+                      alt={`${item.name} technology logo`}
+                      className="w-10 h-10 object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
+                    />
+                  )}
+                </div>
+
+                {/* Title name */}
+                <span className="text-[9px] font-bold font-mono tracking-wide mt-3 text-text-secondary group-hover:text-text-primary transition-colors">
+                  {item.name}
+                </span>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
       </div>
     </div>
   );
@@ -473,14 +562,14 @@ function SolutionsSection() {
 
   return (
     <section id="solutions" className="section-padding-sm bg-bg relative border-t border-border/40">
-      <div className="absolute top-10 left-10 w-[30vw] h-[30vw] rounded-full bg-primary/5 blur-[120px] pointer-events-none"></div>
-      <div className="absolute bottom-10 right-10 w-[35vw] h-[35vw] rounded-full bg-secondary/5 blur-[120px] pointer-events-none"></div>
+      <div className="absolute top-10 left-10 w-[30vw] h-[30vw] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(29,117,255,0.05) 0%, transparent 70%)" }} />
+      <div className="absolute bottom-10 right-10 w-[35vw] h-[35vw] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(77,166,255,0.04) 0%, transparent 70%)" }} />
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 text-left">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.7 }}
+          viewport={{ once: true, margin: "-10px" }}
+          transition={{ duration: 0.4 }}
           className="space-y-4 content-space-sm max-w-2xl text-left"
         >
           <span className="text-xs font-bold uppercase tracking-widest text-primary font-mono block">AI SOLUTIONS</span>
@@ -674,34 +763,54 @@ export default function Home() {
       >
         <div className="absolute inset-0 z-0 overflow-hidden">
           <ThreeDCanvas />
+          {/* Parallax background orbs */}
+          <ParallaxSection offset={-80} className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-[10%] right-[10%] w-[35vw] h-[35vw] rounded-full animate-orb-drift" style={{ background: "radial-gradient(circle, rgba(29,117,255,0.10) 0%, transparent 70%)" }} />
+            <div className="absolute bottom-[20%] left-[-5%] w-[30vw] h-[30vw] rounded-full animate-float-delay" style={{ background: "radial-gradient(circle, rgba(77,166,255,0.07) 0%, transparent 70%)" }} />
+          </ParallaxSection>
           <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/30 to-bg/10 z-1 pointer-events-none"></div>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_40%,var(--color-bg)_100%)] z-1 pointer-events-none"></div>
         </div>
 
         <div className="max-w-7xl mx-auto px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-10 items-center z-10 relative">
           <motion.div 
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="lg:col-span-7 flex flex-col justify-center space-y-5 text-left"
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-7 flex flex-col justify-center space-y-6 text-left"
           >
-            <div className="inline-flex items-center space-x-2.5 px-4.5 py-2 rounded-full bg-primary/10 border border-primary/20 w-fit backdrop-blur-md">
+            {/* Badge — clips in from left */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="inline-flex items-center space-x-2.5 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 w-fit backdrop-blur-md"
+            >
               <span className="w-2 h-2 rounded-full bg-glow animate-pulse"></span>
               <span className="text-[10px] sm:text-xs uppercase tracking-widest font-bold text-primary font-mono">
                 AI | DATA SCIENCE | ANALYTICS | AUTOMATION
               </span>
-            </div>
+            </motion.div>
 
+            {/* Heading with AnimatedText word reveal */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight text-text-primary leading-[1.08]">
-              Scale Your Operations With <br />
-              <span className="text-primary font-normal min-w-[300px] inline-block">
+              <AnimatedText
+                text="Scale Your Operations With"
+                type="words"
+                as="span"
+                animateOnMount
+                delay={0.2}
+                className="block"
+              />{" "}
+              <span className="text-primary font-normal min-w-[300px] inline-block mt-1">
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={activeWordIdx}
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -15 }}
-                    transition={{ duration: 0.3 }}
+                    initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
+                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    exit={{ opacity: 0, y: -20, filter: "blur(8px)" }}
+                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    style={{ display: "inline-block" }}
                   >
                     {words[activeWordIdx]}
                   </motion.span>
@@ -709,14 +818,24 @@ export default function Home() {
               </span>
             </h1>
 
-            <p className="text-sm sm:text-base text-text-secondary font-light max-w-xl leading-relaxed">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              className="text-sm sm:text-base text-text-secondary font-light max-w-xl leading-relaxed"
+            >
               We build production-grade AI systems from your data. Our intelligent automation and predictive analytics are engineered to cut costs, accelerate decisions, and drive growth.
-            </p>
+            </motion.p>
 
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-5 pt-2">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2"
+            >
               <a
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 border border-primary bg-primary hover:bg-transparent text-text-primary hover:text-primary rounded-full px-8 py-3.5 text-sm font-semibold transition-all duration-300 group cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 border border-primary bg-primary hover:bg-transparent text-text-primary hover:text-primary rounded-full px-8 py-3.5 text-sm font-semibold transition-all duration-300 group cursor-pointer shadow-lg shadow-primary/20 hover:shadow-primary/5"
               >
                 <span>Book a Consultation</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -728,31 +847,60 @@ export default function Home() {
               >
                 Explore Services
               </a>
-            </div>
+            </motion.div>
           </motion.div>
 
-          {/* Hero Premium Card Illustration */}
+          {/* Hero Premium Card Illustration — Enhanced 3D card */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.94 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+            initial={{ opacity: 0, scale: 0.9, y: 30 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
             className="lg:col-span-5 relative flex items-center justify-center w-full z-10"
           >
             <div className="relative w-full max-w-[420px] py-12">
-              <div className="absolute w-[480px] h-[480px] rounded-full border border-border/20 animate-[spin_40s_linear_infinite] pointer-events-none z-0"></div>
-              <div className="absolute w-[400px] h-[400px] rounded-full border border-dashed border-primary/10 animate-[spin_24s_linear_infinite] pointer-events-none z-0"></div>
+              {/* Rotating orbit rings */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div className="w-[480px] h-[480px] rounded-full border border-border/15 animate-[spin_50s_linear_infinite]" />
+              </div>
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div className="w-[380px] h-[380px] rounded-full border border-dashed border-primary/10 animate-[spin_30s_linear_infinite_reverse]" />
+              </div>
+              {/* Orbit dot */}
+              <div
+                className="absolute w-3 h-3 rounded-full bg-primary/60 blur-sm shadow-lg shadow-primary/50"
+                style={{
+                  top: "50%",
+                  left: "50%",
+                  transform: "translateX(190px) translateY(-50%)",
+                  animation: "spin 50s linear infinite",
+                  transformOrigin: "-190px 50%",
+                }}
+              />
               
               {/* Dynamic Glassmorphism Card */}
-              <div className="relative w-full h-auto rounded-[32px] bg-surface/60 backdrop-blur-xl border border-border/80 p-8 shadow-2xl flex flex-col justify-between overflow-hidden group hover:border-primary/50 transition-all duration-500 cursor-pointer z-10">
+              <motion.div
+                whileHover={{ scale: 1.02, translateY: -6 }}
+                transition={{ duration: 0.3, ease: [0.34, 1.56, 0.64, 1] }}
+                className="relative w-full h-auto rounded-[32px] bg-surface/70 backdrop-blur-xl border border-border/80 p-8 shadow-2xl flex flex-col justify-between overflow-hidden group hover:border-primary/50 cursor-pointer z-10"
+                style={{ boxShadow: "0 32px 80px rgba(0,0,0,0.4), 0 8px 32px rgba(29,117,255,0.08)" }}
+              >
                 <div className="absolute inset-0 grid-bg opacity-25 pointer-events-none"></div>
-                <div className="absolute top-0 right-0 w-36 h-36 rounded-full bg-primary/10 blur-3xl group-hover:bg-primary/20 transition-colors pointer-events-none"></div>
-                <div className="absolute bottom-0 left-0 w-36 h-36 rounded-full bg-secondary/10 blur-3xl group-hover:bg-secondary/20 transition-colors pointer-events-none"></div>
+                <div className="absolute top-0 right-0 w-36 h-36 rounded-full bg-primary/10 blur-3xl group-hover:bg-primary/20 transition-all duration-700 pointer-events-none"></div>
+                <div className="absolute bottom-0 left-0 w-36 h-36 rounded-full bg-secondary/10 blur-3xl group-hover:bg-secondary/20 transition-all duration-700 pointer-events-none"></div>
+                {/* Shimmer border on hover */}
+                <div className="absolute inset-0 rounded-[32px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  style={{ background: "linear-gradient(135deg, transparent 30%, rgba(29,117,255,0.08) 50%, transparent 70%)" }}
+                />
                 
                 <div className="flex items-center justify-between z-10">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-text-primary shadow-lg group-hover:scale-110 transition-transform">
-                    <Brain className="w-6 h-6 animate-pulse" />
-                  </div>
-                  <span className="text-[9px] font-mono px-3 py-1.5 rounded-full border border-border bg-surface-elevated text-text-secondary font-bold">
+                  <motion.div
+                    className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-text-primary shadow-lg"
+                    whileHover={{ scale: 1.15, rotate: 5 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Brain className="w-6 h-6" />
+                  </motion.div>
+                  <span className="text-[9px] font-mono px-3 py-1.5 rounded-full border border-border bg-surface-elevated text-text-secondary font-bold animate-spark-pulse">
                     TELEMETRY: ONLINE
                   </span>
                 </div>
@@ -762,12 +910,37 @@ export default function Home() {
                     <span className="w-1.5 h-1.5 rounded-full bg-glow animate-ping"></span>
                     <span className="text-[9px] font-bold font-mono tracking-widest text-glow uppercase">NORTHARC NEURAL SYSTEM</span>
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-extrabold font-display tracking-tight text-text-primary group-hover:text-primary transition-colors">
+                  <h3 className="text-xl sm:text-2xl font-extrabold font-display tracking-tight text-text-primary group-hover:text-primary transition-colors duration-300">
                     Enterprise AI Architecture
                   </h3>
                   <p className="text-xs text-text-secondary leading-relaxed font-light">
                     Secure, monitored AI running in your own cloud. We help you answer questions from your data, automate workflows, and report metrics directly to the business.
                   </p>
+                </div>
+
+                {/* Live data ticker */}
+                <div className="space-y-2 z-10 mb-6">
+                  {[
+                    { label: "Model Accuracy", value: 94, color: "#1D75FF" },
+                    { label: "Automation Rate", value: 78, color: "#4DA6FF" },
+                    { label: "Cost Reduction", value: 60, color: "#4D94FF" },
+                  ].map((bar) => (
+                    <div key={bar.label} className="space-y-1">
+                      <div className="flex justify-between text-[9px] font-mono text-text-muted">
+                        <span>{bar.label}</span>
+                        <span>{bar.value}%</span>
+                      </div>
+                      <div className="h-1 bg-border/40 rounded-full overflow-hidden">
+                        <motion.div
+                          className="h-full rounded-full"
+                          style={{ backgroundColor: bar.color }}
+                          initial={{ width: 0 }}
+                          animate={{ width: `${bar.value}%` }}
+                          transition={{ duration: 1.5, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
+                        />
+                      </div>
+                    </div>
+                  ))}
                 </div>
 
                 <div className="flex items-center justify-between z-10 border-t border-border/80 pt-4">
@@ -780,42 +953,52 @@ export default function Home() {
                     v1.5.0-PROD
                   </span>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </motion.div>
         </div>
       </section>
 
       {/* 2. ABOUT SECTION */}
-      <section id="about" className="section-padding-sm bg-surface/20 relative border-t border-border/40">
+      <section id="about" className="section-padding-sm bg-surface/20 relative border-t border-border/40 overflow-hidden">
+        {/* Ambient orbs */}
+        <div className="absolute top-1/4 left-[-10%] w-[40vw] h-[40vw] rounded-full pointer-events-none animate-orb-drift" style={{ background: "radial-gradient(circle, rgba(29,117,255,0.04) 0%, transparent 70%)" }} />
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 text-left">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7 }}
-            className="max-w-4xl space-y-6 content-space-sm text-left"
-          >
+          <ScrollReveal variant="fadeUp" className="max-w-4xl space-y-6 content-space-sm text-left">
             <div className="space-y-4">
-              <span className="text-xs font-bold uppercase tracking-widest text-primary font-mono block">ABOUT NORTHARC</span>
-              <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight font-display text-text-primary leading-[1.1]">
-                Connecting Intelligence to Impact.
-              </h2>
+              <motion.span
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="text-xs font-bold uppercase tracking-widest text-primary font-mono block"
+              >
+                ABOUT NORTHARC
+              </motion.span>
+              <AnimatedText
+                text="Connecting Intelligence to Impact."
+                as="h2"
+                type="words"
+                className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight font-display text-text-primary leading-[1.1]"
+              />
             </div>
 
-            <p className="text-base md:text-lg text-text-secondary leading-relaxed font-light">
-              NorthArc is an AI engineering, data science, and intelligent automation firm that turns your data and operations into measurable business results. We automate the manual work that slows your teams down, leverage your institutional knowledge through GenAI, and forecast future trends with predictive models. Every solution is delivered as a production-grade system inside your own secure cloud. We apply deep technical expertise to the outcomes your business actually reports on.
-            </p>
-          </motion.div>
+            <ScrollReveal variant="fadeUp" delay={0.2}>
+              <p className="text-base md:text-lg text-text-secondary leading-relaxed font-light">
+                NorthArc is an AI engineering, data science, and intelligent automation firm that turns your data and operations into measurable business results. We automate the manual work that slows your teams down, leverage your institutional knowledge through GenAI, and forecast future trends with predictive models. Every solution is delivered as a production-grade system inside your own secure cloud. We apply deep technical expertise to the outcomes your business actually reports on.
+              </p>
+            </ScrollReveal>
+          </ScrollReveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 section-gap-sm">
             {/* Pillar 1 */}
             <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.7, delay: 0.1 }}
-              className="min-h-[132px] h-full p-5 rounded-2xl border-l-4 border-primary bg-surface border border-border hover:border-primary/45 transition-all duration-300 shadow-sm flex items-center lg:col-start-1 lg:row-start-1"
+              initial={{ opacity: 0, y: 40, scale: 0.97 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              whileHover={{ y: -6, boxShadow: "0 20px 48px rgba(29,117,255,0.12)" }}
+              viewport={{ once: true, margin: "-10px" }}
+              transition={{ duration: 0.4, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+              className="min-h-[132px] h-full p-5 rounded-2xl border-l-4 border-primary bg-surface border border-border hover:border-primary/50 transition-colors duration-300 shadow-sm flex items-center lg:col-start-1 lg:row-start-1 cursor-default"
             >
               <div className="flex items-start space-x-4">
                 <div className="p-2.5 rounded-xl bg-primary/10 text-primary mt-1">
@@ -830,34 +1013,14 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Stat 1 */}
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.7, delay: 0.15 }}
-              className="min-h-[132px] h-full p-5 rounded-2xl bg-gradient-to-br from-surface to-surface-elevated border border-border relative overflow-hidden group hover:border-primary/40 transition-all duration-300 flex flex-col justify-center lg:col-start-1 lg:row-start-2"
-            >
-              <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-2xl"></div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-semibold font-mono text-text-muted uppercase tracking-wider">Experience</span>
-                <div className="p-2 rounded-xl bg-primary/10 text-primary">
-                  <Briefcase className="w-5 h-5" />
-                </div>
-              </div>
-              <p className="text-3xl font-extrabold font-display text-text-primary mt-4 tracking-tight">
-                <span className="font-mono tabular-nums font-bold">3.5+</span>
-              </p>
-              <p className="text-sm font-semibold text-text-secondary mt-2">Years across AI, Data Science &amp; ML delivery</p>
-            </motion.div>
-
             {/* Pillar 2 */}
             <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="min-h-[132px] h-full p-5 rounded-2xl border-l-4 border-secondary bg-surface border border-border hover:border-secondary/45 transition-all duration-300 shadow-sm flex items-center lg:col-start-2 lg:row-start-1"
+              initial={{ opacity: 0, y: 40, scale: 0.97 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              whileHover={{ y: -6, boxShadow: "0 20px 48px rgba(77,166,255,0.12)" }}
+              viewport={{ once: true, margin: "-10px" }}
+              transition={{ duration: 0.4, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="min-h-[132px] h-full p-5 rounded-2xl border-l-4 border-secondary bg-surface border border-border hover:border-secondary/50 transition-colors duration-300 shadow-sm flex items-center lg:col-start-2 lg:row-start-1 cursor-default"
             >
               <div className="flex items-start space-x-4">
                 <div className="p-2.5 rounded-xl bg-secondary/10 text-secondary mt-1">
@@ -872,34 +1035,14 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Stat 2 */}
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.7, delay: 0.25 }}
-              className="min-h-[132px] h-full p-5 rounded-2xl bg-gradient-to-br from-surface to-surface-elevated border border-border relative overflow-hidden group hover:border-secondary/40 transition-all duration-300 flex flex-col justify-center lg:col-start-2 lg:row-start-2"
-            >
-              <div className="absolute top-0 right-0 w-24 h-24 bg-secondary/5 rounded-full blur-2xl"></div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-semibold font-mono text-text-muted uppercase tracking-wider">Capabilities</span>
-                <div className="p-2 rounded-xl bg-secondary/10 text-secondary">
-                  <Layers className="w-5 h-5" />
-                </div>
-              </div>
-              <p className="text-3xl font-extrabold font-display text-text-primary mt-4 tracking-tight">
-                <AnimatedCounter value="12" />
-              </p>
-              <p className="text-sm font-semibold text-text-secondary mt-2">AI, data science &amp; automation service lines</p>
-            </motion.div>
-
             {/* Pillar 3 */}
             <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.7, delay: 0.3 }}
-              className="min-h-[132px] h-full p-5 rounded-2xl border-l-4 border-glow bg-surface border border-border hover:border-glow/45 transition-all duration-300 shadow-sm flex items-center lg:col-start-3 lg:row-start-1"
+              initial={{ opacity: 0, y: 40, scale: 0.97 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              whileHover={{ y: -6, boxShadow: "0 20px 48px rgba(77,148,255,0.12)" }}
+              viewport={{ once: true, margin: "-10px" }}
+              transition={{ duration: 0.4, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+              className="min-h-[132px] h-full p-5 rounded-2xl border-l-4 border-glow bg-surface border border-border hover:border-glow/50 transition-colors duration-300 shadow-sm flex items-center lg:col-start-3 lg:row-start-1 cursor-default"
             >
               <div className="flex items-start space-x-4">
                 <div className="p-2.5 rounded-xl bg-glow/10 text-glow mt-1">
@@ -913,56 +1056,42 @@ export default function Home() {
                 </div>
               </div>
             </motion.div>
-
-            {/* Stat 3 */}
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.7, delay: 0.35 }}
-              className="min-h-[132px] h-full p-5 rounded-2xl bg-gradient-to-br from-surface to-surface-elevated border border-border relative overflow-hidden group hover:border-glow/40 transition-all duration-300 flex flex-col justify-center lg:col-start-3 lg:row-start-2"
-            >
-              <div className="absolute top-0 right-0 w-24 h-24 bg-glow/5 rounded-full blur-2xl"></div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-semibold font-mono text-text-muted uppercase tracking-wider">Deployment</span>
-                <div className="p-2 rounded-xl bg-glow/10 text-glow">
-                  <Activity className="w-5 h-5" />
-                </div>
-              </div>
-              <p className="text-3xl font-extrabold font-display text-text-primary mt-4 tracking-tight">
-                <AnimatedCounter value="100%" />
-              </p>
-              <p className="text-sm font-semibold text-text-secondary mt-2">Delivered inside your own secure cloud</p>
-            </motion.div>
           </div>
         </div>
       </section>
 
       {/* 2.5 CAPABILITIES BAND, outcome-led "what we do" */}
-      <section id="capabilities" className="section-padding-sm bg-bg relative border-t border-border/40">
-        <div className="absolute top-0 right-1/4 w-[30vw] h-[30vw] rounded-full bg-primary/5 blur-[130px] pointer-events-none"></div>
+      <section id="capabilities" className="section-padding-sm bg-bg relative border-t border-border/40 overflow-hidden">
+        <div className="absolute top-0 right-1/4 w-[30vw] h-[30vw] rounded-full pointer-events-none animate-orb-drift" style={{ background: "radial-gradient(circle, rgba(29,117,255,0.05) 0%, transparent 70%)" }} />
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 text-left">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7 }}
-            className="space-y-4 content-space-sm max-w-2xl"
-          >
-            <span className="text-xs font-bold uppercase tracking-widest text-primary font-mono block">WHAT WE DO</span>
-            <h2 className="text-3xl md:text-5xl font-light tracking-tight text-text-primary leading-[1.1]">
-              One partner across the full AI spectrum
-            </h2>
-            <p className="text-base text-text-secondary font-light leading-relaxed">
-              From automating manual work to forecasting future trends, every capability is delivered as a production-grade system tied to a business metric you already report on.
-            </p>
-          </motion.div>
+          <ScrollReveal variant="fadeUp" className="space-y-4 content-space-sm max-w-2xl">
+            <motion.span
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-xs font-bold uppercase tracking-widest text-primary font-mono block"
+            >
+              WHAT WE DO
+            </motion.span>
+            <AnimatedText
+              text="One partner across the full AI spectrum"
+              as="h2"
+              type="words"
+              className="text-3xl md:text-5xl font-light tracking-tight text-text-primary leading-[1.1]"
+            />
+            <ScrollReveal variant="fadeUp" delay={0.2}>
+              <p className="text-base text-text-secondary font-light leading-relaxed">
+                From automating manual work to forecasting future trends, every capability is delivered as a production-grade system tied to a business metric you already report on.
+              </p>
+            </ScrollReveal>
+          </ScrollReveal>
 
           <motion.div
-            variants={staggerContainer}
+            variants={makeStagger(0.05, 0.1)}
             initial="hidden"
             whileInView="visible"
-            viewport={viewportOnce}
+            viewport={viewportSoft}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 section-gap-sm"
           >
             {CAPABILITIES.map((cap) => {
@@ -970,12 +1099,21 @@ export default function Home() {
               return (
                 <motion.div
                   key={cap.title}
-                  variants={staggerItem}
-                  className="group p-6 rounded-2xl bg-surface border border-border hover:border-primary/45 transition-all duration-300 shadow-sm h-full flex flex-col"
+                  variants={{
+                    hidden: { opacity: 0, y: 40, scale: 0.95 },
+                    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }
+                  }}
+                  whileHover={{ y: -8, boxShadow: "0 24px 48px rgba(29,117,255,0.12)" }}
+                  transition={{ duration: 0.25, ease: [0.34, 1.56, 0.64, 1] }}
+                  className="group p-6 rounded-2xl bg-surface border border-border hover:border-primary/50 transition-colors duration-300 shadow-sm h-full flex flex-col cursor-default"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                  <motion.div
+                    className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-5"
+                    whileHover={{ rotate: 360, scale: 1.1 }}
+                    transition={{ duration: 0.5 }}
+                  >
                     <Icon className="w-6 h-6" />
-                  </div>
+                  </motion.div>
                   <h3 className="text-lg font-bold font-display tracking-tight text-text-primary group-hover:text-primary transition-colors">
                     {cap.title}
                   </h3>
@@ -995,8 +1133,8 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7 }}
+            viewport={{ once: true, margin: "-10px" }}
+            transition={{ duration: 0.4 }}
             className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 content-space-sm"
           >
             <div className="space-y-4 max-w-2xl">
@@ -1030,8 +1168,13 @@ export default function Home() {
                 <motion.a
                   key={product.slug}
                   href={`/products/${product.slug}`}
-                  variants={staggerItem}
-                  className="group relative p-6 rounded-2xl bg-surface border border-border hover:border-primary/50 transition-all duration-300 shadow-sm h-full flex flex-col overflow-hidden"
+                  variants={{
+                    hidden: { opacity: 0, y: 40, scale: 0.95 },
+                    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }
+                  }}
+                  whileHover={{ y: -8, boxShadow: "0 24px 48px rgba(29,117,255,0.12)" }}
+                  transition={{ duration: 0.25, ease: [0.34, 1.56, 0.64, 1] }}
+                  className="group relative p-6 rounded-2xl bg-surface border border-border hover:border-primary/50 transition-colors duration-300 shadow-sm h-full flex flex-col overflow-hidden"
                 >
                   <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-colors pointer-events-none"></div>
                   <div className="flex items-center justify-between mb-5 relative z-10">
@@ -1065,42 +1208,62 @@ export default function Home() {
       <section id="process" className="section-padding-sm relative overflow-hidden bg-surface/10 border-t border-border/40">
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 text-left">
           
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7 }}
-            className="space-y-4 content-space-sm max-w-2xl"
-          >
-            <span className="text-xs font-bold uppercase tracking-widest text-primary font-mono block">DELIVERY FRAMEWORK</span>
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight font-display text-text-primary leading-[1.1]">
-              Our 5-Step Process
-            </h2>
-            <p className="text-base text-text-secondary font-light leading-relaxed">
-              A disciplined path from first audit to live production, with every phase mapped to the business metric it is meant to move.
-            </p>
-          </motion.div>
+          <ScrollReveal variant="fadeUp" className="space-y-4 content-space-sm max-w-2xl">
+            <motion.span
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-xs font-bold uppercase tracking-widest text-primary font-mono block"
+            >
+              DELIVERY FRAMEWORK
+            </motion.span>
+            <AnimatedText
+              text="Our 5-Step Process"
+              as="h2"
+              type="words"
+              className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight font-display text-text-primary leading-[1.1]"
+            />
+            <ScrollReveal variant="fadeUp" delay={0.2}>
+              <p className="text-base text-text-secondary font-light leading-relaxed">
+                A disciplined path from first audit to live production, with every phase mapped to the business metric it is meant to move.
+              </p>
+            </ScrollReveal>
+          </ScrollReveal>
 
           {/* Stepper container */}
           <div className="relative">
-            <div className="hidden lg:block absolute top-[32px] left-[32px] right-[calc(20%-32px)] h-[2px] bg-gradient-to-r from-primary via-secondary to-glow opacity-30 z-0"></div>
+            {/* Animated timeline line */}
+            <motion.div
+              className="hidden lg:block absolute top-[32px] left-[32px] right-[calc(20%-32px)] h-[2px] bg-gradient-to-r from-primary via-secondary to-glow opacity-40 z-0 origin-left"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true, margin: "-10px" }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+            />
 
             <div className="grid grid-cols-1 lg:grid-cols-5 section-gap-sm relative z-10">
               {DEPLOYMENT_STEPS.map((step, idx) => (
                 <motion.div 
                   key={idx}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 40 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.6, delay: idx * 0.12 }}
+                  viewport={{ once: true, margin: "-10px" }}
+                  transition={{ duration: 0.4, delay: idx * 0.05, ease: [0.22, 1, 0.36, 1] }}
                   className="group text-left space-y-6 relative"
                 >
                   <div>
-                    <div className="w-16 h-16 rounded-2xl bg-surface border border-border flex items-center justify-center shadow-lg group-hover:border-primary/50 group-hover:scale-[1.05] transition-all duration-300 z-10 relative">
+                    <motion.div
+                      className="w-16 h-16 rounded-2xl bg-surface border border-border flex items-center justify-center shadow-lg z-10 relative"
+                      whileHover={{ scale: 1.1, borderColor: "rgba(29,117,255,0.6)" }}
+                      whileInView={{ scale: [0.7, 1.1, 1] }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: idx * 0.12 + 0.2, ease: [0.34, 1.56, 0.64, 1] }}
+                    >
                       <span className="text-xl font-bold font-display bg-gradient-to-tr from-primary to-secondary bg-clip-text text-transparent">
                         {step.number}
                       </span>
-                    </div>
+                    </motion.div>
                   </div>
 
                   <div className="space-y-2">
@@ -1125,13 +1288,13 @@ export default function Home() {
 
       {/* 3.4 CASE STUDY HIGHLIGHTS */}
       <section id="case-studies" className="section-padding-sm bg-bg relative border-t border-border/40">
-        <div className="absolute bottom-0 left-1/4 w-[32vw] h-[32vw] rounded-full bg-secondary/5 blur-[130px] pointer-events-none"></div>
+        <div className="absolute bottom-0 left-1/4 w-[32vw] h-[32vw] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(77,166,255,0.04) 0%, transparent 70%)" }} />
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 text-left">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7 }}
+            viewport={{ once: true, margin: "-10px" }}
+            transition={{ duration: 0.4 }}
             className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 content-space-sm"
           >
             <div className="space-y-4 max-w-2xl">
@@ -1215,8 +1378,8 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7 }}
+            viewport={{ once: true, margin: "-10px" }}
+            transition={{ duration: 0.4 }}
             className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 content-space-sm"
           >
             <div className="space-y-4 max-w-2xl">
@@ -1279,24 +1442,23 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3.5 TECH STACK SECTION (Tallium & Reference styled) */}
+      {/* 3.5 TECH STACK SECTION */}
       <section className="section-padding-sm bg-bg relative border-t border-border/40">
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 text-center">
           
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7 }}
-            className="space-y-4 content-space-sm max-w-3xl mx-auto"
-          >
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight font-display text-text-primary">
-              Built on a Production-Proven Stack
-            </h2>
-            <p className="text-sm md:text-base text-text-secondary font-light max-w-xl mx-auto">
-              Every technology we deploy earns its place by moving a business metric, from ML frameworks and language model tooling to enterprise cloud infrastructure.
-            </p>
-          </motion.div>
+          <ScrollReveal variant="blurIn" className="space-y-4 content-space-sm max-w-3xl mx-auto">
+            <AnimatedText
+              text="Built on a Production-Proven Stack"
+              as="h2"
+              type="words"
+              className="text-3xl md:text-5xl font-extrabold tracking-tight font-display text-text-primary"
+            />
+            <ScrollReveal variant="fadeUp" delay={0.2}>
+              <p className="text-sm md:text-base text-text-secondary font-light max-w-xl mx-auto">
+                Every technology we deploy earns its place by moving a business metric, from ML frameworks and language model tooling to enterprise cloud infrastructure.
+              </p>
+            </ScrollReveal>
+          </ScrollReveal>
 
           {/* Interactive filter switcher */}
           <TechFilterGrid />
@@ -1304,72 +1466,29 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3.8 TRUST / PLATFORM BAND */}
-      <section className="section-padding-sm bg-surface/20 relative border-t border-border/40">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
-            className="space-y-8"
-          >
-            <p className="text-xs font-bold uppercase tracking-widest text-text-muted font-mono">
-              Built on the platforms and models enterprises trust
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-3 max-w-4xl mx-auto">
-              {TRUST_CHIPS.map((chip) => (
-                <span
-                  key={chip}
-                  className="px-5 py-2.5 rounded-full text-sm font-semibold font-mono tracking-wide text-text-secondary bg-surface/60 border border-border hover:border-primary/40 hover:text-text-primary transition-all duration-300"
-                >
-                  {chip}
-                </span>
-              ))}
-            </div>
-          </motion.div>
+      {/* 3.8 TRUST / PLATFORM BAND — Infinite Marquee */}
+      <section className="py-8 bg-surface/20 relative border-t border-border/40 overflow-hidden">
+        <ScrollReveal variant="fadeUp" className="text-center mb-6">
+          <p className="text-xs font-bold uppercase tracking-widest text-text-muted font-mono">
+            Built on the platforms and models enterprises trust
+          </p>
+        </ScrollReveal>
+        {/* Row 1 — forward marquee */}
+        <div className="overflow-hidden relative" style={{ maskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)" }}>
+          <div className="marquee-content gap-3 py-1">
+            {[...TRUST_CHIPS, ...TRUST_CHIPS].map((chip, i) => (
+              <span
+                key={i}
+                className="mx-1.5 px-5 py-2.5 rounded-full text-sm font-semibold font-mono tracking-wide text-text-secondary bg-surface/60 border border-border hover:border-primary/40 hover:text-text-primary transition-all duration-300 shrink-0"
+              >
+                {chip}
+              </span>
+            ))}
+          </div>
         </div>
       </section>
 
       <FAQSection />
-
-      {/* 3.9 FINAL CTA BAND */}
-      <section className="section-padding-sm bg-bg relative border-t border-border/40 overflow-hidden">
-        <div className="absolute inset-0 grid-bg opacity-15 pointer-events-none"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[40vw] rounded-full bg-primary/10 blur-[140px] pointer-events-none"></div>
-        <div className="max-w-4xl mx-auto px-6 md:px-12 relative z-10 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7 }}
-            className="space-y-6"
-          >
-            <span className="text-xs font-bold uppercase tracking-widest text-primary font-mono block">CONNECTING INTELLIGENCE TO IMPACT</span>
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight font-display text-text-primary leading-[1.1]">
-              Ready to turn your data into a business advantage?
-            </h2>
-            <p className="text-base md:text-lg text-text-secondary font-light leading-relaxed max-w-2xl mx-auto">
-              Tell us where your operations slow down. We will map the highest-ROI AI opportunity and show you the business case before a line of code is written.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-              <a
-                href="/contact"
-                className="inline-flex items-center justify-center gap-2 border border-primary bg-primary hover:bg-transparent text-text-primary hover:text-primary rounded-full px-8 py-3.5 text-sm font-semibold transition-all duration-300 group cursor-pointer"
-              >
-                <span>Book a Consultation</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
-              <a
-                href="/products"
-                className="inline-flex items-center justify-center gap-2 border border-primary/20 text-text-primary hover:bg-primary hover:text-text-primary hover:border-primary rounded-full px-8 py-3.5 text-sm font-semibold transition-all duration-300 cursor-pointer"
-              >
-                Explore AI Products
-              </a>
-            </div>
-          </motion.div>
-        </div>
-      </section>
 
       {/* 4. CONTACT SECTION */}
       <section id="contact" className="section-padding bg-surface/30 border-t border-border relative">
@@ -1381,8 +1500,8 @@ export default function Home() {
               <motion.div 
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.7 }}
+                viewport={{ once: true, margin: "-10px" }}
+                transition={{ duration: 0.4 }}
                 className="space-y-4"
               >
                 <span className="text-xs font-bold uppercase tracking-widest text-primary font-mono block">RESERVE CONSULTATION</span>

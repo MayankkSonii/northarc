@@ -12,9 +12,14 @@ import {
   blurInVariant,
   viewportOnce,
   viewportSoft,
+  lineDrawVariant,
+  makeStagger,
+  scalePopVariant,
 } from "../lib/animations";
 import { AnimatedHeroVisual } from "./AnimatedHeroVisual";
 import type { PageContent } from "./pageLayoutTypes";
+import AnimatedText from "./animations/AnimatedText";
+import ScrollReveal from "./animations/ScrollReveal";
 
 /**
  * ServiceLayout, the "offering / delivery" design language.
@@ -62,14 +67,14 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
 
   return (
     <div className="bg-bg min-h-screen text-text-primary relative overflow-hidden font-sans">
-      {/* Symmetric accent orbs, left + right, tinted with content.accent */}
+      {/* Ambient accent orbs */}
       <div
-        className="pointer-events-none absolute left-[-12%] top-[8%] z-0 h-[46vw] w-[46vw] rounded-full blur-[130px]"
-        style={{ background: `${accent}1f` }}
+        className="pointer-events-none absolute left-[-12%] top-[8%] z-0 h-[46vw] w-[46vw] rounded-full animate-orb-drift"
+        style={{ background: `radial-gradient(circle, ${accent}1c 0%, transparent 70%)` }}
       />
       <div
-        className="pointer-events-none absolute right-[-12%] top-[8%] z-0 h-[46vw] w-[46vw] rounded-full blur-[130px]"
-        style={{ background: `${accent}1a` }}
+        className="pointer-events-none absolute right-[-12%] top-[8%] z-0 h-[46vw] w-[46vw] rounded-full animate-float-delay"
+        style={{ background: `radial-gradient(circle, ${accent}15 0%, transparent 70%)` }}
       />
 
       {/* ---------------------------------------------------------------- */}
@@ -89,12 +94,16 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
           >
             {eyebrow}
           </motion.span>
-          <motion.h1
-            variants={staggerItem}
-            className="mt-6 text-4xl font-light leading-[1.08] tracking-tight text-text-primary sm:text-5xl lg:text-6xl"
-          >
-            {title}
-          </motion.h1>
+          <motion.div variants={staggerItem} className="mt-6">
+            <AnimatedText
+              text={title}
+              as="h1"
+              type="words"
+              animateOnMount
+              delay={0.15}
+              className="text-4xl font-light leading-[1.08] tracking-tight text-text-primary sm:text-5xl lg:text-6xl"
+            />
+          </motion.div>
           <motion.p
             variants={staggerItem}
             className="mx-auto mt-6 max-w-2xl text-sm font-light leading-relaxed text-text-secondary sm:text-base"
@@ -102,22 +111,25 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
             {intro}
           </motion.p>
           <motion.div variants={staggerItem} className="mt-8">
-            <a
+            <motion.a
               href={ctaHref}
-              className="group inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold text-text-primary shadow-glow transition-all duration-300"
+              whileHover={{ scale: 1.04, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ duration: 0.2, ease: [0.34, 1.56, 0.64, 1] }}
+              className="group inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold text-text-primary shadow-glow transition-colors duration-300"
               style={{ background: accent }}
             >
               <span>Get in touch</span>
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </a>
+            </motion.a>
           </motion.div>
         </motion.div>
 
-        {/* Wide framed visual panel, full width, bordered rounded-3xl */}
+        {/* Wide framed visual panel - blur reveal on mount */}
         <motion.div
-          variants={scaleInVariant}
-          initial="hidden"
-          animate="visible"
+          initial={{ opacity: 0, scale: 0.96, filter: "blur(12px)" }}
+          animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+          transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
           className="relative mx-auto mt-16 max-w-6xl overflow-hidden rounded-3xl border border-border/20 bg-surface/40 backdrop-blur-sm"
         >
           <div
@@ -151,16 +163,17 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
       {/* ---------------------------------------------------------------- */}
       <section className="relative z-10 border-t border-border/10 px-6 py-20 md:px-12 md:py-28 lg:px-24">
         <div className="mx-auto max-w-7xl">
-          <motion.div
-            variants={slideUpSoft}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewportSoft}
-            className="max-w-2xl"
-          >
-            <h2 className="text-2xl font-light tracking-tight sm:text-3xl">{capsTitle}</h2>
-            <p className="mt-4 text-sm font-light leading-relaxed text-text-secondary">{capsIntro}</p>
-          </motion.div>
+          <ScrollReveal variant="fadeUp" className="max-w-2xl">
+            <AnimatedText
+              text={capsTitle}
+              as="h2"
+              type="words"
+              className="text-2xl font-light tracking-tight sm:text-3xl"
+            />
+            <ScrollReveal variant="fadeUp" delay={0.2}>
+              <p className="mt-4 text-sm font-light leading-relaxed text-text-secondary">{capsIntro}</p>
+            </ScrollReveal>
+          </ScrollReveal>
 
           <div className="mt-16 space-y-16 md:space-y-24">
             {capabilities.map((item, i) => {
@@ -185,17 +198,32 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
                     className="space-y-5 md:[direction:ltr]"
                   >
                     <div className="flex items-center gap-3">
-                      <span className="font-mono text-xs font-bold" style={{ color: accent }}>
+                      <motion.span
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        whileInView={{ scale: 1, opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.4, delay: 0.1 }}
+                        className="font-mono text-xs font-bold"
+                        style={{ color: accent }}
+                      >
                         {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <span className="h-px flex-1 max-w-[64px]" style={{ background: `${accent}55` }} />
+                      </motion.span>
+                      <motion.span
+                        initial={{ scaleX: 0 }}
+                        whileInView={{ scaleX: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        className="h-px flex-1 max-w-[64px] origin-left"
+                        style={{ background: `${accent}55` }}
+                      />
                     </div>
-                    <div
+                    <motion.div
                       className="flex h-12 w-12 items-center justify-center rounded-xl"
                       style={{ background: `${accent}1a`, color: accent }}
+                      whileHover={{ scale: 1.1, rotate: 5 }}
                     >
                       <Icon className="h-6 w-6" style={{ color: accent }} />
-                    </div>
+                    </motion.div>
                     <h3 className="text-xl font-bold text-text-primary sm:text-2xl">{item.title}</h3>
                     <p className="text-sm font-light leading-relaxed text-text-secondary">{item.desc}</p>
                   </motion.div>
@@ -206,25 +234,36 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
                     initial="hidden"
                     whileInView="visible"
                     viewport={viewportSoft}
-                    className="md:[direction:ltr]"
+                    whileHover={{ y: -6, scale: 1.01 }}
+                    transition={{ duration: 0.3, ease: [0.34, 1.56, 0.64, 1] }}
+                    className="md:[direction:ltr] cursor-default"
                   >
-                    <div className="relative overflow-hidden rounded-3xl border border-border/15 bg-surface/40 p-8">
+                    <div className="relative overflow-hidden rounded-3xl border border-border/15 bg-surface/40 p-8 hover:border-primary/30 transition-colors duration-300">
                       <div
                         className="pointer-events-none absolute inset-0 opacity-70"
                         style={{ background: `radial-gradient(circle at 30% 20%, ${accent}18, transparent 65%)` }}
                       />
                       <div className="relative flex items-center justify-center">
-                        <div
+                        <motion.div
                           className="flex h-24 w-24 items-center justify-center rounded-2xl border"
                           style={{ borderColor: `${accent}44`, background: `${accent}12` }}
+                          whileHover={{ rotate: 360, scale: 1.1 }}
+                          transition={{ duration: 0.8, ease: "easeInOut" }}
                         >
                           <Icon className="h-11 w-11" style={{ color: accent }} />
-                        </div>
+                        </motion.div>
                       </div>
                       <div className="relative mt-6 space-y-2.5">
                         <div className="h-2 rounded-full bg-border/50" />
                         <div className="h-2 w-4/5 rounded-full bg-border/35" />
-                        <div className="h-2 w-3/5 rounded-full" style={{ background: `${accent}55` }} />
+                        <motion.div
+                          className="h-2 rounded-full origin-left"
+                          style={{ background: `${accent}55` }}
+                          initial={{ scaleX: 0 }}
+                          whileInView={{ scaleX: 0.6 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.8, delay: 0.4 }}
+                        />
                       </div>
                     </div>
                   </motion.div>
@@ -240,16 +279,17 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
       {/* ---------------------------------------------------------------- */}
       <section className="relative z-10 border-t border-border/10 px-6 py-20 md:px-12 md:py-28 lg:px-24">
         <div className="mx-auto max-w-7xl">
-          <motion.div
-            variants={slideUpSoft}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewportSoft}
-            className="max-w-2xl"
-          >
-            <h2 className="text-2xl font-light tracking-tight sm:text-3xl">{processTitle}</h2>
-            <p className="mt-4 text-sm font-light leading-relaxed text-text-secondary">{processIntro}</p>
-          </motion.div>
+          <ScrollReveal variant="fadeUp" className="max-w-2xl">
+            <AnimatedText
+              text={processTitle}
+              as="h2"
+              type="words"
+              className="text-2xl font-light tracking-tight sm:text-3xl"
+            />
+            <ScrollReveal variant="fadeUp" delay={0.2}>
+              <p className="mt-4 text-sm font-light leading-relaxed text-text-secondary">{processIntro}</p>
+            </ScrollReveal>
+          </ScrollReveal>
 
           <motion.div
             variants={staggerContainer}
@@ -262,25 +302,45 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
               const isLast = i === process.length - 1;
               return (
                 <motion.div key={i} variants={staggerItem} className="relative">
-                  {/* Connector line + arrow to next card (desktop only) */}
+                  {/* Connector line + arrow to next card (desktop only) - animated */}
                   {!isLast && (
-                    <div className="absolute right-[-1.35rem] top-8 z-20 hidden items-center md:flex">
-                      <span className="h-px w-8" style={{ background: `${accent}55` }} />
-                      <ArrowRight className="h-3.5 w-3.5" style={{ color: accent }} />
+                    <div className="absolute right-[-1.35rem] top-8 z-20 hidden items-center md:flex w-8 overflow-hidden">
+                      <motion.span
+                        className="h-px bg-border/40 origin-left block w-8"
+                        style={{ background: `${accent}55` }}
+                        initial={{ scaleX: 0 }}
+                        whileInView={{ scaleX: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: i * 0.15 + 0.3 }}
+                      />
+                      <motion.div
+                        initial={{ opacity: 0, x: -5 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.3, delay: i * 0.15 + 0.9 }}
+                      >
+                        <ArrowRight className="h-3.5 w-3.5" style={{ color: accent }} />
+                      </motion.div>
                     </div>
                   )}
-                  <div className="relative h-full rounded-2xl border border-border/15 bg-surface/40 p-7">
-                    <span
+                  <motion.div
+                    whileHover={{ y: -6 }}
+                    transition={{ duration: 0.25, ease: [0.34, 1.56, 0.64, 1] }}
+                    className="relative h-full rounded-2xl border border-border/15 bg-surface/40 p-7 hover:border-primary/30 transition-colors duration-300 cursor-default"
+                  >
+                    <motion.span
                       className="inline-flex h-11 w-11 items-center justify-center rounded-full font-mono text-sm font-bold"
                       style={{ background: `${accent}1a`, color: accent }}
+                      whileHover={{ scale: 1.1, rotate: 360 }}
+                      transition={{ duration: 0.5 }}
                     >
                       {step.num}
-                    </span>
+                    </motion.span>
                     <h4 className="mt-5 text-lg font-bold text-text-primary">{step.title}</h4>
                     <p className="mt-3 text-sm font-light leading-relaxed text-text-secondary">
                       {step.desc}
                     </p>
-                  </div>
+                  </motion.div>
                 </motion.div>
               );
             })}
@@ -294,15 +354,16 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
       <section className="relative z-10 border-t border-border/10 px-6 py-20 md:px-12 md:py-28 lg:px-24">
         <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Benefits band */}
-          <motion.div
-            variants={slideLeftVariant}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewportSoft}
-            className="space-y-6"
-          >
-            <h2 className="text-2xl font-light tracking-tight sm:text-3xl">{proofTitle}</h2>
-            <p className="text-sm font-light leading-relaxed text-text-secondary">{proofIntro}</p>
+          <div className="space-y-6">
+            <AnimatedText
+              text={proofTitle}
+              as="h2"
+              type="words"
+              className="text-2xl font-light tracking-tight sm:text-3xl"
+            />
+            <ScrollReveal variant="fadeUp" delay={0.2}>
+              <p className="text-sm font-light leading-relaxed text-text-secondary">{proofIntro}</p>
+            </ScrollReveal>
             <motion.div
               variants={staggerContainer}
               initial="hidden"
@@ -311,18 +372,21 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
               className="space-y-4 pt-2"
             >
               {highlights.map((h, i) => (
-                <motion.div key={i} variants={fadeUpVariant} className="flex items-start gap-3 text-sm">
-                  <span
+                <motion.div key={i} variants={staggerItem} className="flex items-start gap-3 text-sm">
+                  <motion.span
                     className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded"
                     style={{ background: `${accent}26`, color: accent }}
+                    whileInView={{ scale: [0.6, 1.2, 1] }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: i * 0.08, ease: "easeOut" }}
                   >
                     <Check className="h-3.5 w-3.5" style={{ color: accent }} />
-                  </span>
+                  </motion.span>
                   <span className="font-light leading-relaxed text-text-secondary">{h}</span>
                 </motion.div>
               ))}
             </motion.div>
-          </motion.div>
+          </div>
 
           {/* Prominent gradient CTA card */}
           <motion.div
@@ -330,7 +394,9 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
             initial="hidden"
             whileInView="visible"
             viewport={viewportSoft}
-            className="relative overflow-hidden rounded-3xl border p-10 text-center"
+            whileHover={{ scale: 1.015, translateY: -4 }}
+            transition={{ duration: 0.3, ease: [0.34, 1.56, 0.64, 1] }}
+            className="relative overflow-hidden rounded-3xl border p-10 text-center cursor-default hover:border-primary/40 transition-all duration-300"
             style={{
               borderColor: `${accent}44`,
               background: `linear-gradient(140deg, ${accent}26, ${accent}0a 60%, transparent)`,
@@ -345,14 +411,17 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
               <p className="mx-auto max-w-sm text-sm font-light leading-relaxed text-text-secondary">
                 {ctaIntro}
               </p>
-              <a
+              <motion.a
                 href={ctaHref}
-                className="group inline-flex w-full items-center justify-center gap-2 rounded-full py-4 text-sm font-semibold text-text-primary shadow-glow transition-all duration-300"
+                whileHover={{ scale: 1.03, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.2, ease: [0.34, 1.56, 0.64, 1] }}
+                className="group inline-flex w-full items-center justify-center gap-2 rounded-full py-4 text-sm font-semibold text-text-primary shadow-glow transition-colors duration-300"
                 style={{ background: accent }}
               >
                 <span>{ctaLabel}</span>
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </a>
+              </motion.a>
             </div>
           </motion.div>
         </div>
@@ -366,28 +435,36 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
           className="pointer-events-none absolute inset-0"
           style={{ background: `linear-gradient(120deg, ${accent}1f, transparent 55%, ${accent}14)` }}
         />
-        <motion.div
-          variants={slideUpSoft}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportSoft}
-          className="relative mx-auto max-w-3xl text-center"
-        >
-          <h2 className="text-3xl font-light tracking-tight sm:text-4xl">{ctaTitle}</h2>
-          <p className="mx-auto mt-5 max-w-xl text-sm font-light leading-relaxed text-text-secondary">
-            {ctaIntro}
-          </p>
-          <div className="mt-8">
-            <a
-              href={ctaHref}
-              className="group inline-flex items-center gap-2 rounded-full px-9 py-4 text-sm font-semibold text-text-primary shadow-glow transition-all duration-300"
-              style={{ background: accent }}
-            >
-              <span>{ctaLabel}</span>
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </a>
-          </div>
-        </motion.div>
+        <div className="relative mx-auto max-w-3xl text-center">
+          <ScrollReveal variant="fadeUp" className="space-y-5">
+            <AnimatedText
+              text={ctaTitle}
+              as="h2"
+              type="words"
+              className="text-3xl font-light tracking-tight sm:text-4xl"
+            />
+            <ScrollReveal variant="fadeUp" delay={0.2}>
+              <p className="mx-auto mt-5 max-w-xl text-sm font-light leading-relaxed text-text-secondary">
+                {ctaIntro}
+              </p>
+            </ScrollReveal>
+            <ScrollReveal variant="fadeUp" delay={0.35}>
+              <div className="mt-8">
+                <motion.a
+                  href={ctaHref}
+                  whileHover={{ scale: 1.04, y: -2 }}
+                  whileTap={{ scale: 0.97 }}
+                  transition={{ duration: 0.2, ease: [0.34, 1.56, 0.64, 1] }}
+                  className="group inline-flex items-center gap-2 rounded-full px-9 py-4 text-sm font-semibold text-text-primary shadow-glow transition-colors duration-300"
+                  style={{ background: accent }}
+                >
+                  <span>{ctaLabel}</span>
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </motion.a>
+              </div>
+            </ScrollReveal>
+          </ScrollReveal>
+        </div>
       </section>
     </div>
   );

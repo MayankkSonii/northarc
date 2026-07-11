@@ -29,45 +29,46 @@ import {
   Briefcase
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
+import CursorGlow from "./components/CursorGlow";
+import FloatingCTA from "./components/FloatingCTA";
 
-// Page imports (lazy-loaded so each route ships its own chunk instead of
-// bundling all 24 pages into a single monolithic bundle)
-const Home = lazy(() => import("./pages/Home"));
-const Contact = lazy(() => import("./pages/Contact"));
-const NotFound = lazy(() => import("./pages/NotFound"));
+// Page imports (statically loaded for instant page-to-page navigation and zero dynamic chunk compiler latency)
+import Home from "./pages/Home";
+import Contact from "./pages/Contact";
+import NotFound from "./pages/NotFound";
 
 // Services subpage imports
-const DedicatedTeam = lazy(() => import("./pages/services/DedicatedTeam"));
-const CustomSoftware = lazy(() => import("./pages/services/CustomSoftware"));
-const CtoService = lazy(() => import("./pages/services/CtoService"));
-const ItConsulting = lazy(() => import("./pages/services/ItConsulting"));
+import DedicatedTeam from "./pages/services/DedicatedTeam";
+import CustomSoftware from "./pages/services/CustomSoftware";
+import CtoService from "./pages/services/CtoService";
+import ItConsulting from "./pages/services/ItConsulting";
 
 // Expertise subpage imports
-const AiMl = lazy(() => import("./pages/expertise/AiMl"));
-const BigData = lazy(() => import("./pages/expertise/BigData"));
-const Reengineering = lazy(() => import("./pages/expertise/Reengineering"));
-const WebMobile = lazy(() => import("./pages/expertise/WebMobile"));
-const DevopsSecurity = lazy(() => import("./pages/expertise/DevopsSecurity"));
-const SupportMaintenance = lazy(() => import("./pages/expertise/SupportMaintenance"));
-const LowCode = lazy(() => import("./pages/expertise/LowCode"));
-const QaAutomation = lazy(() => import("./pages/expertise/QaAutomation"));
-const CloudNative = lazy(() => import("./pages/expertise/CloudNative"));
-const GenerativeAi = lazy(() => import("./pages/expertise/GenerativeAi"));
+import AiMl from "./pages/expertise/AiMl";
+import BigData from "./pages/expertise/BigData";
+import Reengineering from "./pages/expertise/Reengineering";
+import WebMobile from "./pages/expertise/WebMobile";
+import DevopsSecurity from "./pages/expertise/DevopsSecurity";
+import SupportMaintenance from "./pages/expertise/SupportMaintenance";
+import LowCode from "./pages/expertise/LowCode";
+import QaAutomation from "./pages/expertise/QaAutomation";
+import CloudNative from "./pages/expertise/CloudNative";
+import GenerativeAi from "./pages/expertise/GenerativeAi";
 
 // Resources subpage imports
-const CaseStudies = lazy(() => import("./pages/resources/CaseStudies"));
-const Blogs = lazy(() => import("./pages/resources/Blogs"));
-const CaseStudyDetail = lazy(() => import("./pages/resources/CaseStudyDetail"));
-const BlogDetail = lazy(() => import("./pages/resources/BlogDetail"));
+import CaseStudies from "./pages/resources/CaseStudies";
+import Blogs from "./pages/resources/Blogs";
+import CaseStudyDetail from "./pages/resources/CaseStudyDetail";
+import BlogDetail from "./pages/resources/BlogDetail";
 
 // Products subpage imports
-const Products = lazy(() => import("./pages/products/Products"));
-const ProductDetail = lazy(() => import("./pages/products/ProductDetail"));
+import Products from "./pages/products/Products";
+import ProductDetail from "./pages/products/ProductDetail";
 import { products } from "./data/productsData";
 
 // Solutions subpage imports
-const Solutions = lazy(() => import("./pages/solutions/Solutions"));
-const SolutionDetail = lazy(() => import("./pages/solutions/SolutionDetail"));
+import Solutions from "./pages/solutions/Solutions";
+import SolutionDetail from "./pages/solutions/SolutionDetail";
 import { industries, functions } from "./data/solutionsData";
 
 // Component imports
@@ -326,21 +327,41 @@ export default function App() {
   return (
     <div className="min-h-screen bg-bg text-text-primary overflow-x-hidden transition-colors duration-300 flex flex-col justify-between">
 
+      {/* Global cursor glow effect (dark mode only) */}
+      <CursorGlow />
+
+      {/* Floating CTA */}
+      <FloatingCTA />
+
       {/* Global Background Grid */}
       <div className={`fixed inset-0 pointer-events-none z-0 transition-opacity duration-500 ${theme === 'dark' ? 'opacity-30' : 'opacity-[0.14]'}`}>
         <div className="absolute inset-0 grid-bg-dark opacity-35"></div>
-        <div className="absolute top-[-10%] left-[-15%] w-[45vw] h-[45vw] rounded-full bg-gradient-to-tr from-primary/10 to-secondary/15 blur-[120px] animate-float-slow"></div>
-        <div className="absolute bottom-[-10%] right-[-15%] w-[50vw] h-[50vw] rounded-full bg-gradient-to-br from-glow/10 to-secondary/10 blur-[130px] animate-float-delay"></div>
+        {/* Optimized radial gradients instead of CSS blur filters */}
+        <div 
+          className="absolute top-[-10%] left-[-15%] w-[45vw] h-[45vw] rounded-full animate-float-slow"
+          style={{ background: "radial-gradient(circle, rgba(29,117,255,0.08) 0%, rgba(77,166,255,0.04) 50%, transparent 70%)" }}
+        />
+        <div 
+          className="absolute bottom-[-10%] right-[-15%] w-[50vw] h-[50vw] rounded-full animate-float-delay"
+          style={{ background: "radial-gradient(circle, rgba(77,148,255,0.06) 0%, rgba(77,166,255,0.03) 50%, transparent 70%)" }}
+        />
       </div>
 
       {/* Navigation Header */}
       <nav
         id="navbar"
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b ${isScrolled
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b ${
+          isScrolled
             ? "bg-surface/90 backdrop-blur-xl border-border py-4 shadow-xl"
             : "bg-transparent border-transparent py-6"
-          }`}
+        }`}
       >
+        {/* Scroll Progress Bar */}
+        <motion.div
+          className="scroll-progress-bar"
+          style={{ scaleX: scrollPercent / 100, width: "100%" }}
+          aria-hidden="true"
+        />
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
 
           {/* Logo */}
@@ -914,17 +935,53 @@ export default function App() {
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              variants={{
+                hidden: { opacity: 0, height: 0 },
+                visible: {
+                  opacity: 1,
+                  height: "auto",
+                  transition: {
+                    height: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
+                    opacity: { duration: 0.25 },
+                    staggerChildren: 0.04,
+                    delayChildren: 0.05,
+                  }
+                },
+                exit: {
+                  opacity: 0,
+                  height: 0,
+                  transition: {
+                    height: { duration: 0.3, ease: [0.22, 1, 0.36, 1] },
+                    opacity: { duration: 0.2 },
+                  }
+                }
+              }}
               className="lg:hidden w-full border-t border-border bg-surface/95 backdrop-blur-2xl absolute left-0 top-full overflow-hidden shadow-xl text-left"
             >
               <div className="px-6 py-8 space-y-4 flex flex-col">
-                <a href="/" onClick={closeNavigationMenus} className="text-base font-semibold text-text-secondary hover:text-primary py-1">Home</a>
+                <motion.a
+                  variants={{
+                    hidden: { opacity: 0, x: -15 },
+                    visible: { opacity: 1, x: 0, transition: { duration: 0.3 } }
+                  }}
+                  href="/"
+                  onClick={closeNavigationMenus}
+                  className="text-base font-semibold text-text-secondary hover:text-primary py-1"
+                >
+                  Home
+                </motion.a>
 
                 {/* Mobile Services Collapsible */}
-                <div className="space-y-1">
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0, x: -15 },
+                    visible: { opacity: 1, x: 0, transition: { duration: 0.3 } }
+                  }}
+                  className="space-y-1"
+                >
                   <button
                     onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
                     aria-haspopup="true"
@@ -942,10 +999,16 @@ export default function App() {
                       <a href="/services/concept-design" onClick={closeNavigationMenus} className="text-sm text-text-secondary hover:text-primary py-1">AI Product Concept & Design</a>
                     </div>
                   )}
-                </div>
+                </motion.div>
 
                 {/* Mobile Expertise Collapsible */}
-                <div className="space-y-1">
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0, x: -15 },
+                    visible: { opacity: 1, x: 0, transition: { duration: 0.3 } }
+                  }}
+                  className="space-y-1"
+                >
                   <button
                     onClick={() => setMobileExpertiseOpen(!mobileExpertiseOpen)}
                     aria-haspopup="true"
@@ -969,10 +1032,16 @@ export default function App() {
                       <a href="/expertise/cloud-native" onClick={closeNavigationMenus} className="text-sm text-text-secondary hover:text-primary py-1 font-medium">Cloud-native Services</a>
                     </div>
                   )}
-                </div>
+                </motion.div>
 
                 {/* Mobile Products Collapsible */}
-                <div className="space-y-1">
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0, x: -15 },
+                    visible: { opacity: 1, x: 0, transition: { duration: 0.3 } }
+                  }}
+                  className="space-y-1"
+                >
                   <button
                     onClick={() => setMobileProductsOpen(!mobileProductsOpen)}
                     aria-haspopup="true"
@@ -995,10 +1064,16 @@ export default function App() {
                       <a href="/products" onClick={closeNavigationMenus} className="text-sm text-primary hover:text-primary py-1 font-semibold">View all products</a>
                     </div>
                   )}
-                </div>
+                </motion.div>
 
                 {/* Mobile Solutions Collapsible */}
-                <div className="space-y-1">
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0, x: -15 },
+                    visible: { opacity: 1, x: 0, transition: { duration: 0.3 } }
+                  }}
+                  className="space-y-1"
+                >
                   <button
                     onClick={() => setMobileSolutionsOpen(!mobileSolutionsOpen)}
                     aria-haspopup="true"
@@ -1025,10 +1100,16 @@ export default function App() {
                       <a href="/solutions" onClick={closeNavigationMenus} className="text-sm text-primary hover:text-primary py-1 font-semibold">Explore all solutions</a>
                     </div>
                   )}
-                </div>
+                </motion.div>
 
                 {/* Mobile Resources Collapsible */}
-                <div className="space-y-1">
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0, x: -15 },
+                    visible: { opacity: 1, x: 0, transition: { duration: 0.3 } }
+                  }}
+                  className="space-y-1"
+                >
                   <button
                     onClick={() => setMobileResourcesOpen(!mobileResourcesOpen)}
                     aria-haspopup="true"
@@ -1044,9 +1125,15 @@ export default function App() {
                       <a href="/resources/blogs" onClick={closeNavigationMenus} className="text-sm text-text-secondary hover:text-primary py-1 font-medium">Blog</a>
                     </div>
                   )}
-                </div>
+                </motion.div>
 
-                <div className="pt-4 border-t border-border">
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0, x: -15 },
+                    visible: { opacity: 1, x: 0, transition: { duration: 0.3 } }
+                  }}
+                  className="pt-4 border-t border-border"
+                >
                   <a
                     href="/contact"
                     onClick={closeNavigationMenus}
@@ -1054,7 +1141,7 @@ export default function App() {
                   >
                     Book Consultation
                   </a>
-                </div>
+                </motion.div>
               </div>
             </motion.div>
           )}
@@ -1066,12 +1153,12 @@ export default function App() {
         <AnimatePresence mode="wait">
           <motion.div
             key={currentPath}
-            initial={{ opacity: 0, y: 10, filter: "blur(6px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            exit={{ opacity: 0, y: -6, filter: "blur(4px)" }}
-            transition={{ duration: 0.4, ease: [0.22, 0.61, 0.36, 1] }}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
           >
-            <Suspense fallback={<div className="min-h-screen" />}>{renderPage()}</Suspense>
+            {renderPage()}
           </motion.div>
         </AnimatePresence>
       </main>

@@ -1,6 +1,7 @@
 import React from "react";
 import { Linkedin, Mail, MapPin } from "lucide-react";
 import logo from "../narc.png";
+import { motion } from "motion/react";
 
 export function Footer() {
   return (
@@ -11,10 +12,28 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
 
         {/* Top grid: brand + link columns */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-10 mb-10">
+        <motion.div
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-10 mb-10"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: { staggerChildren: 0.08, delayChildren: 0.1 }
+            }
+          }}
+        >
 
           {/* Brand */}
-          <div className="col-span-2 md:col-span-3 lg:col-span-1 space-y-4">
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, x: -20 },
+              visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }
+            }}
+            className="col-span-2 md:col-span-3 lg:col-span-1 space-y-4"
+          >
             <a href="/" className="flex items-center gap-2">
               <img src={logo} alt="NorthArc Logo" className="w-8 h-8 object-contain shrink-0 rounded-lg" />
               <div className="flex flex-col leading-none">
@@ -43,28 +62,37 @@ export function Footer() {
 
             {/* Social */}
             <div className="flex gap-2 pt-1">
-              <a
+              <motion.a
                 href="https://www.linkedin.com/company/northarc"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="NorthArc on LinkedIn"
-                className="p-2 rounded-lg border border-border/10 hover:border-primary/50 hover:text-primary text-text-secondary/40 transition-all duration-200"
+                whileHover={{ scale: 1.1, y: -2 }}
+                transition={{ duration: 0.2 }}
+                className="p-2 rounded-lg border border-border/10 hover:border-primary/50 hover:text-primary text-text-secondary/40 transition-colors duration-200"
               >
                 <Linkedin className="w-3.5 h-3.5" aria-hidden="true" />
-              </a>
+              </motion.a>
             </div>
-          </div>
+          </motion.div>
 
           {/* Services */}
-          <nav aria-label="Footer services navigation" className="space-y-3">
+          <motion.nav
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } }
+            }}
+            aria-label="Footer services navigation" className="space-y-3"
+          >
             <h4 className="text-[10px] font-bold font-mono tracking-widest text-text-secondary/60 uppercase">Services</h4>
+
             <ul className="space-y-2">
               <li><a href="/services/full-cycle-development" className="text-xs text-text-secondary/50 hover:text-primary transition-colors">AI Product Development</a></li>
               <li><a href="/services/team-augmentation" className="text-xs text-text-secondary/50 hover:text-primary transition-colors">AI Team Augmentation</a></li>
               <li><a href="/services/transformation-consulting" className="text-xs text-text-secondary/50 hover:text-primary transition-colors">AI Transformation Consulting</a></li>
               <li><a href="/services/concept-design" className="text-xs text-text-secondary/50 hover:text-primary transition-colors">AI Product Concept &amp; Design</a></li>
             </ul>
-          </nav>
+          </motion.nav>
 
           {/* Products */}
           <nav aria-label="Footer products navigation" className="space-y-3">
@@ -117,13 +145,19 @@ export function Footer() {
             </ul>
           </nav>
 
-        </div>
+        </motion.div>
 
         {/* Bottom bar */}
-        <div className="pt-6 border-t border-border/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-text-secondary/30">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="pt-6 border-t border-border/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-text-secondary/30"
+        >
           <p>© 2026 NorthArc. All rights reserved.</p>
-          <p className="text-text-secondary/40">Connecting Intelligence to Impact.</p>
-        </div>
+          <p className="text-text-secondary/40 hover:text-primary transition-colors duration-300 cursor-default">Connecting Intelligence to Impact.</p>
+        </motion.div>
 
       </div>
     </footer>
