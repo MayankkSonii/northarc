@@ -57,6 +57,8 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    max-width: 100%;
+    overflow-x: hidden;
   }
   
   body {
@@ -64,6 +66,8 @@
     transition: background-color 0.3s ease, color 0.3s ease;
     background-color: var(--color-bg);
     color: var(--color-text-primary);
+    max-width: 100%;
+    overflow-x: hidden;
   }
   
   /* Customized premium scrollbar */

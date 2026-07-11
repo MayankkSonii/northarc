@@ -48,11 +48,11 @@ export function Footer() {
             {/* Contact details */}
             <address className="not-italic space-y-2 pt-1">
               <a
-                href="mailto:solutions@northarc.in"
+                href="mailto:business@northarc.in"
                 className="flex items-center gap-2 text-xs text-text-secondary/50 hover:text-primary transition-colors"
               >
                 <Mail className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
-                <span>solutions@northarc.in</span>
+                <span>business@northarc.in</span>
               </a>
               <p className="flex items-center gap-2 text-xs text-text-secondary/50">
                 <MapPin className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />

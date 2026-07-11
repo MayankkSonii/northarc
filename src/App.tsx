@@ -911,7 +911,7 @@ export default function App() {
               }}
               className="lg:hidden w-full border-t border-border bg-surface/95 backdrop-blur-2xl absolute left-0 top-full overflow-hidden shadow-xl text-left"
             >
-              <div className="px-6 py-8 space-y-4 flex flex-col">
+              <div className="px-6 py-8 space-y-4 flex flex-col max-h-[calc(100vh-5rem)] overflow-y-auto">
                 <motion.a
                   variants={{
                     hidden: { opacity: 0, x: -8 },

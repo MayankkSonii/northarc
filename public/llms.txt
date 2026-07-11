@@ -38,7 +38,7 @@ Industry and business-function AI playbooks: https://northarc.in/solutions
 
 ## Contact
 - Contact page: https://northarc.in/contact
-- Email: solutions@northarc.in
+- Email: business@northarc.in
 
 ## Notes for AI crawlers and LLM-based search
 - All public pages are crawlable; see https://northarc.in/robots.txt and https://northarc.in/sitemap.xml for the full, current URL list.
