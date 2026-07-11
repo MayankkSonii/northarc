@@ -5,10 +5,12 @@ import { Briefcase, Users } from "lucide-react";
 
 export default function DedicatedTeam() {
   useSEO({
-    title: "Hire AI & ML Engineers - Team Augmentation",
+    title: "IT Staff Augmentation | Hire Dedicated Software Developers",
     description:
-      "Embed vetted AI engineers, ML specialists, and data scientists into your team with NorthArc. Ship AI features faster with senior talent placed in under 10 days.",
+      "NorthArc offers IT staff augmentation services — hire dedicated software developers, remote AI developers for hire, and an offshore software development team. Build a dedicated development team for startups and enterprises, placed in under 10 days.",
     path: "/services/team-augmentation",
+    keywords:
+      "IT Staff Augmentation, Dedicated Developers, Offshore Team, Remote Developers, Team Extension, Hire Dedicated Software Developers, IT Staff Augmentation Services, Offshore Software Development Team, Remote AI Developers for Hire, Dedicated Development Team for Startups",
     jsonLd: [
       {
         "@context": "https://schema.org",

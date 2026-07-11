@@ -6,10 +6,12 @@ import { Brain, Sparkles, Database, Network } from "lucide-react";
 
 export default function AiMl() {
   useSEO({
-    title: "AI & Machine Learning Development",
+    title: "AI Development Services | Machine Learning & Generative AI Solutions",
     description:
-      "NorthArc builds and deploys custom AI and machine learning. LLM apps, RAG search, and predictive models that cut costs and drive measurable business outcomes.",
+      "NorthArc delivers custom AI development services for enterprises — from machine learning and generative AI to AI chatbot development services and AI automation solutions for businesses. We are your trusted machine learning development company for production-grade AI systems.",
     path: "/expertise/ai-ml",
+    keywords:
+      "AI Development Services, AI Software Development, Machine Learning, Generative AI, AI Agents, Custom AI Development Services for Enterprises, Generative AI Development Company, AI Chatbot Development Services, AI Automation Solutions for Businesses, Machine Learning Development Company",
     jsonLd: [
       {
         "@context": "https://schema.org",

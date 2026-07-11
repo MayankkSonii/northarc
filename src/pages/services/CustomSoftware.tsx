@@ -5,10 +5,12 @@ import { Layout, Smartphone, Cpu, Server } from "lucide-react";
 
 export default function CustomSoftware() {
   useSEO({
-    title: "AI Product Development Services. Full-Cycle Delivery",
+    title: "Custom Software Development Company | Full-Cycle AI Product Delivery",
     description:
-      "Full-cycle AI product development from NorthArc, we design, build, and ship LLM applications, ML systems, and intelligent platforms that move business KPIs.",
+      "NorthArc is a custom software development company delivering enterprise software development from concept to production. We provide tailor-made software development services and scalable custom software solutions — including business process automation software and AI product builds.",
     path: "/services/full-cycle-development",
+    keywords:
+      "Custom Software Development Company, Enterprise Software, Bespoke Software, Software Engineering, Product Development, Custom Software Development for Businesses, Enterprise Software Development Company, Business Process Automation Software, Tailor-Made Software Development Services, Scalable Custom Software Solutions",
     jsonLd: [
       {
         "@context": "https://schema.org",

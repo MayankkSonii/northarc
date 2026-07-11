@@ -10,10 +10,12 @@ import {
 
 export default function Reengineering() {
   useSEO({
-    title: "Legacy System Reengineering with AI",
+    title: "Custom Software Development Company | Legacy System Modernization",
     description:
-      "NorthArc modernizes legacy systems with AI, refactoring technical debt into decoupled, cloud-native services that cut costs, boost reliability, stay AI-ready.",
+      "NorthArc is a custom software development company specializing in legacy system reengineering. We deliver enterprise software development through AI-assisted refactoring, turning technical debt into scalable custom software solutions and cloud-native microservices.",
     path: "/expertise/reengineering",
+    keywords:
+      "Custom Software Development Company, Enterprise Software, Bespoke Software, Software Engineering, Product Development, Custom Software Development for Businesses, Enterprise Software Development Company, Business Process Automation Software, Scalable Custom Software Solutions, Legacy System Modernization",
     jsonLd: [
       {
         "@context": "https://schema.org",

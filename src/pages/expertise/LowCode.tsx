@@ -10,10 +10,12 @@ import {
 
 export default function LowCode() {
   useSEO({
-    title: "AI-Assisted Low-Code Delivery",
+    title: "Software Development Services | AI-Assisted Low-Code & Rapid Delivery",
     description:
-      "NorthArc ships internal tools, dashboards, and portals in days with AI-assisted low-code delivery. Retool, FlutterFlow, and custom logic on secure backends.",
+      "NorthArc offers end-to-end software development services for enterprises using AI-assisted low-code delivery. Custom software development for enterprises — from internal tools and dashboards to digital product development services on secure cloud backends.",
     path: "/expertise/low-code",
+    keywords:
+      "Software Development Services, AI Development, Web Development, Cloud Solutions, Low-Code Development, End-to-End Software Development Services, Custom Software Development for Enterprises, Digital Product Development Services, Enterprise Software Solutions Provider",
     jsonLd: [
       {
         "@context": "https://schema.org",

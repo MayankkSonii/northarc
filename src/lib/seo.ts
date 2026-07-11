@@ -19,6 +19,13 @@ export interface SEOOptions {
   description: string;
   /** Route path beginning with "/", e.g. "/contact". Used for the canonical URL. */
   path: string;
+  /**
+   * Comma-separated keyword string for <meta name="keywords">.
+   * Include the primary keyword first, then secondary keywords, then long-tail phrases.
+   * Google ignores this tag but Bing/other engines still read it.
+   * Keep primary keyword density < 2.5%, long-tail < 1.5%.
+   */
+  keywords?: string;
   /** Open Graph type. Defaults to "website"; use "article" for blog/case-study detail pages. */
   type?: "website" | "article";
   /** Absolute URL of the social share image. Defaults to the site OG image. */
@@ -61,7 +68,7 @@ function setJsonLd(jsonLd?: object | object[]) {
 }
 
 export function useSEO(options: SEOOptions) {
-  const { title, description, path, type = "website", image = DEFAULT_OG_IMAGE, jsonLd, noindex } = options;
+  const { title, description, path, keywords, type = "website", image = DEFAULT_OG_IMAGE, jsonLd, noindex } = options;
 
   useEffect(() => {
     const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
@@ -69,6 +76,7 @@ export function useSEO(options: SEOOptions) {
 
     document.title = fullTitle;
     upsertMeta("name", "description", description);
+    if (keywords) upsertMeta("name", "keywords", keywords);
     upsertMeta("name", "robots", noindex ? "noindex, nofollow" : "index, follow");
     upsertCanonical(canonical);
 
@@ -86,7 +94,7 @@ export function useSEO(options: SEOOptions) {
 
     setJsonLd(jsonLd);
     // Serialize to keep the dependency array stable across renders.
-  }, [title, description, path, type, image, noindex, JSON.stringify(jsonLd ?? null)]);
+  }, [title, description, path, keywords, type, image, noindex, JSON.stringify(jsonLd ?? null)]);
 }
 
 /** Convenience builder for BreadcrumbList JSON-LD. */

@@ -672,10 +672,12 @@ function SolutionsSection() {
 
 export default function Home() {
   useSEO({
-    title: "NorthArc: AI Engineering, Data Science & Intelligent Automation",
+    title: "AI Development Company | Custom AI & Software Development Services",
     description:
-      "NorthArc engineers AI automation, data science and GenAI systems that cut costs, speed decisions and turn enterprise data into measurable business impact.",
+      "NorthArc is the best AI development company for startups and enterprises. We deliver custom AI software development, end-to-end AI software development, enterprise AI development services, and web & SaaS development solutions that turn data into measurable business impact.",
     path: "/",
+    keywords:
+      "AI Development Company, AI Software Development, Software Development Company, Web Development Company, SaaS Development Company, Enterprise Software Development, Best AI Development Company for Startups, Custom AI Software Development Company, Enterprise AI Development Services, AI Development Company for Businesses, End-to-End AI Software Development",
     jsonLd: [HOME_JSON_LD, FAQ_JSON_LD],
   });
 

@@ -10,10 +10,12 @@ import {
 
 export default function DevopsSecurity() {
   useSEO({
-    title: "DevOps & Cloud Security Engineering",
+    title: "DevOps Services | CI/CD, Kubernetes & Cloud DevOps Solutions",
     description:
-      "NorthArc automates DevOps and hardens cloud security. CI/CD, Kubernetes, and SOC-2-aligned cloud that ships faster and delivers zero-downtime releases.",
+      "NorthArc provides DevOps consulting services for enterprises — CI/CD pipeline implementation services, Kubernetes deployment services, and infrastructure automation services. Our cloud DevOps solutions deliver zero-downtime releases with DevSecOps best practices.",
     path: "/expertise/devops-security",
+    keywords:
+      "DevOps Services, CI/CD, Docker, Kubernetes, DevSecOps, DevOps Consulting Services for Enterprises, CI/CD Pipeline Implementation Services, Kubernetes Deployment Services, Cloud DevOps Solutions, Infrastructure Automation Services",
     jsonLd: [
       {
         "@context": "https://schema.org",

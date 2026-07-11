@@ -5,10 +5,12 @@ import { Layout, PenTool, Settings, Cpu } from "lucide-react";
 
 export default function CtoService() {
   useSEO({
-    title: "AI Product Strategy & Design - Concept to Blueprint",
+    title: "Software Development Company | AI Product Strategy & Design",
     description:
-      "NorthArc turns AI ideas into fundable products, use-case validation, UX for AI experiences, and technical blueprints for models and data, ready to build.",
+      "NorthArc is a trusted software development company in India offering AI product strategy and concept design. An experienced AI development team and digital transformation partner — your technology partner from idea to fundable product blueprint.",
     path: "/services/concept-design",
+    keywords:
+      "Software Development Company, Technology Partner, Product Engineering Company, IT Consulting Company, AI Experts, Trusted Software Development Company in India, Experienced AI Development Team, Custom Software Development Experts, Digital Transformation Partner, Software Company with Enterprise Experience",
     jsonLd: [
       {
         "@context": "https://schema.org",

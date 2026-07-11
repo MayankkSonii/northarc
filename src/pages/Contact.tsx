@@ -14,10 +14,12 @@ import { useSEO, SITE_URL, SITE_NAME } from "../lib/seo";
 
 export default function Contact() {
   useSEO({
-    title: "Contact Us - Book an AI Consultation",
+    title: "Contact AI Development Company | Free Software Development Consultation",
     description:
-      "Book an AI consulting and automation consultation with NorthArc in Ahmedabad. Our solutions desk responds within 24 business hours to map your roadmap.",
+      "Get a free software development consultation with NorthArc. Contact AI development experts, request a custom software quote, or hire software developers today. Talk to our technology experts and get a response within 24 business hours.",
     path: "/contact",
+    keywords:
+      "Contact AI Development Company, Request Quote, Hire Developers, Contact Software Company, Free Consultation, Get a Free Software Development Consultation, Contact AI Development Experts, Request a Custom Software Quote, Hire Software Developers Today, Talk to Our Technology Experts",
     jsonLd: [
       {
         "@context": "https://schema.org",

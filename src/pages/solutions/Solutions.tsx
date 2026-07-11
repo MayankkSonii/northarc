@@ -69,10 +69,12 @@ function renderSolutionCard(s: Solution, index: number) {
 
 export default function Solutions() {
   useSEO({
-    title: "AI Solutions by Industry & Business Function",
+    title: "AI Development Services | Industry & Business Solutions",
     description:
-      "NorthArc AI solutions mapped to your industry and business function, healthcare, finance, retail, sales, support, operations and more, each built for measurable outcomes.",
+      "NorthArc provides custom AI development services for enterprises across industries — healthcare, finance, retail, manufacturing. AI automation solutions for businesses mapped to your industry and function, with generative AI development and machine learning solutions built for measurable outcomes.",
     path: "/solutions",
+    keywords:
+      "AI Development Services, AI Software Development, Machine Learning, Generative AI, AI Agents, Custom AI Development Services for Enterprises, AI Automation Solutions for Businesses, Generative AI Development Company, Machine Learning Development Company, Industry AI Solutions",
     jsonLd: [
       {
         "@context": "https://schema.org",

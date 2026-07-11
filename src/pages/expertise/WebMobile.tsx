@@ -10,10 +10,12 @@ import {
 
 export default function WebMobile() {
   useSEO({
-    title: "Web & Mobile App Development. AI-Ready Products",
+    title: "Web Development Company | Full Stack & Mobile App Development",
     description:
-      "NorthArc engineers fast, AI-ready web and mobile apps that lift engagement, native iOS/Android, React Native, Flutter, offline-first sync, and 60fps UX.",
+      "NorthArc is a custom website development company delivering enterprise web development services. Our full stack web development company builds responsive business websites and custom web applications for iOS, Android, and Flutter app development.",
     path: "/expertise/web-mobile",
+    keywords:
+      "Web Development Company, Website Development, Full Stack Development, Frontend Development, Backend Development, Custom Website Development Company, Enterprise Web Development Services, Full Stack Web Development Company, Responsive Business Website Development, Custom Web Application Development",
     jsonLd: [
       {
         "@context": "https://schema.org",

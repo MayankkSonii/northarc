@@ -5,10 +5,12 @@ import { Database, Network, FileText, Cpu } from "lucide-react";
 
 export default function ItConsulting() {
   useSEO({
-    title: "AI Transformation Consulting - Strategy to ROI",
+    title: "Software Development Services | AI Transformation & Digital Strategy",
     description:
-      "NorthArc's AI transformation consulting turns operations into an advantage, we find high-ROI use cases, ready your data, and automate workflows that cut cost.",
+      "NorthArc delivers end-to-end software development services including AI transformation consulting. Custom software development for enterprises and startups — digital product development services that find high-ROI AI use cases and automate workflows to cut cost.",
     path: "/services/transformation-consulting",
+    keywords:
+      "Software Development Services, AI Development, Web Development, Mobile Development, Cloud Solutions, End-to-End Software Development Services, Custom Software Development for Enterprises, Software Development Services for Startups, Digital Product Development Services, Enterprise Software Solutions Provider",
     jsonLd: [
       {
         "@context": "https://schema.org",
