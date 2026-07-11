@@ -2,6 +2,8 @@ import React from "react";
 import { motion } from "motion/react";
 import { staggerContainer, staggerItem, fadeUpVariant, viewportOnce } from "../../lib/animations";
 import { useSEO, breadcrumbJsonLd, SITE_URL, SITE_NAME } from "../../lib/seo";
+import { AnimatedHeroVisual } from "../../components/AnimatedHeroVisual";
+import AnimatedText from "../../components/animations/AnimatedText";
 import {
   ArrowLeft,
   ArrowRight,
@@ -96,16 +98,17 @@ export default function SolutionDetail({ slug }: Props) {
       />
 
       {/* ── HERO ── */}
-      <section className="px-6 md:px-12 lg:px-24 pt-40 pb-12 relative z-10 max-w-5xl mx-auto">
+      <section className="relative z-10 mx-auto max-w-7xl px-6 pt-24 pb-14 md:px-12 md:pt-28 lg:px-24 lg:pt-32 lg:pb-20">
         <a
           href="/solutions"
-          className="inline-flex items-center gap-2 text-xs text-text-muted hover:text-primary transition-colors font-mono mb-8"
+          className="mx-auto mb-8 inline-flex items-center gap-2 text-xs text-text-muted hover:text-primary transition-colors font-mono"
         >
           <ArrowLeft className="w-3.5 h-3.5" /> All Solutions
         </a>
 
-        <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="space-y-6">
-          <motion.div className="flex items-center gap-3" variants={staggerItem}>
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-8">
+        <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="space-y-8 text-left lg:col-span-6">
+          <motion.div className="flex flex-wrap items-center gap-3" variants={staggerItem}>
             <div
               className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
               style={{ background: `${accent}18`, border: `1px solid ${accent}35` }}
@@ -121,31 +124,81 @@ export default function SolutionDetail({ slug }: Props) {
             </span>
           </motion.div>
 
-          <motion.h1
-            className="text-4xl sm:text-5xl font-light tracking-tight text-text-primary leading-[1.1]"
-            variants={staggerItem}
-          >
-            AI for {solution.title}
-          </motion.h1>
+          <motion.div variants={staggerItem}>
+            <AnimatedText
+              text={`AI for ${solution.title}`}
+              as="h1"
+              type="words"
+              animateOnMount
+              delay={0.04}
+              className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight text-text-primary leading-[1.08]"
+            />
+          </motion.div>
 
-          <motion.p className="text-base sm:text-lg text-text-secondary font-light max-w-2xl leading-relaxed" variants={staggerItem}>
+          <motion.p className="max-w-xl text-sm sm:text-base text-text-secondary font-light leading-relaxed" variants={staggerItem}>
             {solution.tagline}
           </motion.p>
 
-          <motion.p className="text-sm text-text-muted font-light max-w-2xl leading-relaxed" variants={staggerItem}>
+          <motion.p className="max-w-xl text-sm text-text-muted font-light leading-relaxed" variants={staggerItem}>
             {solution.summary}
           </motion.p>
 
           <motion.div className="pt-2" variants={staggerItem}>
             <a
               href="/contact"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-primary hover:bg-primary/90 text-white font-bold text-sm shadow-lg shadow-primary/20 transition-all duration-300 hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold text-white shadow-lg transition-colors duration-300 hover:-translate-y-0.5"
+              style={{ background: accent }}
             >
               Talk to our team
               <ArrowRight className="w-4 h-4" />
             </a>
           </motion.div>
+          <motion.div
+            variants={staggerItem}
+            className="flex items-center gap-3 text-xs text-text-secondary font-light font-mono opacity-80 pt-4"
+          >
+            <div className="w-8 h-8 rounded-full border border-border/20 flex items-center justify-center">
+              <ArrowRight className="w-3.5 h-3.5 rotate-90" />
+            </div>
+            <span>Scroll to explore the solution</span>
+          </motion.div>
         </motion.div>
+
+        <div className="lg:col-span-6">
+              <AnimatedHeroVisual
+                icon={Icon}
+                title={solution.title}
+                eyebrow={badgeLabel}
+                scene={isIndustry ? "data" : "ai"}
+                accentColor={accent}
+              />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.24, delay: 0.04, ease: [0.22, 1, 0.36, 1] }}
+            className="relative mx-auto mt-4 flex min-h-[220px] max-w-md flex-col items-center justify-center gap-4 overflow-hidden rounded-3xl border border-border/20 bg-surface/40 p-8 text-center backdrop-blur-sm lg:hidden"
+          >
+            <div
+              className="pointer-events-none absolute inset-0 opacity-70"
+              style={{ background: `radial-gradient(circle at 50% 40%, ${accent}14, transparent 70%)` }}
+            />
+              <div className="relative flex flex-col items-center gap-4 text-center">
+                <div
+                  className="flex h-20 w-20 items-center justify-center rounded-2xl border"
+                  style={{ background: `${accent}18`, borderColor: `${accent}35` }}
+                >
+                  <Icon className="h-9 w-9" style={{ color: accent }} />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-text-primary">{solution.title}</p>
+                  <p className="mt-2 max-w-sm text-xs leading-relaxed text-text-secondary">
+                    A tailored AI delivery map for your workflows, systems, data, and measurable outcomes.
+                  </p>
+                </div>
+              </div>
+          </motion.div>
+        </div>
+        </div>
       </section>
 
       {/* ── CHALLENGES ── */}
@@ -238,7 +291,7 @@ export default function SolutionDetail({ slug }: Props) {
             <div className="p-2 rounded-xl bg-surface border border-border/20">
               <Boxes className="w-4 h-4" style={{ color: accent }} />
             </div>
-            <h2 className="text-2xl sm:text-3xl font-light tracking-tight">Products that power this</h2>
+            <h2 className="text-2xl sm:text-3xl font-light tracking-tight">Productized services that power this</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {related.map((p) => {
@@ -246,7 +299,7 @@ export default function SolutionDetail({ slug }: Props) {
               return (
                 <a
                   key={p.id}
-                  href={`/products/${p.slug}`}
+                  href={`/services/${p.slug}`}
                   className="group relative flex flex-col rounded-2xl border border-border/10 bg-surface/50 p-6 gap-4 transition-all duration-300 hover:-translate-y-0.5"
                   style={{ borderColor: "rgba(255,255,255,0.07)" }}
                 >
@@ -264,7 +317,7 @@ export default function SolutionDetail({ slug }: Props) {
                     className="flex items-center gap-1.5 text-[11px] font-semibold transition-all duration-300 opacity-0 group-hover:opacity-100"
                     style={{ color: p.accentColor }}
                   >
-                    View product
+                    Explore service
                     <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </a>

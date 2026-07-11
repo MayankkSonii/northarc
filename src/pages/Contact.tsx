@@ -35,7 +35,7 @@ export default function Contact() {
         contactPoint: {
           "@type": "ContactPoint",
           contactType: "sales",
-          email: "solutions@northarc.in",
+          email: "business@northarc.in",
           telephone: "+91-88499-69336",
           areaServed: "IN",
         },
@@ -133,7 +133,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="bg-bg min-h-screen text-text-primary relative overflow-hidden font-sans pt-28">
+    <div className="bg-bg min-h-screen text-text-primary relative overflow-hidden font-sans pt-24">
       <div className="absolute inset-0 pointer-events-none z-0">
         <div className="absolute top-[-10%] left-[-15%] w-[45vw] h-[45vw] rounded-full bg-gradient-to-tr from-primary/10 to-secondary/15 blur-[120px] animate-float-slow"></div>
         <div className="absolute bottom-[-10%] right-[-15%] w-[50vw] h-[50vw] rounded-full bg-gradient-to-br from-glow/10 to-secondary/10 blur-[130px] animate-float-delay"></div>
@@ -163,7 +163,7 @@ export default function Contact() {
               <div className="space-y-6 pt-4">
                 {[
                   { icon: MapPin, title: "Headquarters", content: "Ahmedabad, Gujarat", accent: "text-primary" },
-                  { icon: Mail, title: "Solutions Desk", content: <a href="mailto:solutions@northarc.in" className="text-primary hover:underline">solutions@northarc.in</a>, accent: "text-secondary" },
+                  { icon: Mail, title: "Solutions Desk", content: <a href="mailto:business@northarc.in" className="text-primary hover:underline">business@northarc.in</a>, accent: "text-secondary" },
                   { icon: Phone, title: "Direct Line", content: <a href="tel:+918849969336" className="hover:text-text-primary transition-colors">+91 88499 69336</a>, accent: "text-glow" },
                   { icon: Clock, title: "Guaranteed Response", content: "Within 24 business hours", accent: "text-text-muted" }
                 ].map((item, idx) => {
@@ -266,9 +266,8 @@ export default function Contact() {
                             value={formData.fullName}
                             onChange={handleInputChange}
                             placeholder="John Doe"
-                            className={`w-full bg-surface-elevated/45 border-b border-border hover:border-primary/50 focus:border-primary px-1.5 py-3 text-sm text-text-primary placeholder:text-text-muted focus:outline-none transition-colors ${
-                              formErrors.fullName ? "border-red-500" : ""
-                            }`}
+                            className={`w-full bg-surface-elevated/45 border-b border-border hover:border-primary/50 focus:border-primary px-1.5 py-3 text-sm text-text-primary placeholder:text-text-muted focus:outline-none transition-colors ${formErrors.fullName ? "border-red-500" : ""
+                              }`}
                           />
                           {formErrors.fullName && (
                             <p className="text-xs text-red-500 font-medium text-left">{formErrors.fullName}</p>
@@ -286,9 +285,8 @@ export default function Contact() {
                             value={formData.businessEmail}
                             onChange={handleInputChange}
                             placeholder="john@company.com"
-                            className={`w-full bg-surface-elevated/45 border-b border-border hover:border-primary/50 focus:border-primary px-1.5 py-3 text-sm text-text-primary placeholder:text-text-muted focus:outline-none transition-colors ${
-                              formErrors.businessEmail ? "border-red-500" : ""
-                            }`}
+                            className={`w-full bg-surface-elevated/45 border-b border-border hover:border-primary/50 focus:border-primary px-1.5 py-3 text-sm text-text-primary placeholder:text-text-muted focus:outline-none transition-colors ${formErrors.businessEmail ? "border-red-500" : ""
+                              }`}
                           />
                           {formErrors.businessEmail && (
                             <p className="text-xs text-red-500 font-medium text-left">{formErrors.businessEmail}</p>
@@ -308,9 +306,8 @@ export default function Contact() {
                             value={formData.companyName}
                             onChange={handleInputChange}
                             placeholder="Acme Corp"
-                            className={`w-full bg-surface-elevated/45 border-b border-border hover:border-primary/50 focus:border-primary px-1.5 py-3 text-sm text-text-primary placeholder:text-text-muted focus:outline-none transition-colors ${
-                              formErrors.companyName ? "border-red-500" : ""
-                            }`}
+                            className={`w-full bg-surface-elevated/45 border-b border-border hover:border-primary/50 focus:border-primary px-1.5 py-3 text-sm text-text-primary placeholder:text-text-muted focus:outline-none transition-colors ${formErrors.companyName ? "border-red-500" : ""
+                              }`}
                           />
                           {formErrors.companyName && (
                             <p className="text-xs text-red-500 font-medium text-left">{formErrors.companyName}</p>
@@ -342,9 +339,8 @@ export default function Contact() {
                           name="serviceInterest"
                           value={formData.serviceInterest}
                           onChange={handleInputChange}
-                          className={`w-full bg-surface-elevated/45 border-b border-border hover:border-primary/50 focus:border-primary px-1.5 py-3 text-sm text-text-primary focus:outline-none transition-colors ${
-                            formErrors.serviceInterest ? "border-red-500" : ""
-                          }`}
+                          className={`w-full bg-surface-elevated/45 border-b border-border hover:border-primary/50 focus:border-primary px-1.5 py-3 text-sm text-text-primary focus:outline-none transition-colors ${formErrors.serviceInterest ? "border-red-500" : ""
+                            }`}
                         >
                           <option value="">Select Service Area</option>
                           {SERVICES.map((s, i) => (
