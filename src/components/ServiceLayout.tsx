@@ -4,17 +4,9 @@ import { ArrowDown, ArrowRight, Check } from "lucide-react";
 import {
   staggerContainer,
   staggerItem,
-  fadeUpVariant,
-  slideUpSoft,
-  slideLeftVariant,
-  slideRightVariant,
-  scaleInVariant,
   blurInVariant,
   viewportOnce,
   viewportSoft,
-  lineDrawVariant,
-  makeStagger,
-  scalePopVariant,
 } from "../lib/animations";
 import { AnimatedHeroVisual } from "./AnimatedHeroVisual";
 import type { PageContent } from "./pageLayoutTypes";
@@ -168,7 +160,7 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
       </section>
 
       {/* ---------------------------------------------------------------- */}
-      {/* 2. OFFERINGS, zig-zag alternating rows (signature difference)   */}
+      {/* 2. OFFERINGS                                                    */}
       {/* ---------------------------------------------------------------- */}
       <section className="relative z-10 border-t border-border/10 px-6 py-20 md:px-12 md:py-28 lg:px-24">
         <div className="mx-auto max-w-7xl">
@@ -184,102 +176,42 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
             </ScrollReveal>
           </ScrollReveal>
 
-          <div className="mt-16 space-y-16 md:space-y-24">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSoft}
+            className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2"
+          >
             {capabilities.map((item, i) => {
               const Icon = item.icon;
-              const reversed = i % 2 === 1;
-              // Even rows slide in from the left, odd (reversed) from the right.
-              const textVariant = reversed ? slideRightVariant : slideLeftVariant;
-              const visualVariant = reversed ? slideLeftVariant : slideRightVariant;
               return (
-                <div
+                <motion.div
                   key={i}
-                  className={`grid grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-16 ${
-                    reversed ? "md:[direction:rtl]" : ""
-                  }`}
+                  variants={staggerItem}
+                  whileHover={{ y: -4 }}
+                  transition={{ duration: 0.25, ease: [0.34, 1.56, 0.64, 1] }}
+                  className="group rounded-2xl border border-border/15 bg-surface/40 p-6 transition-colors duration-300 hover:border-primary/30"
                 >
-                  {/* Text column */}
-                  <motion.div
-                    variants={textVariant}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={viewportSoft}
-                    className="space-y-5 md:[direction:ltr]"
-                  >
-                    <div className="flex items-center gap-3">
-                      <motion.span
-                        initial={{ scale: 0.8, opacity: 0 }}
-                        whileInView={{ scale: 1, opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: 0.1 }}
-                        className="font-mono text-xs font-bold"
-                        style={{ color: accent }}
-                      >
-                        {String(i + 1).padStart(2, "0")}
-                      </motion.span>
-                      <motion.span
-                        initial={{ scaleX: 0 }}
-                        whileInView={{ scaleX: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
-                        className="h-px flex-1 max-w-[64px] origin-left"
-                        style={{ background: `${accent}55` }}
-                      />
-                    </div>
-                    <motion.div
-                      className="flex h-12 w-12 items-center justify-center rounded-xl"
-                      style={{ background: `${accent}1a`, color: accent }}
-                      whileHover={{ scale: 1.1, rotate: 5 }}
+                  <div className="flex items-start gap-4">
+                    <div
+                      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border"
+                      style={{ borderColor: `${accent}35`, background: `${accent}14` }}
                     >
-                      <Icon className="h-6 w-6" style={{ color: accent }} />
-                    </motion.div>
-                    <h3 className="text-xl font-bold text-text-primary sm:text-2xl">{item.title}</h3>
-                    <p className="text-sm font-light leading-relaxed text-text-secondary">{item.desc}</p>
-                  </motion.div>
-
-                  {/* Visual column, abstract framed panel */}
-                  <motion.div
-                    variants={visualVariant}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={viewportSoft}
-                    whileHover={{ y: -6, scale: 1.01 }}
-                    transition={{ duration: 0.3, ease: [0.34, 1.56, 0.64, 1] }}
-                    className="md:[direction:ltr] cursor-default"
-                  >
-                    <div className="relative overflow-hidden rounded-3xl border border-border/15 bg-surface/40 p-8 hover:border-primary/30 transition-colors duration-300">
-                      <div
-                        className="pointer-events-none absolute inset-0 opacity-70"
-                        style={{ background: `radial-gradient(circle at 30% 20%, ${accent}18, transparent 65%)` }}
-                      />
-                      <div className="relative flex items-center justify-center">
-                        <motion.div
-                          className="flex h-24 w-24 items-center justify-center rounded-2xl border"
-                          style={{ borderColor: `${accent}44`, background: `${accent}12` }}
-                          whileHover={{ rotate: 360, scale: 1.1 }}
-                          transition={{ duration: 0.8, ease: "easeInOut" }}
-                        >
-                          <Icon className="h-11 w-11" style={{ color: accent }} />
-                        </motion.div>
-                      </div>
-                      <div className="relative mt-6 space-y-2.5">
-                        <div className="h-2 rounded-full bg-border/50" />
-                        <div className="h-2 w-4/5 rounded-full bg-border/35" />
-                        <motion.div
-                          className="h-2 rounded-full origin-left"
-                          style={{ background: `${accent}55` }}
-                          initial={{ scaleX: 0 }}
-                          whileInView={{ scaleX: 0.6 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.8, delay: 0.4 }}
-                        />
-                      </div>
+                      <Icon className="h-5 w-5" style={{ color: accent }} />
                     </div>
-                  </motion.div>
-                </div>
+                    <div>
+                      <div className="mb-3 font-mono text-xs font-bold" style={{ color: accent }}>
+                        {String(i + 1).padStart(2, "0")}
+                      </div>
+                      <h3 className="text-lg font-bold text-text-primary">{item.title}</h3>
+                      <p className="mt-3 text-sm font-light leading-relaxed text-text-secondary">{item.desc}</p>
+                    </div>
+                  </div>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
       </section>
 
