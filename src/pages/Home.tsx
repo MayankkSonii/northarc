@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useForm, ValidationError } from "@formspree/react";
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring } from "motion/react";
 import {
   ArrowRight,
@@ -679,17 +680,18 @@ export default function Home() {
     jsonLd: [HOME_JSON_LD, FAQ_JSON_LD],
   });
 
+  // ─── Formspree ───────────────────────────────────────────────────────────────
+  const [formState, handleFormspreeSubmit] = useForm("mjgnwbed");
+
   const [formData, setFormData] = useState({
-    fullName: "",
-    businessEmail: "",
-    companyName: "",
-    phoneNumber: "",
-    serviceInterest: "",
-    projectRequirements: ""
+    name: "",
+    email: "",
+    company: "",
+    phone: "",
+    service: "",
+    message: "",
   });
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
-  const [formSubmitted, setFormSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Auto-rotating typing terms in Hero Section
   const [activeWordIdx, setActiveWordIdx] = useState(0);
@@ -714,18 +716,18 @@ export default function Home() {
     }
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // Client-side validation before handing off to Formspree
     const errors: Record<string, string> = {};
-
-    if (!formData.fullName.trim()) errors.fullName = "Full Name is required";
-    if (!formData.businessEmail.trim()) {
-      errors.businessEmail = "Business Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(formData.businessEmail)) {
-      errors.businessEmail = "Please enter a valid email address";
+    if (!formData.name.trim()) errors.name = "Full Name is required";
+    if (!formData.email.trim()) {
+      errors.email = "Business Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      errors.email = "Please enter a valid email address";
     }
-    if (!formData.companyName.trim()) errors.companyName = "Company Name is required";
-    if (!formData.serviceInterest) errors.serviceInterest = "Please select a service";
+    if (!formData.company.trim()) errors.company = "Company Name is required";
+    if (!formData.service) errors.service = "Please select a service";
 
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors);
@@ -733,19 +735,8 @@ export default function Home() {
       return;
     }
 
-    setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setFormSubmitted(true);
-      setFormData({
-        fullName: "",
-        businessEmail: "",
-        companyName: "",
-        phoneNumber: "",
-        serviceInterest: "",
-        projectRequirements: ""
-      });
-    }, 1500);
+    // All valid — delegate to Formspree's hook handler
+    handleFormspreeSubmit(e);
   };
 
   return (
@@ -1518,7 +1509,7 @@ export default function Home() {
                 <div className="absolute inset-0 grid-bg opacity-20"></div>
 
                 <AnimatePresence mode="wait">
-                  {formSubmitted ? (
+                  {formState.succeeded ? (
                     <motion.div
                       key="success"
                       initial={{ opacity: 0, scale: 0.95 }}
@@ -1540,7 +1531,7 @@ export default function Home() {
                       </div>
 
                       <button
-                        onClick={() => setFormSubmitted(false)}
+                        onClick={() => window.location.reload()}
                         className="px-6 py-3 rounded-xl bg-primary hover:bg-primary/90 text-text-primary font-semibold text-sm transition-all"
                       >
                         Submit Another Consultation
@@ -1559,16 +1550,17 @@ export default function Home() {
                           </label>
                           <input
                             type="text"
-                            name="fullName"
-                            value={formData.fullName}
+                            name="name"
+                            value={formData.name}
                             onChange={handleInputChange}
                             placeholder="John Doe"
-                            className={`w-full bg-surface-elevated/45 border-b border-border hover:border-primary/50 focus:border-primary px-1.5 py-3 text-sm text-text-primary placeholder:text-text-muted focus:outline-none transition-colors ${formErrors.fullName ? "border-red-500" : ""
+                            className={`w-full bg-surface-elevated/45 border-b border-border hover:border-primary/50 focus:border-primary px-1.5 py-3 text-sm text-text-primary placeholder:text-text-muted focus:outline-none transition-colors ${formErrors.name ? "border-red-500" : ""
                               }`}
                           />
-                          {formErrors.fullName && (
-                            <p className="text-xs text-red-500 font-medium text-left">{formErrors.fullName}</p>
+                          {formErrors.name && (
+                            <p className="text-xs text-red-500 font-medium text-left">{formErrors.name}</p>
                           )}
+                          <ValidationError field="name" prefix="Full Name" errors={formState.errors} className="text-xs text-red-500 font-medium text-left" />
                         </div>
 
                         <div className="space-y-2">
@@ -1577,16 +1569,17 @@ export default function Home() {
                           </label>
                           <input
                             type="email"
-                            name="businessEmail"
-                            value={formData.businessEmail}
+                            name="email"
+                            value={formData.email}
                             onChange={handleInputChange}
                             placeholder="john@company.com"
-                            className={`w-full bg-surface-elevated/45 border-b border-border hover:border-primary/50 focus:border-primary px-1.5 py-3 text-sm text-text-primary placeholder:text-text-muted focus:outline-none transition-colors ${formErrors.businessEmail ? "border-red-500" : ""
+                            className={`w-full bg-surface-elevated/45 border-b border-border hover:border-primary/50 focus:border-primary px-1.5 py-3 text-sm text-text-primary placeholder:text-text-muted focus:outline-none transition-colors ${formErrors.email ? "border-red-500" : ""
                               }`}
                           />
-                          {formErrors.businessEmail && (
-                            <p className="text-xs text-red-500 font-medium text-left">{formErrors.businessEmail}</p>
+                          {formErrors.email && (
+                            <p className="text-xs text-red-500 font-medium text-left">{formErrors.email}</p>
                           )}
+                          <ValidationError field="email" prefix="Email" errors={formState.errors} className="text-xs text-red-500 font-medium text-left" />
                         </div>
                       </div>
 
@@ -1597,16 +1590,17 @@ export default function Home() {
                           </label>
                           <input
                             type="text"
-                            name="companyName"
-                            value={formData.companyName}
+                            name="company"
+                            value={formData.company}
                             onChange={handleInputChange}
                             placeholder="Acme Corp"
-                            className={`w-full bg-surface-elevated/45 border-b border-border hover:border-primary/50 focus:border-primary px-1.5 py-3 text-sm text-text-primary placeholder:text-text-muted focus:outline-none transition-colors ${formErrors.companyName ? "border-red-500" : ""
+                            className={`w-full bg-surface-elevated/45 border-b border-border hover:border-primary/50 focus:border-primary px-1.5 py-3 text-sm text-text-primary placeholder:text-text-muted focus:outline-none transition-colors ${formErrors.company ? "border-red-500" : ""
                               }`}
                           />
-                          {formErrors.companyName && (
-                            <p className="text-xs text-red-500 font-medium text-left">{formErrors.companyName}</p>
+                          {formErrors.company && (
+                            <p className="text-xs text-red-500 font-medium text-left">{formErrors.company}</p>
                           )}
+                          <ValidationError field="company" prefix="Company" errors={formState.errors} className="text-xs text-red-500 font-medium text-left" />
                         </div>
 
                         <div className="space-y-2">
@@ -1615,8 +1609,8 @@ export default function Home() {
                           </label>
                           <input
                             type="tel"
-                            name="phoneNumber"
-                            value={formData.phoneNumber}
+                            name="phone"
+                            value={formData.phone}
                             onChange={handleInputChange}
                             placeholder="+91 1234567890"
                             className="w-full bg-surface-elevated/45 border-b border-border hover:border-primary/50 focus:border-primary px-1.5 py-3 text-sm text-text-primary placeholder:text-text-muted focus:outline-none transition-colors"
@@ -1629,10 +1623,10 @@ export default function Home() {
                           Service Interest *
                         </label>
                         <select
-                          name="serviceInterest"
-                          value={formData.serviceInterest}
+                          name="service"
+                          value={formData.service}
                           onChange={handleInputChange}
-                          className={`w-full bg-surface-elevated/45 border-b border-border hover:border-primary/50 focus:border-primary px-1.5 py-3 text-sm text-text-primary focus:outline-none transition-colors ${formErrors.serviceInterest ? "border-red-500" : ""
+                          className={`w-full bg-surface-elevated/45 border-b border-border hover:border-primary/50 focus:border-primary px-1.5 py-3 text-sm text-text-primary focus:outline-none transition-colors ${formErrors.service ? "border-red-500" : ""
                             }`}
                         >
                           <option value="">Select Service Area</option>
@@ -1640,9 +1634,10 @@ export default function Home() {
                             <option key={i} value={s.title}>{s.title}</option>
                           ))}
                         </select>
-                        {formErrors.serviceInterest && (
-                          <p className="text-xs text-red-500 font-medium text-left">{formErrors.serviceInterest}</p>
+                        {formErrors.service && (
+                          <p className="text-xs text-red-500 font-medium text-left">{formErrors.service}</p>
                         )}
+                        <ValidationError field="service" prefix="Service" errors={formState.errors} className="text-xs text-red-500 font-medium text-left" />
                       </div>
 
                       <div className="space-y-2">
@@ -1650,8 +1645,8 @@ export default function Home() {
                           Project Requirements
                         </label>
                         <textarea
-                          name="projectRequirements"
-                          value={formData.projectRequirements}
+                          name="message"
+                          value={formData.message}
                           onChange={handleInputChange}
                           rows={4}
                           placeholder="Tell us about your pipeline bottlenecks, available model data, or targeted automation metrics..."
@@ -1659,12 +1654,18 @@ export default function Home() {
                         ></textarea>
                       </div>
 
+                      {formErrors.form && (
+                        <p className="text-xs text-red-400 font-medium text-center bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2">
+                          {formErrors.form}
+                        </p>
+                      )}
+
                       <button
                         type="submit"
-                        disabled={isSubmitting}
+                        disabled={formState.submitting}
                         className="w-full py-4 rounded-full font-bold bg-primary hover:bg-transparent border border-primary text-text-primary hover:text-primary transition-all duration-300 flex items-center justify-center space-x-2.5 text-base disabled:opacity-75 disabled:cursor-not-allowed cursor-pointer"
                       >
-                        {isSubmitting ? (
+                        {formState.submitting ? (
                           <>
                             <div className="w-5 h-5 rounded-full border-2 border-white/30 border-t-white animate-spin"></div>
                             <span>Requesting Secure Bridge...</span>
@@ -1677,6 +1678,7 @@ export default function Home() {
                         )}
                       </button>
                     </motion.form>
+
                   )}
                 </AnimatePresence>
 
