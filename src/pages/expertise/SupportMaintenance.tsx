@@ -10,10 +10,12 @@ import {
 
 export default function SupportMaintenance() {
   useSEO({
-    title: "AI-Powered Application Support & Maintenance Services",
+    title: "Software Development Services | Application Support & Maintenance",
     description:
-      "Keep systems always-on with NorthArc's AI-driven monitoring and maintenance, proactive anomaly detection, sub-15-minute incident response, and airtight SLAs.",
+      "NorthArc delivers software development services including enterprise application support and maintenance. Custom software development for enterprises with 24/7 AI-driven monitoring, anomaly detection, and an enterprise software solutions provider you can rely on.",
     path: "/expertise/support-maintenance",
+    keywords:
+      "Software Development Services, Software Engineering, Cloud Solutions, Application Support, Managed Services, Custom Software Development for Enterprises, Enterprise Software Solutions Provider, AI-Powered Application Maintenance",
     jsonLd: [
       {
         "@context": "https://schema.org",

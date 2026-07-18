@@ -6,10 +6,12 @@ import { Layers, Cpu, Database, Server } from "lucide-react";
 
 export default function CloudNative() {
   useSEO({
-    title: "Cloud-Native Development & Microservices",
+    title: "Cloud Application Development | AWS, Azure & GCP Cloud Services",
     description:
-      "NorthArc architects cloud-native platforms, elastic containers, serverless, and microservices that scale on demand and cut infrastructure costs.",
+      "NorthArc delivers cloud application development services on AWS, Azure, and GCP. From AWS cloud migration services to cloud-native application development, we are your enterprise cloud solutions provider for secure cloud infrastructure services.",
     path: "/expertise/cloud-native",
+    keywords:
+      "Cloud Application Development, Cloud Migration, AWS, Azure, GCP, Cloud Application Development Services, AWS Cloud Migration Services, Cloud Native Application Development, Enterprise Cloud Solutions Provider, Secure Cloud Infrastructure Services",
     jsonLd: [
       {
         "@context": "https://schema.org",

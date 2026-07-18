@@ -10,10 +10,12 @@ import {
 
 export default function QaAutomation() {
   useSEO({
-    title: "QA & Intelligent Test Automation",
+    title: "Software Development Services | QA Automation & CI/CD Testing",
     description:
-      "NorthArc delivers QA and intelligent test automation. AI-assisted test generation, CI/CD quality gates, and load audits that ship reliable software faster.",
+      "NorthArc provides software development services that include QA automation and intelligent test automation. Our end-to-end software development services include CI/CD quality gates, AI-assisted test generation, and custom software development for enterprises that ships faster and more reliably.",
     path: "/expertise/qa-automation",
+    keywords:
+      "Software Development Services, Software Engineering, DevOps, CI/CD, QA Automation, End-to-End Software Development Services, Custom Software Development for Enterprises, AI-Assisted Test Automation, Enterprise Software Solutions Provider",
     jsonLd: [
       {
         "@context": "https://schema.org",

@@ -6,10 +6,12 @@ import { Database, LineChart, Layers, Cpu } from "lucide-react";
 
 export default function BigData() {
   useSEO({
-    title: "Big Data & Data Science Engineering",
+    title: "AI Development Services | Big Data, Analytics & Machine Learning",
     description:
-      "NorthArc engineers petabyte-scale data lakes, real-time pipelines, and analytics that turn raw data into business intelligence and faster, smarter decisions.",
+      "NorthArc delivers AI development services for big data and analytics — machine learning development company building petabyte-scale data lakes, real-time pipelines, and AI automation solutions for businesses that turn raw data into measurable business intelligence.",
     path: "/expertise/big-data",
+    keywords:
+      "AI Development Services, AI Software Development, Machine Learning, AI Analytics, Big Data, Machine Learning Development Company, AI Automation Solutions for Businesses, Custom AI Development Services for Enterprises, Data Science Engineering",
     jsonLd: [
       {
         "@context": "https://schema.org",

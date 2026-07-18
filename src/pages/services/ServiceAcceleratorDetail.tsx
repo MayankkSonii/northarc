@@ -157,28 +157,28 @@ export default function ServiceAcceleratorDetail({ slug }: Props) {
       </section>
 
       <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-14 border-t border-border/10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-          <motion.div variants={fadeUpVariant} initial="hidden" whileInView="visible" viewport={viewportOnce} className="lg:col-span-4">
-            <div className="rounded-3xl border border-border/20 bg-surface/40 p-7">
-              <div className="flex items-center gap-3 mb-4">
-                <Target className="w-5 h-5" style={{ color: accent }} />
-                <h2 className="text-xl font-light tracking-tight">The problem</h2>
-              </div>
-              <p className="text-sm text-text-secondary font-light leading-relaxed">{accelerator.problem}</p>
+        <div className="space-y-10">
+          <motion.div variants={fadeUpVariant} initial="hidden" whileInView="visible" viewport={viewportOnce} className="max-w-3xl">
+            <div className="flex items-center gap-3">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border" style={{ borderColor: `${accent}35`, background: `${accent}12` }}>
+                <Target className="w-4 h-4" style={{ color: accent }} />
+              </span>
+              <h2 className="text-2xl font-light tracking-tight">The problem</h2>
             </div>
+            <p className="mt-4 text-sm text-text-secondary font-light leading-relaxed sm:text-base">{accelerator.problem}</p>
           </motion.div>
 
-          <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-5">
-            <InfoList title="How it works" icon={Workflow} items={accelerator.howItWorks} accent={accent} />
-            <InfoList title="Outcomes" icon={Zap} items={accelerator.outcomes} accent={accent} />
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+            <PointGroup title="How it works" icon={Workflow} items={accelerator.howItWorks} accent={accent} />
+            <PointGroup title="Outcomes" icon={Zap} items={accelerator.outcomes} accent={accent} />
           </div>
         </div>
       </section>
 
       <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-14 border-t border-border/10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-          <InfoList title="Features" icon={Layers} items={accelerator.features} accent={accent} />
-          <InfoList title="Use cases" icon={CheckCircle} items={accelerator.useCases} accent={accent} />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <PointGroup title="Features" icon={Layers} items={accelerator.features} accent={accent} />
+          <PointGroup title="Use cases" icon={CheckCircle} items={accelerator.useCases} accent={accent} />
         </div>
       </section>
 
@@ -200,7 +200,7 @@ export default function ServiceAcceleratorDetail({ slug }: Props) {
   );
 }
 
-function InfoList({
+function PointGroup({
   title,
   icon: Icon,
   items,
@@ -212,15 +212,15 @@ function InfoList({
   accent: string;
 }) {
   return (
-    <motion.div variants={fadeUpVariant} initial="hidden" whileInView="visible" viewport={viewportOnce} className="rounded-3xl border border-border/20 bg-surface/40 p-7">
+    <motion.div variants={fadeUpVariant} initial="hidden" whileInView="visible" viewport={viewportOnce} className="space-y-5">
       <div className="flex items-center gap-3 mb-5">
         <Icon className="w-5 h-5" style={{ color: accent }} />
         <h2 className="text-xl font-light tracking-tight">{title}</h2>
       </div>
-      <div className="space-y-4">
+      <div className="grid grid-cols-1 gap-3">
         {items.map((item, index) => (
-          <div key={index} className="flex items-start gap-3">
-            <span className="mt-0.5 text-xs font-mono font-bold" style={{ color: accent }}>
+          <div key={index} className="flex items-start gap-3 rounded-xl border border-border/15 bg-surface/35 p-4">
+            <span className="mt-0.5 text-xs font-mono font-bold shrink-0" style={{ color: accent }}>
               {String(index + 1).padStart(2, "0")}
             </span>
             <p className="text-sm text-text-secondary font-light leading-relaxed">{item}</p>

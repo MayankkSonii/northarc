@@ -23,10 +23,12 @@ const allCategories = [
 
 export default function CaseStudies() {
   useSEO({
-    title: "AI & Machine Learning Case Studies",
+    title: "Software Development Case Studies | AI & Digital Transformation Projects",
     description:
-      "Real-world AI, machine learning and data science case studies from the NorthArc team, measurable outcomes across finance, retail, media, automotive and more.",
+      "Explore AI development success stories and custom software development case studies from NorthArc. Real-world enterprise digital transformation projects, web development portfolio examples, and SaaS development success stories with measurable outcomes.",
     path: "/resources/case-studies",
+    keywords:
+      "Software Development Case Studies, Client Success Stories, Project Portfolio, AI Projects, Digital Transformation, AI Development Success Stories, Custom Software Development Case Studies, Enterprise Digital Transformation Projects, Web Development Portfolio Examples, SaaS Development Success Stories",
   });
 
   const [activeCategory, setActiveCategory] = useState("All");

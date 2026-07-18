@@ -23,10 +23,12 @@ const allCategories = [
 
 export default function Blogs() {
   useSEO({
-    title: "Blog. AI Engineering & Data Science Insights",
+    title: "Software Development Blog | AI Trends, SaaS & Technology Insights",
     description:
-      "Practical guides and strategic insights on AI engineering, GA4, BigQuery, agentic AI, and data analytics, helping teams turn data into business impact.",
+      "Read the latest AI development trends, software development best practices, and a SaaS product development guide from NorthArc. Web development tutorials for businesses and enterprise technology insights to help you stay ahead.",
     path: "/resources/blogs",
+    keywords:
+      "Software Development Blog, AI Trends, Web Development, SaaS, Technology Insights, Latest AI Development Trends, Software Development Best Practices, SaaS Product Development Guide, Web Development Tutorials for Businesses, Enterprise Technology Insights",
     jsonLd: breadcrumbJsonLd([
       { name: "Home", path: "/" },
       { name: "Blog", path: "/resources/blogs" },

@@ -6,10 +6,12 @@ import { Sparkles, MessageSquare, BookOpen, Bot } from "lucide-react";
 
 export default function GenerativeAi() {
   useSEO({
-    title: "Generative AI & LLM Development",
+    title: "Generative AI Development Company | LLM & AI Chatbot Services",
     description:
-      "NorthArc builds enterprise generative AI. RAG knowledge assistants, copilots and AI agents that turn your data into instant answers and automate work.",
+      "NorthArc is a generative AI development company building enterprise RAG knowledge assistants, AI chatbot development services, and AI automation solutions for businesses. Custom AI development services for enterprises that turn data into instant answers.",
     path: "/expertise/generative-ai",
+    keywords:
+      "AI Development Services, Generative AI, AI Software Development, Machine Learning, AI Agents, Generative AI Development Company, Custom AI Development Services for Enterprises, AI Chatbot Development Services, AI Automation Solutions for Businesses, Machine Learning Development Company",
     jsonLd: [
       {
         "@context": "https://schema.org",
