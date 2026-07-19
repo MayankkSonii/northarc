@@ -269,7 +269,8 @@
 /* ============================================================ */
 .floating-cta {
   position: fixed;
-  bottom: 2rem;
+  /* Reserve the lower-right corner for the global back-to-top control. */
+  bottom: 6rem;
   right: 2rem;
   z-index: 998;
 }
@@ -482,6 +483,27 @@
 
 .content-space-sm {
   margin-bottom: 2rem;   /* 32px */
+}
+
+/* Keep dense sections comfortable on phones without creating oversized gaps. */
+@media (max-width: 640px) {
+  .section-padding {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .section-padding-sm {
+    padding-top: 2.25rem;
+    padding-bottom: 2.25rem;
+  }
+
+  .content-space {
+    margin-bottom: 1.75rem;
+  }
+
+  .content-space-sm {
+    margin-bottom: 1.5rem;
+  }
 }
 
 /* ============================================================ */

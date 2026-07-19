@@ -21,7 +21,6 @@ import {
   ScanText,
   BarChart3,
   TrendingUp,
-  ChevronDown,
   ChevronLeft,
   ChevronRight
 } from "lucide-react";
@@ -154,135 +153,6 @@ const TRUST_CHIPS = [
   "AWS", "Microsoft Azure", "Google Cloud", "OpenAI", "Anthropic Claude",
   "Google Gemini", "LangChain", "PyTorch", "TensorFlow", "BigQuery", "Vertex AI", "scikit-learn",
 ];
-
-// Frequently asked questions, also rendered as FAQPage structured data.
-const FAQ_ITEMS = [
-  {
-    question: "What does NorthArc actually build for clients?",
-    answer: "We build production-grade AI systems: LLM applications grounded in your own data, predictive machine learning models, intelligent automation pipelines, and the web and mobile platforms that surface them. Every engagement ships as working software running in your cloud, not a proof of concept.",
-  },
-  {
-    question: "How long does a typical AI engagement take?",
-    answer: "Most engagements move from opportunity audit to a first production release in 6 to 10 weeks, then continue in bi-weekly delivery sprints. Timelines scale with scope, we agree on milestones and success metrics before any build work starts.",
-  },
-  {
-    question: "Do you work with our existing cloud and tech stack?",
-    answer: "Yes. We deploy inside your own AWS, Azure, or GCP environment and integrate with your existing data warehouse, APIs, and CI/CD pipeline rather than asking you to adopt a new platform.",
-  },
-  {
-    question: "Do you offer team augmentation instead of full projects?",
-    answer: "Yes. Alongside full-cycle product delivery, we embed AI engineers and data scientists directly into your team on a dedicated basis, working inside your existing sprints and tooling.",
-  },
-  {
-    question: "Who owns the code and models you build?",
-    answer: "You do. 100% intellectual property ownership transfers to you on final release, including model weights, training pipelines, and source code.",
-  },
-  {
-    question: "Do you support us after launch?",
-    answer: "Yes. We monitor accuracy, cost, and latency in production and offer ongoing support and retraining plans so performance improves with every release rather than degrading over time.",
-  },
-];
-
-const FAQ_JSON_LD = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: FAQ_ITEMS.map((item) => ({
-    "@type": "Question",
-    name: item.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: item.answer,
-    },
-  })),
-};
-
-function FAQSection() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
-
-  return (
-    <section id="faq" className="section-padding-sm bg-bg relative border-t border-border/40 overflow-hidden">
-      {/* Ambient glow */}
-      <div className="absolute top-1/3 left-1/4 w-[40vw] h-[40vw] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(29,117,255,0.04) 0%, transparent 70%)" }} />
-      <div className="max-w-4xl mx-auto px-6 md:px-12 relative z-10 text-left">
-        <ScrollReveal variant="fadeUp" className="space-y-4 content-space-sm max-w-2xl">
-          <motion.span
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-xs font-bold uppercase tracking-widest text-primary font-mono block"
-          >
-            FAQ
-          </motion.span>
-          <AnimatedText
-            text="Frequently Asked Questions"
-            as="h2"
-            type="words"
-            className="text-3xl md:text-5xl font-light tracking-tight text-text-primary leading-[1.1]"
-          />
-          <ScrollReveal variant="fadeUp" delay={0.2}>
-            <p className="text-base text-text-secondary font-light leading-relaxed">
-              Answers to what prospective partners ask us most before kicking off an engagement.
-            </p>
-          </ScrollReveal>
-        </ScrollReveal>
-
-        <div className="space-y-3">
-          {FAQ_ITEMS.map((item, idx) => {
-            const isOpen = openIndex === idx;
-            const fromLeft = idx % 2 === 0;
-            return (
-              <motion.div
-                key={item.question}
-                initial={{ opacity: 0, x: fromLeft ? -30 : 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.55, delay: idx * 0.04, ease: [0.22, 1, 0.36, 1] }}
-                className={`rounded-2xl border bg-surface overflow-hidden transition-all duration-300 ${isOpen
-                    ? "border-primary/40 shadow-lg shadow-primary/5"
-                    : "border-border hover:border-primary/20"
-                  }`}
-              >
-                <button
-                  onClick={() => setOpenIndex(isOpen ? null : idx)}
-                  aria-expanded={isOpen}
-                  className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left group"
-                >
-                  <span className={`text-sm md:text-base font-bold transition-colors duration-200 ${isOpen ? "text-primary" : "text-text-primary group-hover:text-primary"
-                    }`}>{item.question}</span>
-                  <div className={`w-8 h-8 rounded-full border flex items-center justify-center shrink-0 transition-all duration-300 ${isOpen
-                      ? "bg-primary border-primary text-white rotate-180"
-                      : "border-border text-text-secondary group-hover:border-primary/40 group-hover:text-primary"
-                    }`}>
-                    <ChevronDown className="w-4 h-4 transition-transform duration-300" />
-                  </div>
-                </button>
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
-                      className="overflow-hidden"
-                    >
-                      <div className="px-6 pb-6 pt-1">
-                        <div className="h-px bg-border/50 mb-4" />
-                        <p className="text-sm text-text-secondary font-light leading-relaxed">
-                          {item.answer}
-                        </p>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 // Animated Stats Counter Component
 interface AnimatedCounterProps {
@@ -679,7 +549,7 @@ export default function Home() {
     path: "/",
     keywords:
       "AI Development Company, AI Software Development, Software Development Company, Web Development Company, SaaS Development Company, Enterprise Software Development, Best AI Development Company for Startups, Custom AI Software Development Company, Enterprise AI Development Services, AI Development Company for Businesses, End-to-End AI Software Development",
-    jsonLd: [HOME_JSON_LD, FAQ_JSON_LD],
+    jsonLd: HOME_JSON_LD,
   });
 
   // ─── Formspree ───────────────────────────────────────────────────────────────
@@ -1449,8 +1319,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      <FAQSection />
 
       {/* 4. CONTACT SECTION */}
       <section id="contact" className="section-padding bg-surface/30 border-t border-border relative">
