@@ -72,13 +72,13 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
       {/* ---------------------------------------------------------------- */}
       {/* 1. HERO, asymmetric split matching Expertise pages              */}
       {/* ---------------------------------------------------------------- */}
-      <section className="relative z-10 mx-auto max-w-7xl px-6 pt-24 pb-14 md:px-12 md:pt-28 lg:px-24 lg:pt-32 lg:pb-20">
-        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-8">
+      <section className="relative z-10 mx-auto max-w-7xl px-6 pt-32 pb-8 md:px-12 md:pt-28 md:pb-14 lg:px-24 lg:pt-32 lg:pb-20">
+        <div className="grid grid-cols-1 items-center gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-8">
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           animate="visible"
-          className="space-y-8 text-left lg:col-span-6"
+          className="space-y-6 text-left lg:col-span-6 lg:space-y-8"
         >
           <motion.span
             variants={staggerItem}
@@ -118,7 +118,7 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
           </motion.div>
           <motion.div
             variants={staggerItem}
-            className="flex items-center gap-3 text-xs text-text-secondary font-light font-mono opacity-80 pt-4"
+            className="hidden items-center gap-3 text-xs text-text-secondary font-light font-mono opacity-80 pt-4 sm:flex"
           >
             <div className="w-8 h-8 rounded-full border border-border/20 flex items-center justify-center">
               <ArrowDown className="w-3.5 h-3.5" />
@@ -139,7 +139,7 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
             initial={{ opacity: 0, scale: 0.98, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.24, delay: 0.04, ease: [0.22, 1, 0.36, 1] }}
-            className="relative mx-auto mt-4 flex min-h-[220px] max-w-md flex-col items-center justify-center gap-4 overflow-hidden rounded-3xl border border-border/20 bg-surface/40 p-8 text-center backdrop-blur-sm lg:hidden"
+            className="hidden relative mx-auto mt-4 flex min-h-[220px] max-w-md flex-col items-center justify-center gap-4 overflow-hidden rounded-3xl border border-border/20 bg-surface/40 p-8 text-center backdrop-blur-sm lg:hidden"
           >
             <div
               className="pointer-events-none absolute inset-0 opacity-60"
@@ -162,7 +162,7 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
       {/* ---------------------------------------------------------------- */}
       {/* 2. OFFERINGS                                                    */}
       {/* ---------------------------------------------------------------- */}
-      <section className="relative z-10 border-t border-border/10 px-6 py-20 md:px-12 md:py-28 lg:px-24">
+      <section className="relative z-10 border-t border-border/10 px-6 py-10 sm:py-14 md:px-12 md:py-20 lg:px-24 lg:py-24">
         <div className="mx-auto max-w-7xl">
           <ScrollReveal variant="fadeUp" className="max-w-2xl">
             <AnimatedText
@@ -181,7 +181,7 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
             initial="hidden"
             whileInView="visible"
             viewport={viewportSoft}
-            className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2"
+            className="mt-8 grid grid-cols-1 gap-5 sm:mt-12 md:grid-cols-2"
           >
             {capabilities.map((item, i) => {
               const Icon = item.icon;
@@ -218,7 +218,7 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
       {/* ---------------------------------------------------------------- */}
       {/* 3. PROCESS, horizontal numbered step flow with connectors       */}
       {/* ---------------------------------------------------------------- */}
-      <section className="relative z-10 border-t border-border/10 px-6 py-20 md:px-12 md:py-28 lg:px-24">
+      <section className="relative z-10 border-t border-border/10 px-6 py-10 sm:py-14 md:px-12 md:py-20 lg:px-24 lg:py-24">
         <div className="mx-auto max-w-7xl">
           <ScrollReveal variant="fadeUp" className="max-w-2xl">
             <AnimatedText
@@ -237,7 +237,7 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
             initial="hidden"
             whileInView="visible"
             viewport={viewportSoft}
-            className="relative mt-16 grid grid-cols-1 gap-8 md:grid-cols-3"
+            className="relative mt-8 grid grid-cols-1 gap-6 sm:mt-12 md:grid-cols-3 md:gap-8 lg:mt-16"
           >
             {process.map((step, i) => {
               const isLast = i === process.length - 1;
@@ -292,8 +292,8 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
       {/* ---------------------------------------------------------------- */}
       {/* 4. PROOF, benefits band + prominent gradient CTA card           */}
       {/* ---------------------------------------------------------------- */}
-      <section className="relative z-10 border-t border-border/10 px-6 py-20 md:px-12 md:py-28 lg:px-24">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <section className="relative z-10 border-t border-border/10 px-6 py-10 sm:py-14 md:px-12 md:py-20 lg:px-24 lg:py-24">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-16">
           {/* Benefits band */}
           <div className="space-y-6">
             <AnimatedText
@@ -337,7 +337,7 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
             viewport={viewportSoft}
             whileHover={{ scale: 1.015, translateY: -4 }}
             transition={{ duration: 0.3, ease: [0.34, 1.56, 0.64, 1] }}
-            className="relative overflow-hidden rounded-3xl border p-10 text-center cursor-default hover:border-primary/40 transition-all duration-300"
+            className="relative overflow-hidden rounded-3xl border p-6 text-center cursor-default hover:border-primary/40 transition-all duration-300 sm:p-10"
             style={{
               borderColor: `${accent}44`,
               background: `linear-gradient(140deg, ${accent}26, ${accent}0a 60%, transparent)`,
@@ -371,7 +371,7 @@ export default function ServiceLayout({ content }: { content: PageContent }) {
       {/* ---------------------------------------------------------------- */}
       {/* 5. FINAL CTA, full-width accent gradient band                   */}
       {/* ---------------------------------------------------------------- */}
-      <section className="relative z-10 overflow-hidden border-t border-border/10 px-6 py-24 md:px-12 lg:px-24">
+      <section className="relative z-10 overflow-hidden border-t border-border/10 px-6 py-12 sm:py-16 md:px-12 lg:px-24 lg:py-24">
         <div
           className="pointer-events-none absolute inset-0"
           style={{ background: `linear-gradient(120deg, ${accent}1f, transparent 55%, ${accent}14)` }}

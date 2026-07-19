@@ -488,13 +488,13 @@
 /* Keep dense sections comfortable on phones without creating oversized gaps. */
 @media (max-width: 640px) {
   .section-padding {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
+    padding-top: 2.75rem;
+    padding-bottom: 2.75rem;
   }
 
   .section-padding-sm {
-    padding-top: 2.25rem;
-    padding-bottom: 2.25rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 
   .content-space {

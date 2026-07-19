@@ -101,10 +101,10 @@ export default function Contact() {
 
       <section className="section-padding bg-surface/30 border-t border-border relative">
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 text-left">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-16 items-start">
 
             {/* Left Info Column */}
-            <div className="lg:col-span-5 space-y-10 lg:sticky lg:top-32">
+            <div className="lg:col-span-5 space-y-7 sm:space-y-10 lg:sticky lg:top-32">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -120,7 +120,7 @@ export default function Contact() {
                 </p>
               </motion.div>
 
-              <div className="space-y-6 pt-4">
+              <div className="space-y-4 pt-2 sm:space-y-6 sm:pt-4">
                 {[
                   { icon: MapPin, title: "Headquarters", content: "Ahmedabad, Gujarat", accent: "text-primary" },
                   { icon: Mail, title: "Solutions Desk", content: <a href="mailto:business@northarc.in" className="text-primary hover:underline">business@northarc.in</a>, accent: "text-secondary" },
@@ -151,7 +151,7 @@ export default function Contact() {
 
             {/* Right Contact Form Column */}
             <div className="lg:col-span-7">
-              <div className="rounded-3xl bg-surface border border-border p-8 lg:p-10 relative overflow-hidden shadow-xl">
+              <div className="rounded-3xl bg-surface border border-border p-5 sm:p-8 lg:p-10 relative overflow-hidden shadow-xl">
                 <div className="absolute inset-0 grid-bg opacity-20"></div>
 
                 <AnimatePresence mode="wait">
@@ -161,7 +161,7 @@ export default function Contact() {
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0 }}
-                      className="text-center py-12 space-y-6 relative z-10"
+                      className="text-center py-8 sm:py-12 space-y-6 relative z-10"
                     >
                       <div className="w-16 h-16 rounded-full bg-primary/10 border border-primary/20 text-primary flex items-center justify-center mx-auto shadow-lg">
                         <Check className="w-8 h-8" />

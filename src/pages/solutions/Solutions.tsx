@@ -101,9 +101,9 @@ export default function Solutions() {
       <div className="absolute right-[-12%] top-[45%] w-[40vw] h-[40vw] rounded-full bg-gradient-to-br from-secondary/5 to-glow/5 blur-[130px] pointer-events-none z-0" />
 
       {/* ── HERO ── */}
-      <section className="relative z-10 mx-auto max-w-7xl px-6 pt-24 pb-14 md:px-12 md:pt-28 lg:px-24 lg:pt-32 lg:pb-20">
-        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-8">
-        <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="space-y-8 text-left lg:col-span-6">
+      <section className="relative z-10 mx-auto max-w-7xl px-6 pt-32 pb-8 md:px-12 md:pt-28 md:pb-14 lg:px-24 lg:pt-32 lg:pb-20">
+        <div className="grid grid-cols-1 items-center gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-8">
+        <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="space-y-6 text-left lg:col-span-6 lg:space-y-8">
           <motion.span className="text-xs font-bold uppercase tracking-widest text-primary font-mono block" variants={staggerItem}>
             Solutions
           </motion.span>
@@ -138,7 +138,7 @@ export default function Solutions() {
           </motion.div>
           <motion.div
             variants={staggerItem}
-            className="flex items-center gap-3 text-xs text-text-secondary font-light font-mono opacity-80 pt-4"
+            className="hidden items-center gap-3 text-xs text-text-secondary font-light font-mono opacity-80 pt-4 sm:flex"
           >
             <div className="w-8 h-8 rounded-full border border-border/20 flex items-center justify-center">
               <ArrowDown className="w-3.5 h-3.5" />
@@ -153,7 +153,7 @@ export default function Solutions() {
             initial={{ opacity: 0, scale: 0.98, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.24, delay: 0.04, ease: [0.22, 1, 0.36, 1] }}
-            className="relative mx-auto mt-4 flex min-h-[220px] max-w-md flex-col items-center justify-center gap-4 overflow-hidden rounded-3xl border border-border/20 bg-surface/40 p-8 text-center backdrop-blur-sm lg:hidden"
+            className="hidden relative mx-auto mt-4 flex min-h-[220px] max-w-md flex-col items-center justify-center gap-4 overflow-hidden rounded-3xl border border-border/20 bg-surface/40 p-8 text-center backdrop-blur-sm lg:hidden"
           >
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 opacity-70" />
             <div className="relative flex flex-col items-center gap-4 text-center">
@@ -173,7 +173,7 @@ export default function Solutions() {
       </section>
 
       {/* ── BY INDUSTRY ── */}
-      <section className="px-6 md:px-12 lg:px-24 py-14 border-t border-border/10 relative z-10 max-w-7xl mx-auto">
+      <section className="px-6 md:px-12 lg:px-24 py-10 sm:py-14 border-t border-border/10 relative z-10 max-w-7xl mx-auto">
         <div className="flex items-center gap-3 mb-2">
           <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary font-mono">01</span>
           <span className="h-px w-8 bg-primary/40" />
@@ -182,7 +182,7 @@ export default function Solutions() {
         <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-text-primary mb-3">
           Built for how your <span className="text-primary font-semibold">industry works</span>
         </h2>
-        <p className="text-sm text-text-secondary font-light max-w-2xl mb-10 leading-relaxed">
+        <p className="text-sm text-text-secondary font-light max-w-2xl mb-7 sm:mb-10 leading-relaxed">
           AI tuned to the data, workflows, and compliance realities of your sector, from patient risk in
           healthcare to demand planning in manufacturing.
         </p>
@@ -198,7 +198,7 @@ export default function Solutions() {
       </section>
 
       {/* ── BY BUSINESS FUNCTION ── */}
-      <section className="px-6 md:px-12 lg:px-24 py-14 border-t border-border/10 relative z-10 max-w-7xl mx-auto">
+      <section className="px-6 md:px-12 lg:px-24 py-10 sm:py-14 border-t border-border/10 relative z-10 max-w-7xl mx-auto">
         <div className="flex items-center gap-3 mb-2">
           <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary font-mono">02</span>
           <span className="h-px w-8 bg-primary/40" />
@@ -207,7 +207,7 @@ export default function Solutions() {
         <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-text-primary mb-3">
           Built for what your <span className="text-primary font-semibold">team does</span>
         </h2>
-        <p className="text-sm text-text-secondary font-light max-w-2xl mb-10 leading-relaxed">
+        <p className="text-sm text-text-secondary font-light max-w-2xl mb-7 sm:mb-10 leading-relaxed">
           AI mapped to the functions that run your business, so sales, support, operations, finance, and HR
           each get the leverage that matters most to them.
         </p>
@@ -223,9 +223,9 @@ export default function Solutions() {
       </section>
 
       {/* ── CTA BANNER ── */}
-      <section className="px-6 md:px-12 lg:px-24 py-20 relative z-10">
+      <section className="px-6 md:px-12 lg:px-24 py-12 sm:py-16 lg:py-20 relative z-10">
         <div className="max-w-7xl mx-auto">
-          <div className="relative rounded-3xl border border-border/50 bg-surface/40 backdrop-blur-xl px-8 py-14 sm:px-16 overflow-hidden text-center">
+          <div className="relative rounded-3xl border border-border/50 bg-surface/40 backdrop-blur-xl px-5 py-10 sm:px-16 sm:py-14 overflow-hidden text-center">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/6 via-transparent to-secondary/6 pointer-events-none" />
             <div className="absolute -top-1/4 left-1/2 -translate-x-1/2 w-[40vw] h-[40vw] rounded-full bg-primary/8 blur-[100px] pointer-events-none" />
             <span className="text-[10px] font-mono uppercase tracking-widest text-primary font-bold block mb-4">
