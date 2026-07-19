@@ -34,6 +34,7 @@ import FloatingCTA from "./components/FloatingCTA";
 
 // Page imports (statically loaded for instant page-to-page navigation and zero dynamic chunk compiler latency)
 import Home from "./pages/Home";
+import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
@@ -268,6 +269,8 @@ export default function App() {
         return <Home />;
       case "/contact":
         return <Contact />;
+      case "/about":
+        return <About />;
       case "/services/full-cycle-development":
         return <CustomSoftware />;
       case "/services/team-augmentation":
@@ -392,6 +395,13 @@ export default function App() {
             <a href="/" onClick={closeNavigationMenus} className={navLinkClass("/")}>
               Home
               {currentPath === "/" && (
+                <motion.div layoutId="nav-underline" className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary" />
+              )}
+            </a>
+
+            <a href="/about" onClick={closeNavigationMenus} className={navLinkClass("/about")}>
+              About
+              {currentPath === "/about" && (
                 <motion.div layoutId="nav-underline" className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary" />
               )}
             </a>
@@ -922,6 +932,18 @@ export default function App() {
                   className="text-base font-semibold text-text-secondary hover:text-primary py-1"
                 >
                   Home
+                </motion.a>
+
+                <motion.a
+                  variants={{
+                    hidden: { opacity: 0, x: -8 },
+                    visible: { opacity: 1, x: 0, transition: { duration: 0.16 } }
+                  }}
+                  href="/about"
+                  onClick={closeNavigationMenus}
+                  className="text-base font-semibold text-text-secondary hover:text-primary py-1"
+                >
+                  About
                 </motion.a>
 
                 {/* Mobile Services Collapsible */}
