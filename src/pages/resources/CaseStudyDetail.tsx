@@ -110,10 +110,10 @@ export default function CaseStudyDetail({ slug }: Props) {
       />
 
       {/* ── HERO ── */}
-      <section className="px-6 md:px-12 lg:px-24 pt-28 lg:pt-32 pb-10 relative z-10 max-w-5xl mx-auto">
+      <section className="px-6 md:px-12 lg:px-24 pt-32 lg:pt-32 pb-8 sm:pb-10 relative z-10 max-w-5xl mx-auto">
         <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="space-y-6">
           {/* Breadcrumb */}
-          <motion.nav className="flex items-center gap-2 text-xs text-text-muted font-mono mb-8" variants={staggerItem}>
+          <motion.nav className="flex items-center gap-2 text-xs text-text-muted font-mono mb-5 sm:mb-8" variants={staggerItem}>
             <a href="/resources/case-studies" className="hover:text-primary transition-colors">Case Studies</a>
             <ChevronRight className="w-3 h-3" />
             <span className="text-text-secondary truncate max-w-[200px]">{cs.client}</span>
@@ -122,7 +122,7 @@ export default function CaseStudyDetail({ slug }: Props) {
           {/* Back link */}
           <motion.a
             href="/resources/case-studies"
-            className="inline-flex items-center gap-2 text-xs font-semibold text-text-muted hover:text-primary transition-colors mb-8 group"
+            className="inline-flex items-center gap-2 text-xs font-semibold text-text-muted hover:text-primary transition-colors mb-5 sm:mb-8 group"
             variants={staggerItem}
           >
             <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
@@ -187,20 +187,20 @@ export default function CaseStudyDetail({ slug }: Props) {
       </section>
 
       {/* ── BODY ── */}
-      <section className="px-6 md:px-12 lg:px-24 pb-16 relative z-10 max-w-5xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <section className="px-6 md:px-12 lg:px-24 pb-12 sm:pb-16 relative z-10 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12">
 
           {/* Main content */}
           <div className="lg:col-span-8 space-y-2 text-left">
 
             {/* Challenge */}
-            <div className="p-6 rounded-2xl border border-border bg-surface/40 backdrop-blur-sm mb-10">
+            <div className="p-5 sm:p-6 rounded-2xl border border-border bg-surface/40 backdrop-blur-sm mb-6 sm:mb-10">
               <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-primary block mb-3">The Challenge</span>
               <p className="text-sm text-text-secondary leading-relaxed">{cs.challenge}</p>
             </div>
 
             {/* Solution */}
-            <div className="p-6 rounded-2xl border mb-10" style={{ borderColor: `${cs.accentColor}30`, background: `${cs.accentColor}06` }}>
+            <div className="p-5 sm:p-6 rounded-2xl border mb-6 sm:mb-10" style={{ borderColor: `${cs.accentColor}30`, background: `${cs.accentColor}06` }}>
               <span className="text-[10px] font-mono font-bold uppercase tracking-widest block mb-3" style={{ color: cs.accentColor }}>Our Solution</span>
               <p className="text-sm text-text-secondary leading-relaxed">{cs.solution}</p>
             </div>
@@ -213,7 +213,7 @@ export default function CaseStudyDetail({ slug }: Props) {
             </div>
 
             {/* Outcome */}
-            <div className="mt-10 p-8 rounded-2xl border border-primary/20 bg-primary/5">
+            <div className="mt-8 sm:mt-10 p-5 sm:p-8 rounded-2xl border border-primary/20 bg-primary/5">
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
                   <TrendingUp className="w-5 h-5 text-primary" />

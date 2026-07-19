@@ -129,10 +129,10 @@ export default function BlogDetail({ slug }: Props) {
       />
 
       {/* ── HERO ── */}
-      <section className="px-6 md:px-12 lg:px-24 pt-28 lg:pt-32 pb-10 relative z-10 max-w-5xl mx-auto">
+      <section className="px-6 md:px-12 lg:px-24 pt-32 lg:pt-32 pb-8 sm:pb-10 relative z-10 max-w-5xl mx-auto">
         <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="space-y-6">
           {/* Breadcrumb */}
-          <motion.nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-text-muted font-mono mb-8" variants={staggerItem}>
+          <motion.nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-text-muted font-mono mb-5 sm:mb-8" variants={staggerItem}>
             <a href="/resources/blogs" className="hover:text-primary transition-colors">Blog</a>
             <ChevronRight className="w-3 h-3" />
             <span className="text-text-secondary truncate max-w-[220px]">{post.category}</span>
@@ -141,7 +141,7 @@ export default function BlogDetail({ slug }: Props) {
           {/* Back link */}
           <motion.a
             href="/resources/blogs"
-            className="inline-flex items-center gap-2 text-xs font-semibold text-text-muted hover:text-primary transition-colors mb-8 group"
+            className="inline-flex items-center gap-2 text-xs font-semibold text-text-muted hover:text-primary transition-colors mb-5 sm:mb-8 group"
             variants={staggerItem}
           >
             <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
@@ -205,8 +205,8 @@ export default function BlogDetail({ slug }: Props) {
       </section>
 
       {/* ── BODY ── */}
-      <section className="px-6 md:px-12 lg:px-24 pb-20 relative z-10 max-w-5xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <section className="px-6 md:px-12 lg:px-24 pb-12 sm:pb-16 lg:pb-20 relative z-10 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12">
 
           {/* Article content */}
           <article className="lg:col-span-8 space-y-5 text-left">
@@ -334,9 +334,9 @@ export default function BlogDetail({ slug }: Props) {
       </section>
 
       {/* ── MORE ARTICLES CTA ── */}
-      <section className="px-6 md:px-12 lg:px-24 py-16 relative z-10">
+      <section className="px-6 md:px-12 lg:px-24 py-12 sm:py-16 relative z-10">
         <div className="max-w-5xl mx-auto">
-          <div className="relative rounded-3xl border border-border bg-surface/50 backdrop-blur-xl px-8 py-12 text-center overflow-hidden">
+          <div className="relative rounded-3xl border border-border bg-surface/50 backdrop-blur-xl px-5 py-10 text-center overflow-hidden sm:px-8 sm:py-12">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-purple-500/5 pointer-events-none" />
             <h2 className="text-2xl sm:text-3xl font-light text-text-primary mb-3">
               Explore more <span className="text-primary font-semibold">insights</span>

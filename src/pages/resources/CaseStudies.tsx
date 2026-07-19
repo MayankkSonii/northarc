@@ -53,7 +53,7 @@ export default function CaseStudies() {
       <div className="absolute right-[-12%] top-[45%] w-[40vw] h-[40vw] rounded-full bg-gradient-to-br from-purple-500/5 to-secondary/5 blur-[130px] pointer-events-none z-0" />
 
       {/* ── HERO ── */}
-      <section className="min-h-[52vh] flex flex-col justify-between px-6 md:px-12 lg:px-24 pt-28 lg:pt-32 pb-12 relative z-10 max-w-7xl mx-auto">
+      <section className="flex flex-col justify-between px-6 md:px-12 lg:px-24 pt-32 lg:pt-32 pb-8 lg:min-h-[52vh] lg:pb-12 relative z-10 max-w-7xl mx-auto">
         <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="space-y-6 max-w-3xl">
           <motion.span className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary font-mono block" variants={staggerItem}>
             Resources / Case Studies
@@ -88,7 +88,7 @@ export default function CaseStudies() {
         <div className="pointer-events-none absolute right-6 top-[calc(50%+40px)] hidden w-[38%] -translate-y-1/2 lg:block">
           <AnimatedHeroVisual icon={TrendingUp} title="Delivered outcomes" eyebrow="Case evidence" scene="data" />
         </div>
-        <div className="flex items-center gap-3 text-xs text-text-secondary font-mono opacity-60 pt-10 lg:pt-0">
+        <div className="hidden items-center gap-3 text-xs text-text-secondary font-mono opacity-60 pt-10 sm:flex lg:pt-0">
           <div className="w-8 h-8 rounded-full border border-border/30 flex items-center justify-center animate-bounce">
             <ArrowDown className="w-3.5 h-3.5" />
           </div>
@@ -131,7 +131,7 @@ export default function CaseStudies() {
       </section>
 
       {/* ── GRID ── */}
-      <section className="px-6 md:px-12 lg:px-24 py-14 relative z-10 max-w-7xl mx-auto">
+      <section className="px-6 md:px-12 lg:px-24 py-10 sm:py-14 relative z-10 max-w-7xl mx-auto">
         <p className="text-[11px] text-text-muted font-mono mb-8">
           Showing <span className="text-primary font-semibold">{filtered.length}</span> of {caseStudies.length} case studies
         </p>
@@ -234,7 +234,7 @@ export default function CaseStudies() {
         </AnimatePresence>
 
         {filtered.length === 0 && (
-          <div className="text-center py-28 text-text-muted">
+          <div className="text-center py-16 sm:py-28 text-text-muted">
             <Search className="w-10 h-10 mx-auto mb-4 opacity-20" />
             <p className="text-sm">No case studies match your filters.</p>
           </div>
@@ -242,9 +242,9 @@ export default function CaseStudies() {
       </section>
 
       {/* ── CTA BANNER ── */}
-      <section className="px-6 md:px-12 lg:px-24 py-20 relative z-10">
+      <section className="px-6 md:px-12 lg:px-24 py-12 sm:py-16 lg:py-20 relative z-10">
         <div className="max-w-7xl mx-auto">
-          <div className="relative rounded-3xl border border-border/50 bg-surface/40 backdrop-blur-xl px-8 py-14 sm:px-16 overflow-hidden text-center">
+          <div className="relative rounded-3xl border border-border/50 bg-surface/40 backdrop-blur-xl px-5 py-10 sm:px-16 sm:py-14 overflow-hidden text-center">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/6 via-transparent to-purple-500/6 pointer-events-none" />
             <div className="absolute -top-1/4 left-1/2 -translate-x-1/2 w-[40vw] h-[40vw] rounded-full bg-primary/8 blur-[100px] pointer-events-none" />
             <span className="text-[10px] font-mono uppercase tracking-widest text-primary font-bold block mb-4">

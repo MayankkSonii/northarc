@@ -81,9 +81,9 @@ export default function About() {
     <div className="about-page bg-bg min-h-screen text-text-primary relative overflow-hidden font-sans">
 
       {/* Hero follows the shared service and expertise page layout. */}
-      <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24 pt-24 pb-14 md:pt-28 lg:pt-32 lg:pb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
-          <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="lg:col-span-6 space-y-8 text-left">
+      <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24 pt-32 pb-8 md:pt-28 md:pb-14 lg:pt-32 lg:pb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-8 items-center">
+          <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="lg:col-span-6 space-y-6 text-left lg:space-y-8">
             <motion.span variants={staggerItem} className="block text-xs font-bold uppercase tracking-widest font-mono text-primary">
               ABOUT NORTHARC
             </motion.span>
@@ -101,7 +101,7 @@ export default function About() {
                 <span>Start a conversation</span><ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </motion.a>
             </motion.div>
-            <motion.div variants={staggerItem} className="flex items-center gap-3 text-xs text-text-secondary font-light font-mono opacity-80 pt-1">
+            <motion.div variants={staggerItem} className="hidden items-center gap-3 text-xs text-text-secondary font-light font-mono opacity-80 pt-1 sm:flex">
               <div className="w-8 h-8 rounded-full border border-border/20 flex items-center justify-center"><ArrowDown className="w-3.5 h-3.5" /></div>
               <span>Scroll to explore NorthArc</span>
             </motion.div>
@@ -109,7 +109,7 @@ export default function About() {
 
           <div className="lg:col-span-6 lg:self-start lg:-translate-y-10">
             <AnimatedHeroVisual icon={Building2} title="Technology partnership" eyebrow="ABOUT NORTHARC" scene="team" accentColor="#1D75FF" />
-            <div className="relative mx-auto mt-4 flex min-h-[220px] max-w-md flex-col items-center justify-center gap-4 overflow-hidden rounded-3xl border border-border/20 bg-surface/40 p-8 text-center backdrop-blur-sm lg:hidden">
+            <div className="hidden relative mx-auto mt-4 flex min-h-[220px] max-w-md flex-col items-center justify-center gap-4 overflow-hidden rounded-3xl border border-border/20 bg-surface/40 p-8 text-center backdrop-blur-sm lg:hidden">
               <div className="flex h-20 w-20 items-center justify-center rounded-2xl border border-primary/30 bg-primary/10"><Building2 className="h-9 w-9 text-primary" /></div>
               <p className="text-sm font-semibold text-text-primary">Technology partnership</p>
             </div>

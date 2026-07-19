@@ -60,13 +60,55 @@ export function AnimatedHeroVisual({
   const Icons = sceneIcons[scene] ?? sceneIcons.default;
 
   return (
-    <motion.div
-      variants={heroVisualVariant}
-      initial="hidden"
-      animate="visible"
-      className="relative hidden h-[520px] w-full max-w-[520px] ml-auto lg:block"
-      aria-hidden="true"
-    >
+    <>
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        className="relative mx-auto w-full max-w-md overflow-hidden rounded-3xl border border-border/25 bg-surface/45 p-4 backdrop-blur-sm sm:p-5 lg:hidden"
+        aria-hidden="true"
+      >
+        <div
+          className="pointer-events-none absolute inset-0 opacity-70"
+          style={{ background: `radial-gradient(circle at 50% 0%, ${accentColor ? `${accentColor}18` : "rgba(29,117,255,0.10)"}, transparent 70%)` }}
+        />
+        <div className="relative flex items-center gap-3">
+          <div
+            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-primary/25 bg-primary/10"
+            style={accentColor ? { borderColor: `${accentColor}55`, background: `${accentColor}18` } : undefined}
+          >
+            <Icon className="h-6 w-6 text-primary" style={accentStyle} />
+          </div>
+          <div className="min-w-0">
+            <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-text-muted">{eyebrow}</p>
+            <p className="mt-1 truncate text-sm font-semibold text-text-primary">{title}</p>
+          </div>
+          <span className="ml-auto h-2 w-2 shrink-0 rounded-full bg-glow shadow-[0_0_12px_rgba(77,166,255,0.8)]" />
+        </div>
+        <div className="relative mt-5 grid grid-cols-3 gap-2">
+          {labels.map((label, index) => {
+            const NodeIcon = Icons[index] ?? Icon;
+            return (
+              <React.Fragment key={label}>
+                <div className="flex min-w-0 flex-col items-center gap-2 rounded-2xl border border-border/25 bg-bg/35 px-2 py-3 text-center">
+                  <NodeIcon className="h-4 w-4 text-primary" style={accentStyle} />
+                  <span className="truncate text-[9px] font-mono uppercase tracking-wider text-text-secondary">{label}</span>
+                </div>
+                {index < labels.length - 1 && <span className="absolute top-7 h-px w-2 bg-primary/35" style={{ left: `calc(${(index + 1) * 33.333}% - 4px)` }} />}
+              </React.Fragment>
+            );
+          })}
+        </div>
+        <p className="relative mt-4 text-[10px] font-mono tracking-wide text-text-muted">A connected path from intent to measurable delivery</p>
+      </motion.div>
+
+      <motion.div
+        variants={heroVisualVariant}
+        initial="hidden"
+        animate="visible"
+        className="relative hidden h-[520px] w-full max-w-[520px] ml-auto lg:block"
+        aria-hidden="true"
+      >
       <motion.div
         animate={{ rotate: 360 }}
         transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
@@ -177,6 +219,7 @@ export function AnimatedHeroVisual({
       >
         <Icon className="h-9 w-9 text-primary" style={accentStyle} />
       </motion.div>
-    </motion.div>
+      </motion.div>
+    </>
   );
 }

@@ -616,7 +616,7 @@ export default function Home() {
       {/* 1. HERO SECTION */}
       <section
         id="home"
-        className="relative min-h-screen flex items-center justify-center pt-24 pb-14 overflow-hidden bg-bg"
+        className="relative min-h-[calc(100svh-32px)] sm:min-h-screen flex items-center justify-center pt-32 pb-8 sm:pt-24 sm:pb-14 overflow-hidden bg-bg"
       >
         <div className="absolute inset-0 z-0 overflow-hidden">
           <ThreeDCanvas />
@@ -629,7 +629,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_40%,var(--color-bg)_100%)] z-1 pointer-events-none"></div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-10 items-center z-10 relative">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 items-center z-10 relative">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -712,7 +712,7 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.98, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.26, ease: [0.22, 1, 0.36, 1], delay: 0.04 }}
-            className="lg:col-span-5 relative flex items-center justify-center w-full z-10"
+            className="lg:col-span-5 relative hidden sm:flex items-center justify-center w-full z-10"
           >
             <div className="relative w-full max-w-[420px] py-12">
               {/* Rotating orbit rings */}
@@ -1323,10 +1323,10 @@ export default function Home() {
       {/* 4. CONTACT SECTION */}
       <section id="contact" className="section-padding bg-surface/30 border-t border-border relative">
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 text-left">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-16 items-start">
 
             {/* Left Info Column */}
-            <div className="lg:col-span-5 space-y-10 lg:sticky lg:top-32">
+            <div className="lg:col-span-5 space-y-7 sm:space-y-10 lg:sticky lg:top-32">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -1343,7 +1343,7 @@ export default function Home() {
                 </p>
               </motion.div>
 
-              <div className="space-y-6 pt-4">
+              <div className="space-y-4 pt-2 sm:space-y-6 sm:pt-4">
                 {[
                   { icon: MapPin, title: "Headquarters", content: "Ahmedabad, Gujarat", accent: "text-primary" },
                   { icon: Mail, title: "Solutions Desk", content: <a href="mailto:business@northarc.in" className="text-primary hover:underline">business@northarc.in</a>, accent: "text-secondary" },
@@ -1375,7 +1375,7 @@ export default function Home() {
 
             {/* Right Contact Form Column */}
             <div className="lg:col-span-7">
-              <div className="rounded-3xl bg-surface border border-border p-8 lg:p-10 relative overflow-hidden shadow-xl">
+              <div className="rounded-3xl bg-surface border border-border p-5 sm:p-8 lg:p-10 relative overflow-hidden shadow-xl">
                 <div className="absolute inset-0 grid-bg opacity-20"></div>
 
                 <AnimatePresence mode="wait">
@@ -1385,7 +1385,7 @@ export default function Home() {
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0 }}
-                      className="text-center py-12 space-y-6 relative z-10"
+                      className="text-center py-8 sm:py-12 space-y-6 relative z-10"
                     >
                       <div className="w-16 h-16 rounded-full bg-primary/10 border border-primary/20 text-primary flex items-center justify-center mx-auto shadow-lg">
                         <Check className="w-8 h-8" />

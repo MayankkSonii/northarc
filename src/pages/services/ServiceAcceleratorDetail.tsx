@@ -78,16 +78,16 @@ export default function ServiceAcceleratorDetail({ slug }: Props) {
         style={{ background: `radial-gradient(circle, ${accent}1c 0%, transparent 70%)` }}
       />
 
-      <section className="relative z-10 mx-auto max-w-7xl px-6 pt-24 pb-14 md:px-12 md:pt-28 lg:px-24 lg:pt-32 lg:pb-20">
+      <section className="relative z-10 mx-auto max-w-7xl px-6 pt-32 pb-8 md:px-12 md:pt-28 md:pb-14 lg:px-24 lg:pt-32 lg:pb-20">
         <a
           href="/services/full-cycle-development"
-          className="mb-8 inline-flex items-center gap-2 text-xs text-text-muted hover:text-primary transition-colors font-mono"
+          className="mb-5 inline-flex items-center gap-2 text-xs text-text-muted hover:text-primary transition-colors font-mono sm:mb-8"
         >
           <ArrowLeft className="w-3.5 h-3.5" /> Services
         </a>
 
-        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-8">
-          <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="space-y-8 text-left lg:col-span-6">
+        <div className="grid grid-cols-1 items-center gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-8">
+          <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="space-y-6 text-left lg:col-span-6 lg:space-y-8">
             <motion.span
               variants={staggerItem}
               className="inline-flex w-fit items-center gap-2 rounded-full border px-3 py-1 text-[10px] font-bold uppercase tracking-widest font-mono"
@@ -136,7 +136,7 @@ export default function ServiceAcceleratorDetail({ slug }: Props) {
               initial={{ opacity: 0, scale: 0.98, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ duration: 0.24, delay: 0.04, ease: [0.22, 1, 0.36, 1] }}
-              className="relative mx-auto mt-4 flex min-h-[220px] max-w-md flex-col items-center justify-center gap-4 overflow-hidden rounded-3xl border border-border/20 bg-surface/40 p-8 text-center backdrop-blur-sm lg:hidden"
+              className="hidden relative mx-auto mt-4 flex min-h-[220px] max-w-md flex-col items-center justify-center gap-4 overflow-hidden rounded-3xl border border-border/20 bg-surface/40 p-8 text-center backdrop-blur-sm lg:hidden"
             >
               <div
                 className="pointer-events-none absolute inset-0 opacity-60"
@@ -156,8 +156,8 @@ export default function ServiceAcceleratorDetail({ slug }: Props) {
         </div>
       </section>
 
-      <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-14 border-t border-border/10">
-        <div className="space-y-10">
+      <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-10 sm:py-14 border-t border-border/10">
+        <div className="space-y-8 sm:space-y-10">
           <motion.div variants={fadeUpVariant} initial="hidden" whileInView="visible" viewport={viewportOnce} className="max-w-3xl">
             <div className="flex items-center gap-3">
               <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border" style={{ borderColor: `${accent}35`, background: `${accent}12` }}>
@@ -175,7 +175,7 @@ export default function ServiceAcceleratorDetail({ slug }: Props) {
         </div>
       </section>
 
-      <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-14 border-t border-border/10">
+      <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-10 sm:py-14 border-t border-border/10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <PointGroup title="Features" icon={Layers} items={accelerator.features} accent={accent} />
           <PointGroup title="Use cases" icon={CheckCircle} items={accelerator.useCases} accent={accent} />
@@ -183,8 +183,8 @@ export default function ServiceAcceleratorDetail({ slug }: Props) {
       </section>
 
       {accelerator.techStack && (
-        <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-14 border-t border-border/10">
-          <div className="rounded-3xl border border-border/20 bg-surface/40 p-7">
+        <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-10 sm:py-14 border-t border-border/10">
+          <div className="rounded-3xl border border-border/20 bg-surface/40 p-5 sm:p-7">
             <span className="text-[10px] font-mono tracking-widest text-text-muted uppercase font-bold">Typical stack</span>
             <div className="mt-5 flex flex-wrap gap-2">
               {accelerator.techStack.map((tech) => (

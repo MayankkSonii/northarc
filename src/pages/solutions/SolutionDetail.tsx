@@ -98,16 +98,16 @@ export default function SolutionDetail({ slug }: Props) {
       />
 
       {/* ── HERO ── */}
-      <section className="relative z-10 mx-auto max-w-7xl px-6 pt-24 pb-14 md:px-12 md:pt-28 lg:px-24 lg:pt-32 lg:pb-20">
+      <section className="relative z-10 mx-auto max-w-7xl px-6 pt-32 pb-8 md:px-12 md:pt-28 md:pb-14 lg:px-24 lg:pt-32 lg:pb-20">
         <a
           href="/solutions"
-          className="mx-auto mb-8 inline-flex items-center gap-2 text-xs text-text-muted hover:text-primary transition-colors font-mono"
+          className="mx-auto mb-5 inline-flex items-center gap-2 text-xs text-text-muted hover:text-primary transition-colors font-mono sm:mb-8"
         >
           <ArrowLeft className="w-3.5 h-3.5" /> All Solutions
         </a>
 
-        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-8">
-        <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="space-y-8 text-left lg:col-span-6">
+        <div className="grid grid-cols-1 items-center gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-8">
+        <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="space-y-6 text-left lg:col-span-6 lg:space-y-8">
           <motion.div className="flex flex-wrap items-center gap-3" variants={staggerItem}>
             <div
               className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
@@ -155,7 +155,7 @@ export default function SolutionDetail({ slug }: Props) {
           </motion.div>
           <motion.div
             variants={staggerItem}
-            className="flex items-center gap-3 text-xs text-text-secondary font-light font-mono opacity-80 pt-4"
+            className="hidden items-center gap-3 text-xs text-text-secondary font-light font-mono opacity-80 pt-4 sm:flex"
           >
             <div className="w-8 h-8 rounded-full border border-border/20 flex items-center justify-center">
               <ArrowRight className="w-3.5 h-3.5 rotate-90" />
@@ -176,7 +176,7 @@ export default function SolutionDetail({ slug }: Props) {
             initial={{ opacity: 0, scale: 0.98, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.24, delay: 0.04, ease: [0.22, 1, 0.36, 1] }}
-            className="relative mx-auto mt-4 flex min-h-[220px] max-w-md flex-col items-center justify-center gap-4 overflow-hidden rounded-3xl border border-border/20 bg-surface/40 p-8 text-center backdrop-blur-sm lg:hidden"
+            className="hidden relative mx-auto mt-4 flex min-h-[220px] max-w-md flex-col items-center justify-center gap-4 overflow-hidden rounded-3xl border border-border/20 bg-surface/40 p-8 text-center backdrop-blur-sm lg:hidden"
           >
             <div
               className="pointer-events-none absolute inset-0 opacity-70"
@@ -202,8 +202,8 @@ export default function SolutionDetail({ slug }: Props) {
       </section>
 
       {/* ── CHALLENGES ── */}
-      <section className="px-6 md:px-12 lg:px-24 py-14 border-t border-border/10 relative z-10 max-w-5xl mx-auto">
-        <div className="flex items-center gap-3 mb-8">
+      <section className="px-6 md:px-12 lg:px-24 py-10 sm:py-14 border-t border-border/10 relative z-10 max-w-5xl mx-auto">
+        <div className="flex items-center gap-3 mb-6 sm:mb-8">
           <div className="p-2 rounded-xl bg-surface border border-border/20">
             <AlertCircle className="w-4 h-4" style={{ color: accent }} />
           </div>
@@ -229,8 +229,8 @@ export default function SolutionDetail({ slug }: Props) {
       </section>
 
       {/* ── OFFERINGS ── */}
-      <section className="px-6 md:px-12 lg:px-24 py-14 border-t border-border/10 relative z-10 max-w-5xl mx-auto">
-        <div className="flex items-center gap-3 mb-8">
+      <section className="px-6 md:px-12 lg:px-24 py-10 sm:py-14 border-t border-border/10 relative z-10 max-w-5xl mx-auto">
+        <div className="flex items-center gap-3 mb-6 sm:mb-8">
           <div className="p-2 rounded-xl bg-surface border border-border/20">
             <Layers className="w-4 h-4" style={{ color: accent }} />
           </div>
@@ -259,8 +259,8 @@ export default function SolutionDetail({ slug }: Props) {
       </section>
 
       {/* ── OUTCOMES ── */}
-      <section className="px-6 md:px-12 lg:px-24 py-14 border-t border-border/10 relative z-10 max-w-5xl mx-auto">
-        <div className="flex items-center gap-3 mb-8">
+      <section className="px-6 md:px-12 lg:px-24 py-10 sm:py-14 border-t border-border/10 relative z-10 max-w-5xl mx-auto">
+        <div className="flex items-center gap-3 mb-6 sm:mb-8">
           <div className="p-2 rounded-xl bg-surface border border-border/20">
             <TrendingUp className="w-4 h-4" style={{ color: accent }} />
           </div>
@@ -286,8 +286,8 @@ export default function SolutionDetail({ slug }: Props) {
 
       {/* ── RELATED PRODUCTS ── */}
       {related.length > 0 && (
-        <section className="px-6 md:px-12 lg:px-24 py-14 border-t border-border/10 relative z-10 max-w-5xl mx-auto">
-          <div className="flex items-center gap-3 mb-8">
+        <section className="px-6 md:px-12 lg:px-24 py-10 sm:py-14 border-t border-border/10 relative z-10 max-w-5xl mx-auto">
+          <div className="flex items-center gap-3 mb-6 sm:mb-8">
             <div className="p-2 rounded-xl bg-surface border border-border/20">
               <Boxes className="w-4 h-4" style={{ color: accent }} />
             </div>
@@ -328,9 +328,9 @@ export default function SolutionDetail({ slug }: Props) {
       )}
 
       {/* ── CTA BANNER ── */}
-      <section className="px-6 md:px-12 lg:px-24 py-20 relative z-10">
+      <section className="px-6 md:px-12 lg:px-24 py-12 sm:py-16 lg:py-20 relative z-10">
         <div className="max-w-5xl mx-auto">
-          <div className="relative rounded-3xl border border-border/50 bg-surface/40 backdrop-blur-xl px-8 py-14 sm:px-16 overflow-hidden text-center">
+          <div className="relative rounded-3xl border border-border/50 bg-surface/40 backdrop-blur-xl px-5 py-10 sm:px-16 sm:py-14 overflow-hidden text-center">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/6 via-transparent to-secondary/6 pointer-events-none" />
             <div className="absolute -top-1/4 left-1/2 -translate-x-1/2 w-[40vw] h-[40vw] rounded-full bg-primary/8 blur-[100px] pointer-events-none" />
             <span className="text-[10px] font-mono uppercase tracking-widest text-primary font-bold block mb-4">

@@ -48,13 +48,13 @@ export default function ExpertiseLayout({ content }: { content: PageContent }) {
       />
 
       {/* 1. HERO, asymmetric split */}
-      <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24 pt-24 pb-14 md:pt-28 lg:pt-32 lg:pb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+      <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24 pt-32 pb-8 md:pt-28 md:pb-14 lg:pt-32 lg:pb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-8 items-center">
           <motion.div
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
-            className="lg:col-span-6 space-y-8 text-left"
+            className="lg:col-span-6 space-y-6 text-left lg:space-y-8"
           >
             <motion.span
               variants={staggerItem}
@@ -93,7 +93,7 @@ export default function ExpertiseLayout({ content }: { content: PageContent }) {
             </motion.div>
             <motion.div
               variants={staggerItem}
-              className="flex items-center gap-3 text-xs text-text-secondary font-light font-mono opacity-80 pt-4"
+              className="hidden items-center gap-3 text-xs text-text-secondary font-light font-mono opacity-80 pt-4 sm:flex"
             >
               <div className="w-8 h-8 rounded-full border border-border/20 flex items-center justify-center">
                 <ArrowDown className="w-3.5 h-3.5" />
@@ -114,7 +114,7 @@ export default function ExpertiseLayout({ content }: { content: PageContent }) {
               initial={{ opacity: 0, scale: 0.98, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ duration: 0.24, delay: 0.04, ease: [0.22, 1, 0.36, 1] }}
-              className="relative mx-auto mt-4 flex min-h-[220px] max-w-md flex-col items-center justify-center gap-4 overflow-hidden rounded-3xl border border-border/20 bg-surface/40 p-8 text-center backdrop-blur-sm lg:hidden"
+              className="hidden relative mx-auto mt-4 flex min-h-[220px] max-w-md flex-col items-center justify-center gap-4 overflow-hidden rounded-3xl border border-border/20 bg-surface/40 p-8 text-center backdrop-blur-sm lg:hidden"
             >
               <div
                 className="pointer-events-none absolute inset-0 opacity-60"
@@ -140,8 +140,8 @@ export default function ExpertiseLayout({ content }: { content: PageContent }) {
       </section>
 
       {/* 2. DOMAINS, sticky editorial title + hairline card grid */}
-      <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-16 lg:py-24 border-t border-border/10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-10 sm:py-14 lg:py-24 border-t border-border/10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12">
           <div className="lg:col-span-4">
             <ScrollReveal variant="fadeUp" className="lg:sticky lg:top-28">
               <AnimatedText
@@ -194,8 +194,8 @@ export default function ExpertiseLayout({ content }: { content: PageContent }) {
       </section>
 
       {/* 3. PROCESS, vertical timeline (signature) */}
-      <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-16 lg:py-24 border-t border-border/10">
-        <ScrollReveal variant="fadeUp" className="max-w-2xl mb-14">
+      <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-10 sm:py-14 lg:py-24 border-t border-border/10">
+        <ScrollReveal variant="fadeUp" className="max-w-2xl mb-8 sm:mb-12 lg:mb-14">
           <AnimatedText
             text={content.processTitle}
             as="h2"
@@ -219,7 +219,7 @@ export default function ExpertiseLayout({ content }: { content: PageContent }) {
             transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.05 }}
             style={{ backgroundColor: `${accent}4d` }}
           />
-          <div className="space-y-10">
+          <div className="space-y-7 sm:space-y-10">
             {content.process.map((step, i) => (
               <motion.div
                 key={i}
@@ -253,8 +253,8 @@ export default function ExpertiseLayout({ content }: { content: PageContent }) {
       </section>
 
       {/* 4. PROOF, checklist + accent-tinted quote/stat card */}
-      <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-16 lg:py-24 border-t border-border/10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-10 sm:py-14 lg:py-24 border-t border-border/10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12 items-center">
           <div className="lg:col-span-6 space-y-6">
             <AnimatedText
               text={content.proofTitle}
@@ -301,7 +301,7 @@ export default function ExpertiseLayout({ content }: { content: PageContent }) {
             className="lg:col-span-6 flex justify-center lg:justify-end cursor-default"
           >
             <div
-              className="max-w-md w-full rounded-3xl border p-8 space-y-5 shadow-lg transition-colors duration-300 hover:border-primary/30"
+              className="max-w-md w-full rounded-3xl border p-6 space-y-5 shadow-lg transition-colors duration-300 hover:border-primary/30 sm:p-8"
               style={{
                 backgroundColor: `${accent}12`,
                 borderColor: `${accent}33`,
@@ -328,7 +328,7 @@ export default function ExpertiseLayout({ content }: { content: PageContent }) {
       </section>
 
       {/* 5. CTA, centered accent-tinted band */}
-      <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-20 lg:py-28 border-t border-border/10">
+      <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-12 sm:py-16 lg:py-28 border-t border-border/10">
         <motion.div
           variants={fadeInVariant}
           initial="hidden"
@@ -336,7 +336,7 @@ export default function ExpertiseLayout({ content }: { content: PageContent }) {
           viewport={viewportOnce}
           whileHover={{ scale: 1.01 }}
           transition={{ duration: 0.3 }}
-          className="rounded-3xl border p-10 md:p-16 text-center space-y-6 shadow-xl transition-all duration-300 hover:border-primary/45 cursor-default"
+          className="rounded-3xl border p-6 sm:p-10 md:p-16 text-center space-y-6 shadow-xl transition-all duration-300 hover:border-primary/45 cursor-default"
           style={{
             backgroundColor: `${accent}12`,
             borderColor: `${accent}33`,
